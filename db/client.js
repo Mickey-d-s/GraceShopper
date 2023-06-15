@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 
-const dbName = `your-db-name`;
+const dbName = `Mickey-d-s`;
 
 const client = new Client({
   connectionString:
