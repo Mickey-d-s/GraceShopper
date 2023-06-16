@@ -20,8 +20,8 @@ async function createTables() {
     // -- Create the "users" table
     await client.query(`
       CREATE TABLE users (
-        user_id SERIAL PRIMARY KEY,
-        username VARCHAR(50) NOT NULL UNIQUE,
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) NOT NULL,
         email VARCHAR(100) NOT NULL,
         password VARCHAR(50) NOT NULL
       )`);
@@ -29,17 +29,19 @@ async function createTables() {
     // -- Create the "products" table
     await client.query(`
       CREATE TABLE products (
-        product_id SERIAL PRIMARY KEY,
-        product_name VARCHAR(100) NOT NULL UNIQUE,
+        product_id INT PRIMARY KEY,
+        product_name VARCHAR(100) NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
-        description TEXT
+        description TEXT,
+        user_id INT,
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
       )`);
 
     // -- Create the "category" table
     await client.query(`
       CREATE TABLE category (
         category_id SERIAL PRIMARY KEY,
-        category_name VARCHAR(100) NOT NULL UNIQUE
+        category_name VARCHAR(100) NOT NULL
       )`);
 
     // -- Create the "categorythrough" table
@@ -55,7 +57,7 @@ async function createTables() {
     // -- Create the "inventory" table
     await client.query(`
       CREATE TABLE inventory (
-        inventory_id SERIAL PRIMARY KEY,
+        inventory_id INT PRIMARY KEY,
         product_id INT,
         quantity INT,
         FOREIGN KEY (product_id) REFERENCES products(product_id)
@@ -64,7 +66,7 @@ async function createTables() {
     // -- Create the "shoppingcart" table
     await client.query(`
       CREATE TABLE shoppingcart (
-        shoppingcart_id SERIAL PRIMARY KEY,
+        shoppingcart_id INT PRIMARY KEY,
         status text,
         user_id INT,
         FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -73,7 +75,7 @@ async function createTables() {
     // -- Create the "cart_items" table
     await client.query(`
       CREATE TABLE cart_items (
-        item_id SERIAL PRIMARY KEY,
+        item_id INT PRIMARY KEY,
         shoppingcart_id INT,
         product_id INT,
         quantity INT,
