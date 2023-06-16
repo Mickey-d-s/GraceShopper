@@ -17,3 +17,4 @@ async function createShoppingCart({ status, user_id }) {
     throw error;
   }
 }
+module.exports = { createShoppingCart };

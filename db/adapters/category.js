@@ -18,3 +18,4 @@ async function createCategory({ category_name }) {
     throw error;
   }
 }
+module.exports = { createCategory };

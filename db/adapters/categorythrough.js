@@ -17,3 +17,4 @@ async function createCategoryThrough({ category_id, product_id }) {
     throw error;
   }
 }
+module.exports = { createCategoryThrough };

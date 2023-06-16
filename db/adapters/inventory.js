@@ -17,3 +17,4 @@ async function createInventory({ product_id, quantity }) {
     throw error;
   }
 }
+module.exports = { createInventory };

@@ -18,3 +18,5 @@ async function createProduct({ product_name, price, description }) {
     throw error;
   }
 }
+
+module.exports = { createProduct };

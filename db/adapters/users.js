@@ -18,3 +18,5 @@ async function createUser({ username, email, password }) {
     throw error;
   }
 }
+
+module.exports = { createUser };
