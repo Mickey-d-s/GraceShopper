@@ -32,7 +32,8 @@ async function createTables() {
         product_id SERIAL PRIMARY KEY,
         product_name VARCHAR(100) NOT NULL UNIQUE,
         price DECIMAL(10, 2) NOT NULL,
-        description TEXT
+        description TEXT,
+        quantity INT,
       )`);
 
     // -- Create the "category" table
