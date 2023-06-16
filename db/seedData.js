@@ -107,4 +107,5 @@ const category = [
   { categoryname: "Sweets/Snacks" },
   { categoryname: "deals" },
 ];
+const inventory = [{}];
 module.exports = { users };
