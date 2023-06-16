@@ -12,7 +12,7 @@ async function dropTables() {
   try {
     console.log("Starting to drop tables");
     await client.query(`
-      DROP TABLE IF EXISTS inventory, category, categorythrough, cartitems, shopping_cart, products, users;
+      DROP TABLE IF EXISTS inventory, categories, categorythroughs, cart_items, shoppingcart, products, users CASCADE;
     `);
   } catch (error) {
     console.error(error);
