@@ -8,96 +8,70 @@ const users = [
 
 const products = [
   {
-    product_id: 1,
     product_name: "The Angus Burger",
-    price: "$3",
+    price: (3, 2),
     description: "made from cow",
-    inventory_id: 1,
   },
   {
-    product_id: 1,
     product_name: "The Chicken Burger",
-    price: "$3",
+    price: (3, 2),
     description: "made from chicken",
-    inventory_id: 1,
   },
   {
-    product_id: 1,
     product_name: "The Pork Burger",
-    price: "$3",
+    price: (3, 2),
     description: "made from pig",
-    inventory_id: 1,
   },
   {
-    product_id: 1,
     product_name: "The fish Burger",
-    price: "$3",
+    price: (3, 2),
     description: "made from fish",
-    inventory_id: 1,
   },
   {
-    product_id: 2,
     product_name: "Coke cola",
-    price: "$1",
+    price: (3, 2),
     description: "crispy fizziness",
-    inventory_id: 2,
   },
   {
-    product_id: 2,
     product_name: "Dr.pepper",
-    price: "$1",
+    price: (3, 2),
     description: "23 amazing flavors",
-    inventory_id: 2,
   },
   {
-    product_id: 2,
     product_name: "Mountain dew",
-    price: "$1",
+    price: (1, 2),
     description: "comes from mount everest",
-    inventory_id: 2,
   },
   {
-    product_id: 3,
     product_name: "Fries",
-    price: "$2",
+    price: (2, 2),
     description: "pentagon fries",
-    inventory_id: 3,
   },
   {
-    product_id: 3,
     product_name: "fruits cups",
-    price: "$1.5",
+    price: (1, 2),
     description: "comes from mount everest",
-    inventory_id: 3,
   },
   {
-    product_id: 4,
     product_name: "ice cream cone",
-    price: "$1",
+    price: (1, 2),
     description: "toothpaste",
-    inventory_id: 4,
   },
   {
-    product_id: 4,
     product_name: "sundaes",
-    price: "$1",
+    price: (1, 2),
     description: "made straight from the udders of cow",
-    inventory_id: 4,
   },
 
   {
-    product_id: 5,
     product_name: "Two for $3",
-    price: "$4",
+    price: (1, 2),
     description: "get two burgers for the price of 4",
-    inventory_id: 5,
   },
   {
-    product_id: 5,
     product_name: "Grimace birthday meal",
-    price: "20",
+    price: (1, 2),
     description: "made with real babies... cow babies",
-    inventory_id: 5,
   },
 ];
 const categories = [
@@ -122,7 +96,10 @@ const cart_items = [
   { shoppingcart_id: null, product_id: 5, count: null },
 ];
 
-const categorythrough = [{ category_id: null, product_id: null }];
+const categorythroughs = [
+  { category_id: 1, product_id: 1 },
+  { category_id: 1, product_id: 2 },
+];
 
 const shopping_cart = [
   { status: null, user_id: 1 },
@@ -139,5 +116,5 @@ module.exports = {
   cart_items,
   shopping_cart,
   products,
-  categorythrough,
+  categorythroughs,
 };

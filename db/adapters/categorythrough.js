@@ -1,4 +1,4 @@
-const { client } = require("../client");
+const client = require("../client");
 
 async function createCategoryThrough({ category_id, product_id }) {
   try {
@@ -6,8 +6,8 @@ async function createCategoryThrough({ category_id, product_id }) {
       rows: [categoryThrough],
     } = await client.query(
       `
-            INSERT INTO categoryThrough(category_id, product_id)
-            VALUES($1)
+            INSERT INTO categoryThroughs(category_id, product_id)
+            VALUES($1,$2)
             RETURNING *;
             `,
       [category_id, product_id]
