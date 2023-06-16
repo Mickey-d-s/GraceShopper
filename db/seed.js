@@ -1,11 +1,12 @@
 const client = require("./client");
-const { createUsers } = require("./adapters/users");
+const { createUser } = require("./adapters/users");
 const { createProduct } = require("./adapters/products");
 const { createCategory } = require("./adapters/category");
 const { createCategoryThrough } = require("./adapters/categorythrough");
 const { createShoppingCart } = require("./adapters/shoppingcart");
 const { createInventory } = require("./adapters/inventory");
 const { createCart_Items } = require("./adapters/cart_items");
+const { users, products, categories, categorythroughs } = require("./seedData");
 
 async function dropTables() {
   console.log("Dropping tables...");
@@ -34,6 +35,7 @@ async function createTables() {
     console.log("after creating user");
 
     // // -- Create the "products" table
+    //there is more work in products its all 2 dollars
     await client.query(`
       CREATE TABLE products (
         product_id SERIAL PRIMARY KEY,
@@ -97,7 +99,7 @@ async function populateTables() {
   console.log("Populating tables...");
   try {
     for (const user of users) {
-      await createUsers(user);
+      await createUser(user);
       console.log("users table populated");
     }
     for (const product of products) {
@@ -108,7 +110,10 @@ async function populateTables() {
       await createCategory(category);
       console.log("categories table populated");
     }
-    // for (const categorythrough of categorythroughs )
+    for (const categorythrough of categorythroughs) {
+      await createCategoryThrough(categorythrough);
+      console.log("categorythrough table populated");
+    }
 
     // Add code to populate tables here
   } catch (error) {
