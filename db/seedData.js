@@ -81,7 +81,7 @@ const categories = [
   { categoryname: "Sweets/Snacks" },
   { categoryname: "deals" },
 ];
-const inventory = [
+const inventories = [
   { product_id: 1, quantity: 100 },
   { product_id: 2, quantity: 100 },
   { product_id: 3, quantity: 100 },
@@ -112,7 +112,7 @@ const shopping_cart = [
 module.exports = {
   users,
   categories,
-  inventory,
+  inventories,
   cart_items,
   shopping_cart,
   products,

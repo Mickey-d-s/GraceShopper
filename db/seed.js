@@ -4,9 +4,15 @@ const { createProduct } = require("./adapters/products");
 const { createCategory } = require("./adapters/category");
 const { createCategoryThrough } = require("./adapters/categorythrough");
 const { createShoppingCart } = require("./adapters/shoppingcart");
-const { createInventory } = require("./adapters/inventory");
+const { createInventories } = require("./adapters/inventory");
 const { createCart_Items } = require("./adapters/cart_items");
-const { users, products, categories, categorythroughs } = require("./seedData");
+const {
+  users,
+  products,
+  categories,
+  categorythroughs,
+  inventories,
+} = require("./seedData");
 
 async function dropTables() {
   console.log("Dropping tables...");
@@ -64,7 +70,7 @@ async function createTables() {
 
     // // -- Create the "inventory" table
     await client.query(`
-      CREATE TABLE inventory (
+      CREATE TABLE inventories (
         inventory_id SERIAL PRIMARY KEY,
         product_id INT,
         quantity INT,
@@ -113,6 +119,10 @@ async function populateTables() {
     for (const categorythrough of categorythroughs) {
       await createCategoryThrough(categorythrough);
       console.log("categorythrough table populated");
+    }
+    for (const inventory of inventories) {
+      await createInventories(inventory);
+      console.log("Inventory table populated");
     }
 
     // Add code to populate tables here
