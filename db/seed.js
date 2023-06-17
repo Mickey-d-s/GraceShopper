@@ -3,7 +3,7 @@ const { createUser } = require("./adapters/users");
 const { createProduct } = require("./adapters/products");
 const { createCategory } = require("./adapters/category");
 const { createCategoryThrough } = require("./adapters/categorythrough");
-const { createShoppingCart } = require("./adapters/shoppingcart");
+const { createShoppingCarts } = require("./adapters/shoppingcart");
 const { createInventories } = require("./adapters/inventory");
 const { createCart_Items } = require("./adapters/cart_items");
 const {
@@ -12,6 +12,7 @@ const {
   categories,
   categorythroughs,
   inventories,
+  shopping_carts,
 } = require("./seedData");
 
 async function dropTables() {
@@ -19,7 +20,7 @@ async function dropTables() {
   try {
     console.log("Starting to drop tables");
     await client.query(`
-      DROP TABLE IF EXISTS inventory, categories, categorythroughs, cart_items, shoppingcart, products, users CASCADE;
+      DROP TABLE IF EXISTS inventory, categories, categorythroughs, cart_items, shoppingcarts, products, users CASCADE;
     `);
   } catch (error) {
     console.error(error);
@@ -79,7 +80,7 @@ async function createTables() {
 
     // // // -- Create the "shoppingcart" table
     await client.query(`
-      CREATE TABLE shoppingcart (
+      CREATE TABLE shoppingcarts (
         shoppingcart_id SERIAL PRIMARY KEY,
         status text,
         user_id INT,
@@ -93,7 +94,7 @@ async function createTables() {
         shoppingcart_id INT,
         product_id INT,
         count INT,
-        FOREIGN KEY (shoppingcart_id) REFERENCES shoppingcart(shoppingcart_id),
+        FOREIGN KEY (shoppingcart_id) REFERENCES shoppingcarts(shoppingcart_id),
         FOREIGN KEY (product_id) REFERENCES products(product_id)
       )`);
   } catch (error) {
@@ -124,7 +125,10 @@ async function populateTables() {
       await createInventories(inventory);
       console.log("Inventory table populated");
     }
-
+    for (const shoppingCart of shopping_carts) {
+      await createShoppingCarts([shoppingCart]);
+      console.log("ShoppingCarts table populated");
+    }
     // Add code to populate tables here
   } catch (error) {
     console.error(error);

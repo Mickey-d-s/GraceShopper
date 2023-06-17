@@ -1,20 +1,20 @@
 const client = require("../client");
 
-async function createShoppingCart({ status, user_id }) {
+async function createShoppingCarts({ status, user_id }) {
   try {
     const {
       rows: [shoppingCart],
     } = await client.query(
       `
-            INSERT INTO shoppingcart(status, user_id)
+            INSERT INTO shoppingcarts(status, user_id)
             VALUES($1,$2)
             RETURNING *;
             `,
       [status, user_id]
     );
-    return user;
+    return shoppingCart;
   } catch (error) {
     throw error;
   }
 }
-module.exports = { createShoppingCart };
+module.exports = { createShoppingCarts };

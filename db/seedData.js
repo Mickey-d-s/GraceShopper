@@ -101,7 +101,7 @@ const categorythroughs = [
   { category_id: 1, product_id: 2 },
 ];
 
-const shopping_cart = [
+const shopping_carts = [
   { status: null, user_id: 1 },
   { status: null, user_id: 2 },
   { status: null, user_id: 3 },
@@ -114,7 +114,7 @@ module.exports = {
   categories,
   inventories,
   cart_items,
-  shopping_cart,
+  shopping_carts,
   products,
   categorythroughs,
 };
