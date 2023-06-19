@@ -1,4 +1,8 @@
 const usersRouter = require("express").Router();
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 10;
+
+require("dotenv").config();
 
 const { getAllUsers, getUserByUsername } = require("../db/adapters/users");
 
