@@ -13,6 +13,7 @@ const {
   categorythroughs,
   inventories,
   shopping_carts,
+  cart_items,
 } = require("./seedData");
 
 async function dropTables() {
@@ -128,6 +129,10 @@ async function populateTables() {
     for (const shoppingCart of shopping_carts) {
       await createShoppingCarts([shoppingCart]);
       console.log("ShoppingCarts table populated");
+    }
+    for (const cart_item of cart_items) {
+      await createCart_Items(cart_item);
+      console.log("Cart items table populated");
     }
     // Add code to populate tables here
   } catch (error) {
