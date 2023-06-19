@@ -6,9 +6,10 @@ router.get("/health", (req, res, next) => {
     message: "Api is up and healthy!",
   });
 });
-
-const cart_itemsRouter = require("./cart_item");
-router.use("/cart_item", cart_itemsRouter);
+const usersRouter = require("./users");
+router.use("/users", usersRouter);
+const cart_itemsRouter = require("./cart_items.js");
+router.use("/cart_items", cart_itemsRouter);
 const categoriesRouter = require("./categories");
 router.use("/categories", categoriesRouter);
 const categoryThroughsRouter = require("./categorythroughs");
@@ -19,7 +20,5 @@ const productsRouter = require("./products");
 router.use("/products", productsRouter);
 const shoppingCartsRouter = require("./shoppingcarts");
 router.use("/shoppingcart", shoppingCartsRouter);
-const usersRouter = require("./users");
-router.use("/users", usersRouter);
 
 module.exports = router;
