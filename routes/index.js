@@ -7,8 +7,8 @@ router.get("/health", (req, res, next) => {
   });
 });
 
-const cart_itemsRouter = require("./cartitems");
-router.use("/cartitems", cart_itemsRouter);
+const cart_itemsRouter = require("./cart_item");
+router.use("/cart_item", cart_itemsRouter);
 const categoriesRouter = require("./categories");
 router.use("/categories", categoriesRouter);
 const categoryThroughsRouter = require("./categorythroughs");
