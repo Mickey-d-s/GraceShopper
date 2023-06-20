@@ -14,6 +14,7 @@ server.use(express.json());
 server.use(morgan("dev"));
 server.use(cors());
 
+
 // Servers the built React app
 server.use(express.static(path.join(__dirname, "./client", "dist")));
 
