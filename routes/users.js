@@ -16,7 +16,7 @@ usersRouter.get("/", async (req, res, next) => {
 });
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
 
     const _user = await getUserByUsername(username);
     if (_user) {
@@ -29,7 +29,11 @@ usersRouter.post("/register", async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
-    const user = await createUser({ username, password: hashedPassword });
+    const user = await createUser({
+      username,
+      email,
+      password: hashedPassword,
+    });
 
     console.log("JWT secret:", JWT_SECRET);
 
@@ -53,7 +57,7 @@ usersRouter.post("/register", async (req, res, next) => {
 });
 usersRouter.post("/login", async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, password } = req.body;
 
     const user = await getUserByUsername(username);
     console.log("password:", password);
