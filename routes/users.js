@@ -38,4 +38,4 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-module.export = usersRouter;
+module.exports = usersRouter;
