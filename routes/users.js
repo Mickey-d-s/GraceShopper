@@ -1,10 +1,15 @@
 const usersRouter = require("express").Router();
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
-
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = process.env;
 require("dotenv").config();
 
-const { getAllUsers, getUserByUsername } = require("../db/adapters/users");
+const {
+  createUser,
+  getAllUsers,
+  getUserByUsername,
+} = require("../db/adapters/users");
 
 usersRouter.get("/", async (req, res, next) => {
   try {
@@ -26,6 +31,7 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
+    console.log("_user:", _user);
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
@@ -34,6 +40,7 @@ usersRouter.post("/register", async (req, res, next) => {
       email,
       password: hashedPassword,
     });
+    console.log("user:", user);
 
     console.log("JWT secret:", JWT_SECRET);
 
@@ -48,7 +55,7 @@ usersRouter.post("/register", async (req, res, next) => {
     delete user.password;
     res.send({
       success: true,
-      message: "Thank you for regisering",
+      message: "Thank you for registering",
       data: user,
     });
   } catch (error) {
@@ -62,7 +69,10 @@ usersRouter.post("/login", async (req, res, next) => {
     const user = await getUserByUsername(username);
     console.log("password:", password);
     console.log("userpassword:", user.password);
-    const checkedpassword = await bcrypt.compare(password, user.password);
+    const checkedpassword = await bcrypt.compare(
+      password.value,
+      user.password.value
+    );
     if (checkedpassword) {
       delete user.password;
       const token = jwt.sign(user, JWT_SECRET);
