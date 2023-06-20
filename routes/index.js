@@ -7,4 +7,6 @@ router.get("/health", (req, res, next) => {
   });
 });
 
+router.use("/users", require("./users"));
+
 module.exports = router;
