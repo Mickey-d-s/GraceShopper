@@ -31,4 +31,4 @@ function HealthPage() {
   );
 }
 
-export default App;
+export default HealthPage;

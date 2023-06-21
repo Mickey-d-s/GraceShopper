@@ -1,5 +1,5 @@
-export async function registerUser(username, email, password) {
-  const response = await fetch("api/users/register", {
+export default function registerUser(username, email, password) {
+  const response = fetch("api/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -10,7 +10,7 @@ export async function registerUser(username, email, password) {
       password,
     }),
   });
-  const { success, message, data } = await response.json();
+  const { success, message, data } = response.json();
   if (!success) {
     throw {
       message,
