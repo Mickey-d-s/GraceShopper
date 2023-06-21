@@ -2,7 +2,8 @@ const usersRouter = require("express").Router();
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, COOKIE_SECRET } = process.env;
+
 require("dotenv").config();
 
 const {
@@ -31,7 +32,7 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
-    console.log("_user:", _user);
+    console.log("_user:", await _user);
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
@@ -72,7 +73,7 @@ usersRouter.post("/login", async (req, res, next) => {
     const checkedpassword = await bcrypt.compare(password, user.password);
     if (checkedpassword) {
       delete user.password;
-      const token = jwt.sign(user, JWT_SECRET);
+      const token = jwt.sign(user, COOKIE_SECRET);
       res.cookie("token", token, {
         sameSite: "strict",
         httpOnly: true,

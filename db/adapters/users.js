@@ -36,6 +36,7 @@ async function getUserByUsername(username) {
       `,
       [username]
     );
+    console.log("user from getUserbyUsername:", user);
     return user;
   } catch (error) {
     throw error;
