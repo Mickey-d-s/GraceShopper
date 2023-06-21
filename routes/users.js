@@ -88,5 +88,20 @@ usersRouter.post("/login", async (req, res, next) => {
     next(error);
   }
 });
+usersRouter.get("/logout", async (req, res, next) => {
+  try {
+    res.clearCookie("token", {
+      sameSite: "strict",
+      httpOnly: true,
+      signed: true,
+    });
+    res.send({
+      success: true,
+      message: "Logged Out!",
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = usersRouter;

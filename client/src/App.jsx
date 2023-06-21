@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
 import "./App.css";
+import useAuth from "./components/hooks/useAuth";
+import Nav from "./components/Nav";
+import Home from "./components/Home";
+// import Profile from "./components/Profile";
 
 function App() {
-  const [healthMsg, setHealthMsg] = useState(null);
-  const [err, setErr] = useState(null);
-
-  useEffect(() => {
-    async function checkHealth() {
-      try {
-        const response = await fetch("/api/health");
-        if (!response.ok) {
-          throw {
-            message: "Api is Down 😭",
-          };
-        }
-        const { message } = await response.json();
-        setHealthMsg(message);
-      } catch (error) {
-        setErr(error.message);
-      }
-    }
-    checkHealth();
-  }, []);
-
+  const { token, user } = useAuth();
+  console.log("token in app.jsx:", token);
+  console.log("User in app.jsx:", user);
   return (
     <div>
-      <h1>Welcome to Grace Shopper</h1>
-      {healthMsg && <p>{healthMsg}</p>}
-      {err && <p>{err}</p>}
+      <Nav />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Home />} />
+        <Route path="/register" element={<Home />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
+      </Routes>
     </div>
   );
 }
