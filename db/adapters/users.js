@@ -15,7 +15,6 @@ async function createUser({ username, email, password }) {
     );
   } catch (error) {
     console.log(error);
-    throw error;
   }
 }
 async function getAllUsers() {
@@ -39,7 +38,7 @@ async function getUserByUsername(username) {
     console.log("user from getUserbyUsername:", user);
     return user;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 }
 

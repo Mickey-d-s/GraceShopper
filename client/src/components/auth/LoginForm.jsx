@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { registerUser, loginUser } from "../../API/usersAuth";
+import { loginUser } from "../../../src/api/userAuth";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 
-export default function AuthForm() {
+export default function LoginForm() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { setLoggedIn } = useAuth();
@@ -23,14 +23,15 @@ export default function AuthForm() {
       setError("passwords don't match");
       return;
     }
+    if (email.length === undefined) {
+      setError("email is undefined");
+      return;
+    }
 
     try {
       let result;
-      if (pathname === "/register") {
-        result = await registerUser(username, password);
-      } else {
+      if (pathname === "/login") {
         result = await loginUser(username, password);
-        alert("you're logged in");
       }
       console.log("Result after login or register: ", result);
       if (result.success) {
@@ -48,7 +49,7 @@ export default function AuthForm() {
     <div className="auth-form-container">
       <div className="auth-form">
         <form onSubmit={handleSubmit}>
-          <h2>{pathname === "/register" ? "Register" : "Login"}</h2>
+          <h2>{location.pathname.substring(1)}</h2>
           {error && <p className="error-message">{error}</p>}
           <input
             required
