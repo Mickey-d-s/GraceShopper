@@ -1,5 +1,5 @@
-export default function registerUser(username, email, password) {
-  const response = fetch("api/users/register", {
+export default async function registerUser(username, email, password) {
+  const response = await fetch("api/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,6 +16,7 @@ export default function registerUser(username, email, password) {
       message,
     };
   }
+  console.log(success, message, data);
   return { success, message, data };
 }
 

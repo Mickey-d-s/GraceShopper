@@ -17,6 +17,7 @@ const AuthProvider = ({ children }) => {
       } catch (error) {
         setUser({ username: "Stranger" });
         setLoggedIn(false);
+        console.log("authprovider are we hitting here?");
       }
     }
     getMe();

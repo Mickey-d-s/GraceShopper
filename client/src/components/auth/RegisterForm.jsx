@@ -14,8 +14,8 @@ export default function RegisterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (username.length < 8) {
-      setError("username must be longer than 8 characters");
+    if (username.length < 4) {
+      setError("username must be longer than 4 characters");
       return;
     }
     if (password !== passwordConfirmation) {
@@ -29,11 +29,10 @@ export default function RegisterForm() {
 
     try {
       let result;
-      if (pathname === "/register") {
-        result = await registerUser(username, email, password);
-        console.log("result at register", result);
-      }
 
+      result = await registerUser(username, email, password);
+      console.log("result at register", result);
+      console.log("result", result);
       if (result.success) {
         setLoggedIn(true);
         alert("you're registered!");

@@ -13,6 +13,7 @@ async function createUser({ username, email, password }) {
             `,
       [username, email, password]
     );
+    return { success, message, user };
   } catch (error) {
     console.log(error);
   }
