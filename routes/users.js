@@ -32,7 +32,7 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
-    console.log("_user:", await _user);
+    console.log("_user:", _user);
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
@@ -44,7 +44,7 @@ usersRouter.post("/register", async (req, res, next) => {
     console.log("user:", user);
 
     console.log("JWT secret:", JWT_SECRET);
-
+    delete user.password;
     const token = jwt.sign(user, JWT_SECRET);
     console.log("token:", token);
 
@@ -53,7 +53,7 @@ usersRouter.post("/register", async (req, res, next) => {
       httpOnly: true,
       signed: true,
     });
-    delete user.password;
+
     res.send({
       success: true,
       message: "Thank you for registering",

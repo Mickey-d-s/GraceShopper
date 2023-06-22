@@ -32,7 +32,6 @@ export default function RegisterForm() {
 
       result = await registerUser(username, email, password);
       console.log("result at register", result);
-      console.log("result", result);
       if (result.success) {
         setLoggedIn(true);
         alert("you're registered!");
@@ -49,7 +48,7 @@ export default function RegisterForm() {
   return (
     <div className="register-container">
       <div className="register-form">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <h2>{location.pathname.substring(1)}</h2>
           {error && <p className="error-message">{error}</p>}
           <input

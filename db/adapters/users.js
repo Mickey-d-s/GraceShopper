@@ -13,9 +13,14 @@ async function createUser({ username, email, password }) {
             `,
       [username, email, password]
     );
+    const success = true;
+    const message = "successfully created user";
+    console.log("success in creating user", user);
     return { success, message, user };
   } catch (error) {
     console.log(error);
+    const success = false;
+    const message = "failed to create user";
   }
 }
 async function getAllUsers() {
@@ -43,4 +48,20 @@ async function getUserByUsername(username) {
   }
 }
 
-module.exports = { createUser, getAllUsers, getUserByUsername };
+async function getUserbytoken(token) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+    SELECT * from users
+    WHERE password = $1
+    `,
+      [token]
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = { createUser, getAllUsers, getUserByUsername, getUserbytoken };
