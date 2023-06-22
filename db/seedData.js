@@ -75,11 +75,11 @@ const products = [
   },
 ];
 const categories = [
-  { categoryname: "Sandwiches" },
-  { categoryname: "Beverages" },
-  { categoryname: "Sides" },
-  { categoryname: "Sweets/Snacks" },
-  { categoryname: "deals" },
+  { category_name: "Sandwiches" },
+  { category_name: "Beverages" },
+  { category_name: "Sides" },
+  { category_name: "Sweets/Snacks" },
+  { category_name: "deals" },
 ];
 const inventories = [
   { product_id: 1, quantity: 100 },
