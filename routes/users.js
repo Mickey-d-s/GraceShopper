@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const usersRouter = require("express").Router();
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
@@ -106,25 +105,3 @@ usersRouter.get("/logout", async (req, res, next) => {
 });
 
 module.exports = usersRouter;
-=======
-const userRouter = require("express").Router();
-const { authRequired } = require("./utils");
-const { getUserByUsername } = require("../db/adapters/users.js");
-
-userRouter.post("/login", async (req, res, next) => {
-  const { username, password } = req.body;
-  try {
-    const user = await getUserByUsername(username);
-  } catch (error) {
-    next({
-      name: "Login Failed",
-      message: "Invalid Username or Password",
-    });
-  }
-});
-userRouter.get("/me", authRequired, (req, res, next) => {
-  res.send(req.user);
-});
-
-module.exports = userRouter;
->>>>>>> 5d317c76d22f53b5c5e8887322eb4035b92da436

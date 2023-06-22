@@ -77,21 +77,32 @@ module.exports = { createUser, getAllUsers, getUserByUsername, getUserbytoken };
     );
     return user;
   } catch (error) {
+<<<<<<< HEAD
+    console.log(error);
+=======
     throw error;
+>>>>>>> 357e486b864a7747beed86349475e1eeea02695f
   }
 }
 
 async function getUserByUsername(username) {
-  const {
-    rows: [user],
-  } = await client.query(
-    `SELECT * FROM users WHERE username=$1;
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `SELECT * FROM users WHERE username=$1;
         `,
-    [username]
-  );
-  console.log("getUserByUsername", user);
-  return user;
+      [username]
+    );
+    console.log("getUserByUsername", user);
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = { createUser, getUserByUsername };
+<<<<<<< HEAD
+=======
 >>>>>>> 5d317c76d22f53b5c5e8887322eb4035b92da436
+>>>>>>> 357e486b864a7747beed86349475e1eeea02695f

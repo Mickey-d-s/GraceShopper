@@ -1,5 +1,4 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 
 // GET /api/health
 router.get("/health", (req, res, next) => {
@@ -22,4 +21,5 @@ router.use("/categories", categoriesRouter);
 // router.use("/products", productsRouter);
 // const shoppingCartsRouter = require("./shoppingcarts");
 // router.use("/shoppingcart", shoppingCartsRouter);
+
 module.exports = router;
