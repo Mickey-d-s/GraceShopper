@@ -1,6 +1,5 @@
 const client = require("../client");
 
-
 async function createUser({ username, email, password }) {
   try {
     console.log({ username, email, password });
@@ -13,11 +12,13 @@ async function createUser({ username, email, password }) {
             ON CONFLICT (username) DO NOTHING
             returning *;
 `,
-    [username, email, password]
-  );
-  return user;
+      [username, email, password]
+    );
+    return user;
+  } catch (error) {
+    throw error;
+  }
 }
-
 
 async function getUserByUsername(username) {
   const {
@@ -31,4 +32,4 @@ async function getUserByUsername(username) {
   return user;
 }
 
-  module.exports = { createUser, getUserByUsername };
+module.exports = { createUser, getUserByUsername };
