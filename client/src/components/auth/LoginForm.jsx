@@ -36,7 +36,7 @@ export default function LoginForm() {
       console.log("Result after login or register: ", result);
       if (result.success) {
         setLoggedIn(true);
-        alert("you're registered!");
+        alert("you're logged in !");
         console.log("Auth Results", result);
         navigate("/");
       }

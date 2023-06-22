@@ -1,5 +1,5 @@
 import registerUser from "../../../src/api/userAuth";
-import useState from "react";
+import { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
 export default function RegisterForm() {
@@ -26,31 +26,31 @@ export default function RegisterForm() {
       setError("email is undefined");
       return;
     }
-  }
 
-  try {
-    let result;
-    if (pathname === "/register") {
-      result = registerUser(username, email, password);
-      console.log("result at register", result);
-    }
+    try {
+      let result;
+      if (pathname === "/register") {
+        result = await registerUser(username, email, password);
+        console.log("result at register", result);
+      }
 
-    if (result.success) {
-      setLoggedIn(true);
-      alert("you're registered!");
-      console.log("Auth Results", result);
-      navigate("/");
+      if (result.success) {
+        setLoggedIn(true);
+        alert("you're registered!");
+        console.log("Auth Results", result);
+        navigate("/");
+      }
+    } catch (error) {
+      setError(error.message);
     }
-  } catch (error) {
-    setError(error.message);
+    setUsername("");
+    setPassword("");
   }
-  setUsername("");
-  setPassword("");
 
   return (
     <div className="register-container">
       <div className="register-form">
-        <form onSubmit={handleSubmit()}>
+        <form onSubmit={handleSubmit}>
           <h2>{location.pathname.substring(1)}</h2>
           {error && <p className="error-message">{error}</p>}
           <input
@@ -60,6 +60,14 @@ export default function RegisterForm() {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            required
+            type="email"
+            name="email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             required
