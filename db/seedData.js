@@ -1,7 +1,7 @@
 // Create some seed data and export it from this file
 const users = [
   { username: "Brandon", email: "Brandon@gmail.com", password: 12345678 },
-  { username: "Jefrrey", email: "Jeffrey@gmail.com", password: 12345678 },
+  { username: "Jeffrey", email: "Jeffrey@gmail.com", password: 12345678 },
   { username: "Elliot", email: "Elliot@gmail.com", password: 12345678 },
   { username: "Brian", email: "Brian@gmail.com", password: 12345678 },
 ];
