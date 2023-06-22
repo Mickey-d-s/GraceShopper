@@ -48,7 +48,7 @@ async function getUserByUsername(username) {
   }
 }
 
-async function getUserbytoken(token) {
+async function getUserbytoken() {
   try {
     const {
       rows: [user],
