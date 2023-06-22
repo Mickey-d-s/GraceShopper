@@ -17,6 +17,7 @@ server.use(morgan("dev"));
 server.use(cors());
 server.use(cookieParser(process.env.COOKIE_SECRET));
 
+
 // Servers the built React app
 server.use(express.static(path.join(__dirname, "./client", "dist")));
 

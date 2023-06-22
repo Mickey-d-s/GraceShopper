@@ -21,7 +21,7 @@ async function dropTables() {
   try {
     console.log("Starting to drop tables");
     await client.query(`
-      DROP TABLE IF EXISTS inventory, categories, categorythroughs, cart_items, shoppingcarts, products, users CASCADE;
+      DROP TABLE IF EXISTS inventories, categories, categorythroughs, cart_items, shoppingcarts, products, users CASCADE;
     `);
   } catch (error) {
     console.error(error);
@@ -87,7 +87,6 @@ async function createTables() {
         user_id INT,
         FOREIGN KEY (user_id) REFERENCES users(user_id)
       )`);
-
     // // // -- Create the "cart_items" table
     await client.query(`
       CREATE TABLE cart_items (
@@ -127,7 +126,8 @@ async function populateTables() {
       console.log("Inventory table populated");
     }
     for (const shoppingCart of shopping_carts) {
-      await createShoppingCarts([shoppingCart]);
+      console.log("shopping cart item:", shoppingCart);
+      await createShoppingCarts(shoppingCart);
       console.log("ShoppingCarts table populated");
     }
     for (const cart_item of cart_items) {

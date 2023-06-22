@@ -2,6 +2,7 @@ const client = require("../client");
 
 async function createShoppingCarts({ status, user_id }) {
   try {
+    console.log(user_id);
     const {
       rows: [shoppingCart],
     } = await client.query(
