@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 
-function App() {
+function Health() {
   const [healthMsg, setHealthMsg] = useState(null);
   const [err, setErr] = useState(null);
 
@@ -32,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default Health;
