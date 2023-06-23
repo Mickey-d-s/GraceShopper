@@ -1,39 +1,19 @@
-//   const [user, setUser] = useState(useAuth());
-//   console.log("user:", user);
+import useAuth from "../components/hooks/useAuth";
+import { useState, useEffect } from "react";
 
-//   const [myRoutines, setMyRoutines] = useState([]);
+function Profile() {
+  const [user, setUser] = useState(useAuth());
+  console.log("user:", user);
 
-//   useEffect(() => {
-//     async function getRoutinesbyUser() {
-//       setUser(user);
-//       const response = await getUserRoutines(user);
-//       console.log("response:", response);
-//       setMyRoutines([response]);
-//     }
-//     getRoutinesbyUser();
-//   }, [user]);
-//   return (
-//     <>
-//       <div className="profilePage">
-//         <h1> Welcome to your Profile {user.username}</h1>
-//         <h2> my routines</h2>
-//         <div className="myroutines">
-//           {myRoutines.map((routine, idx) => {
-//             return (
-//               <>
-//                 <div className="routine">
-//                   <div key={idx} className="routinecard">
-//                     <p>{routine.name}</p>
-//                     <p>{routine.goal}</p>
-//                   </div>
-//                 </div>
-//               </>
-//             );
-//           })}
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
+  return (
+    <>
+      <div className="profilePage">
+        <h1> Welcome to your Profile {user.username}</h1>
+        <h2> order history</h2>
+        <div className="orderhistory">place your order now!</div>
+      </div>
+    </>
+  );
+}
 
-// export { ProfileComponent };
+export default Profile;

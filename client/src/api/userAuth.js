@@ -10,7 +10,9 @@ export default async function registerUser(username, email, password) {
       password,
     }),
   });
-  const { success, message, data } = response.json();
+  console.log("RESPONSE: ", response);
+  const { success, message, data } = await response.json();
+  console.log({ success, message, data });
   if (!success) {
     throw {
       message,

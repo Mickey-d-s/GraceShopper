@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function getMe() {
+      console.log("Inside of get me...");
       try {
         const { message, success, user } = await fetchMe();
         setUser(user);
@@ -17,7 +18,6 @@ const AuthProvider = ({ children }) => {
       } catch (error) {
         setUser({ username: "Stranger" });
         setLoggedIn(false);
-        console.log("authprovider are we hitting here?");
       }
     }
     getMe();

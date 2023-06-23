@@ -3,14 +3,13 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET, COOKIE_SECRET } = process.env;
-
 require("dotenv").config();
-
 const {
   createUser,
   getAllUsers,
   getUserByUsername,
 } = require("../db/adapters/users");
+const { authRequired } = require("./utils");
 
 usersRouter.get("/", async (req, res, next) => {
   try {
@@ -32,7 +31,6 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
-    console.log("_user:", _user);
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
@@ -41,12 +39,9 @@ usersRouter.post("/register", async (req, res, next) => {
       email,
       password: hashedPassword,
     });
-    console.log("user:", user);
 
-    console.log("JWT secret:", JWT_SECRET);
     delete user.password;
     const token = jwt.sign(user, JWT_SECRET);
-    console.log("token:", token);
 
     res.cookie("token", token, {
       sameSite: "strict",
@@ -103,5 +98,10 @@ usersRouter.get("/logout", async (req, res, next) => {
     next(error);
   }
 });
+
+usersRouter.get("/me", authRequired, async (req, res, next) => {
+  res.send({ success: true, message: "you are authorized", user: req.user });
+});
+// write a /me route! that sends the req.use....
 
 module.exports = usersRouter;

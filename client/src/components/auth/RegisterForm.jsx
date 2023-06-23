@@ -1,8 +1,10 @@
 import registerUser from "../../api/userAuth";
 import { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function RegisterForm() {
+  const { setLoggedIn } = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -31,11 +33,10 @@ export default function RegisterForm() {
       let result;
 
       result = await registerUser(username, email, password);
-      console.log("result at register", result);
       if (result.success) {
+        console.log("About to set logged in...");
         setLoggedIn(true);
-        alert("you're registered!");
-        console.log("Auth Results", result);
+        // alert("you're registered!");
         navigate("/");
       }
     } catch (error) {

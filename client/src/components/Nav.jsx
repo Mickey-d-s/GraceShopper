@@ -3,9 +3,8 @@ import { logout } from "../api/userAuth";
 import useAuth from "../components/hooks/useAuth";
 
 const Nav = () => {
-  const { setLoggedIn, loggedIn } = useAuth();
-  const { token, user } = useAuth();
-  console.log("token in app.jsx:", token);
+  const { setLoggedIn, loggedIn, user } = useAuth();
+
   console.log("User in app.jsx:", user);
 
   async function handleLogout() {
@@ -27,13 +26,16 @@ const Nav = () => {
             </li>
           </>
         )}
-        {(user?.username == "Stranger" || user?.username == "Stranger") && (
+        {user?.username === "Stranger" && (
           <>
             <li>
               <Link to="/register">Register</Link>
             </li>
             <li>
               <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
             </li>
           </>
         )}
