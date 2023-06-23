@@ -7,7 +7,6 @@ async function createUser({ username, email, password }) {
       rows: [user],
     } = await client.query(
       `
-<<<<<<< HEAD
     INSERT INTO users(username, email, password )
             VALUES($1,$2, $3)
             ON CONFLICT (username) DO NOTHING
@@ -64,45 +63,7 @@ async function getUserbytoken() {
   } catch (error) {
     console.log(error);
   }
+  ç;
 }
 
 module.exports = { createUser, getAllUsers, getUserByUsername, getUserbytoken };
-=======
-    INSERT INTO users(username, email,password )
-            VALUES($1,$2,$3)
-            ON CONFLICT (username) DO NOTHING
-            returning *;
-`,
-      [username, email, password]
-    );
-    return user;
-  } catch (error) {
-<<<<<<< HEAD
-    console.log(error);
-=======
-    throw error;
->>>>>>> 357e486b864a7747beed86349475e1eeea02695f
-  }
-}
-
-async function getUserByUsername(username) {
-  try {
-    const {
-      rows: [user],
-    } = await client.query(
-      `SELECT * FROM users WHERE username=$1;
-        `,
-      [username]
-    );
-    console.log("getUserByUsername", user);
-    return user;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-module.exports = { createUser, getUserByUsername };
-<<<<<<< HEAD
-=======
->>>>>>> 5d317c76d22f53b5c5e8887322eb4035b92da436
->>>>>>> 357e486b864a7747beed86349475e1eeea02695f
