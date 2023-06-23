@@ -55,6 +55,7 @@ export async function logout() {
 export async function fetchMe() {
   const response = await fetch("/api/users/me");
   const { success, message, user } = await response.json();
+  console.log("INSIDE FETCH ME:       ", { success, message, user });
   if (!success) {
     throw {
       message,

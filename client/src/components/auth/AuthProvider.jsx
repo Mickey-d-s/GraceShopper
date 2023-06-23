@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
       console.log("Inside of get me...");
       try {
         const { message, success, user } = await fetchMe();
+        console.log("user in useEffect authContext", user);
         setUser(user);
         setLoggedIn(true);
       } catch (error) {

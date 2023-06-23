@@ -14,10 +14,8 @@ async function createUser({ username, email, password }) {
             `,
       [username, email, password]
     );
-    const success = true;
-    const message = "successfully created user";
-    console.log("success in creating user", user);
-    return { success, message, user };
+
+    return user;
   } catch (error) {
     console.log(error);
     const success = false;
