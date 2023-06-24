@@ -6,8 +6,8 @@ export function Footer() {
       <h1
         style={{ color: "green", textAlign: "center", marginTop: "-50px" }}
       ></h1>
-      <div>
-        <ul>
+      <>
+        <div>
           <h1>About Us</h1>
           <li>
             <a href="#" />
@@ -21,8 +21,8 @@ export function Footer() {
             <a href="#" />
             Franchise info
           </li>
-        </ul>
-        <ul>
+        </div>
+        <div>
           <h1>Services</h1>
           <li>
             <a href="#" />
@@ -37,8 +37,8 @@ export function Footer() {
             McCafé
           </li>
           <div href="#">MyMcDonald's Rewards</div>
-        </ul>
-        <ul>
+        </div>
+        <div>
           <h1>Contact Us</h1>
           <li>
             <a href="#" />
@@ -56,8 +56,8 @@ export function Footer() {
             <a href="#" />
             Frequently Asked Questions
           </li>
-        </ul>
-      </div>
+        </div>
+      </>
     </footer>
   );
 }
