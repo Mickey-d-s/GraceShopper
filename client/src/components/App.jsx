@@ -7,6 +7,7 @@ import HealthPage from "../components/HealthPage";
 import Profile from "../components/Profile";
 import { Routes, Route } from "react-router-dom";
 import { Homepage } from "./home";
+import Footer from "./Footer";
 // import Profile from "./components/Profile";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<Registerform />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
