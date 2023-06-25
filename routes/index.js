@@ -17,8 +17,8 @@ router.use("/categories", categoriesRouter);
 // router.use("/categorythroughs", categoryThroughsRouter);
 // const inventoriesRouter = require("./inventories");
 // router.use("/inventories", inventoriesRouter);
-// const productsRouter = require("./products");
-// router.use("/products", productsRouter);
+const productsRouter = require("./products");
+router.use("/products", productsRouter);
 // const shoppingCartsRouter = require("./shoppingcarts");
 // router.use("/shoppingcart", shoppingCartsRouter);
 
