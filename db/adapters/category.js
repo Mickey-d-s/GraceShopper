@@ -1,6 +1,6 @@
 const client = require("../client");
 
-async function createCategory({ categoryname }) {
+async function createCategory({ category_name }) {
   try {
     const {
       rows: [category],
@@ -11,7 +11,7 @@ async function createCategory({ categoryname }) {
             ON CONFLICT (category_name) DO NOTHING
             RETURNING *;
             `,
-      [categoryname]
+      [category_name]
     );
     return category;
   } catch (error) {

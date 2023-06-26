@@ -17,4 +17,13 @@ categoriesRouter.post("/", authRequired, async (req, res, next) => {
   }
 });
 
+categoriesRouter.get("/", authRequired, async (req, res, next) => {
+  try {
+    const AllCategories = await getAllCategories();
+    res.send(AllCategories);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = categoriesRouter;
