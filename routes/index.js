@@ -9,8 +9,8 @@ router.get("/health", (req, res, next) => {
 
 const usersRouter = require("./users");
 router.use("/users", usersRouter);
-// const cart_itemsRouter = require("./cart_items.js");
-// router.use("/cart_items", cart_itemsRouter);
+const cart_itemsRouter = require("./cart_items.js");
+router.use("/cart_items", cart_itemsRouter);
 const categoriesRouter = require("./categories");
 router.use("/categories", categoriesRouter);
 // const categoryThroughsRouter = require("./categorythroughs");
