@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { logout } from "../api/userAuth";
 import useAuth from "../components/hooks/useAuth";
+import "../App.css";
+import "../index.css";
 
 const Nav = () => {
   const { setLoggedIn, loggedIn, user } = useAuth();
@@ -15,31 +17,29 @@ const Nav = () => {
   return (
     <nav className="navbar">
       <h3 className="navbar__username">Hi, {user.username}</h3>
-      <ul className="navbar__links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        {user?.username != "Stranger" && (
-          <>
-            <li>
-              <Link to="/users/profile">Profile</Link>
-            </li>
-          </>
-        )}
-        {user?.username === "Stranger" && (
-          <>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-          </>
-        )}
-      </ul>
+      <div className="Link">
+        <Link to="/">Home</Link>
+      </div>
+      {user?.username != "Stranger" && (
+        <>
+          <div className="Link">
+            <Link to="/users/profile">Profile</Link>
+          </div>
+        </>
+      )}
+      {user?.username === "Stranger" && (
+        <>
+          <div className="Link">
+            <Link to="/register">Register</Link>
+          </div>
+          <div className="Link">
+            <Link to="/login">Login</Link>
+          </div>
+          <div className="Link">
+            <Link to="/profile">Profile</Link>
+          </div>
+        </>
+      )}
       <button className="navbar__logout" onClick={handleLogout}>
         Logout
       </button>
