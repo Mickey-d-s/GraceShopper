@@ -64,14 +64,16 @@ async function updateCategory(category_id, category_name) {
     throw error;
   }
 }
-async function deleteCategory() {
-  await client.query(
-    `DELETE from Categories
-          WHERE id = $1
+
+async function deleteCategory(category_id) {
+  const deleted = await client.query(
+    `DELETE from categories
+          WHERE category_id = $1
+          RETURNING *;
           `,
     [category_id]
   );
-  return;
+  return deleted;
 }
 
 module.exports = {
