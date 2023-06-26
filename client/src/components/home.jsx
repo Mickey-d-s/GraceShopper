@@ -11,11 +11,11 @@ export function Homepage() {
           style={{ backgroundImage: `url(${bigburger})` }}
         >
           <h1 className="landertext">
-            THE ORIGINAL BURGER JOIN BEOFRE MC**ALD'S
+            THE ORIGINAL BURGER JOINT BEOFRE MC**ALD'S
           </h1>
         </div>
         <div className="flex">
-          <h2>the burger above thier burger</h2>
+          <h2>the burger above their burger</h2>
           <div>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
