@@ -15,9 +15,15 @@ export default function LoginForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (username.length < 5) {
-      setError("username must be longer than 8 characters");
+
+      setError("username must be longer than 5 characters");
       return;
     }
+    if (password !== passwordConfirmation) {
+      setError("passwords don't match");
+      return;
+    }
+
 
     try {
       let result;

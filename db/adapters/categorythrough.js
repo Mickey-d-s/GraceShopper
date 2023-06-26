@@ -17,4 +17,14 @@ async function createCategoryThrough({ category_id, product_id }) {
     throw error;
   }
 }
-module.exports = { createCategoryThrough };
+
+async function deleteCategoryThrough(product_id, category_id) {
+  await client.query(
+    `DELETE from categorythroughs
+          WHERE product_id =$1 && category_id=$2
+          `,
+    [product_id, category_id]
+  );
+  return;
+}
+module.exports = { createCategoryThrough, deleteCategoryThrough };
