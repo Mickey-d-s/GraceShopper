@@ -15,16 +15,12 @@ export default function LoginForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (username.length < 8) {
-      setError("username must be longer than 8 characters");
+    if (username.length < 5) {
+      setError("username must be longer than 5 characters");
       return;
     }
     if (password !== passwordConfirmation) {
       setError("passwords don't match");
-      return;
-    }
-    if (email.length === undefined) {
-      setError("email is undefined");
       return;
     }
 
@@ -48,7 +44,7 @@ export default function LoginForm() {
   return (
     <div className="auth-form-container">
       <div className="auth-form">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <h2>{location.pathname.substring(1)}</h2>
           {error && <p className="error-message">{error}</p>}
           <input

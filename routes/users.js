@@ -74,7 +74,7 @@ usersRouter.post("/login", async (req, res, next) => {
         httpOnly: true,
         signed: true,
       });
-      res.send(user);
+      res.send({ success: true, message: "login success", data: user });
     } else {
       next({ message: "invalid login credentials" });
       return;
