@@ -11,28 +11,18 @@ export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (username.length < 8) {
+    if (username.length < 5) {
       setError("username must be longer than 8 characters");
-      return;
-    }
-    if (password !== passwordConfirmation) {
-      setError("passwords don't match");
-      return;
-    }
-    if (email.length === undefined) {
-      setError("email is undefined");
       return;
     }
 
     try {
       let result;
-      if (pathname === "/login") {
-        result = await loginUser(username, password);
-      }
+      result = await loginUser(username, password);
+
       console.log("Result after login or register: ", result);
       if (result.success) {
         setLoggedIn(true);
@@ -48,7 +38,7 @@ export default function LoginForm() {
   return (
     <div className="auth-form-container">
       <div className="auth-form">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <h2>{location.pathname.substring(1)}</h2>
           {error && <p className="error-message">{error}</p>}
           <input
@@ -67,20 +57,13 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input
-            type="password"
-            placeholder="password confirmation"
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-          />
           <button type="submit">Submit</button>
         </form>
         <p>
-          {pathname === "/register"
+          {pathname === "/login"
             ? "Already have an account? "
             : "Don't have an account? "}
-          <Link to={pathname === "/register" ? "/register" : "/login"}>
-            {pathname === "/login" ? "Sign Up" : "Login Here"}
-          </Link>
+          <Link to={pathname === "/register"}>{"Sign Up"}</Link>
         </p>
       </div>
     </div>
