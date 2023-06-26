@@ -66,6 +66,7 @@ usersRouter.post("/login", async (req, res, next) => {
     console.log("password:", password);
     console.log("userpassword:", user.password);
     const checkedpassword = await bcrypt.compare(password, user.password);
+    console.log("checkedpassword:", checkedpassword);
     if (checkedpassword) {
       delete user.password;
       const token = jwt.sign(user, COOKIE_SECRET);
