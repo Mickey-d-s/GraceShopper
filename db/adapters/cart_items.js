@@ -29,9 +29,10 @@ async function updateCartItems({
     } = await client.query(
       `
     UPDATE cart_items
-    SET item_id = $1
-    WHERE shoppingcart_id = $2 and product_id =  $3 and count= $4
-    ;
+    SET shoppingcart_id = $2, product_id =  $3, count= $4
+    WHERE item_id = $1
+    RETURNING *;
+    
     `,
       [item_id, shoppingcart_id, product_id, count]
     );
@@ -41,13 +42,21 @@ async function updateCartItems({
   }
 }
 
-async function deleteCartItem(product_id) {
-  const {
-    rows: [cart_item],
-  } = await client.query("DELETE from cart_items WHERE product_id=$2", [
-    product_id,
-  ]);
-  return cart_item;
+async function deleteCartItem(item_id) {
+  try {
+    const {
+      rows: [cart_item],
+    } = await client.query(
+      `
+  DELETE from cart_items WHERE item_id =$1
+  RETURNING *;
+  `,
+      [item_id]
+    );
+    return cart_item;
+  } catch (error) {
+    throw error;
+  }
 }
 
-module.exports = { createCart_Items, updateCartItems };
+module.exports = { createCart_Items, updateCartItems, deleteCartItem };

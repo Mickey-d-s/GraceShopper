@@ -90,7 +90,7 @@ const inventories = [
 ];
 const cart_items = [
   { shoppingcart_id: 1, product_id: 1, count: 10 },
-  { shoppingcart_id: null, product_id: 2, count: null },
+  { shoppingcart_id: 3, product_id: 2, count: 9 },
   { shoppingcart_id: null, product_id: 3, count: null },
   { shoppingcart_id: null, product_id: 4, count: null },
   { shoppingcart_id: null, product_id: 5, count: null },
