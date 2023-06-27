@@ -53,7 +53,7 @@ inventoriesRouter.patch("/:id", authRequired, async (req, res, next) => {
     next(error);
   }
 });
-
+//getting you are not authorized for this one too
 inventoriesRouter.delete("/:id", authRequired, async (req, res, next) => {
   try {
     const { id } = req.params;

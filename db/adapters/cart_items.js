@@ -1,6 +1,6 @@
 const client = require("../client");
 
-async function createCart_Items({ shoppingcart_id, product_id, count }) {
+async function createCart_Item({ shoppingcart_id, product_id, count }) {
   try {
     const {
       rows: [cart_item],
@@ -17,12 +17,7 @@ async function createCart_Items({ shoppingcart_id, product_id, count }) {
     throw error;
   }
 }
-async function updateCartItems({
-  item_id,
-  shoppingcart_id,
-  product_id,
-  count,
-}) {
+async function updateCartItem({ item_id, shoppingcart_id, product_id, count }) {
   try {
     const {
       rows: [cart_item],
@@ -59,4 +54,4 @@ async function deleteCartItem(item_id) {
   }
 }
 
-module.exports = { createCart_Items, updateCartItems, deleteCartItem };
+module.exports = { createCart_Item, updateCartItem, deleteCartItem };
