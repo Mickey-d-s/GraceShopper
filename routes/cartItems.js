@@ -7,19 +7,24 @@ const {
 const { authRequired } = require("./utils");
 
 //getting 200 but for some reason doesn't do anything
-cart_itemsRouter.post("/", authRequired, async (req, res, next) => {
-  try {
-    const { shoppingcart_id, product_id, count } = req.body;
-    const newCart_Item = await createCart_Item(
-      shoppingcart_id,
-      product_id,
-      count
-    );
-    res.send(newCart_Item);
-  } catch (error) {
-    next(error);
+cart_itemsRouter.post(
+  "/",
+  //  authRequired,
+  async (req, res, next) => {
+    try {
+      const { shoppingcart_id, product_id, count } = req.body;
+      const newCart_Item = await createCart_Item(
+        shoppingcart_id,
+        product_id,
+        count
+      );
+      console.log("newCart_Item:", newCart_Item);
+      res.send(newCart_Item);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 //getting 200 but for some reason doesn't do anything
 cart_itemsRouter.patch("/:item_id", authRequired, async (req, res, next) => {
   try {
@@ -45,3 +50,5 @@ cart_itemsRouter.delete("/:item_id", authRequired, async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = cart_itemsRouter;
