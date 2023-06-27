@@ -53,7 +53,7 @@ categoriesRouter.patch("/:update", authRequired, async (req, res, next) => {
 
 categoriesRouter.delete(
   "/:category_id",
-  // authRequired,
+  authRequired,
   async (req, res, next) => {
     try {
       const category_id = req.params.category_id;
