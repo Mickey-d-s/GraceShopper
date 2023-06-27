@@ -22,7 +22,10 @@ async function getInventoryById(id) {
   const {
     rows: [inventory],
   } = await client.query(
-    `SELECT * FROM inventories WHERE inventory_id=$1;
+    `
+  SELECT * 
+  FROM inventories 
+  WHERE inventory_id=$1;
   `[id]
   );
   console.log("getInventoriesById CHECK", inventory);
