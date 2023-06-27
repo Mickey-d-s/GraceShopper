@@ -29,4 +29,39 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+// i don't think the adapter function is right for this, i believe it needs to take in an id as a parameter
+inventoriesRouter.get("/:AllInventoryid", async (req, res, next) => {
+  try {
+    const id = req.params.AllInventoryid;
+    const AllInventoryById = await getAllInventoryById(id);
+    res.send({ AllInventoryById });
+  } catch (error) {
+    next(error);
+  }
+});
+//getting you are not authorized for this one too
+inventoriesRouter.patch("/:id", authRequired, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { product_id, quantity } = req.body;
+    const updatedInventory = await updateInventory(id, {
+      product_id,
+      quantity,
+    });
+    res.send(updatedInventory);
+  } catch (error) {
+    next(error);
+  }
+});
+
+inventoriesRouter.delete("/:id", authRequired, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deletedInventory = await deleteInventory(id);
+    res.send({ message: "Deleted order!" });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = inventoriesRouter;
