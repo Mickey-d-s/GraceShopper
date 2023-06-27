@@ -1,5 +1,4 @@
 const categoriesRouter = require("express").Router();
-const { sign } = require("jsonwebtoken");
 const {
   createCategory,
   getAllCategories,
@@ -7,17 +6,21 @@ const {
   updateCategory,
   deleteCategory,
 } = require("../db/adapters/category");
-const { authRequired } = require("./utils");
+const { authRequired, checkForAdmin } = require("./utils");
 
-categoriesRouter.post("/", authRequired, async (req, res, next) => {
-  try {
-    const { category_name } = req.body;
-    const newCategory = await createCategory(category_name);
-    res.send(newCategory);
-  } catch (error) {
-    next(error);
+categoriesRouter.post(
+  "/",
+  authRequired && checkForAdmin,
+  async (req, res, next) => {
+    try {
+      const { category_name } = req.body;
+      const newCategory = await createCategory(category_name);
+      res.send(newCategory);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 categoriesRouter.get("/", async (req, res, next) => {
   try {
@@ -38,22 +41,26 @@ categoriesRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-categoriesRouter.patch("/:update", authRequired, async (req, res, next) => {
-  try {
-    const { category_name } = req.body;
-    const UpdatedCategory = await updateCategory(
-      req.params.update,
-      category_name
-    );
-    res.send(UpdatedCategory);
-  } catch (error) {
-    next(error);
+categoriesRouter.patch(
+  "/:update",
+  authRequired && checkForAdmin,
+  async (req, res, next) => {
+    try {
+      const { category_name } = req.body;
+      const UpdatedCategory = await updateCategory(
+        req.params.update,
+        category_name
+      );
+      res.send(UpdatedCategory);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 categoriesRouter.delete(
   "/:category_id",
-  authRequired,
+  authRequired && checkForAdmin,
   async (req, res, next) => {
     try {
       const category_id = req.params.category_id;
