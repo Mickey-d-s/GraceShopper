@@ -9,15 +9,19 @@ const {
 const { authRequired } = require("./utils");
 
 //not sure if this route is working. it return "you're not authorized", but doesn't let me create even after logging in
-inventoriesRouter.post("/", authRequired, async (req, res, next) => {
-  try {
-    const { product_id, quantity } = req.body;
-    const newInventory = await createInventories(product_id, quantity);
-    res.send(newInventory);
-  } catch (error) {
-    next(error);
+inventoriesRouter.post(
+  "/",
+  //  authRequired,
+  async (req, res, next) => {
+    try {
+      const { product_id, quantity } = req.body;
+      const newInventory = await createInventories(product_id, quantity);
+      res.send(newInventory);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 //not sure if working either get's syntax error of select
 inventoriesRouter.get("/:id", async (req, res, next) => {
   try {
@@ -40,28 +44,36 @@ inventoriesRouter.get("/:AllInventoryid", async (req, res, next) => {
   }
 });
 //getting you are not authorized for this one too
-inventoriesRouter.patch("/:id", authRequired, async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { product_id, quantity } = req.body;
-    const updatedInventory = await updateInventory(id, {
-      product_id,
-      quantity,
-    });
-    res.send(updatedInventory);
-  } catch (error) {
-    next(error);
+inventoriesRouter.patch(
+  "/:id",
+  //  authRequired,
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const { product_id, quantity } = req.body;
+      const updatedInventory = await updateInventory(id, {
+        product_id,
+        quantity,
+      });
+      res.send(updatedInventory);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 //getting you are not authorized for this one too
-inventoriesRouter.delete("/:id", authRequired, async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const deletedInventory = await deleteInventory(id);
-    res.send({ message: "Deleted order!" });
-  } catch (error) {
-    next(error);
+inventoriesRouter.delete(
+  "/:id",
+  //  authRequired,
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const deletedInventory = await deleteInventory(id);
+      res.send({ message: "Deleted order!" });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = inventoriesRouter;

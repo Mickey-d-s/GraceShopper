@@ -25,29 +25,37 @@ cart_itemsRouter.post(
   }
 );
 //getting 200 but for some reason doesn't do anything
-cart_itemsRouter.patch("/:item_id", authRequired, async (req, res, next) => {
-  try {
-    const { item_id } = req.params;
-    const { shoppingcart_id, product_id, count } = req.body;
-    const updatedCartItem = await updateCartItem(item_id, {
-      shoppingcart_id,
-      product_id,
-      count,
-    });
-    res.send(updatedCartItem);
-  } catch (error) {
-    next(error);
+cart_itemsRouter.patch(
+  "/:item_id",
+  //  authRequired,
+  async (req, res, next) => {
+    try {
+      const { item_id } = req.params;
+      const { shoppingcart_id, product_id, count } = req.body;
+      const updatedCartItem = await updateCartItem(item_id, {
+        shoppingcart_id,
+        product_id,
+        count,
+      });
+      res.send(updatedCartItem);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 //getting 200 but for some reason doesn't do anything
-cart_itemsRouter.delete("/:item_id", authRequired, async (req, res, next) => {
-  try {
-    const { item_id } = req.params;
-    const deletedCartItem = await deleteCartItem(item_id);
-    res.send({ message: "Deleted cartItem!" });
-  } catch (error) {
-    next(error);
+cart_itemsRouter.delete(
+  "/:item_id",
+  //  authRequired,
+  async (req, res, next) => {
+    try {
+      const { item_id } = req.params;
+      const deletedCartItem = await deleteCartItem(item_id);
+      res.send({ message: "Deleted cartItem!" });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = cart_itemsRouter;
