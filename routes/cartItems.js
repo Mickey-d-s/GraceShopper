@@ -24,7 +24,7 @@ cart_itemsRouter.post(
     }
   }
 );
-//getting 200 but for some reason doesn't do anything
+
 cart_itemsRouter.patch(
   "/:item_id",
   //  authRequired,
@@ -32,18 +32,21 @@ cart_itemsRouter.patch(
     try {
       const { item_id } = req.params;
       const { shoppingcart_id, product_id, count } = req.body;
-      const updatedCartItem = await updateCartItem(item_id, {
+      console.log(req.body);
+      const updatedCartItem = await updateCartItem({
+        item_id,
         shoppingcart_id,
         product_id,
         count,
       });
+      console.log("updatedCartItem:", updatedCartItem);
       res.send(updatedCartItem);
     } catch (error) {
       next(error);
     }
   }
 );
-//getting 200 but for some reason doesn't do anything
+
 cart_itemsRouter.delete(
   "/:item_id",
   //  authRequired,
