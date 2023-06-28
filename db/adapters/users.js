@@ -3,6 +3,7 @@ const client = require("../client");
 async function createUser({ username, email, password }) {
   try {
     console.log({ username, email, password });
+
     const {
       rows: [user],
     } = await client.query(

@@ -31,7 +31,6 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
-
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
     const user = await createUser({
@@ -100,7 +99,7 @@ usersRouter.get("/logout", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", authRequired, async (req, res, next) => {
+usersRouter.get("/me", async (req, res, next) => {
   console.log("REQ USER: ", req.user);
   res.send({ success: true, message: "you are authorized", user: req.user });
 });

@@ -6,7 +6,6 @@ const {
 } = require("../db/adapters/cart_items");
 const { authRequired } = require("./utils");
 
-//getting 200 but for some reason doesn't do anything
 cart_itemsRouter.post(
   "/",
   //  authRequired,
