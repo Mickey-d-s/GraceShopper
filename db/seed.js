@@ -5,7 +5,7 @@ const { createCategory } = require("./adapters/category");
 const { createCategoryThrough } = require("./adapters/categorythrough");
 const { createShoppingCarts } = require("./adapters/shoppingcart");
 const { createInventories } = require("./adapters/inventory");
-const { createCart_Items } = require("./adapters/cart_items");
+const { createCart_Item } = require("./adapters/cart_items");
 const {
   users,
   products,
@@ -36,10 +36,9 @@ async function createTables() {
     await client.query(`
       CREATE TABLE users (
         user_id SERIAL PRIMARY KEY,
-        username VARCHAR(50) NOT NULL UNIQUE,
-        email VARCHAR(100) NOT NULL,
-        password VARCHAR(50) NOT NULL,
-        is_admin BOOLEAN DEFAULT FALSE
+        username VARCHAR(255) NOT NULL UNIQUE,
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
       )`);
     console.log("after creating user");
 
@@ -132,7 +131,7 @@ async function populateTables() {
       console.log("ShoppingCarts table populated");
     }
     for (const cart_item of cart_items) {
-      await createCart_Items(cart_item);
+      await createCart_Item(cart_item);
       console.log("Cart items table populated");
     }
     // Add code to populate tables here

@@ -6,7 +6,6 @@ const {
 } = require("../db/adapters/cart_items");
 const { authRequired } = require("./utils");
 
-//getting 200 but for some reason doesn't do anything
 cart_itemsRouter.post(
   "/",
   //  authRequired,
@@ -18,13 +17,14 @@ cart_itemsRouter.post(
         product_id,
         count
       );
+      console.log("newCart_Item:", newCart_Item);
       res.send(newCart_Item);
     } catch (error) {
       next(error);
     }
   }
 );
-//getting 200 but for some reason doesn't do anything
+
 cart_itemsRouter.patch(
   "/:item_id",
   //  authRequired,
@@ -32,18 +32,21 @@ cart_itemsRouter.patch(
     try {
       const { item_id } = req.params;
       const { shoppingcart_id, product_id, count } = req.body;
-      const updatedCartItem = await updateCartItem(item_id, {
+      console.log(req.body);
+      const updatedCartItem = await updateCartItem({
+        item_id,
         shoppingcart_id,
         product_id,
         count,
       });
+      console.log("updatedCartItem:", updatedCartItem);
       res.send(updatedCartItem);
     } catch (error) {
       next(error);
     }
   }
 );
-//getting 200 but for some reason doesn't do anything
+
 cart_itemsRouter.delete(
   "/:item_id",
   //  authRequired,
@@ -57,3 +60,5 @@ cart_itemsRouter.delete(
     }
   }
 );
+
+module.exports = cart_itemsRouter;
