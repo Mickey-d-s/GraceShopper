@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 export default function LoginForm() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { setLoggedIn, setUser } = useAuth();
+  const { setLoggedIn } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,12 +23,10 @@ export default function LoginForm() {
       let result;
       result = await loginUser(username, password);
 
-      console.log("Result after login or register: ", result);
+      console.log("Result after login: ", result);
       if (result.success) {
+        console.log("About to set logged in...");
         setLoggedIn(true);
-        setUser({ username: username });
-        alert("you're logged in !");
-        console.log("Auth Results", result);
         navigate("/");
       }
     } catch (error) {

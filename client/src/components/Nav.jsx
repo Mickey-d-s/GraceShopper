@@ -3,15 +3,17 @@ import { logout } from "../api/userAuth";
 import useAuth from "../components/hooks/useAuth";
 import "../App.css";
 import "../index.css";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const { setLoggedIn, loggedIn, user } = useAuth();
-
-  console.log("User in app.jsx:", user);
+  const navigate = useNavigate();
 
   async function handleLogout() {
     await logout();
     setLoggedIn(!loggedIn);
+    alert("you have logged out!");
+    navigate("/users/login");
   }
 
   return (
@@ -40,7 +42,7 @@ const Nav = () => {
           </div>
         </>
       )}
-      <button className="navbar__logout" onClick={handleLogout}>
+      <button className="navbar__logout" onClick={(e) => handleLogout(e)}>
         Logout
       </button>
     </nav>
