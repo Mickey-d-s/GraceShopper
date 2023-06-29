@@ -11,67 +11,80 @@ const products = [
     product_name: "The Angus Burger",
     price: (3, 2),
     description: "made from cow",
+    category: "Sandwiches",
   },
   {
     product_name: "The Chicken Burger",
     price: (3, 2),
     description: "made from chicken",
+    category: "Sandwiches",
   },
   {
     product_name: "The Pork Burger",
     price: (3, 2),
     description: "made from pig",
+    category: "Sandwiches",
   },
   {
     product_name: "The fish Burger",
     price: (3, 2),
     description: "made from fish",
+    category: "Sandwiches",
   },
   {
     product_name: "Coke cola",
     price: (3, 2),
     description: "crispy fizziness",
+    category: "Beverages",
   },
   {
     product_name: "Dr.pepper",
     price: (3, 2),
     description: "23 amazing flavors",
+    category: "Beverages",
   },
   {
     product_name: "Mountain dew",
     price: (1, 2),
     description: "comes from mount everest",
+    category: "Beverages",
   },
   {
     product_name: "Fries",
     price: (2, 2),
     description: "pentagon fries",
+    category: "Sides",
   },
   {
     product_name: "fruits cups",
     price: (1, 2),
     description: "comes from mount everest",
+    category: "Sides",
   },
   {
     product_name: "ice cream cone",
     price: (1, 2),
     description: "toothpaste",
+    category: "Ice Cream",
   },
   {
     product_name: "sundaes",
     price: (1, 2),
     description: "made straight from the udders of cow",
+    category: "Ice Cream",
   },
 
   {
     product_name: "Two for $3",
     price: (1, 2),
     description: "get two burgers for the price of 4",
+    category: "Deals",
   },
   {
     product_name: "Grimace birthday meal",
     price: (1, 2),
     description: "made with real babies... cow babies",
+    category: "Deals",
   },
 ];
 // const categories = [

@@ -1,17 +1,17 @@
 const client = require("../client");
 
-async function createProduct({ product_name, price, description }) {
+async function createProduct({ product_name, price, description, category }) {
   try {
     const {
       rows: [product],
     } = await client.query(
       `
-            INSERT INTO products(product_name, price, description)
-            VALUES($1,$2,$3)
+            INSERT INTO products(product_name, price, description, category)
+            VALUES($1,$2,$3,$4)
             ON CONFLICT (product_name) DO NOTHING
             RETURNING *;
             `,
-      [product_name, price, description]
+      [product_name, price, description, category]
     );
     return product;
   } catch (error) {
@@ -47,7 +47,13 @@ async function getProductById(product_id) {
   }
 }
 
-async function updateProduct(product_id, product_name, price, description) {
+async function updateProduct(
+  product_id,
+  product_name,
+  price,
+  description,
+  category
+) {
   try {
     const {
       rows: [updatedProduct],
@@ -57,10 +63,11 @@ async function updateProduct(product_id, product_name, price, description) {
     SET product_name = $2,
     price = $3,
     description = $4
+    category = $5
     WHERE product_id = $1
     RETURNING *;
     `,
-      [product_id, product_name, price, description]
+      [product_id, product_name, price, description, category]
     );
     return updatedProduct;
   } catch (error) {
@@ -69,11 +76,6 @@ async function updateProduct(product_id, product_name, price, description) {
 }
 
 async function deleteProduct(product_id) {
-  await client.query(
-    `DELETE FROM categorythroughs
-     WHERE product_id = $1`,
-    [product_id]
-  );
   await client.query(
     `DELETE FROM inventories
      WHERE product_id = $1`,

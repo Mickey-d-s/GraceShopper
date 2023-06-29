@@ -51,7 +51,7 @@ async function createTables() {
         price DECIMAL(10,2) NOT NULL,
         description TEXT,
         inventory_id INT,
-        category TEXT
+        category TEXT NOT NULL
       )`);
 
     // // // -- Create the "category" table
