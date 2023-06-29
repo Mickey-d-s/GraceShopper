@@ -8,7 +8,6 @@ const {
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
 
-//not sure if this route is working. it return "you're not authorized", but doesn't let me create even after logging in
 inventoriesRouter.post(
   "/",
   //  authRequired,
@@ -51,10 +50,7 @@ inventoriesRouter.patch(
     try {
       const { id } = req.params;
       const { product_id, quantity } = req.body;
-      const updatedInventory = await updateInventory(id, {
-        product_id,
-        quantity,
-      });
+      const updatedInventory = await updateInventory(id, product_id, quantity);
       res.send(updatedInventory);
     } catch (error) {
       next(error);
