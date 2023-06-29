@@ -1,7 +1,7 @@
 import Nav from "../components/Nav";
 import "../App.css";
 import "../index.css";
-import Categories from "../components/Categories";
+import Menu from "./Menu";
 import Registerform from "../components/auth/RegisterForm";
 import LoginForm from "../components/auth/LoginForm";
 import HealthPage from "../components/HealthPage";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Registerform />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/categories" element={<Categories />} />
+        <Route path="/products" element={<Menu />} />
       </Routes>
       <Footer />
     </div>

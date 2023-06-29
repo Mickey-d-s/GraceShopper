@@ -28,7 +28,7 @@ const Nav = () => {
             <Link to="/users/profile">Profile</Link>
           </div>
           <div className="Link">
-            <Link to="/categories">Categories</Link>
+            <Link to="/products">Menu</Link>
           </div>
         </>
       )}
@@ -44,7 +44,7 @@ const Nav = () => {
             <Link to="/profile">Profile</Link>
           </div>
           <div className="Link">
-            <Link to="/categories">Categories</Link>
+            <Link to="/products">Menu</Link>
           </div>
         </>
       )}
