@@ -18,8 +18,8 @@ router.use("/categories", categoriesRouter);
 const inventoriesRouter = require("./inventory");
 router.use("/inventories", inventoriesRouter);
 const productsRouter = require("./products");
-router.use("/products", productsRouter);
-// const shoppingCartsRouter = require("./shoppingcarts");
+// router.use("/products", productsRouter);
+// const shoppingCartsRouter = require("./shoppingcart");
 // router.use("/shoppingcart", shoppingCartsRouter);
 
 module.exports = router;

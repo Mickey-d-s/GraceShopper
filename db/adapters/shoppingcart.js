@@ -21,11 +21,10 @@ async function createShoppingCarts({ status, user_id }) {
 }
 
 // not sure if we need a full crud but will do so just in case
-async function deleteshoppingcartbyuserid({ user_id, updateobj }) {
+async function deleteshoppingcartbyuserid({ user_id }) {
   try {
     //untested
     console.log(user_id);
-
     const {
       rows: [shoppingCart],
     } = await client.query(
@@ -40,7 +39,7 @@ async function deleteshoppingcartbyuserid({ user_id, updateobj }) {
   }
 }
 
-async function updateshoppingcart({ user_id }) {
+async function updateshoppingcart({ user_id, updateObj }) {
   try {
     //untested
     console.log(user_id);
@@ -65,7 +64,6 @@ async function updateshoppingcart({ user_id }) {
     throw error;
   }
 }
-//this is more than likely broken, couldn't find anything on it.... asked pawan hopefully get a message back
 async function getshoppingcartbyuserid({ user_id }) {
   try {
     const {
@@ -73,17 +71,24 @@ async function getshoppingcartbyuserid({ user_id }) {
     } = await client.query(
       `
       SELECT
-      shoppingcarts.id as id,
-      shoppingcarts.status as status,
-      shoppingcarts.user_id as customer,
-      CASE WHEN cart_itmes.shoppingcart_id IS NULL THEN '[]'::json
-      ELSE
-      JSON_AGG(
-        JSON_BUILD_OBJECT(
-          'productid', cart_items.product_id,
-          'count', cart_items.count
-        )
-      )
+shoppingcarts.shoppingcart_id as id,
+shoppingcarts.status as status,
+shoppingcarts.user_id as customer,
+JSON_AGG(
+JSON_BUILD_OBJECT(
+products.product_id,
+products.product_name,
+cart_items.count,
+products.price
+)
+)
+from shoppingcarts
+full outer join cart_items
+on shoppingcarts.shoppingcart_id = cart_items.shoppingcart_id
+inner join products
+on products.product_id = cart_items.product_id
+where shoppingcarts.user_id = 1
+group by shoppingcarts.shoppingcart_id
     `,
       [user_id]
     );
@@ -92,13 +97,9 @@ async function getshoppingcartbyuserid({ user_id }) {
   }
 }
 
-module.exports = { createShoppingCarts };
-
-multidimsumarray = (1, 4, [4, 2], [2, [2, 3]], 3);
-
-function sumofarray(array) {
-  flatarray = array.flat(10);
-  const accumilator = 0;
-  const adder = (accumilator, toadd) => Math.max(accumilator, toadd);
-  sumwithintial = flatarray.reduce(adder, flatarray);
-}
+module.exports = {
+  createShoppingCarts,
+  deleteshoppingcartbyuserid,
+  updateshoppingcart,
+  getshoppingcartbyuserid,
+};
