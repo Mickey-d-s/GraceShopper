@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 export default function LoginForm() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { setLoggedIn } = useAuth();
+  const { setLoggedIn, setUser } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ export default function LoginForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (username.length < 5) {
-      setError("username must be longer than 8 characters");
+      setError("username must be longer than 5 characters");
       return;
     }
 
@@ -26,6 +26,7 @@ export default function LoginForm() {
       console.log("Result after login or register: ", result);
       if (result.success) {
         setLoggedIn(true);
+        setUser({ username: username });
         alert("you're logged in !");
         console.log("Auth Results", result);
         navigate("/");

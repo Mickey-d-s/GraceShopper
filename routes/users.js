@@ -21,8 +21,11 @@ usersRouter.get("/", async (req, res, next) => {
 });
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
-
+    const { username, email, password } = req.body.username;
+    // console.log("username", username);
+    // console.log("email", email);
+    // console.log("password", password);
+    // console.log(req.body);
     const _user = await getUserByUsername(username);
     if (_user) {
       next({
@@ -31,7 +34,8 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
-
+    // console.log("HEllO");
+    // console.log("password", password);
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
     const user = await createUser({
@@ -39,7 +43,7 @@ usersRouter.post("/register", async (req, res, next) => {
       email,
       password: hashedPassword,
     });
-
+    console.log("user:", user);
     delete user.password;
     const token = jwt.sign(user, JWT_SECRET);
 
@@ -61,6 +65,7 @@ usersRouter.post("/register", async (req, res, next) => {
 usersRouter.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
+    console.log("req.boody", req.body);
 
     const user = await getUserByUsername(username);
     console.log("password:", password);
@@ -75,7 +80,7 @@ usersRouter.post("/login", async (req, res, next) => {
         httpOnly: true,
         signed: true,
       });
-      res.send(user);
+      res.send({ success: true, message: "login success", data: user });
     } else {
       next({ message: "invalid login credentials" });
       return;
@@ -100,7 +105,7 @@ usersRouter.get("/logout", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", authRequired, async (req, res, next) => {
+usersRouter.get("/me", async (req, res, next) => {
   console.log("REQ USER: ", req.user);
   res.send({ success: true, message: "you are authorized", user: req.user });
 });

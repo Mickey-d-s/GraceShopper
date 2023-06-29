@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
       try {
         const { message, success, user } = await fetchMe();
         console.log("user in useEffect authContext", user);
-        setUser(user);
+        // setUser(user);
         setLoggedIn(true);
       } catch (error) {
         setUser({ username: "Stranger" });

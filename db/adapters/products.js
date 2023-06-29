@@ -60,7 +60,7 @@ async function updateProduct(product_id, product_name, price, description) {
     WHERE product_id = $1
     RETURNING *;
     `,
-      [product_id, product_name]
+      [product_id, product_name, price, description]
     );
     return updatedProduct;
   } catch (error) {
@@ -68,9 +68,35 @@ async function updateProduct(product_id, product_name, price, description) {
   }
 }
 
+async function deleteProduct(product_id) {
+  await client.query(
+    `DELETE FROM categorythroughs
+     WHERE product_id = $1`,
+    [product_id]
+  );
+  await client.query(
+    `DELETE FROM inventories
+     WHERE product_id = $1`,
+    [product_id]
+  );
+  await client.query(
+    `DELETE FROM cart_items
+     WHERE product_id = $1`,
+    [product_id]
+  );
+  await client.query(
+    `DELETE FROM products
+     WHERE product_id = $1`,
+    [product_id]
+  );
+
+  return;
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
   updateProduct,
+  deleteProduct,
 };

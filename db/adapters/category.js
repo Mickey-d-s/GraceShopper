@@ -65,9 +65,21 @@ async function updateCategory(category_id, category_name) {
   }
 }
 
+async function deleteCategory(category_id) {
+  const deleted = await client.query(
+    `DELETE from categories
+          WHERE category_id = $1
+          RETURNING *;
+          `,
+    [category_id]
+  );
+  return deleted;
+}
+
 module.exports = {
   createCategory,
   getAllCategories,
   getCategoryById,
   updateCategory,
+  deleteCategory,
 };
