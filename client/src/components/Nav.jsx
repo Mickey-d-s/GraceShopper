@@ -27,6 +27,9 @@ const Nav = () => {
           <div className="Link">
             <Link to="/users/profile">Profile</Link>
           </div>
+          <div className="Link">
+            <Link to="/categories">Categories</Link>
+          </div>
         </>
       )}
       {user?.username === "Stranger" && (
@@ -39,6 +42,9 @@ const Nav = () => {
           </div>
           <div className="Link">
             <Link to="/profile">Profile</Link>
+          </div>
+          <div className="Link">
+            <Link to="/categories">Categories</Link>
           </div>
         </>
       )}
