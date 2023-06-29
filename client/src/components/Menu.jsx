@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import { fetchAllCategories } from "../../src/api/categories";
+import { fetchAllCategories } from "../api/categories";
 
 export default function allCategories() {
   const [categories, setCategories] = useState([]);

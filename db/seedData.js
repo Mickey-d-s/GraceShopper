@@ -74,13 +74,13 @@ const products = [
     description: "made with real babies... cow babies",
   },
 ];
-const categories = [
-  { category_name: "Sandwiches" },
-  { category_name: "Beverages" },
-  { category_name: "Sides" },
-  { category_name: "Sweets/Snacks" },
-  { category_name: "deals" },
-];
+// const categories = [
+//   { category_name: "Sandwiches" },
+//   { category_name: "Beverages" },
+//   { category_name: "Sides" },
+//   { category_name: "Sweets/Snacks" },
+//   { category_name: "deals" },
+// ];
 const inventories = [
   { product_id: 1, quantity: 100 },
   { product_id: 2, quantity: 100 },
@@ -96,10 +96,10 @@ const cart_items = [
   { shoppingcart_id: null, product_id: 5, count: null },
 ];
 
-const categorythroughs = [
-  { category_id: 1, product_id: 1 },
-  { category_id: 1, product_id: 2 },
-];
+// const categorythroughs = [
+//   { category_id: 1, product_id: 1 },
+//   { category_id: 1, product_id: 2 },
+// ];
 
 const shopping_carts = [
   { status: null, user_id: 1 },
@@ -111,10 +111,10 @@ const shopping_carts = [
 // ]
 module.exports = {
   users,
-  categories,
+  // categories,
   inventories,
   cart_items,
   shopping_carts,
   products,
-  categorythroughs,
+  // categorythroughs,
 };
