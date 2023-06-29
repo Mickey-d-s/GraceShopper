@@ -74,7 +74,7 @@ usersRouter.post("/login", async (req, res, next) => {
     console.log("checkedpassword:", checkedpassword);
     if (checkedpassword) {
       delete user.password;
-      const token = jwt.sign(user, COOKIE_SECRET);
+      const token = jwt.sign(user, JWT_SECRET);
       res.cookie("token", token, {
         sameSite: "strict",
         httpOnly: true,
@@ -105,7 +105,7 @@ usersRouter.get("/logout", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", async (req, res, next) => {
+usersRouter.get("/me", authRequired, async (req, res, next) => {
   console.log("REQ USER: ", req.user);
   res.send({ success: true, message: "you are authorized", user: req.user });
 });

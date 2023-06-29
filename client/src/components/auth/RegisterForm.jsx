@@ -37,8 +37,6 @@ export default function RegisterForm() {
       if (result.success) {
         console.log("About to set logged in...");
         setLoggedIn(true);
-        setUser(result.data.username);
-        // alert("you're registered!");
         navigate("/");
       }
     } catch (error) {

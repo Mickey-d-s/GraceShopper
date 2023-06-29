@@ -6,11 +6,8 @@ import "../index.css";
 import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  const { setLoggedIn, loggedIn, setUser, user } = useAuth();
+  const { setLoggedIn, loggedIn, user } = useAuth();
   const navigate = useNavigate();
-
-  setUser(user);
-  console.log("User in app.jsx:", user);
 
   async function handleLogout() {
     await logout();
