@@ -6,12 +6,14 @@ import "../index.css";
 import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  const { setLoggedIn, loggedIn, user } = useAuth();
+  const { setLoggedIn, loggedIn, user, setUser } = useAuth();
   const navigate = useNavigate();
+  console.log("loggedIn", loggedIn);
 
   async function handleLogout() {
     await logout();
     setLoggedIn(!loggedIn);
+    setUser(user);
     alert("you have logged out!");
     navigate("/users/login");
   }
