@@ -5,7 +5,7 @@ import "../App.css";
 import "../index.css";
 
 const Nav = () => {
-  const { setLoggedIn, loggedIn, user } = useAuth();
+  const { setLoggedIn, loggedIn, setUser, user } = useAuth();
 
   console.log("User in app.jsx:", user);
 

@@ -22,10 +22,10 @@ usersRouter.get("/", async (req, res, next) => {
 usersRouter.post("/register", async (req, res, next) => {
   try {
     const { username, email, password } = req.body.username;
-    // console.log("username", username);
-    // console.log("email", email);
-    // console.log("password", password);
-    // console.log(req.body);
+    console.log("username", username);
+    console.log("email", email);
+    console.log("password", password);
+    console.log(req.body);
     const _user = await getUserByUsername(username);
     if (_user) {
       next({

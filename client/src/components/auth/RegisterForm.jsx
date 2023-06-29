@@ -4,7 +4,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export default function RegisterForm() {
-  const { setLoggedIn, setUser } = useAuth();
+  const { setLoggedIn, setUser, user } = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ export default function RegisterForm() {
       if (result.success) {
         console.log("About to set logged in...");
         setLoggedIn(true);
-        setUser(user.username);
+        setUser(result.data.username);
         // alert("you're registered!");
         navigate("/");
       }
