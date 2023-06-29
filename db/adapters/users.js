@@ -62,7 +62,19 @@ async function getUserbytoken() {
   } catch (error) {
     console.log(error);
   }
-  ç;
+}
+async function deleteUser(id) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `DELETE from users WHERE user_id=$1
+    `,
+      [id]
+    );
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = { createUser, getAllUsers, getUserByUsername, getUserbytoken };
