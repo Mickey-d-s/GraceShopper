@@ -32,6 +32,9 @@ const Nav = () => {
           <div className="Link">
             <Link to="/products">Menu</Link>
           </div>
+          <div className="Link">
+            <Link to="/inventories">Inventory</Link>
+          </div>
         </>
       )}
       {user?.username === "Stranger" && (
