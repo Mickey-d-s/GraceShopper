@@ -33,14 +33,14 @@ async function getInventoryById(id) {
 }
 
 async function getAllInventoryById() {
-  const {
-    rows: [inventory],
-  } = await client.query(`
-  SELECT * 
-  FROM inventories
-  `);
-  return rows;
-  console.log("getAllInventoryById CHECK", inventory);
+  try {
+    const { rows } = await client.query(`
+          SELECT * FROM inventories;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
 }
 
 function updateInventory({ inventory_id, product_id, quantity }) {

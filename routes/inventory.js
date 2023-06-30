@@ -22,6 +22,16 @@ inventoriesRouter.post(
     }
   }
 );
+
+inventoriesRouter.get("/", async (req, res, next) => {
+  try {
+    const AllInventories = await getAllInventoryById();
+    res.send(AllInventories);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //not sure if working either get's syntax error of select
 inventoriesRouter.get("/:id", async (req, res, next) => {
   try {
@@ -33,16 +43,17 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-// i don't think the adapter function is right for this, i believe it needs to take in an id as a parameter
-inventoriesRouter.get("/:AllInventoryid", async (req, res, next) => {
-  try {
-    const id = req.params.AllInventoryid;
-    const AllInventoryById = await getAllInventoryById(id);
-    res.send({ AllInventoryById });
-  } catch (error) {
-    next(error);
-  }
-});
+// // i don't think the adapter function is right for this, i believe it needs to take in an id as a parameter
+// inventoriesRouter.get("/:AllInventoryid", async (req, res, next) => {
+//   try {
+//     const id = req.params.AllInventoryid;
+//     const AllInventoryById = await getAllInventoryById(id);
+//     res.send({ AllInventoryById });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 //getting you are not authorized for this one too
 inventoriesRouter.patch(
   "/:id",
@@ -61,6 +72,7 @@ inventoriesRouter.patch(
     }
   }
 );
+
 //getting you are not authorized for this one too
 inventoriesRouter.delete(
   "/:id",
