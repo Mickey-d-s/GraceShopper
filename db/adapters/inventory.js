@@ -24,7 +24,7 @@ async function getInventoryById(id) {
   } = await client.query(
     `
   SELECT * 
-  FROM inventories 
+  FROM inventories
   WHERE inventory_id=$1;
   `,
     [id]
@@ -44,13 +44,14 @@ async function getAllInventory() {
   }
 }
 
-function updateInventory({ inventory_id, product_id, quantity }) {
+async function updateInventory({ inventory_id, product_id, quantity }) {
   const {
     rows: [inventory],
-  } = client.query(
+  } = await client.query(
     `
-  UPDATE inventories SET inventory_id = $1
-    where product_id=$2 and quantity = $3;
+    UPDATE inventories
+    SET inventory_id = $1
+    WHERE product_id = $2 AND quantity = $3;
     `,
     [inventory_id, product_id, quantity]
   );

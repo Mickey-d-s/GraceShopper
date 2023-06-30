@@ -17,6 +17,7 @@ inventoriesRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
 inventoriesRouter.post(
   "/",
   //  authRequired,
