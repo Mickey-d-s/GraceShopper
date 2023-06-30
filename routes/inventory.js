@@ -8,11 +8,10 @@ const {
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
 
-// i don't think the adapter function is right for this, i believe it needs to take in an id as a parameter
 inventoriesRouter.get("/", async (req, res, next) => {
   try {
     const AllInventory = await getAllInventory();
-    res.send({ AllInventory });
+    res.send(AllInventory);
   } catch (error) {
     next(error);
   }
