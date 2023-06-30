@@ -34,14 +34,11 @@ shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   }
 });
 
-shoppingCartsRouter.post(
-  "/shoppingcart",
-  authRequired,
-  async (req, res, next) => {
-    const createcart = await createShoppingCarts(req.body, user.id);
-    res.send(createcart);
-  }
-);
+shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
+  const createcart = await createShoppingCarts(req.body, user.id);
+  res.send(createcart);
+});
+
 shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {
   const cart = await getshoppingcartbyuserid(+req.params.id);
   if (req.user.id == cart.customer) {

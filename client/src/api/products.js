@@ -9,7 +9,26 @@ export async function fetchAllProducts() {
   }
 }
 
-// export async function createShoppingCart() {}
+export async function getShoppingCartById({ shoppingcart_id }) {
+  try {
+    const response = await fetch("/api/shoppingcart/:id", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ shoppingcart_id }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to get shopping cart by ID");
+    }
+
+    const cart_item = await response.json();
+    return cart_item;
+  } catch (error) {
+    throw error;
+  }
+}
 
 export async function addCart_Item({ shoppingcart_id, product_id, count }) {
   try {
