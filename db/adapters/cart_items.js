@@ -37,7 +37,7 @@ async function updateCartItem({ item_id, shoppingcart_id, product_id, count }) {
   }
 }
 
-async function deleteCartItem(item_id) {
+async function deleteCartItem(shoppingcart_id) {
   try {
     const {
       rows: [cart_item],
@@ -46,7 +46,7 @@ async function deleteCartItem(item_id) {
   DELETE from cart_items WHERE item_id =$1
   RETURNING *;
   `,
-      [item_id]
+      [shoppingcart_id]
     );
     return cart_item;
   } catch (error) {
