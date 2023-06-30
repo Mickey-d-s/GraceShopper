@@ -13,8 +13,6 @@ const Nav = () => {
   async function handleLogout() {
     await logout();
     setLoggedIn(!loggedIn);
-    setUser(user);
-    alert("you have logged out!");
     navigate("/users/login");
   }
 
@@ -31,6 +29,9 @@ const Nav = () => {
           </div>
           <div className="Link">
             <Link to="/products">Menu</Link>
+          </div>
+          <div className="Link">
+            <Link to="/inventories">Inventory</Link>
           </div>
         </>
       )}
@@ -50,7 +51,7 @@ const Nav = () => {
           </div>
         </>
       )}
-      <button className="navbar__logout" onClick={(e) => handleLogout(e)}>
+      <button className="navbar__logout" onClick={handleLogout}>
         Logout
       </button>
     </nav>

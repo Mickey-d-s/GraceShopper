@@ -1,9 +1,21 @@
 export async function fetchAllInventories() {
   try {
     const response = await fetch("/api/inventories");
-    const result = await response.json();
-    console.log("result in fetch all inventories", result);
-    return result;
+    const inventories = await response.json();
+
+    // Fetch product details for each inventory
+    const inventoryPromises = inventories.map(async (inventory) => {
+      const productResponse = await fetch(
+        `/api/products/${inventory.product_id}`
+      );
+      const product = await productResponse.json();
+      inventory.product = product;
+      return inventory;
+    });
+
+    const fetchedInventories = await Promise.all(inventoryPromises);
+    console.log("fetched inventories", fetchedInventories);
+    return fetchedInventories;
   } catch (error) {
     console.error(error);
   }
