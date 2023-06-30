@@ -24,32 +24,34 @@ async function getInventoryById(id) {
   } = await client.query(
     `
   SELECT * 
-  FROM inventories 
+  FROM inventories
   WHERE inventory_id=$1;
-  `[id]
+  `,
+    [id]
   );
   console.log("getInventoriesById CHECK", inventory);
   return inventory;
 }
 
-async function getAllInventoryById() {
-  const {
-    rows: [inventory],
-  } = await client.query(`
-  SELECT * 
-  FROM inventories
-  `);
-  return rows;
-  console.log("getAllInventoryById CHECK", inventory);
+async function getAllInventory() {
+  try {
+    const { rows } = await client.query(`
+          SELECT * FROM inventories;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
 }
 
-function updateInventory({ inventory_id, product_id, quantity }) {
+async function updateInventory({ inventory_id, product_id, quantity }) {
   const {
     rows: [inventory],
-  } = client.query(
+  } = await client.query(
     `
-  UPDATE inventories SET inventory_id = $1
-    where product_id=$2 and quantity = $3;
+    UPDATE inventories
+    SET inventory_id = $1
+    WHERE product_id = $2 AND quantity = $3;
     `,
     [inventory_id, product_id, quantity]
   );
@@ -70,7 +72,7 @@ async function deleteInventory(id) {
 module.exports = {
   createInventories,
   getInventoryById,
-  getAllInventoryById,
+  getAllInventory,
   updateInventory,
   deleteInventory,
 };

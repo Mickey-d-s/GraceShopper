@@ -6,13 +6,13 @@ import "../index.css";
 import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  const { setLoggedIn, loggedIn, user } = useAuth();
+  const { setLoggedIn, loggedIn, user, setUser } = useAuth();
   const navigate = useNavigate();
+  console.log("loggedIn", loggedIn);
 
   async function handleLogout() {
     await logout();
     setLoggedIn(!loggedIn);
-    alert("you have logged out!");
     navigate("/users/login");
   }
 
@@ -27,6 +27,12 @@ const Nav = () => {
           <div className="Link">
             <Link to="/users/profile">Profile</Link>
           </div>
+          <div className="Link">
+            <Link to="/products">Menu</Link>
+          </div>
+          <div className="Link">
+            <Link to="/inventories">Inventory</Link>
+          </div>
         </>
       )}
       {user?.username === "Stranger" && (
@@ -40,9 +46,12 @@ const Nav = () => {
           <div className="Link">
             <Link to="/profile">Profile</Link>
           </div>
+          <div className="Link">
+            <Link to="/products">Menu</Link>
+          </div>
         </>
       )}
-      <button className="navbar__logout" onClick={(e) => handleLogout(e)}>
+      <button className="navbar__logout" onClick={handleLogout}>
         Logout
       </button>
     </nav>

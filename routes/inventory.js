@@ -2,13 +2,22 @@ const inventoriesRouter = require("express").Router();
 const {
   createInventories,
   getInventoryById,
-  getAllInventoryById,
+  getAllInventory,
   updateInventory,
   deleteInventory,
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
 
-//not sure if this route is working. it return "you're not authorized", but doesn't let me create even after logging in
+// i don't think the adapter function is right for this, i believe it needs to take in an id as a parameter
+inventoriesRouter.get("/", async (req, res, next) => {
+  try {
+    const AllInventory = await getAllInventory();
+    res.send({ AllInventory });
+  } catch (error) {
+    next(error);
+  }
+});
+
 inventoriesRouter.post(
   "/",
   //  authRequired,
@@ -26,42 +35,34 @@ inventoriesRouter.post(
 inventoriesRouter.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    const InventoryById = await getInventoryById(id);
-    res.send({ InventoryById });
+    const inventoryById = await getInventoryById(id);
+    console.log("Inventory by id: ", inventoryById);
+    res.send({ inventoryById });
   } catch (error) {
     next(error);
   }
 });
 
-// i don't think the adapter function is right for this, i believe it needs to take in an id as a parameter
-inventoriesRouter.get("/:AllInventoryid", async (req, res, next) => {
-  try {
-    const id = req.params.AllInventoryid;
-    const AllInventoryById = await getAllInventoryById(id);
-    res.send({ AllInventoryById });
-  } catch (error) {
-    next(error);
-  }
-});
 //getting you are not authorized for this one too
 inventoriesRouter.patch(
-  "/:id",
+  "/:inventory_id",
   //  authRequired,
   async (req, res, next) => {
     try {
-      const { id } = req.params;
+      const { inventory_id } = req.params;
       const { product_id, quantity } = req.body;
-      const updatedInventory = await updateInventory(id, {
+      const updatedInventory = await updateInventory(
+        inventory_id,
         product_id,
-        quantity,
-      });
+        quantity
+      );
       res.send(updatedInventory);
     } catch (error) {
       next(error);
     }
   }
 );
-//getting you are not authorized for this one too
+
 inventoriesRouter.delete(
   "/:id",
   //  authRequired,

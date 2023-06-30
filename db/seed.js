@@ -1,16 +1,12 @@
 const client = require("./client");
 const { createUser } = require("./adapters/users");
 const { createProduct } = require("./adapters/products");
-const { createCategory } = require("./adapters/category");
-const { createCategoryThrough } = require("./adapters/categorythrough");
 const { createShoppingCarts } = require("./adapters/shoppingcart");
 const { createInventories } = require("./adapters/inventory");
 const { createCart_Item } = require("./adapters/cart_items");
 const {
   users,
   products,
-  categories,
-  categorythroughs,
   inventories,
   shopping_carts,
   cart_items,
@@ -21,7 +17,7 @@ async function dropTables() {
   try {
     console.log("Starting to drop tables");
     await client.query(`
-      DROP TABLE IF EXISTS inventories, categories, categorythroughs, cart_items, shoppingcarts, products, users CASCADE;
+      DROP TABLE IF EXISTS inventories, cart_items, shoppingcarts, products, users CASCADE;
     `);
   } catch (error) {
     console.error(error);
@@ -50,24 +46,8 @@ async function createTables() {
         product_name VARCHAR(100) NOT NULL UNIQUE,
         price DECIMAL(10,2) NOT NULL,
         description TEXT,
-        inventory_id INT
-      )`);
-
-    // // -- Create the "category" table
-    await client.query(`
-      CREATE TABLE categories (
-        category_id SERIAL PRIMARY KEY,
-        category_name VARCHAR(100) NOT NULL UNIQUE
-      )`);
-
-    // // -- Create the "categorythrough" table
-    await client.query(`
-      CREATE TABLE categorythroughs (
-        categorythrough_id SERIAL PRIMARY KEY,
-        product_id INT,
-        category_id INT,
-        FOREIGN KEY (product_id) REFERENCES products(product_id),
-        FOREIGN KEY (category_id) REFERENCES categories(category_id)
+        inventory_id INT,
+        category TEXT NOT NULL
       )`);
 
     // // -- Create the "inventory" table
@@ -112,14 +92,6 @@ async function populateTables() {
     for (const product of products) {
       await createProduct(product);
       console.log("products table populated");
-    }
-    for (const category of categories) {
-      await createCategory(category);
-      console.log("categories table populated");
-    }
-    for (const categorythrough of categorythroughs) {
-      await createCategoryThrough(categorythrough);
-      console.log("categorythrough table populated");
     }
     for (const inventory of inventories) {
       await createInventories(inventory);
