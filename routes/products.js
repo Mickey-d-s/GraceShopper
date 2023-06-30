@@ -13,8 +13,13 @@ productsRouter.post(
   authRequired && checkForAdmin,
   async (req, res, next) => {
     try {
-      const { product_name, price, description } = req.body;
-      const newProduct = await createProduct(product_name, price, description);
+      const { product_name, price, description, category } = req.body;
+      const newProduct = await createProduct(
+        product_name,
+        price,
+        description,
+        category
+      );
       res.send(newProduct);
     } catch (error) {
       next(error);
@@ -46,12 +51,13 @@ productsRouter.patch(
   authRequired && checkForAdmin,
   async (req, res, next) => {
     try {
-      const { product_name, price, description } = req.body;
+      const { product_name, price, description, category } = req.body;
       const UpdatedProduct = await updateProduct(
         req.params.update,
         product_name,
         price,
-        description
+        description,
+        category
       );
       res.send(UpdatedProduct);
     } catch (error) {
