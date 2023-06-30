@@ -1,4 +1,4 @@
-const shoppingCartsRouter = require("express").Router;
+const shoppingCartsRouter = require("express").Router();
 const { deleteCartItem } = require("../db/adapters/cart_items");
 const {
   getshoppingcartbyuserid,
@@ -50,3 +50,5 @@ shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {
     res.send({ message: "shoppingCart deleted" });
   }
 });
+
+module.exports = shoppingCartsRouter;
