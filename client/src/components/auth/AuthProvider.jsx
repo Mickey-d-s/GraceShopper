@@ -7,30 +7,24 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ username: "Stranger" });
   const [loggedIn, setLoggedIn] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function getMe() {
-      console.log("Inside of get me...");
       try {
         const { message, success, user } = await fetchMe();
-
-        if (!success) {
-          setUser({ username: "Stranger" });
-          setLoggedIn(false);
-        } else {
-          setUser(user);
-          setLoggedIn(true);
-        }
+        setUser(user);
+        setLoggedIn(true);
       } catch (error) {
-        setError(error);
+        setUser({ username: "Stranger" });
+        setLoggedIn(false);
       }
     }
     getMe();
   }, [loggedIn]);
 
+  console.log("user in context: ", user);
+
   const contextValue = {
-    error,
     user,
     setUser,
     loggedIn,
@@ -39,8 +33,6 @@ const AuthProvider = ({ children }) => {
   AuthProvider.propTypes = {
     children: PropTypes.node.isRequired,
   };
-
-  console.log("user from Auth Context", user);
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

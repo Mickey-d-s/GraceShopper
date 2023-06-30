@@ -26,21 +26,22 @@ async function getInventoryById(id) {
   SELECT * 
   FROM inventories 
   WHERE inventory_id=$1;
-  `[id]
+  `,
+    [id]
   );
   console.log("getInventoriesById CHECK", inventory);
   return inventory;
 }
 
-async function getAllInventoryById() {
-  const {
-    rows: [inventory],
-  } = await client.query(`
-  SELECT * 
-  FROM inventories
-  `);
-  return rows;
-  console.log("getAllInventoryById CHECK", inventory);
+async function getAllInventory() {
+  try {
+    const { rows } = await client.query(`
+          SELECT * FROM inventories;
+    `);
+    return rows;
+  } catch (error) {
+    throw error;
+  }
 }
 
 function updateInventory({ inventory_id, product_id, quantity }) {
@@ -70,7 +71,7 @@ async function deleteInventory(id) {
 module.exports = {
   createInventories,
   getInventoryById,
-  getAllInventoryById,
+  getAllInventory,
   updateInventory,
   deleteInventory,
 };
