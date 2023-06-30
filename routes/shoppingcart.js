@@ -34,9 +34,19 @@ shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   }
 });
 
+// shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
+//   const createcart = await createShoppingCarts(req.body, user.id);
+//   res.send(createcart);
+// });
+
 shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
-  const createcart = await createShoppingCarts(req.body, user.id);
-  res.send(createcart);
+  try {
+    const { status, user_id } = req.body;
+    const newCart = await createShoppingCarts(status, user_id);
+    res.send(newCart);
+  } catch (error) {
+    next(error);
+  }
 });
 
 shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {

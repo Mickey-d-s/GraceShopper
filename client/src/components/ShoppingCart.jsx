@@ -1,25 +1,23 @@
-import { useState, useEffect } from "react";
-// // import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { createShoppingCart } from "../api/shoppingcart";
-import AuthProvider from "./auth/AuthProvider";
-import useAuth from "./hooks/useAuth";
+import { AuthContext } from "./auth/AuthProvider";
 
-export default function startOrder() {
+export default function StartOrder() {
+  const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
-  const { user, setUser } = useAuth;
-  const [status, setStatus] = useState("active");
 
   async function shoppingCart() {
     try {
-      console.log("user", user);
-      const order = await createShoppingCart(status, user.id);
-      setOrder(order);
-      setStatus(status);
+      const createdOrder = await createShoppingCart({
+        status: "pending",
+        user_id: user.user_id, // Access the user_id from the user object
+      });
+      setOrder(createdOrder);
+      // Rest of the code
     } catch (error) {
       console.log(error);
     }
   }
-  shoppingCart();
 
   return (
     <div>
