@@ -33,6 +33,9 @@ const Nav = () => {
           <div className="Link">
             <Link to="/inventories">Inventory</Link>
           </div>
+          <div className="Link">
+            <Link to="/shoppingcart">Shopping Cart</Link>
+          </div>
         </>
       )}
       {user?.username === "Stranger" && (

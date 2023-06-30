@@ -10,6 +10,7 @@ import { Routes, Route } from "react-router-dom";
 import { Homepage } from "./home";
 import Footer from "./Footer";
 import Inventory from "../components/Inventory";
+import ShoppingCart from "../components/ShoppingCart";
 // import Profile from "./components/Profile";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<Menu />} />
         <Route path="/inventories" element={<Inventory />} />
+        <Route path="/shoppingcart" element={<ShoppingCart />} />
       </Routes>
       <Footer />
     </div>

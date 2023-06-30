@@ -1,6 +1,6 @@
 export async function createShoppingCart(cartData) {
   try {
-    const response = await fetch("/shoppingCarts", {
+    const response = await fetch("/shoppingcart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
