@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import {
-  fetchAllProducts,
-  addCart_Item,
-  getShoppingCartById,
-} from "../api/products";
+import { fetchAllProducts, addItemToCart, getCartById } from "../api/menu";
 
 export default function allProducts() {
   const [products, setProducts] = useState([]);
@@ -21,26 +17,26 @@ export default function allProducts() {
     fetchProducts();
   }, []);
 
-  const [shoppingcart_id, setShoppingCartId] = useState(null);
+  const [item_id, setItemId] = useState(null);
 
   useEffect(() => {
-    async function fetchShoppingCartId() {
+    async function fetchCartId() {
       // Fetch the shopping cart ID
-      const id = await getShoppingCartById();
-      setShoppingCartId(id);
+      const id = await getCartById();
+      setItemId(id);
     }
-    fetchShoppingCartId();
+    fetchCartId();
   }, []);
 
   const addToCart = async (product_id, count) => {
     // Ensure shoppingcart_id is defined before adding to cart
     if (shoppingcart_id) {
       try {
-        const cartItem = await addCart_Item({
+        const cartItem = await addItemToCart(
           shoppingcart_id,
           product_id,
-          count,
-        });
+          count
+        );
         console.log("Item added to cart:", cartItem);
       } catch (error) {
         console.log("Failed to add item to cart:", error);

@@ -9,14 +9,14 @@ export async function fetchAllProducts() {
   }
 }
 
-export async function getShoppingCartById({ shoppingcart_id }) {
+export async function getCartById(item_id) {
   try {
-    const response = await fetch("/api/shoppingcart/:id", {
+    const response = await fetch("/api/cart_items/:id", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ shoppingcart_id }),
+      body: JSON.stringify(item_id),
     });
 
     if (!response.ok) {
@@ -30,14 +30,14 @@ export async function getShoppingCartById({ shoppingcart_id }) {
   }
 }
 
-export async function addCart_Item({ shoppingcart_id, product_id, count }) {
+export async function addItemToCart(item_id, product_id, count) {
   try {
     const response = await fetch("/api/cart_items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ shoppingcart_id, product_id, count }),
+      body: JSON.stringify(shoppingcart_id, product_id, count),
     });
 
     if (!response.ok) {
