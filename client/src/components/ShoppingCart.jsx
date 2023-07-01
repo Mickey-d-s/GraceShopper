@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { createShoppingCart } from "../api/shoppingcart";
 import { AuthContext } from "./auth/AuthProvider";
+import Menu from "./Menu";
 
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
@@ -23,6 +24,7 @@ export default function StartOrder() {
 
   return (
     <div>
+      {order.shoppingcart_id && <Menu shoppingCartId={order.shoppingcart_id} />}
       {!started && <button onClick={() => shoppingCart()}>Start Order</button>}
       <button>Cancel Order</button>
     </div>

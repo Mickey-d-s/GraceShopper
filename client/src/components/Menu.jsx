@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import { fetchAllProducts, addItemToCart, getCartById } from "../api/menu";
+import { fetchAllProducts, addItemToCart } from "../api/menu";
 
 export default function allProducts() {
   const [products, setProducts] = useState([]);
-
+  const [shoppingCartId, setShoppingCartId] = useState([]);
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -17,18 +17,18 @@ export default function allProducts() {
     fetchProducts();
   }, []);
 
-  const [item_id, setItemId] = useState(null);
+  // const [item_id, setItemId] = useState(null);
 
-  useEffect(() => {
-    async function fetchCartId() {
-      // Fetch the shopping cart ID
-      const id = await getCartById();
-      setItemId(id);
-    }
-    fetchCartId();
-  }, []);
-
-  const addToCart = async (product_id, count) => {
+  // useEffect(() => {
+  //   async function fetchCartId() {
+  //     // Fetch the shopping cart ID
+  //     const id = await getCartById();
+  //     setItemId(id);
+  //   }
+  //   fetchCartId();
+  // }, []);
+  const shoppingcart_id = shoppingCartId;
+  const addToCart = async (shoppingcart_id, product_id, count) => {
     // Ensure shoppingcart_id is defined before adding to cart
     if (shoppingcart_id) {
       try {
