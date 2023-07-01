@@ -5,6 +5,7 @@ import { AuthContext } from "./auth/AuthProvider";
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
+  const [started, setStarted] = useState(false);
 
   async function shoppingCart() {
     try {
@@ -13,6 +14,7 @@ export default function StartOrder() {
         user_id: user.user_id, // Access the user_id from the user object
       });
       setOrder(createdOrder);
+      setStarted(true);
       // Rest of the code
     } catch (error) {
       console.log(error);
@@ -21,7 +23,8 @@ export default function StartOrder() {
 
   return (
     <div>
-      <button onClick={() => shoppingCart()}>Create Shopping Cart</button>
+      {!started && <button onClick={() => shoppingCart()}>Start Order</button>}
+      <button>Cancel Order</button>
     </div>
   );
 }
