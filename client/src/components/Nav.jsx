@@ -17,8 +17,8 @@ const Nav = () => {
   }
 
   return (
-    <nav className="navbar">
-      <h3 className="navbar__username">Hi, {user.username}</h3>
+    <nav className="nav">
+      <h3 className="Username">Hi, {user.username}</h3>
       <div className="Link">
         <Link to="/">Home</Link>
       </div>

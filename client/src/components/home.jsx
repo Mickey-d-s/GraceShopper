@@ -14,7 +14,7 @@ export function Homepage() {
             THE ORIGINAL BURGER JOINT BEOFRE MC**ALD'S
           </h1>
         </div>
-        <div className="flex">
+        <div className="flexImage">
           <h2>the burger above their burger</h2>
           <div>
             <p>
@@ -28,7 +28,7 @@ export function Homepage() {
           </div>
         </div>
         <div>
-          <div className="flex">
+          <div className="flexImage">
             <div
               style={{
                 backgroundImage: `url(http://placekitten.com/g/500/300)`,
