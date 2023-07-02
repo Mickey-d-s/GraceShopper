@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import bigburger from "../assets/bigburger.jpg";
+import bigburger2 from "../assets/bigburger2.jpg";
 
 export function Homepage() {
   try {
@@ -8,7 +8,7 @@ export function Homepage() {
       <>
         <div
           className="landerlogo"
-          style={{ backgroundImage: `url(${bigburger})` }}
+          style={{ backgroundImage: `url(${bigburger2})` }}
         >
           <h1 className="landertext">
             THE ORIGINAL BURGER JOINT BEOFRE MC**ALD'S
