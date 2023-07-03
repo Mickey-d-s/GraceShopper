@@ -4,10 +4,10 @@ import { fetchAllShoppingCarts } from "../api/shoppingcart";
 
 export default function Profile() {
   const [ShoppingCarts, setShoppingCarts] = useState([]);
+  const [user, setUser] = useState(useAuth());
+  console.log("user:", user);
 
   useEffect(() => {
-    const [user, setUser] = useState(useAuth());
-    console.log("user:", user);
     async function fetchShoppingCarts() {
       try {
         const fetchedShoppingcarts = await fetchAllShoppingCarts();
@@ -16,7 +16,7 @@ export default function Profile() {
         console.log(error);
       }
     }
-    fetchInventories();
+    fetchShoppingCarts();
   }, []);
 
   return (
