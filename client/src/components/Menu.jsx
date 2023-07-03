@@ -24,8 +24,7 @@ export default function allProducts() {
   useEffect(() => {
     const fetchShoppingCartId = async () => {
       try {
-        const result = await getUserShoppingCart(); // Pass the appropriate user_id
-        console.log("BIG RESULT", result);
+        const result = await getUserShoppingCart();
         setShoppingCartId(result.shoppingcart_id);
       } catch (error) {
         console.error(error);
@@ -44,12 +43,10 @@ export default function allProducts() {
           product_id,
           count,
         });
-        console.log("Item added to cart:", cartItem);
       } catch (error) {
         console.log("Failed to add item to cart:", error);
       }
     }
-    // ...
   };
 
   // Group products by category

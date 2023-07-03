@@ -21,7 +21,6 @@ shoppingCartsRouter.get("/:id", async (req, res, next) => {
 shoppingCartsRouter.get("/user/cart", authRequired, async (req, res, next) => {
   try {
     const shoppingCart = await getshoppingcartbyuserid(req.user.user_id);
-    console.log("SHOPPING CART EXPRES--------------", shoppingCart);
     res.send(shoppingCart);
   } catch (error) {
     next(error);
@@ -43,11 +42,6 @@ shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
     next(error);
   }
 });
-
-// shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
-//   const createcart = await createShoppingCarts(req.body, user.id);
-//   res.send(createcart);
-// });
 
 shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
   try {

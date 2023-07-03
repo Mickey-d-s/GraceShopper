@@ -19,7 +19,6 @@ export default function StartOrder() {
       setOrder(createdOrder);
       setStarted(true);
       navigate("/Menu");
-      // Rest of the code
     } catch (error) {
       console.log(error);
     }
