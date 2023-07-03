@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import { AuthContext } from "./auth/AuthProvider";
+import { useState, useEffect } from "react";
 import {
   fetchAllProducts,
   addItemToCart,
@@ -7,9 +6,8 @@ import {
 } from "../api/menu";
 
 export default function allProducts() {
-  const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
-  const [shoppingcart_id, setShoppingCartId] = useState(null);
+  const [cart_id, setShoppingCartId] = useState(null);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -37,11 +35,15 @@ export default function allProducts() {
     fetchShoppingCartId();
   }, []);
 
-  const addToCart = async (cart_id, product_id, count) => {
+  const addToCart = async (shoppingcart_id, product_id, count) => {
     // Ensure shoppingcart_id is defined before adding to cart
-    if (cart_id) {
+    if (shoppingcart_id) {
       try {
-        const cartItem = await addItemToCart(cart_id, product_id, count);
+        const cartItem = await addItemToCart({
+          shoppingcart_id,
+          product_id,
+          count,
+        });
         console.log("Item added to cart:", cartItem);
       } catch (error) {
         console.log("Failed to add item to cart:", error);
@@ -70,11 +72,7 @@ export default function allProducts() {
               <h3>{product.product_name}</h3>
               <p>Price: ${product.price}</p>
               <p>Description: {product.description}</p>
-              <button
-                onClick={() =>
-                  addToCart(shoppingcart_id, product.product_id, 1)
-                }
-              >
+              <button onClick={() => addToCart(cart_id, product.product_id, 1)}>
                 Add to Cart
               </button>{" "}
             </div>
