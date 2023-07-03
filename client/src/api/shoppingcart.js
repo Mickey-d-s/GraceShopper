@@ -1,4 +1,4 @@
-export async function createShoppingCart(status, user_id) {
+export async function createShoppingCart({ status, user_id }) {
   try {
     const response = await fetch(`/api/shoppingcart`, {
       method: "POST",

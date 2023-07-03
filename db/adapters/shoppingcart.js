@@ -3,7 +3,6 @@ const client = require("../client");
 
 async function createShoppingCarts({ status, user_id }) {
   try {
-    console.log(user_id);
     const {
       rows: [shoppingCart],
     } = await client.query(
@@ -64,34 +63,19 @@ async function updateshoppingcart({ user_id, updateObj }) {
     throw error;
   }
 }
-async function getshoppingcartbyuserid({ user_id }) {
+async function getshoppingcartbyuserid(user_id) {
   try {
     const {
       rows: [shoppingCart],
     } = await client.query(
       `
-      SELECT
-shoppingcarts.shoppingcart_id as id,
-shoppingcarts.status as status,
-shoppingcarts.user_id as customer,
-JSON_AGG(
-JSON_BUILD_OBJECT(
-products.product_id,
-products.product_name,
-cart_items.count,
-products.price
-)
-)
-from shoppingcarts
-full outer join cart_items
-on shoppingcarts.shoppingcart_id = cart_items.shoppingcart_id
-inner join products
-on products.product_id = cart_items.product_id
-where shoppingcarts.user_id = 1
-group by shoppingcarts.shoppingcart_id
+      SELECT * 
+      FROM shoppingcarts
+      WHERE shoppingcarts.user_id = $1 AND status = 'pending'
     `,
       [user_id]
     );
+    return shoppingCart;
   } catch (error) {
     throw error;
   }

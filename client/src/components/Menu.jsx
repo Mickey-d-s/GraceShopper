@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-import { fetchAllProducts, addItemToCart } from "../api/menu";
+import {
+  fetchAllProducts,
+  addItemToCart,
+  getUserShoppingCart,
+} from "../api/menu";
 
 export default function allProducts() {
   const [products, setProducts] = useState([]);
-  const [shoppingCartId, setShoppingCartId] = useState([]);
+  const [cart_id, setShoppingCartId] = useState(null);
+
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -17,32 +21,32 @@ export default function allProducts() {
     fetchProducts();
   }, []);
 
-  // const [item_id, setItemId] = useState(null);
+  useEffect(() => {
+    const fetchShoppingCartId = async () => {
+      try {
+        const result = await getUserShoppingCart();
+        setShoppingCartId(result.shoppingcart_id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  // useEffect(() => {
-  //   async function fetchCartId() {
-  //     // Fetch the shopping cart ID
-  //     const id = await getCartById();
-  //     setItemId(id);
-  //   }
-  //   fetchCartId();
-  // }, []);
-  const shoppingcart_id = shoppingCartId;
+    fetchShoppingCartId();
+  }, []);
+
   const addToCart = async (shoppingcart_id, product_id, count) => {
     // Ensure shoppingcart_id is defined before adding to cart
     if (shoppingcart_id) {
       try {
-        const cartItem = await addItemToCart(
+        const cartItem = await addItemToCart({
           shoppingcart_id,
           product_id,
-          count
-        );
-        console.log("Item added to cart:", cartItem);
+          count,
+        });
       } catch (error) {
         console.log("Failed to add item to cart:", error);
       }
     }
-    // ...
   };
 
   // Group products by category
@@ -65,11 +69,7 @@ export default function allProducts() {
               <h3>{product.product_name}</h3>
               <p>Price: ${product.price}</p>
               <p>Description: {product.description}</p>
-              <button
-                onClick={() =>
-                  addToCart(shoppingcart_id, product.product_id, 1)
-                }
-              >
+              <button onClick={() => addToCart(cart_id, product.product_id, 1)}>
                 Add to Cart
               </button>{" "}
             </div>

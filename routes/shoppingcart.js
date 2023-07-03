@@ -18,6 +18,15 @@ shoppingCartsRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+shoppingCartsRouter.get("/user/cart", authRequired, async (req, res, next) => {
+  try {
+    const shoppingCart = await getshoppingcartbyuserid(req.user.user_id);
+    res.send(shoppingCart);
+  } catch (error) {
+    next(error);
+  }
+});
+
 shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   try {
     const getcart = await getshoppingcartbyuserid(+req.params.id);
@@ -34,15 +43,10 @@ shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   }
 });
 
-// shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
-//   const createcart = await createShoppingCarts(req.body, user.id);
-//   res.send(createcart);
-// });
-
 shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
   try {
     const { status, user_id } = req.body;
-    const newCart = await createShoppingCarts(status, user_id);
+    const newCart = await createShoppingCarts({ status, user_id });
     res.send(newCart);
   } catch (error) {
     next(error);
