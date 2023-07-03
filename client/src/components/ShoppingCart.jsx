@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { createShoppingCart } from "../api/shoppingcart";
 import { AuthContext } from "./auth/AuthProvider";
-import Menu from "./Menu";
+import { useNavigate } from "react-router-dom";
 
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [started, setStarted] = useState(false);
+  let navigate = useNavigate();
 
   async function shoppingCart() {
     try {
@@ -16,6 +17,7 @@ export default function StartOrder() {
       });
       setOrder(createdOrder);
       setStarted(true);
+      navigate("/Menu");
       // Rest of the code
     } catch (error) {
       console.log(error);
@@ -24,7 +26,6 @@ export default function StartOrder() {
 
   return (
     <div>
-      {order.shoppingcart_id && <Menu shoppingCartId={order.shoppingcart_id} />}
       {!started && <button onClick={() => shoppingCart()}>Start Order</button>}
       <button>Cancel Order</button>
     </div>
