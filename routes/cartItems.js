@@ -1,29 +1,36 @@
 const cart_itemsRouter = require("express").Router();
 const {
   createCart_Item,
+  getCartById,
   updateCartItem,
   deleteCartItem,
 } = require("../db/adapters/cart_items");
 const { authRequired } = require("./utils");
 
-cart_itemsRouter.post(
-  "/",
-  //  authRequired,
-  async (req, res, next) => {
-    try {
-      const { shoppingcart_id, product_id, count } = req.body;
-      const newCart_Item = await createCart_Item(
-        shoppingcart_id,
-        product_id,
-        count
-      );
-      console.log("newCart_Item:", newCart_Item);
-      res.send(newCart_Item);
-    } catch (error) {
-      next(error);
-    }
+cart_itemsRouter.post("/", authRequired, async (req, res, next) => {
+  try {
+    const { shoppingcart_id, product_id, count } = req.body;
+    const newCart_Item = await createCart_Item(
+      shoppingcart_id,
+      product_id,
+      count
+    );
+    console.log("newCart_Item:", newCart_Item);
+    res.send(newCart_Item);
+  } catch (error) {
+    next(error);
   }
-);
+});
+
+cart_itemsRouter.get("/:id", async (req, res, next) => {
+  try {
+    const SingleCart = await getCartById(req.params.id);
+    console.log("Get cart by id", SingleCart);
+    res.send(SingleCart);
+  } catch (error) {
+    next(error);
+  }
+});
 
 cart_itemsRouter.patch(
   "/:item_id",

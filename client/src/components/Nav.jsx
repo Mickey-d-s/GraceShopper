@@ -4,6 +4,7 @@ import useAuth from "../components/hooks/useAuth";
 import "../App.css";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
+import Profile from "./Profile";
 
 const Nav = () => {
   const { setLoggedIn, loggedIn, user, setUser } = useAuth();
@@ -17,21 +18,24 @@ const Nav = () => {
   }
 
   return (
-    <nav className="navbar">
-      <h3 className="navbar__username">Hi, {user.username}</h3>
+    <nav className="nav">
+      <h3 className="Username">Hi, {user.username}</h3>
       <div className="Link">
         <Link to="/">Home</Link>
       </div>
       {user?.username != "Stranger" && (
         <>
           <div className="Link">
-            <Link to="/users/profile">Profile</Link>
+            <Link to="/Profile">Profile</Link>
           </div>
           <div className="Link">
-            <Link to="/products">Menu</Link>
+            <Link to="/Menu">Menu</Link>
           </div>
           <div className="Link">
             <Link to="/inventories">Inventory</Link>
+          </div>
+          <div className="Link">
+            <Link to="/shoppingcart">Shopping Cart</Link>
           </div>
         </>
       )}
@@ -44,10 +48,10 @@ const Nav = () => {
             <Link to="/login">Login</Link>
           </div>
           <div className="Link">
-            <Link to="/profile">Profile</Link>
+            <Link to="/Profile">Profile</Link>
           </div>
           <div className="Link">
-            <Link to="/products">Menu</Link>
+            <Link to="/Menu">Menu</Link>
           </div>
         </>
       )}

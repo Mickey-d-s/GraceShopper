@@ -1,20 +1,24 @@
-.navbar {
+
+.nav {
   display: flex;
+  
 }
-.navbar__username {
+nav {
+  background-color: black;
+}
+.Username {
   color: white;
-}
-.navbar_links {
-  display: flexbox;
-  flex-wrap: wrap;
+  padding-left: 2rem;
 }
 .Link {
   margin: auto;
+
 }
 .flex {
   display: flex;
 }
 .landerlogo {
+  height:100%;
   width: 100%;
   margin: 0;
 }
@@ -26,14 +30,9 @@
 }
 a {
   text-decoration: none;
-  color: purple;
+  color:yellow;
 }
 
-nav {
-  min-height: 0;
-  justify-content: space-between;
-  background-color: black;
-}
 body {
   margin: 0;
 }
@@ -50,4 +49,10 @@ footer {
   text-align: center;
   border-top: 1px solid #ddd;
   justify-content: center;
+} 
+.landerlogo {
+display:grid;
+place-items:center;
+object-fit: fill;
+height:100%
 }

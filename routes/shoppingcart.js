@@ -1,4 +1,4 @@
-const shoppingCartsRouter = require("express").Router;
+const shoppingCartsRouter = require("express").Router();
 const { deleteCartItem } = require("../db/adapters/cart_items");
 const {
   getshoppingcartbyuserid,
@@ -34,14 +34,21 @@ shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   }
 });
 
-shoppingCartsRouter.post(
-  "/shoppingcart",
-  authRequired,
-  async (req, res, next) => {
-    const createcart = await createShoppingCarts(req.body, user.id);
-    res.send(createcart);
+// shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
+//   const createcart = await createShoppingCarts(req.body, user.id);
+//   res.send(createcart);
+// });
+
+shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
+  try {
+    const { status, user_id } = req.body;
+    const newCart = await createShoppingCarts(status, user_id);
+    res.send(newCart);
+  } catch (error) {
+    next(error);
   }
-);
+});
+
 shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {
   const cart = await getshoppingcartbyuserid(+req.params.id);
   if (req.user.id == cart.customer) {
@@ -50,3 +57,5 @@ shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {
     res.send({ message: "shoppingCart deleted" });
   }
 });
+
+module.exports = shoppingCartsRouter;

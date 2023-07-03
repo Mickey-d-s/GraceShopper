@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import { fetchAllProducts, addCart_Item } from "../api/products";
+import { fetchAllProducts, addItemToCart } from "../api/menu";
 
 export default function allProducts() {
   const [products, setProducts] = useState([]);
-
+  const [shoppingCartId, setShoppingCartId] = useState([]);
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -16,18 +16,33 @@ export default function allProducts() {
     }
     fetchProducts();
   }, []);
-  //  Need shopping cart to exist to addToCart
+
+  // const [item_id, setItemId] = useState(null);
+
+  // useEffect(() => {
+  //   async function fetchCartId() {
+  //     // Fetch the shopping cart ID
+  //     const id = await getCartById();
+  //     setItemId(id);
+  //   }
+  //   fetchCartId();
+  // }, []);
+  const shoppingcart_id = shoppingCartId;
   const addToCart = async (shoppingcart_id, product_id, count) => {
-    try {
-      const cartItem = await addCart_Item({
-        shoppingcart_id,
-        product_id,
-        count,
-      });
-      console.log("Item added to cart:", cartItem);
-    } catch (error) {
-      console.log("Failed to add item to cart:", error);
+    // Ensure shoppingcart_id is defined before adding to cart
+    if (shoppingcart_id) {
+      try {
+        const cartItem = await addItemToCart(
+          shoppingcart_id,
+          product_id,
+          count
+        );
+        console.log("Item added to cart:", cartItem);
+      } catch (error) {
+        console.log("Failed to add item to cart:", error);
+      }
     }
+    // ...
   };
 
   // Group products by category

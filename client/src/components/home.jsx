@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import bigburger from "../assets/bigburger.jpg";
+import bigburger2 from "../assets/bigburger2.jpg";
 
 export function Homepage() {
   try {
@@ -8,13 +8,13 @@ export function Homepage() {
       <>
         <div
           className="landerlogo"
-          style={{ backgroundImage: `url(${bigburger})` }}
+          style={{ backgroundImage: `url(${bigburger2})` }}
         >
           <h1 className="landertext">
             THE ORIGINAL BURGER JOINT BEOFRE MC**ALD'S
           </h1>
         </div>
-        <div className="flex">
+        <div className="flexImage">
           <h2>the burger above their burger</h2>
           <div>
             <p>
@@ -28,7 +28,7 @@ export function Homepage() {
           </div>
         </div>
         <div>
-          <div className="flex">
+          <div className="flexImage">
             <div
               style={{
                 backgroundImage: `url(http://placekitten.com/g/500/300)`,

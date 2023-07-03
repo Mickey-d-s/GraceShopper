@@ -17,6 +17,24 @@ async function createCart_Item({ shoppingcart_id, product_id, count }) {
     throw error;
   }
 }
+
+async function getCartById(item_id) {
+  try {
+    const {
+      rows: [cart],
+    } = await client.query(
+      `
+    SELECT * FROM cart_items
+    WHERE item_id = $1;
+    `,
+      [item_id]
+    );
+    return cart;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function updateCartItem({ item_id, shoppingcart_id, product_id, count }) {
   try {
     const {
@@ -54,4 +72,9 @@ async function deleteCartItem(shoppingcart_id) {
   }
 }
 
-module.exports = { createCart_Item, updateCartItem, deleteCartItem };
+module.exports = {
+  createCart_Item,
+  getCartById,
+  updateCartItem,
+  deleteCartItem,
+};
