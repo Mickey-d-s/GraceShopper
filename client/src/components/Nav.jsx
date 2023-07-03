@@ -48,9 +48,6 @@ const Nav = () => {
             <Link to="/login">Login</Link>
           </div>
           <div className="Link">
-            <Link to="/Profile">Profile</Link>
-          </div>
-          <div className="Link">
             <Link to="/Menu">Menu</Link>
           </div>
         </>
