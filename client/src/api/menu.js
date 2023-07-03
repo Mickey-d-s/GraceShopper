@@ -9,6 +9,40 @@ export async function fetchAllProducts() {
   }
 }
 
+export async function getShoppingCartByUserId(user_id) {
+  try {
+    const response = await fetch(`/api/shoppingcart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// export async function getShoppingCartByUserId(user_id) {
+//   try {
+//     const response = await fetch(`/api/shoppingcart`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     // Process the response here
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
 export async function addItemToCart(shoppingcart_id, product_id, count) {
   try {
     const response = await fetch("/api/cart_items", {
@@ -29,24 +63,3 @@ export async function addItemToCart(shoppingcart_id, product_id, count) {
     throw error;
   }
 }
-
-// export async function getCartById(item_id) {
-//   try {
-//     const response = await fetch("/api/cart_items/:id", {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(item_id),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Failed to get shopping cart by ID");
-//     }
-
-//     const cart_item = await response.json();
-//     return cart_item;
-//   } catch (error) {
-//     throw error;
-//   }
-// }

@@ -1,10 +1,16 @@
-import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-import { fetchAllProducts, addItemToCart } from "../api/menu";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "./auth/AuthProvider";
+import {
+  fetchAllProducts,
+  addItemToCart,
+  getShoppingCartByUserId,
+} from "../api/menu";
 
 export default function allProducts() {
+  const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
-  const [shoppingCartId, setShoppingCartId] = useState([]);
+  const [shoppingcart_id, setShoppingCartId] = useState("");
+
   useEffect(() => {
     async function fetchProducts() {
       try {
@@ -17,17 +23,20 @@ export default function allProducts() {
     fetchProducts();
   }, []);
 
-  // const [item_id, setItemId] = useState(null);
+  useEffect(() => {
+    const fetchShoppingCartId = async () => {
+      try {
+        const result = await getShoppingCartByUserId(user.user_id); // Pass the appropriate user_id
+        console.log("BIG RESULT", result);
+        setShoppingCartId(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  // useEffect(() => {
-  //   async function fetchCartId() {
-  //     // Fetch the shopping cart ID
-  //     const id = await getCartById();
-  //     setItemId(id);
-  //   }
-  //   fetchCartId();
-  // }, []);
-  const shoppingcart_id = shoppingCartId;
+    fetchShoppingCartId();
+  }, []);
+
   const addToCart = async (shoppingcart_id, product_id, count) => {
     // Ensure shoppingcart_id is defined before adding to cart
     if (shoppingcart_id) {

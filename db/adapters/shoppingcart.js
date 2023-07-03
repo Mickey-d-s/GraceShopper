@@ -92,6 +92,7 @@ group by shoppingcarts.shoppingcart_id
     `,
       [user_id]
     );
+    return shoppingCart;
   } catch (error) {
     throw error;
   }
