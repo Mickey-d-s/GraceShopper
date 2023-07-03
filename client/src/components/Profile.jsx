@@ -1,7 +1,7 @@
 import useAuth from "../components/hooks/useAuth";
 import { useState, useEffect } from "react";
 
-function Profile() {
+export default function Profile() {
   const [user, setUser] = useState(useAuth());
   console.log("user:", user);
 
@@ -15,5 +15,3 @@ function Profile() {
     </>
   );
 }
-
-export default Profile;

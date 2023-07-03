@@ -46,22 +46,6 @@ export default function RegisterForm() {
     setPassword("");
   }
 
-  // Function to create a new shopping cart
-  async function handleCreateCart() {
-    try {
-      const cartData = {
-        status: null,
-        user_id: user.user_id,
-      };
-
-      const createdCart = await createShoppingCart(cartData);
-      console.log("Created shopping cart:", createdCart);
-      // Perform any necessary actions after creating the shopping cart
-    } catch (error) {
-      console.log("Failed to create shopping cart:", error);
-    }
-  }
-
   return (
     <div className="register-container">
       <div className="register-form">

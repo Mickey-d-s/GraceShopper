@@ -4,6 +4,7 @@ import useAuth from "../components/hooks/useAuth";
 import "../App.css";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
+import Profile from "./Profile";
 
 const Nav = () => {
   const { setLoggedIn, loggedIn, user, setUser } = useAuth();
@@ -25,7 +26,7 @@ const Nav = () => {
       {user?.username != "Stranger" && (
         <>
           <div className="Link">
-            <Link to="/users/profile">Profile</Link>
+            <Link to="/Profile">Profile</Link>
           </div>
           <div className="Link">
             <Link to="/products">Menu</Link>
@@ -47,7 +48,7 @@ const Nav = () => {
             <Link to="/login">Login</Link>
           </div>
           <div className="Link">
-            <Link to="/profile">Profile</Link>
+            <Link to="/Profile">Profile</Link>
           </div>
           <div className="Link">
             <Link to="/products">Menu</Link>

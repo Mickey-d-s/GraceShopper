@@ -22,7 +22,7 @@ function App() {
         <Route path="/health" element={<HealthPage />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Registerform />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/products" element={<Menu />} />
         <Route path="/inventories" element={<Inventory />} />
         <Route path="/shoppingcart" element={<ShoppingCart />} />
