@@ -9,17 +9,9 @@ export async function fetchAllProducts() {
   }
 }
 
-export async function getShoppingCartByUserId(user_id) {
+export async function getUserShoppingCart() {
   try {
-    const response = await fetch(`/api/shoppingcart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id,
-      }),
-    });
+    const response = await fetch(`/api/shoppingcart/user/cart`);
     const result = await response.json();
     console.log(result);
     return result;

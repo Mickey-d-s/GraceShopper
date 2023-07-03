@@ -3,13 +3,13 @@ import { AuthContext } from "./auth/AuthProvider";
 import {
   fetchAllProducts,
   addItemToCart,
-  getShoppingCartByUserId,
+  getUserShoppingCart,
 } from "../api/menu";
 
 export default function allProducts() {
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
-  const [shoppingcart_id, setShoppingCartId] = useState("");
+  const [shoppingcart_id, setShoppingCartId] = useState(null);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -26,9 +26,9 @@ export default function allProducts() {
   useEffect(() => {
     const fetchShoppingCartId = async () => {
       try {
-        const result = await getShoppingCartByUserId(user.user_id); // Pass the appropriate user_id
+        const result = await getUserShoppingCart(); // Pass the appropriate user_id
         console.log("BIG RESULT", result);
-        setShoppingCartId(result);
+        setShoppingCartId(result.shoppingcart_id);
       } catch (error) {
         console.error(error);
       }
@@ -37,15 +37,11 @@ export default function allProducts() {
     fetchShoppingCartId();
   }, []);
 
-  const addToCart = async (shoppingcart_id, product_id, count) => {
+  const addToCart = async (cart_id, product_id, count) => {
     // Ensure shoppingcart_id is defined before adding to cart
-    if (shoppingcart_id) {
+    if (cart_id) {
       try {
-        const cartItem = await addItemToCart(
-          shoppingcart_id,
-          product_id,
-          count
-        );
+        const cartItem = await addItemToCart(cart_id, product_id, count);
         console.log("Item added to cart:", cartItem);
       } catch (error) {
         console.log("Failed to add item to cart:", error);

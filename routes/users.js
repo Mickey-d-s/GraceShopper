@@ -107,6 +107,7 @@ usersRouter.get("/logout", async (req, res, next) => {
 
 usersRouter.get("/me", authRequired, async (req, res, next) => {
   console.log("REQ USER: ", req.user);
+  // query the db and get the cartid via userid (req.user.id)
   res.send({ success: true, message: "you are authorized", user: req.user });
 });
 // write a /me route! that sends the req.use....

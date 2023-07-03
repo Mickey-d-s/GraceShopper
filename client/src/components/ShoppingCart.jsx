@@ -15,6 +15,7 @@ export default function StartOrder() {
         status: "pending",
         user_id: user.user_id, // Access the user_id from the user object
       });
+      console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
       setStarted(true);
       navigate("/Menu");
