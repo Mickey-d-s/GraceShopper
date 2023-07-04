@@ -18,24 +18,12 @@ export async function createShoppingCart({ status, user_id }) {
   }
 }
 
-export async function fetchAllShoppingCarts() {
+export async function fetchItemsFromCart(shoppingcart_id) {
   try {
-    const response = await fetch("/api/shoppingcart");
-    const shoppingcarts = await response.json();
-
-    // Fetch product details for each inventory
-    const shoppingcartsPromises = shoppingcarts.map(async (shoppingcart) => {
-      const userResponse = await fetch(
-        `/api/shoppingcart/${shoppingcart.user_id}`
-      );
-      const user = await userResponse.json();
-      shoppingcart.user = user;
-      return shoppingcart.user;
-    });
-
-    const fetchedShoppingcart = await Promise.all(shoppingcartsPromises);
-    console.log("fetched Shoppingcart", fetchedShoppingcart);
-    return fetchedShoppingcart;
+    const response = await fetch(`/api/cart_items/items/${shoppingcart_id}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
   } catch (error) {
     console.error(error);
   }

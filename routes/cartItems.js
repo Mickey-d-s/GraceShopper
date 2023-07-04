@@ -4,6 +4,7 @@ const {
   getCartById,
   updateCartItem,
   deleteCartItem,
+  getItemsFromCartId,
 } = require("../db/adapters/cart_items");
 const { authRequired } = require("./utils");
 
@@ -17,6 +18,15 @@ cart_itemsRouter.post("/", authRequired, async (req, res, next) => {
     );
     console.log("newCart_Item:", newCart_Item);
     res.send(newCart_Item);
+  } catch (error) {
+    next(error);
+  }
+});
+
+cart_itemsRouter.get("/items/:id", async (req, res, next) => {
+  try {
+    const items = await getItemsFromCartId(req.params.id);
+    res.send(items);
   } catch (error) {
     next(error);
   }
