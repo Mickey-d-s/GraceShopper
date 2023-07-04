@@ -1,15 +1,19 @@
 import { useContext, useState, useEffect } from "react";
 import { createShoppingCart, fetchItemsFromCart } from "../api/shoppingcart";
+import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [started, setStarted] = useState(false);
-  let navigate = useNavigate();
+  const [items, setItems] = useState([]);
+  const [cart_id, setShoppingCartId] = useState(null);
 
-  async function shoppingCart() {
+  // let navigate = useNavigate();
+
+  async function createShoppingCart() {
     try {
       const createdOrder = await createShoppingCart({
         status: "pending",
@@ -18,17 +22,31 @@ export default function StartOrder() {
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
       setStarted(true);
-      navigate("/Menu");
+      // navigate("/Menu");
     } catch (error) {
       console.log(error);
     }
   }
-  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchShoppingCartId = async () => {
+      try {
+        const result = await getUserShoppingCart();
+        setShoppingCartId(result.shoppingcart_id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchShoppingCartId();
+  }, []);
+
   useEffect(() => {
     async function fetchAllItems() {
       try {
-        const fetchedItems = await fetchItemsFromCart(shoppingcart_id);
+        const fetchedItems = await fetchItemsFromCart(cart_id);
         setItems(fetchedItems);
+        console.log("FETCHED ITEMS IN CART:", fetchedItems);
       } catch (error) {
         console.log(error);
       }
@@ -40,7 +58,7 @@ export default function StartOrder() {
     <div>
       <div id="orderButtons">
         {!started && (
-          <button onClick={() => shoppingCart()}>Start Order</button>
+          <button onClick={() => createShoppingCart()}>Start Order</button>
         )}
         <button>Cancel Order</button>
       </div>
