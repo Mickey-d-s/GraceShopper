@@ -47,6 +47,7 @@ footer {
   border-top: 1px solid #ddd;
   justify-content: center;
   list-style-type: none;
+
 }
 .landerlogo {
   display: grid;
@@ -62,4 +63,8 @@ footer {
 .flexfooter {
   display:flex;
   flex-direction:row;
+}
+.listitems {
+  display:flex;
+  flex-direction: row;
 }

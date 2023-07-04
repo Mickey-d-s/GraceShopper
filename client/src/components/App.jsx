@@ -1,6 +1,4 @@
 import Nav from "../components/Nav";
-import "../App.css";
-import "../index.css";
 import Menu from "./Menu";
 import Registerform from "../components/auth/RegisterForm";
 import LoginForm from "../components/auth/LoginForm";
@@ -11,7 +9,6 @@ import { Homepage } from "./home";
 import Footer from "./Footer";
 import Inventory from "../components/Inventory";
 import ShoppingCart from "../components/ShoppingCart";
-// import Profile from "./components/Profile";
 
 function App() {
   return (
