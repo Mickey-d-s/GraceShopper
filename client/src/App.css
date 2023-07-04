@@ -14,11 +14,7 @@ nav {
 .flex {
   display: flex;
 }
-.landerlogo {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-}
+
 .landertext {
   margin: 0;
   color: white;
@@ -28,6 +24,20 @@ nav {
 a {
   text-decoration: none;
   color: yellow;
+}
+
+#orderButtons {
+  padding-top: 4rem;
+}
+
+#bigBurger2 {
+  background-image: url(./assets/bigburger2.jpg);
+  background-size: cover;
+  border-radius: 40%;
+}
+
+#bigBurger Img {
+  width: 100%;
 }
 
 body {
@@ -47,23 +57,11 @@ footer {
   border-top: 1px solid #ddd;
   justify-content: center;
   list-style-type: none;
-
-}
-.landerlogo {
-  display: grid;
-  place-items: center;
-  object-fit: fill;
-  height: 100%;
 }
 
-#orderButtons {
-  padding-top: 4rem;
+#listitems {
+  display: flex;
 }
-.listitems {
-  display:flex;
-  flex-direction: row;
-}
-#flexfooter {
-  display:flex;
-  flex-direction:row;
+
+.flexfooter {
 }
