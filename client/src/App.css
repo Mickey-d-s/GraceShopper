@@ -59,7 +59,7 @@ footer {
   padding-top: 4rem;
 }
 
-.flexfooter div {
+.flexfooter {
   display:flex;
   flex-direction:row;
 }
