@@ -21,6 +21,10 @@ function Footer() {
             <a href="#" />
             Franchise info
           </li>
+          <li>
+            <a href="#" />
+            Radric Delantic Davis aka Gucci Mane
+          </li>
         </div>
         <div className="flexfooter">
           <h1>Services</h1>
