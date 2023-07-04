@@ -1,5 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { createShoppingCart, fetchItemsFromCart } from "../api/shoppingcart";
+import {
+  createShoppingCart,
+  fetchItemsFromCart,
+  fetchProductById,
+} from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 // import { useNavigate } from "react-router-dom";
@@ -13,7 +17,7 @@ export default function StartOrder() {
 
   // let navigate = useNavigate();
 
-  async function createShoppingCart() {
+  async function startShopping() {
     try {
       const createdOrder = await createShoppingCart({
         status: "pending",
@@ -42,31 +46,45 @@ export default function StartOrder() {
   }, []);
 
   useEffect(() => {
-    async function fetchAllItems() {
+    async function fetchAllCartItems() {
       try {
-        const fetchedItems = await fetchItemsFromCart(cart_id);
-        setItems(fetchedItems);
-        console.log("FETCHED ITEMS IN CART:", fetchedItems);
+        if (cart_id) {
+          const fetchedItems = await fetchItemsFromCart(cart_id);
+          const itemsWithProductNames = await Promise.all(
+            fetchedItems.map(async (item) => {
+              const product = await fetchProductById(item.product_id);
+              return {
+                ...item,
+                product_name: product.product_name,
+                price: product.price,
+              };
+            })
+          );
+          setItems(itemsWithProductNames); // Update the items state
+          console.log("FETCHED ITEMS IN CART:", itemsWithProductNames);
+        }
       } catch (error) {
         console.log(error);
       }
     }
-    fetchAllItems();
-  }, []);
+    fetchAllCartItems();
+  }, [cart_id]);
 
   return (
     <div>
       <div id="orderButtons">
         {!started && (
-          <button onClick={() => createShoppingCart()}>Start Order</button>
+          <button onClick={() => startShopping()}>Start Order</button>
         )}
         <button>Cancel Order</button>
       </div>
-      {/* {items.map((item) => (
-        <div key={item.shoppingcart_id}>
-          <p>{item.product_id}</p>
+      {items.map((item) => (
+        <div key={item.item_id}>
+          <p>{item.product_name}</p>
+          <p>Quantity: {item.count}</p>
+          <p>Cost: {item.price}</p>
         </div>
-      ))} */}
+      ))}
     </div>
   );
 }

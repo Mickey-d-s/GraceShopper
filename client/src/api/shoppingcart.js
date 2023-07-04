@@ -28,3 +28,14 @@ export async function fetchItemsFromCart(shoppingcart_id) {
     console.error(error);
   }
 }
+
+export async function fetchProductById(product_id) {
+  try {
+    const response = await fetch(`/api/products/${product_id}`);
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
