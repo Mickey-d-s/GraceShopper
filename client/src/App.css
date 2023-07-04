@@ -59,12 +59,11 @@ footer {
 #orderButtons {
   padding-top: 4rem;
 }
-
-.flexfooter {
-  display:flex;
-  flex-direction:row;
-}
 .listitems {
   display:flex;
   flex-direction: row;
+}
+#flexfooter {
+  display:flex;
+  flex-direction:row;
 }
