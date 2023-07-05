@@ -66,8 +66,12 @@ export default function allProducts() {
         <div key={category}>
           <h1>{category}</h1>
           {products.map((product) => (
-            <div key={product.product_id}>
-              <h3>{product.product_name}</h3>
+            <div
+              className="menu"
+              key={product.product_id}
+              id={`${product.product_name}`}
+            >
+              <h3 className="dah2">{product.product_name}</h3>
               <p>Price: ${product.price}</p>
               <p>Description: {product.description}</p>
               <button onClick={() => addToCart(cart_id, product.product_id, 1)}>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 // // import { useNavigate } from "react-router-dom";
 import { fetchAllInventories } from "../api/inventory";
+import { Outlet } from "react-router-dom";
 
 export default function allInventories() {
   const [inventories, setInventories] = useState([]);
@@ -25,6 +26,7 @@ export default function allInventories() {
           <p>Quantiy: {inventory.quantity}</p>
         </div>
       ))}
+      <Outlet />
     </div>
   );
 }
