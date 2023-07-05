@@ -55,6 +55,22 @@ const Nav = () => {
           </div>
         </>
       )}
+      {/* {user?.username != "Stranger" && user?.isAdmin (
+        <>
+          <div className="Link">
+            <Link to="/register">Register</Link>
+          </div>
+          <div className="Link">
+            <Link to="/login">Login</Link>
+          </div>
+          <div className="Link">
+            <Link to="/Profile">Profile</Link>
+          </div>
+          <div className="Link">
+            <Link to="/Menu">Menu</Link>
+          </div>
+        </>
+      )} */}
       <button className="navbar__logout" onClick={handleLogout}>
         Logout
       </button>

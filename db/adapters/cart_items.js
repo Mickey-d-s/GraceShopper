@@ -72,9 +72,26 @@ async function deleteCartItem(shoppingcart_id) {
   }
 }
 
+async function getItemsFromCartId(shoppingcart_id) {
+  try {
+    const { rows: items } = await client.query(
+      `
+      SELECT *
+      FROM cart_items
+      WHERE shoppingcart_id = $1;
+    `,
+      [shoppingcart_id]
+    );
+    return items;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createCart_Item,
   getCartById,
   updateCartItem,
   deleteCartItem,
+  getItemsFromCartId,
 };

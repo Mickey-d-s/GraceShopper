@@ -5,12 +5,13 @@ const {
   updateshoppingcart,
   createShoppingCarts,
   deleteshoppingcartbyuserid,
+  getShoppingCartById,
 } = require("../db/adapters/shoppingcart");
 const { authRequired } = require("./utils");
 
 shoppingCartsRouter.get("/:id", async (req, res, next) => {
   try {
-    const shoppingCart = await getshoppingcartbyuserid(+req.params.id);
+    const shoppingCart = await getShoppingCartById(+req.params.id);
     console.log(shoppingCart);
     res.send(shoppingCart);
   } catch (error) {

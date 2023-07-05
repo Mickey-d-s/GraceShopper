@@ -43,6 +43,7 @@ export default function allProducts() {
           product_id,
           count,
         });
+        return cartItem;
       } catch (error) {
         console.log("Failed to add item to cart:", error);
       }

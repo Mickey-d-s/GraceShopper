@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import bigburger2 from "../assets/bigburger2.jpg";
+import React from "react";
+// import bigburger2 from "../assets/bigburger2.jpg";
+import bigburger from "../assets/bigburger.jpg";
 
 export function Homepage() {
   try {
     // const {user} = require("../") missing use context + use auth
     return (
       <>
-        <div
-          className="landerlogo"
-          style={{ backgroundImage: `url(${bigburger2})` }}
-        >
+        <div id="bigBurger2">
+          {/* <img src={bigburger2} alt="Big Burger TWO IMG" /> */}
           <h1 className="landertext">
             THE ORIGINAL BURGER JOINT BEOFRE MC**ALD'S
           </h1>
@@ -54,8 +53,8 @@ export function Homepage() {
         <div>
           <h1>the best burger i ever had</h1>
         </div>
-        <div>
-          <img src="http://placekitten.com/1500/500" alt="" />
+        <div id="bigBurger">
+          <img src={bigburger} alt="Big Burger IMG" />
         </div>
         <div>
           <h1>order online or come visit us today</h1>
