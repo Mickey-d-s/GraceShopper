@@ -53,6 +53,7 @@ export default function RegisterForm() {
           <h2>{location.pathname.substring(1)}</h2>
           {error && <p className="error-message">{error}</p>}
           <input
+            className="input"
             required
             type="text"
             name="username"
@@ -60,7 +61,9 @@ export default function RegisterForm() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          <br />
           <input
+            className="input"
             required
             type="email"
             name="email"
@@ -68,7 +71,9 @@ export default function RegisterForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <br />
           <input
+            className="input righty"
             required
             type="password"
             name="password"
@@ -77,10 +82,12 @@ export default function RegisterForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
+            className="input"
             type="password"
             placeholder="password confirmation"
             onChange={(e) => setPasswordConfirmation(e.target.value)}
           />
+          <br />
           <button type="submit">Submit</button>
         </form>
         <p>

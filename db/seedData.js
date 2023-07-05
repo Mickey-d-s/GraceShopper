@@ -1,9 +1,35 @@
 // Create some seed data and export it from this file
 const users = [
-  { username: "Brandon", email: "Brandon@gmail.com", password: 12345678 },
-  { username: "Jeffrey", email: "Jeffrey@gmail.com", password: 12345678 },
-  { username: "Elliot", email: "Elliot@gmail.com", password: 12345678 },
-  { username: "Brian", email: "Brian@gmail.com", password: 12345678 },
+  {
+    username: "Brandon",
+    email: "Brandon@gmail.com",
+    password: 12345678,
+    adm: false,
+  },
+  {
+    username: "Jeffrey",
+    email: "Jeffrey@gmail.com",
+    password: 12345678,
+    adm: false,
+  },
+  {
+    username: "Elliot",
+    email: "Elliot@gmail.com",
+    password: 12345678,
+    adm: false,
+  },
+  {
+    username: "Brian",
+    email: "Brian@gmail.com",
+    password: 12345678,
+    adm: false,
+  },
+  {
+    username: "admin",
+    email: "admin@admin",
+    password: "admin",
+    adm: true,
+  },
 ];
 
 const products = [
