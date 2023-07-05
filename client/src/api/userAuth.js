@@ -1,4 +1,4 @@
-export default async function registerUser(username, email, password) {
+export default async function registerUser(username, email, password, adm) {
   const response = await fetch("api/users/register", {
     method: "POST",
     headers: {

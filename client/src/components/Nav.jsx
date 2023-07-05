@@ -19,7 +19,7 @@ const Nav = () => {
 
   return (
     <nav className="nav">
-      <h3 className="Username">Hi, {user.username}</h3>
+      <h3 className="Username">MICKEY D's</h3>
       <div className="Link">
         <Link to="/">Home</Link>
       </div>
@@ -32,10 +32,14 @@ const Nav = () => {
             <Link to="/Menu">Menu</Link>
           </div>
           <div className="Link">
-            <Link to="/inventories">Inventory</Link>
-          </div>
-          <div className="Link">
             <Link to="/shoppingcart">Shopping Cart</Link>
+          </div>
+        </>
+      )}
+      {user?.adm != false && (
+        <>
+          <div className="Link">
+            <Link to="/Dashboard">Admin-Dash</Link>
           </div>
         </>
       )}
@@ -68,6 +72,7 @@ const Nav = () => {
           </div>
         </>
       )} */}
+      <h3 className="Username">Hi, {user.username}</h3>
       <button className="navbar__logout" onClick={handleLogout}>
         Logout
       </button>

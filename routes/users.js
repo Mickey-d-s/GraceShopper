@@ -19,13 +19,15 @@ usersRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, email, password } = req.body.username;
+    const { username, email, password, adm } = req.body.username;
     console.log("username", username);
     console.log("email", email);
     console.log("password", password);
-    console.log(req.body);
+    console.log("admin", adm);
+    console.log("req.body in backend routes", req.body.username);
     const _user = await getUserByUsername(username);
     if (_user) {
       next({
@@ -34,14 +36,15 @@ usersRouter.post("/register", async (req, res, next) => {
       });
       return;
     }
-    // console.log("HEllO");
-    // console.log("password", password);
+    //we need to refactor the admin bool.... everything up to createuser worked...
+    //but after it disapears
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     console.log("hashed password:", hashedPassword);
     const user = await createUser({
       username,
       email,
       password: hashedPassword,
+      adm: false,
     });
     console.log("user:", user);
     delete user.password;
@@ -62,6 +65,7 @@ usersRouter.post("/register", async (req, res, next) => {
     next(error);
   }
 });
+
 usersRouter.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
