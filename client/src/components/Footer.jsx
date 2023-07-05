@@ -6,8 +6,8 @@ function Footer() {
       <h1
         style={{ color: "green", textAlign: "center", marginTop: "-50px" }}
       ></h1>
-      <>
-        <div>
+      <div id="listitems">
+        <div className="flexfooter">
           <h1>About Us</h1>
           <li>
             <a href="#" />
@@ -21,8 +21,12 @@ function Footer() {
             <a href="#" />
             Franchise info
           </li>
+          <li>
+            <a href="#" />
+            Radric Delantic Davis aka Gucci Mane
+          </li>
         </div>
-        <div>
+        <div className="flexfooter">
           <h1>Services</h1>
           <li>
             <a href="#" />
@@ -38,7 +42,7 @@ function Footer() {
           </li>
           <div href="#">MyMcDonald's Rewards</div>
         </div>
-        <div>
+        <div className="flexfooter">
           <h1>Contact Us</h1>
           <li>
             <a href="#" />
@@ -57,7 +61,7 @@ function Footer() {
             Frequently Asked Questions
           </li>
         </div>
-      </>
+      </div>
     </footer>
   );
 }
