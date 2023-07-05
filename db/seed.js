@@ -34,7 +34,8 @@ async function createTables() {
         user_id SERIAL PRIMARY KEY,
         username VARCHAR(255) NOT NULL UNIQUE,
         email VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL
+        password VARCHAR(255) NOT NULL,
+        adm BOOLEAN
       )`);
     console.log("after creating user");
 

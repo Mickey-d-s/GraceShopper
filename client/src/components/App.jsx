@@ -7,9 +7,10 @@ import Profile from "../components/Profile";
 import { Routes, Route } from "react-router-dom";
 import { Homepage } from "./home";
 import Footer from "./Footer";
-import Inventory from "../components/Inventory";
 import ShoppingCart from "../components/ShoppingCart";
-
+import { Dashboard } from "./Dashboard/dashboard";
+import { Dashboardnav } from "./Dashboard/dashboardnav";
+import Inventory from "./Inventory";
 function App() {
   return (
     <div>
@@ -21,7 +22,9 @@ function App() {
         <Route path="/register" element={<Registerform />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Menu" element={<Menu />} />
-        <Route path="/inventories" element={<Inventory />} />
+        <Route path="/Dashboard" element={<Dashboardnav />}>
+          <Route path="inventory" element={<Inventory />}></Route>
+        </Route>
         <Route path="/shoppingcart" element={<ShoppingCart />} />
       </Routes>
       <Footer />
