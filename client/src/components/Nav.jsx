@@ -36,13 +36,15 @@ const Nav = () => {
           </div>
         </>
       )}
-      {user?.adm != false && (
-        <>
-          <div className="Link">
-            <Link to="/Dashboard">Admin-Dash</Link>
-          </div>
-        </>
-      )}
+      {user?.adm != false &&
+        user?.username != "Stranger" &&
+        stranger(
+          <>
+            <div className="Link">
+              <Link to="/Dashboard">Admin-Dash</Link>
+            </div>
+          </>
+        )}
       {user?.username === "Stranger" && (
         <>
           <div className="Link">
