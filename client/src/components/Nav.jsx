@@ -55,7 +55,7 @@ const Nav = () => {
           </div>
         </>
       )}
-      {/* {user?.username != "Stranger" && user?.isAdmin (
+      {/* {user?.username != "Stranger" && user?.isAdmin === true && (
         <>
           <div className="Link">
             <Link to="/register">Register</Link>
