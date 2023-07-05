@@ -14,6 +14,11 @@ nav {
 .flex {
   display: flex;
 }
+/* This is what makes it into a line */
+.menu {
+  display: inline-block;
+  margin-right: 1%;
+}
 
 .landertext {
   margin: 0;
@@ -25,7 +30,25 @@ a {
   text-decoration: none;
   color: yellow;
 }
-
+.flexImage {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+.product {
+  margin-bottom: 40%;
+}
+.productbtn {
+  background-color: white;
+  color: black;
+  border-radius: 20%;
+  opacity: 80%;
+}
+.input {
+  margin-bottom: 2%;
+}
+.righty {
+  margin-right: 2%;
+}
 #orderButtons {
   padding-top: 4rem;
 }
@@ -35,13 +58,35 @@ a {
   background-size: cover;
   border-radius: 40%;
 }
-
+#fries {
+  background-image: url(./assets/fries.jpg);
+  background-size: cover;
+  width: 300px;
+  height: 200px;
+  margin: 2%;
+}
+#chickenburger {
+  background-image: url(./assets/Chicken-Burgers.jpg);
+  background-size: cover;
+  width: 300px;
+  height: 200px;
+  margin: 2%;
+}
+#dah2 {
+  margin: auto;
+  width: 100%;
+}
 #bigBurger Img {
   width: 100%;
 }
-
+#textboxalign {
+  margin-left: 12%;
+}
 body {
   margin: 0;
+}
+p {
+  word-wrap: break-word;
 }
 
 footer {

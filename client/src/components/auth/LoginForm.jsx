@@ -42,13 +42,16 @@ export default function LoginForm() {
           {error && <p className="error-message">{error}</p>}
           <input
             required
+            className="input"
             type="text"
             name="username"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          <br />
           <input
+            className="input"
             required
             type="password"
             name="password"
@@ -56,7 +59,10 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Submit</button>
+          <br />
+          <button className="productbtn" type="submit">
+            Submit
+          </button>
         </form>
         <p>
           {pathname === "/login"

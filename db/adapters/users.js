@@ -1,19 +1,20 @@
 const client = require("../client");
 
-async function createUser({ username, email, password }) {
+async function createUser({ username, email, password, adm }) {
   try {
-    console.log({ username, email, password });
+    console.log("in the adapter");
+    console.log({ username, email, password, adm });
 
     const {
       rows: [user],
     } = await client.query(
       `
-    INSERT INTO users(username, email, password )
-            VALUES($1,$2, $3)
+    INSERT INTO users(username, email, password, adm)
+            VALUES($1,$2, $3, $4)
             ON CONFLICT (username) DO NOTHING
             returning *
             `,
-      [username, email, password]
+      [username, email, password, adm]
     );
 
     return user;
