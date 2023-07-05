@@ -16,7 +16,7 @@ nav {
 }
 /* This is what makes it into a line */
 .menu {
-  display: inline flow-root;
+  display: inline-block;
   margin-right: 1%;
 }
 
