@@ -72,15 +72,22 @@ export default function allProducts() {
               id={`${product.product_name}`}
             >
               <h3 className="dah2">{product.product_name}</h3>
-              <p>Price: ${product.price}</p>
-              <p>Description: {product.description}</p>
-              <button onClick={() => addToCart(cart_id, product.product_id, 1)}>
-                Add to Cart
-              </button>{" "}
+              <div className="price-quantity">
+                <p> {product.description}</p>
+                <p> ${product.price}</p>
+                <button
+                  onClick={() => addToCart(cart_id, product.product_id, 1)}
+                >
+                  <i onClick="decrement(${id})" class="bi bi-dash-lg"></i>
+                  <div id={`${product.price}`} className="quantity">
+                    0
+                  </div>
+                  <i onClick="increment(${id})" class="bi bi-plus-lg"></i>
+                </button>{" "}
+              </div>
             </div>
           ))}
         </div>
       ))}
     </div>
-  );
-}
+  );};

@@ -14,10 +14,61 @@ nav {
 .flex {
   display: flex;
 }
+.price-quantity{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+}
+.bi-dash-lg{
+color: red;
+
+}
+
+.bi-plus-lg{
+  color: green;
+}
+
+
+
+
+.cart{
+  position: relative;
+  background-color: black;
+  color: yellow;
+  padding: 5px;
+  border-radius: 4px;
+
+}
+
+.cartAmount{
+  position: absolute;
+  top: -2px;
+  right: 30px;
+  font-size: 15px;
+  background-color: red;
+  padding: 1px ;
+  border-radius: 1px;
+  color: white;
+
+
+}
 /* This is what makes it into a line */
 .menu {
-  display: inline-block;
+  display: inline-table;
+  grid-template-columns: repeat(4, 223px);
+  background-color: rgb(246, 246, 97);
+  border-radius: 10px;
+  justify-content: center;
   margin-right: 1%;
+  
 }
 
 .landertext {
@@ -51,6 +102,7 @@ a {
 }
 #orderButtons {
   padding-top: 4rem;
+  
 }
 
 #bigBurger2 {
@@ -87,6 +139,8 @@ body {
 }
 p {
   word-wrap: break-word;
+
+  gap: 10px;
 }
 
 footer {

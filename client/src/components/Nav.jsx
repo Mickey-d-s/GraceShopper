@@ -33,6 +33,10 @@ const Nav = () => {
           </div>
           <div className="Link">
             <Link to="/shoppingcart">Shopping Cart</Link>
+            <div className="cart">
+              <i class="bi bi-cart3"></i>
+              <div className="cartAmount">0</div>
+            </div>
           </div>
         </>
       )}
