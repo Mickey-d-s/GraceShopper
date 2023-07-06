@@ -75,3 +75,12 @@ export async function fetchMe() {
   }
   return { success, message, user };
 }
+export async function fetchuserbyid(userid) {
+  const response = await fetch(`/api/users/test/${userid}`);
+  const { success, message, user } = await response.json();
+  console.log("inside getuserbyid-api", { success, message, user });
+  if (!success) {
+    throw { message };
+  }
+  return { success, message, user };
+}

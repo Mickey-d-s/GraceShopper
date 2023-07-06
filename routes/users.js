@@ -8,6 +8,8 @@ const {
   createUser,
   getAllUsers,
   getUserByUsername,
+  getUserByUserid,
+  updateuser,
 } = require("../db/adapters/users");
 const { authRequired } = require("./utils");
 
@@ -19,7 +21,14 @@ usersRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
-
+usersRouter.get("/test/:id", async (req, res, next) => {
+  try {
+    const user = await getUserByUserid(+req.params.id);
+    res.send({ success: true, message: "user found", user });
+  } catch (error) {
+    next(error);
+  }
+});
 usersRouter.post("/register", async (req, res, next) => {
   try {
     const { username, email, password, adm } = req.body.username;
@@ -106,6 +115,18 @@ usersRouter.get("/logout", async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+});
+usersRouter.patch("/update/:id", async (req, res, next) => {
+  try {
+    const { userid } = req.params.id;
+    const { adm } = req.body;
+    adm = updateObj;
+    const user = await getUserByUserid(+userid);
+    const updateduser = await updateuser(+userid, updateObj);
+    res.send({ success, updateduser });
+  } catch (error) {
+    throw error;
   }
 });
 
