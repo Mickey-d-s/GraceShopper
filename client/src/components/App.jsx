@@ -10,6 +10,8 @@ import Footer from "./Footer";
 import ShoppingCart from "../components/ShoppingCart";
 import { Dashboard } from "./Dashboard/dashboard";
 import Inventory from "./Inventory";
+import Users from "./Users";
+
 function App() {
   return (
     <div>
@@ -23,6 +25,7 @@ function App() {
         <Route path="/Menu" element={<Menu />} />
         <Route path="Dashboard" element={<Dashboard />}>
           <Route path="inventory" element={<Inventory />}></Route>
+          <Route path="users" element={<Users />}></Route>
         </Route>
         <Route path="/shoppingcart" element={<ShoppingCart />} />
       </Routes>
