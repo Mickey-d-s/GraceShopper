@@ -11,7 +11,7 @@ export function Dashboardnav() {
             <Link to="inventory">inventory</Link>
           </div>
           <div className="Link">
-            <Link to="/api/users">users</Link>
+            <Link to="users">users</Link>
           </div>
         </nav>
       </>
