@@ -22,8 +22,9 @@ function App() {
         <Route path="/register" element={<Registerform />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Menu" element={<Menu />} />
-        <Route path="/Dashboard" element={<Dashboardnav />}></Route>
-        <Route path="inventory" element={<Inventory />}></Route>
+        <Route path="/Dashboard" element={<Dashboardnav />}>
+          <Route path="inventory" element={<Inventory />}></Route>
+        </Route>
         <Route path="/shoppingcart" element={<ShoppingCart />} />
       </Routes>
       <Footer />
