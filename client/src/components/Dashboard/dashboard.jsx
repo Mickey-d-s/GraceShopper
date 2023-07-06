@@ -7,8 +7,9 @@ export function Dashboard() {
   try {
     return (
       <>
-        <Dashboardnav />
+        <Dashboardnav></Dashboardnav>
         <Outlet />
+        <h1>test</h1>
       </>
     );
   } catch (error) {

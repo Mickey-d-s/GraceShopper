@@ -52,6 +52,19 @@ export async function logout() {
   return { success, message, data };
 }
 
+
+export async function getAllUsers() {
+  const response = await fetch("/api/users/");
+  const { rows } = await response.json();
+  console.log("ALL USERS:", rows);
+  if (!success) {
+    throw {
+      message,
+    };
+  }
+  return { rows };
+}
+
 export async function fetchMe() {
   const response = await fetch("/api/users/me");
   const { success, message, user } = await response.json();

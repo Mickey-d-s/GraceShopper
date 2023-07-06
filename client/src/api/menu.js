@@ -20,7 +20,7 @@ export async function getUserShoppingCart() {
   }
 }
 
-export async function addItemToCart(shoppingcart_id, product_id, count) {
+export async function addItemToCart({ shoppingcart_id, product_id, count }) {
   try {
     const response = await fetch("/api/cart_items", {
       method: "POST",

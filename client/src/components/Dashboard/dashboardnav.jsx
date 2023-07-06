@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Routes } from "react-router-dom";
 
+
 export function Dashboardnav() {
   try {
     return (
@@ -8,6 +9,9 @@ export function Dashboardnav() {
         <nav className="nav">
           <div className="Link">
             <Link to="inventory">inventory</Link>
+          </div>
+          <div className="Link">
+            <Link to="users">users</Link>
           </div>
         </nav>
       </>
