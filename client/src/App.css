@@ -14,51 +14,47 @@ nav {
 .flex {
   display: flex;
 }
-.price-quantity{
+.price-quantity {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.button{
+.button {
   display: flex;
   flex-direction: row;
   gap: 10px;
-
 }
-.bi-dash-lg{
-color: red;
-
+.bi-dash-lg {
+  color: red;
 }
 
-.bi-plus-lg{
+.bi-plus-lg {
   color: green;
 }
 
+.Username {
+  padding-right: 1rem;
+}
 
-
-
-.cart{
+.cart {
   position: relative;
   background-color: black;
   color: yellow;
   padding: 5px;
   border-radius: 4px;
-
 }
 
-.cartAmount{
+.cartAmount {
   position: absolute;
   top: -2px;
   right: 30px;
   font-size: 15px;
   background-color: red;
-  padding: 1px ;
+  padding: 1px;
   border-radius: 1px;
   color: white;
-
-
 }
 /* This is what makes it into a line */
 .menu {
@@ -68,7 +64,6 @@ color: red;
   border-radius: 10px;
   justify-content: center;
   margin-right: 1%;
-  
 }
 
 .landertext {
@@ -102,7 +97,6 @@ a {
 }
 #orderButtons {
   padding-top: 4rem;
-  
 }
 
 #bigBurger2 {

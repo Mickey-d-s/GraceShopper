@@ -20,7 +20,7 @@ async function createShoppingCarts({ status, user_id }) {
 }
 
 // not sure if we need a full crud but will do so just in case
-async function deleteshoppingcartbyuserid({ user_id }) {
+async function deleteShoppingCartByUserId({ user_id }) {
   try {
     //untested
     console.log(user_id);
@@ -38,7 +38,7 @@ async function deleteshoppingcartbyuserid({ user_id }) {
   }
 }
 
-async function updateshoppingcart({ user_id, updateObj }) {
+async function updateShoppingCart({ user_id, updateObj }) {
   try {
     //untested
     console.log(user_id);
@@ -63,7 +63,7 @@ async function updateshoppingcart({ user_id, updateObj }) {
     throw error;
   }
 }
-async function getshoppingcartbyuserid(user_id) {
+async function getShoppingCartByUserId(user_id) {
   try {
     const {
       rows: [shoppingCart],
@@ -81,28 +81,28 @@ async function getshoppingcartbyuserid(user_id) {
   }
 }
 
-async function getShoppingCartById(shoppingcart_id) {
-  try {
-    const {
-      rows: [shoppingCart],
-    } = await client.query(
-      `
-      SELECT *
-      FROM shoppingcarts
-      WHERE shoppingcart_id = $1;
-    `,
-      [shoppingCart]
-    );
-    return shoppingcart_id;
-  } catch (error) {
-    throw error;
-  }
-}
+// async function getShoppingCartById(shoppingcart_id) {
+//   try {
+//     const {
+//       rows: [shoppingCart],
+//     } = await client.query(
+//       `
+//       SELECT *
+//       FROM shoppingcarts
+//       WHERE shoppingcart_id = $1;
+//     `,
+//       [shoppingCart]
+//     );
+//     return shoppingcart_id;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 module.exports = {
   createShoppingCarts,
-  deleteshoppingcartbyuserid,
-  updateshoppingcart,
-  getshoppingcartbyuserid,
-  getShoppingCartById,
+  deleteShoppingCartByUserId,
+  updateShoppingCart,
+  getShoppingCartByUserId,
+  // getShoppingCartById,
 };

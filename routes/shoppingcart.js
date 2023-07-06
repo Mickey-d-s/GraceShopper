@@ -1,27 +1,27 @@
 const shoppingCartsRouter = require("express").Router();
 const { deleteCartItem } = require("../db/adapters/cart_items");
 const {
-  getshoppingcartbyuserid,
-  updateshoppingcart,
+  getShoppingCartByUserId,
+  updateShoppingCart,
   createShoppingCarts,
-  deleteshoppingcartbyuserid,
-  getShoppingCartById,
+  deleteShoppingCartByUserId,
+  // getShoppingCartById,
 } = require("../db/adapters/shoppingcart");
 const { authRequired } = require("./utils");
 
-shoppingCartsRouter.get("/:id", async (req, res, next) => {
-  try {
-    const shoppingCart = await getShoppingCartById(+req.params.id);
-    console.log(shoppingCart);
-    res.send(shoppingCart);
-  } catch (error) {
-    next(error);
-  }
-});
+// shoppingCartsRouter.get("/:id", async (req, res, next) => {
+//   try {
+//     const shoppingCart = await getShoppingCartById(+req.params.id);
+//     console.log(shoppingCart);
+//     res.send(shoppingCart);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 shoppingCartsRouter.get("/user/cart", authRequired, async (req, res, next) => {
   try {
-    const shoppingCart = await getshoppingcartbyuserid(req.user.user_id);
+    const shoppingCart = await getShoppingCartByUserId(req.user.user_id);
     res.send(shoppingCart);
   } catch (error) {
     next(error);
@@ -30,9 +30,9 @@ shoppingCartsRouter.get("/user/cart", authRequired, async (req, res, next) => {
 
 shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   try {
-    const getcart = await getshoppingcartbyuserid(+req.params.id);
+    const getcart = await getShoppingCartByUserId(+req.params.id);
     if (req.user.id == getcart.customer) {
-      const updatecart = await updateshoppingcart(+req.params.id, req.body);
+      const updatecart = await updateShoppingCart(+req.params.id, req.body);
       res.send(updatecart);
     } else {
       //shouldnt hit this....
@@ -55,10 +55,10 @@ shoppingCartsRouter.post("/", authRequired, async (req, res, next) => {
 });
 
 shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {
-  const cart = await getshoppingcartbyuserid(+req.params.id);
+  const cart = await getShoppingCartByUserId(+req.params.id);
   if (req.user.id == cart.customer) {
     const products = await deleteCartItem(cart.id);
-    const shoppingCart = await deleteshoppingcartbyuserid(+req.params.id);
+    const shoppingCart = await deleteShoppingCartByUserId(+req.params.id);
     res.send({ message: "shoppingCart deleted" });
   }
 });
