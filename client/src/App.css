@@ -7,6 +7,7 @@ nav {
 .Username {
   color: white;
   padding-left: 2rem;
+  padding-right: 1rem;
 }
 .Link {
   margin: auto;
@@ -14,28 +15,23 @@ nav {
 .flex {
   display: flex;
 }
-.price-quantity {
+
+/* .price-quantity {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-.button {
+} */
+/* .button {
   display: flex;
   flex-direction: row;
   gap: 10px;
-}
+} */
 .bi-dash-lg {
   color: red;
 }
-
 .bi-plus-lg {
   color: green;
-}
-
-.Username {
-  padding-right: 1rem;
 }
 
 .cart {
@@ -45,7 +41,6 @@ nav {
   padding: 5px;
   border-radius: 4px;
 }
-
 .cartAmount {
   position: absolute;
   top: -2px;
@@ -80,6 +75,7 @@ a {
   display: inline-flex;
   flex-wrap: wrap;
 }
+
 .product {
   margin-bottom: 40%;
 }
@@ -118,19 +114,23 @@ a {
   height: 200px;
   margin: 2%;
 }
-#dah2 {
+/* #dah2 {
   margin: auto;
   width: 100%;
-}
+} */
+
 #bigBurger Img {
   width: 100%;
 }
+
 #textboxalign {
   margin-left: 12%;
 }
+
 body {
   margin: 0;
 }
+
 p {
   word-wrap: break-word;
 
