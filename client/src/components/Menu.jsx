@@ -11,28 +11,18 @@ export default function allProducts() {
   const [counts, setCounts] = useState({});
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function fetchData() {
       try {
         const fetchedProducts = await fetchAllProducts();
         setProducts(fetchedProducts);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchProducts();
-  }, []);
 
-  useEffect(() => {
-    const fetchShoppingCartId = async () => {
-      try {
         const result = await getUserShoppingCart();
         setShoppingCartId(result.shoppingcart_id);
       } catch (error) {
         console.error(error);
       }
-    };
-
-    fetchShoppingCartId();
+    }
+    fetchData();
   }, []);
 
   const addToCart = async (shoppingcart_id, product_id, count) => {

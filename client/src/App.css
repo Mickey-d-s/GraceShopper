@@ -146,7 +146,7 @@ a {
 #bigBurger2 {
   background-image: url(./assets/bigburger2.jpg);
   background-size: cover;
-  border-radius: 40%;
+  border-radius: 30%;
 }
 #fries {
   background-image: url(./assets/fries.jpg);
