@@ -27,7 +27,6 @@ export default function allUsers() {
           <p>email: {user.email}</p>
         </div>
       ))}
-      <Outlet />
     </div>
   );
 }
