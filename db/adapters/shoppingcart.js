@@ -69,9 +69,27 @@ async function getShoppingCartByUserId(user_id) {
       rows: [shoppingCart],
     } = await client.query(
       `
-      SELECT * 
+      SELECT shoppingcarts.shoppingcart_id as id,
+      shoppingcarts.status,
+      shoppingcarts.user_id, 
+       CASE WHEN cart_items.shoppingcart_id IS NULL THEN '[]'::json
+      
+      ELSE
+      JSON_AGG(
+          JSON_BUILD_OBJECT(
+               'id', products.product_id,
+               'name', products.product_name,
+               'qty', cart_items.count,
+               'price', products.price
+          )
+      ) END AS products
       FROM shoppingcarts
-      WHERE shoppingcarts.user_id = $1 AND status = 'pending'
+      FULL OUTER JOIN cart_items 
+      ON shoppingcarts.shoppingcart_id = cart_items.shoppingcart_id
+      FULL OUTER JOIN products
+      ON products.product_id = cart_items.product_id
+      WHERE user_id = $1 and status='pending'
+      GROUP BY shoppingcarts.shoppingcart_id, cart_items.shoppingcart_id
     `,
       [user_id]
     );
