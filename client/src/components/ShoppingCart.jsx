@@ -82,7 +82,7 @@ export default function StartOrder() {
         <div key={item.item_id}>
           <p>{item.product_name}</p>
           <p>Quantity: {item.count}</p>
-          <p>Cost: {item.price}</p>
+          <p>Cost Per Item: {item.price}</p>
         </div>
       ))}
     </div>

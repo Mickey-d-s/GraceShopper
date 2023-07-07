@@ -76,8 +76,8 @@ export default function allProducts() {
               key={product.product_id}
               // id={`${product.product_name}`}
             >
-              <h3 className="dah2">{product.product_name}</h3>
-              <div className="price-quantity">
+              <h3 className="productName">{product.product_name}</h3>
+              <div className="productCard">
                 <p>{product.description}</p>
                 <p>${product.price}</p>
                 <div>
