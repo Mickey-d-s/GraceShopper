@@ -8,6 +8,7 @@ import {
 export default function allProducts() {
   const [products, setProducts] = useState([]);
   const [cart_id, setShoppingCartId] = useState(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -49,6 +50,13 @@ export default function allProducts() {
       }
     }
   };
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
 
   // Group products by category
   const groupedProducts = products.reduce((acc, product) => {
@@ -77,9 +85,10 @@ export default function allProducts() {
                 <p> ${product.price}</p>
                 <button
                   id="addToCartButton"
-                  onClick={() => addToCart(cart_id, product.product_id, 1)}
+                  onClick={() => addToCart(cart_id, product.product_id, count)}
                 >
-                  <i
+                  Add to Cart
+                  {/* <i
                     onClick={() => decrement(count)}
                     className="bi bi-dash-lg"
                   ></i>
@@ -89,7 +98,7 @@ export default function allProducts() {
                   <i
                     onClick={() => increment(count)}
                     className="bi bi-plus-lg"
-                  ></i>
+                  ></i> */}
                 </button>
               </div>
             </div>
