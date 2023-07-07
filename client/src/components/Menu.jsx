@@ -61,11 +61,7 @@ export default function allProducts() {
         <div key={category}>
           <h1>{category}</h1>
           {products.map((product) => (
-            <div
-              className="menu"
-              key={product.product_id}
-              // id={`${product.product_name}`}
-            >
+            <div className="menu" key={product.product_id}>
               <h3 className="productName">{product.product_name}</h3>
               <div className="productCard">
                 <p>{product.description}</p>
