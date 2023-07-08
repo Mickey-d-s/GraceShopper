@@ -42,7 +42,7 @@ export default function StartOrder() {
     try {
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
-      // Do something with the completed cart data
+      setShoppingCart([]);
     } catch (error) {
       console.error("Error completing shopping cart:", error);
       // Handle the error
