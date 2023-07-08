@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { createShoppingCart } from "../api/shoppingcart";
+import { createShoppingCart, completeOrder } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 // import { useNavigate } from "react-router-dom";
@@ -36,18 +36,24 @@ export default function StartOrder() {
       }
     };
     fetchShoppingCart();
-    // user the user.id (from useAuth) to fetch you shoppingcart where status is pending
-    // Make sure that the shopping cart from the db includes all products
-    // const result = await getUserShoppingCart();
-    // the its a matter of keeping the shoppingcart (with products) in state
-    // and map over it
   }, []);
+
+  const checkout = async () => {
+    try {
+      const completedCart = await completeOrder();
+      console.log("Shopping cart completed:", completedCart);
+      // Do something with the completed cart data
+    } catch (error) {
+      console.error("Error completing shopping cart:", error);
+      // Handle the error
+    }
+  };
 
   return (
     <div>
       <div id="orderButtons">
         <button onClick={() => startShopping()}>Start Order</button>
-
+        <button onClick={() => checkout()}>Checkout</button>
         <button>Cancel Order</button>
       </div>
       {shoppingCart.length > 0 ? (
@@ -55,7 +61,7 @@ export default function StartOrder() {
           {shoppingCart.map((item) => (
             <div key={item.item_id}>
               <p>{item.name}</p>
-              <p>Quantity: {item.qty}</p>
+              <p>Qty: {item.qty}</p>
               <p>Cost Per Item: {item.price}</p>
             </div>
           ))}

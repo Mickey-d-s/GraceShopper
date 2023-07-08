@@ -59,10 +59,12 @@ async function updateShoppingCart({ user_id, updateObj }) {
     `,
       Object.values(updateObj)
     );
+    return shoppingCart;
   } catch (error) {
     throw error;
   }
 }
+
 async function getShoppingCartByUserId(user_id) {
   try {
     const {
@@ -100,6 +102,26 @@ async function getShoppingCartByUserId(user_id) {
   }
 }
 
+async function updateShoppingStatus(user_id) {
+  try {
+    // Update the status from 'pending' to 'completed'
+    await client.query(
+      `
+      UPDATE shoppingcarts
+      SET status = 'completed'
+      WHERE user_id = $1
+        AND status = 'pending'
+      RETURNING *
+    `,
+      [user_id]
+    );
+
+    console.log("Shopping status updated successfully!");
+  } catch (error) {
+    console.log("Error updating shopping status:", error);
+  }
+}
+
 // async function getShoppingCartById(shoppingcart_id) {
 //   try {
 //     const {
@@ -123,5 +145,6 @@ module.exports = {
   deleteShoppingCartByUserId,
   updateShoppingCart,
   getShoppingCartByUserId,
+  updateShoppingStatus,
   // getShoppingCartById,
 };

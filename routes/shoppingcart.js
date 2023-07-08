@@ -5,6 +5,7 @@ const {
   updateShoppingCart,
   createShoppingCarts,
   deleteShoppingCartByUserId,
+  updateShoppingStatus,
   // getShoppingCartById,
 } = require("../db/adapters/shoppingcart");
 const { authRequired } = require("./utils");
@@ -27,6 +28,19 @@ shoppingCartsRouter.get("/user/cart", authRequired, async (req, res, next) => {
     next(error);
   }
 });
+
+shoppingCartsRouter.patch(
+  "/completed",
+  authRequired,
+  async (req, res, next) => {
+    try {
+      const completedCart = await updateShoppingStatus(req.user.user_id);
+      res.send(completedCart);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   try {
