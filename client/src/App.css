@@ -7,6 +7,7 @@ nav {
 .Username {
   color: white;
   padding-left: 2rem;
+  padding-right: 1rem;
 }
 .Link {
   margin: auto;
@@ -14,10 +15,98 @@ nav {
 .flex {
   display: flex;
 }
-/* This is what makes it into a line */
-.menu {
+
+.count-button {
+  background-color: darkgrey;
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
   display: inline-block;
+  font-size: 16px;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.count {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 8px;
+}
+
+#addToCartButton {
+  background-color: gold;
+  border: none;
+  color: black;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.productName {
+  color: white;
+}
+
+.productCard {
+  color: white;
+}
+
+.menu {
+  display: inline-table;
+  grid-template-columns: repeat(4, 223px);
+  border-radius: 1rem;
+  justify-content: center;
   margin-right: 1%;
+  padding: 0.5rem;
+}
+.menu {
+  background: linear-gradient(
+    to right,
+    #3e3c3c,
+    #f9d423
+  ); /* Black and yellow gradient */
+  background-size: 200% 100%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.cart {
+  position: relative;
+  background-color: black;
+  color: yellow;
+  padding: 5px;
+  border-radius: 4px;
+}
+.cartAmount {
+  position: absolute;
+  top: -2px;
+  right: 30px;
+  font-size: 15px;
+  background-color: red;
+  padding: 1px;
+  border-radius: 1px;
+  color: white;
 }
 
 .landertext {
@@ -34,6 +123,7 @@ a {
   display: inline-flex;
   flex-wrap: wrap;
 }
+
 .product {
   margin-bottom: 40%;
 }
@@ -56,7 +146,7 @@ a {
 #bigBurger2 {
   background-image: url(./assets/bigburger2.jpg);
   background-size: cover;
-  border-radius: 40%;
+  border-radius: 30%;
 }
 #fries {
   background-image: url(./assets/fries.jpg);
@@ -72,21 +162,23 @@ a {
   height: 200px;
   margin: 2%;
 }
-#dah2 {
-  margin: auto;
-  width: 100%;
-}
+
 #bigBurger Img {
   width: 100%;
 }
+
 #textboxalign {
   margin-left: 12%;
 }
+
 body {
   margin: 0;
 }
+
 p {
   word-wrap: break-word;
+
+  gap: 10px;
 }
 
 footer {
