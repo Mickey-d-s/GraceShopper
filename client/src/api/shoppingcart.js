@@ -39,3 +39,17 @@ export async function fetchProductById(product_id) {
     console.error(error);
   }
 }
+
+export async function fetchAllOrdersForUser(user_id) {
+  try {
+    const response = await fetch("/api/allOrdersForUser/${user_id}");
+    const result = await response.json();
+    console.log("fetch all orders for a specific user", result);
+    return result;
+  } catch (error) {
+    console.error(`Error fetching data from server ${error}`);
+  }
+}
+
+
+

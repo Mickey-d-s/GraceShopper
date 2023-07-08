@@ -4,6 +4,7 @@ const {
   getshoppingcartbyuserid,
   updateshoppingcart,
   createShoppingCarts,
+  getAllOrdersByUserId,
   deleteshoppingcartbyuserid,
   getShoppingCartById,
 } = require("../db/adapters/shoppingcart");
@@ -27,6 +28,22 @@ shoppingCartsRouter.get("/user/cart", authRequired, async (req, res, next) => {
     next(error);
   }
 });
+
+shoppingCartsRouter.get("/user/order-history", async (req, res, next) => {
+  try {
+    const orders = await getAllOrdersByUserId(req.user.user_id);
+    res.send({
+      success: true,
+      message: "All My Orders ",
+      orders: orders,
+    });
+  } catch ({ error }) {
+    next({ error });
+  }
+});
+
+// call your get db adapter
+// if the user is logged in the user id is off the req.user
 
 shoppingCartsRouter.patch("/:id", authRequired, async (req, res, next) => {
   try {
@@ -62,5 +79,7 @@ shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {
     res.send({ message: "shoppingCart deleted" });
   }
 });
+
+
 
 module.exports = shoppingCartsRouter;

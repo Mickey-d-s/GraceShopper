@@ -14,6 +14,7 @@ export default function StartOrder() {
   const [started, setStarted] = useState(false);
   const [items, setItems] = useState([]);
   const [cart_id, setShoppingCartId] = useState(null);
+  const [history, setHistory] = useState([]);
 
   // let navigate = useNavigate();
 
@@ -31,6 +32,19 @@ export default function StartOrder() {
       console.log(error);
     }
   }
+  async function orderHistory() {
+    try {
+      const userHistory = await getAllOrdersByUserId({
+        user_id: user.user_id,
+        status: "pending",
+      });
+      console.log("created order histroy", userHistory);
+      setHistory(userHistory);
+    } catch (error) {
+      console.log("Error fetching orders it NO WORK", error);
+    }
+  }
+  orderHistory();
 
   useEffect(() => {
     const fetchShoppingCartId = async () => {

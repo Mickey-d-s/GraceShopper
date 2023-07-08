@@ -81,22 +81,51 @@ async function getshoppingcartbyuserid(user_id) {
   }
 }
 
-async function getShoppingCartById(shoppingcart_id) {
+async function getAllOrdersByUserId(user_id) {
   try {
-    const {
-      rows: [shoppingCart],
-    } = await client.query(
-      `
-      SELECT *
-      FROM shoppingcarts
-      WHERE shoppingcart_id = $1;
-    `,
-      [shoppingCart]
+    const { rows: shoppingCart } = await client.query(
+      `SELECT shoppingcarts.shoppingcart_id AS shoppingcart_id, shoppingcarts.user_id AS user_id, shoppingcarts.status AS status,
+COALESCE(
+    JSON_AGG(
+        JSON_BUILD_OBJECT (
+        'item_id', cart_items.item_id,
+        'product_id', products.product_id,
+        'name', products.product_name,
+        'qty', cart_items.count,
+        'price', products.price
+        )
+    )::json,
+    '[]'::json
+) AS products
+FROM shoppingcarts
+LEFT JOIN cart_items ON shoppingcarts.shoppingcart_id = cart_items.shoppingcart_id
+LEFT JOIN products ON cart_items.product_id = products.product_id
+GROUP BY shoppingcarts.shoppingcart_id, shoppingcarts.user_id, shoppingcarts.status;`,
+      [user_id]
     );
-    return shoppingcart_id;
+    return shoppingCart;
   } catch (error) {
+    console.log("Error in getting the Shopping Cart by User Id:", error);
     throw error;
   }
+
+  // async function getShoppingCartById(shoppingcart_id) {
+  //   try {
+  //     const {
+  //       rows: [shoppingCart],
+  //     } = await client.query(
+  //       `
+  //     SELECT *
+  //     FROM shoppingcarts
+  //     WHERE shoppingcart_id = $1;
+  //   `,
+  //       [shoppingCart]
+  //     );
+  //     return shoppingcart_id;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }
 
 module.exports = {
@@ -104,5 +133,7 @@ module.exports = {
   deleteshoppingcartbyuserid,
   updateshoppingcart,
   getshoppingcartbyuserid,
-  getShoppingCartById,
+  //getShoppingCartById,
+  getAllOrdersByUserId,
 };
+
