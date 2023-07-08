@@ -17,19 +17,15 @@ inventoriesRouter.get("/", async (req, res, next) => {
   }
 });
 
-inventoriesRouter.post(
-  "/",
-  //  authRequired,
-  async (req, res, next) => {
-    try {
-      const { product_id, quantity } = req.body;
-      const newInventory = await createInventories(product_id, quantity);
-      res.send(newInventory);
-    } catch (error) {
-      next(error);
-    }
+inventoriesRouter.post("/", authRequired, async (req, res, next) => {
+  try {
+    const { product_id, quantity } = req.body;
+    const newInventory = await createInventories(product_id, quantity);
+    res.send(newInventory);
+  } catch (error) {
+    next(error);
   }
-);
+});
 //not sure if working either get's syntax error of select
 inventoriesRouter.get("/:id", async (req, res, next) => {
   try {
@@ -45,7 +41,7 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
 //getting you are not authorized for this one too
 inventoriesRouter.patch(
   "/:inventory_id",
-  //  authRequired,
+  authRequired,
   async (req, res, next) => {
     try {
       const { inventory_id } = req.params;

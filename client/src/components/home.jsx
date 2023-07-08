@@ -9,7 +9,6 @@ export function Homepage() {
     return (
       <>
         <div id="bigBurger2">
-          {/* <img src={bigburger2} alt="Big Burger TWO IMG" /> */}
           <h1 className="landertext">
             THE ORIGINAL BURGER JOINT BEFORE MC**ALD'S
           </h1>
