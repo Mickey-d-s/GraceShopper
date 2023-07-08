@@ -53,7 +53,7 @@ export default function StartOrder() {
       {shoppingCart.length > 0 ? (
         <div>
           {shoppingCart.map((item) => (
-            <div key={item.product_id}>
+            <div key={item.item_id}>
               <p>{item.name}</p>
               <p>Quantity: {item.qty}</p>
               <p>Cost Per Item: {item.price}</p>
