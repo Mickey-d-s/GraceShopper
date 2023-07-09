@@ -1,33 +1,38 @@
 import { useContext, useState, useEffect } from "react";
-import {
-  createShoppingCart,
-  fetchItemsFromCart,
-  fetchProductById,
-} from "../api/shoppingcart";
+import { createShoppingCart, completeOrder } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
 
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
-  const [started, setStarted] = useState(false);
-  const [items, setItems] = useState([]);
-  const [cart_id, setShoppingCartId] = useState(null);
-  const [history, setHistory] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCartCreated, setShoppingCartCreated] = useState(
+    localStorage.getItem(SHOPPING_CART_CREATED_KEY) === "true"
+  );
 
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   async function startShopping() {
     try {
+      // Check if the user already has a shopping cart
+      if (shoppingCart.length > 0) {
+        console.log("User already has a shopping cart.");
+        return;
+      }
+      // Create a new shopping cart
       const createdOrder = await createShoppingCart({
         status: "pending",
-        user_id: user.user_id, // Access the user_id from the user object
+        user_id: user.user_id,
       });
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
-      setStarted(true);
-      // navigate("/Menu");
+      setShoppingCartCreated(true);
+      localStorage.setItem(SHOPPING_CART_CREATED_KEY, "true");
+      navigate("/Menu");
     } catch (error) {
       console.log(error);
     }
@@ -47,58 +52,64 @@ export default function StartOrder() {
   orderHistory();
 
   useEffect(() => {
-    const fetchShoppingCartId = async () => {
+    const fetchShoppingCart = async () => {
       try {
         const result = await getUserShoppingCart();
-        setShoppingCartId(result.shoppingcart_id);
+        setShoppingCart(result.products);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching shopping cart:", error);
       }
     };
-
-    fetchShoppingCartId();
+    fetchShoppingCart();
   }, []);
 
-  useEffect(() => {
-    async function fetchAllCartItems() {
-      try {
-        if (cart_id) {
-          const fetchedItems = await fetchItemsFromCart(cart_id);
-          const itemsWithProductNames = await Promise.all(
-            fetchedItems.map(async (item) => {
-              const product = await fetchProductById(item.product_id);
-              return {
-                ...item,
-                product_name: product.product_name,
-                price: product.price,
-              };
-            })
-          );
-          setItems(itemsWithProductNames); // Update the items state
-          console.log("FETCHED ITEMS IN CART:", itemsWithProductNames);
-        }
-      } catch (error) {
-        console.log(error);
-      }
+  //Delete function item from cart_items inside of shopping cart
+  //Update function QTY of item inside of shopping cart
+
+  const checkout = async () => {
+    try {
+      const completedCart = await completeOrder();
+      console.log("Shopping cart completed:", completedCart);
+      setShoppingCart([]);
+      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
+      //edits inventory qty by how much was ordered
+    } catch (error) {
+      console.error("Error completing shopping cart:", error);
     }
-    fetchAllCartItems();
-  }, [cart_id]);
+  };
 
   return (
     <div>
       <div id="orderButtons">
-        {!started && (
-          <button onClick={() => startShopping()}>Start Order</button>
+        {!shoppingCartCreated && (
+          <button id="startShopping" onClick={() => startShopping()}>
+            Start Order
+          </button>
         )}
-        <button>Cancel Order</button>
+        {shoppingCartCreated && (
+          <>
+            <button onClick={() => checkout()}>Checkout</button>
+            <button>Cancel Order</button>
+          </>
+        )}
       </div>
-      {items.map((item) => (
-        <div key={item.item_id}>
-          <p>{item.product_name}</p>
-          <p>Quantity: {item.count}</p>
-          <p>Cost: {item.price}</p>
+      {shoppingCart.length > 0 ? (
+        <div>
+          {shoppingCart.map((item) => (
+            <div key={item.item_id}>
+              <p>{item.name}</p>
+              <p>Qty: {item.qty}</p>
+              {/* add on click to edit qty that
+               deletes if qty is changed to 0*/}
+              {/* should update if qty is >1 */}
+              <button>Edit Qty</button>
+              <p>Cost Per Item: {item.price}</p>
+            </div>
+          ))}
         </div>
-      ))}
+      ) : (
+        <p>Your shopping cart is empty 🤕</p>
+      )}
     </div>
   );
 }

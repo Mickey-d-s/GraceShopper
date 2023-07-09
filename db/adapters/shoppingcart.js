@@ -20,7 +20,7 @@ async function createShoppingCarts({ status, user_id }) {
 }
 
 // not sure if we need a full crud but will do so just in case
-async function deleteshoppingcartbyuserid({ user_id }) {
+async function deleteShoppingCartByUserId({ user_id }) {
   try {
     //untested
     console.log(user_id);
@@ -38,7 +38,7 @@ async function deleteshoppingcartbyuserid({ user_id }) {
   }
 }
 
-async function updateshoppingcart({ user_id, updateObj }) {
+async function updateShoppingCart({ user_id, updateObj }) {
   try {
     //untested
     console.log(user_id);
@@ -59,19 +59,40 @@ async function updateshoppingcart({ user_id, updateObj }) {
     `,
       Object.values(updateObj)
     );
+    return shoppingCart;
   } catch (error) {
     throw error;
   }
 }
-async function getshoppingcartbyuserid(user_id) {
+
+async function getShoppingCartByUserId(user_id) {
   try {
     const {
       rows: [shoppingCart],
     } = await client.query(
       `
-      SELECT * 
-      FROM shoppingcarts
-      WHERE shoppingcarts.user_id = $1 AND status = 'pending'
+      SELECT
+      shoppingcarts.shoppingcart_id AS shoppingcart_id,
+      shoppingcarts.status AS status,
+      shoppingcarts.user_id AS user_id,
+      COALESCE(JSON_AGG(
+        JSON_BUILD_OBJECT(
+          'item_id', cart_items.item_id,
+          'product_id', products.product_id,
+          'name', products.product_name,
+          'qty', cart_items.count,
+          'price', products.price
+        )
+      ), '[]'::json) AS products
+    FROM
+      shoppingcarts
+      LEFT JOIN cart_items ON shoppingcarts.shoppingcart_id = cart_items.shoppingcart_id
+      LEFT JOIN products ON products.product_id = cart_items.product_id
+    WHERE
+      shoppingcarts.user_id = $1
+      AND shoppingcarts.status = 'pending'
+    GROUP BY
+      shoppingcarts.shoppingcart_id, shoppingcarts.status, shoppingcarts.user_id
     `,
       [user_id]
     );
@@ -108,32 +129,51 @@ GROUP BY shoppingcarts.shoppingcart_id, shoppingcarts.user_id, shoppingcarts.sta
     console.log("Error in getting the Shopping Cart by User Id:", error);
     throw error;
   }
-
-  // async function getShoppingCartById(shoppingcart_id) {
-  //   try {
-  //     const {
-  //       rows: [shoppingCart],
-  //     } = await client.query(
-  //       `
-  //     SELECT *
-  //     FROM shoppingcarts
-  //     WHERE shoppingcart_id = $1;
-  //   `,
-  //       [shoppingCart]
-  //     );
-  //     return shoppingcart_id;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
 }
+async function updateShoppingStatus(user_id) {
+  try {
+    // Update the status from 'pending' to 'completed'
+    await client.query(
+      `
+      UPDATE shoppingcarts
+      SET status = 'completed'
+      WHERE user_id = $1
+        AND status = 'pending'
+      RETURNING *
+    `,
+      [user_id]
+    );
+
+    console.log("Shopping status updated successfully!");
+  } catch (error) {
+    console.log("Error updating shopping status:", error);
+  }
+}
+
+// async function getShoppingCartById(shoppingcart_id) {
+//   try {
+//     const {
+//       rows: [shoppingCart],
+//     } = await client.query(
+//       `
+//       SELECT *
+//       FROM shoppingcarts
+//       WHERE shoppingcart_id = $1;
+//     `,
+//       [shoppingCart]
+//     );
+//     return shoppingcart_id;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
 module.exports = {
   createShoppingCarts,
-  deleteshoppingcartbyuserid,
-  updateshoppingcart,
-  getshoppingcartbyuserid,
+  deleteShoppingCartByUserId,
+  updateShoppingCart,
+  getShoppingCartByUserId,
   //getShoppingCartById,
   getAllOrdersByUserId,
+  updateShoppingStatus,
 };
-

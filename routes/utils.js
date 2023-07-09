@@ -18,8 +18,9 @@ const authRequired = (req, res, next) => {
 
 const checkForAdmin = (req, res, next) => {
   try {
-    const { user } = req;
-    if (user.is_admin) {
+    console.log(req.user);
+    console.log(req.user.adm);
+    if (req.user.adm) {
       next();
     }
   } catch (error) {
