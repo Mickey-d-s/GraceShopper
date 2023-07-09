@@ -105,23 +105,30 @@ async function getShoppingCartByUserId(user_id) {
 async function getAllOrdersByUserId(user_id) {
   try {
     const { rows: shoppingCart } = await client.query(
-      `SELECT shoppingcarts.shoppingcart_id AS shoppingcart_id, shoppingcarts.user_id AS user_id, shoppingcarts.status AS status,
-COALESCE(
-    JSON_AGG(
-        JSON_BUILD_OBJECT (
-        'item_id', cart_items.item_id,
-        'product_id', products.product_id,
-        'name', products.product_name,
-        'qty', cart_items.count,
-        'price', products.price
+      `
+      SELECT
+      shoppingcarts.shoppingcart_id AS shoppingcart_id,
+      shoppingcarts.status AS status,
+      shoppingcarts.user_id AS user_id,
+      COALESCE(JSON_AGG(
+        JSON_BUILD_OBJECT(
+          'item_id', cart_items.item_id,
+          'product_id', products.product_id,
+          'name', products.product_name,
+          'qty', cart_items.count,
+          'price', products.price
         )
-    )::json,
-    '[]'::json
-) AS products
-FROM shoppingcarts
-LEFT JOIN cart_items ON shoppingcarts.shoppingcart_id = cart_items.shoppingcart_id
-LEFT JOIN products ON cart_items.product_id = products.product_id
-GROUP BY shoppingcarts.shoppingcart_id, shoppingcarts.user_id, shoppingcarts.status;`,
+      ), '[]'::json) AS products
+    FROM
+      shoppingcarts
+      LEFT JOIN cart_items ON shoppingcarts.shoppingcart_id = cart_items.shoppingcart_id
+      LEFT JOIN products ON products.product_id = cart_items.product_id
+    WHERE
+      shoppingcarts.user_id = $1
+      AND shoppingcarts.status = 'completed'
+    GROUP BY
+      shoppingcarts.shoppingcart_id, shoppingcarts.status, shoppingcarts.user_id
+    `,
       [user_id]
     );
     return shoppingCart;

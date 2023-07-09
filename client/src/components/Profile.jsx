@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Profile() {
   const [shoppingCarts, setShoppingCarts] = useState([]);
   const [user] = useState(useAuth());
-
+  console.log("user", user);
   // NOT FINISHED
   // get all shopping carts related to user_id
   // AND list all of the cart items related to each specific shoppingcart_id
@@ -15,7 +15,7 @@ export default function Profile() {
     async function fetchShoppingCarts() {
       try {
         const fetchedShoppingCarts = await fetchAllOrdersForUser(user.user_id);
-        setShoppingCarts(fetchedShoppingCarts.products);
+        setShoppingCarts(fetchedShoppingCarts);
       } catch (error) {
         console.log(error);
       }
@@ -26,28 +26,26 @@ export default function Profile() {
   return (
     <>
       <div className="profilePage">
-        <h1 className="userHeader">Welcome, {user.username}!</h1>
+        <h1 className="userHeader">Welcome, {user.user.username}!</h1>
         <div className="userInfo">
           <u>USER INFO</u>
-          <br></br>
-          <Link to={`/Nav/orderhistory/${user.username}`}>Order History</Link>
-          <br></br>
-          to={`/Nav/WHATEVER WE WANT TO ADD/${user.username}`}
+          <div>{user.user.username}</div>
+          <hr></hr>
           <div className="orderhistory">
             <h2> Order History</h2>
             <h3 className="historyProducts">Your Recent Purchased Items</h3>
             <ul className="history"></ul>
-            {shoppingCarts.map((item) => (
+            {/* {shoppingCarts.map((item) => (
               <div key={item.item_id}>
                 <p>{item.name}</p>
-                <p>Qty: {item.qty}</p>
-                {/* add on click to edit qty that
+                <p>Qty: {item.qty}</p> */}
+            {/* add on click to edit qty that
                deletes if qty is changed to 0*/}
-                {/* should update if qty is >1 */}
-                <button>Edit Qty</button>
+            {/* should update if qty is >1 */}
+            {/* <button>Edit Qty</button>
                 <p>Cost Per Item: {item.price}</p>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
