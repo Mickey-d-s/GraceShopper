@@ -3,7 +3,6 @@ import { createShoppingCart, completeOrder } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import Nav from "./Nav";
 
 const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
 
@@ -24,7 +23,7 @@ export default function StartOrder() {
         console.log("User already has a shopping cart.");
         return;
       }
-      // Create a new shopping cart
+      // Create a new shopping cart if no cart exists
       const createdOrder = await createShoppingCart({
         status: "pending",
         user_id: user.user_id,
@@ -62,7 +61,6 @@ export default function StartOrder() {
       setShoppingCart([]);
       localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
       localStorage.setItem("cartItems", "[]");
-
       //edits inventory qty by how much was ordered
     } catch (error) {
       console.error("Error completing shopping cart:", error);
