@@ -2,25 +2,29 @@ import { useContext, useState, useEffect } from "react";
 import { createShoppingCart, completeOrder } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   async function startShopping() {
     try {
-      // Does the user have a cart already??????
-      // If the user does not have a cart:
+      // Check if the user already has a shopping cart
+      if (shoppingCart.length > 0) {
+        console.log("User already has a shopping cart.");
+        return;
+      }
+      // Create a new shopping cart
       const createdOrder = await createShoppingCart({
         status: "pending",
         user_id: user.user_id,
       });
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
-      // navigate("/Menu");
+      navigate("/Menu");
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +59,9 @@ export default function StartOrder() {
   return (
     <div>
       <div id="orderButtons">
-        <button onClick={() => startShopping()}>Start Order</button>
+        <button id="startShopping" onClick={() => startShopping()}>
+          Start Order
+        </button>
         <button onClick={() => checkout()}>Checkout</button>
         <button>Cancel Order</button>
       </div>
