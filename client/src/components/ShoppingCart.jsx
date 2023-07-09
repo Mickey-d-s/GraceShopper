@@ -3,6 +3,7 @@ import { createShoppingCart, completeOrder } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Nav from "./Nav";
 
 const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
 
@@ -43,6 +44,7 @@ export default function StartOrder() {
       try {
         const result = await getUserShoppingCart();
         setShoppingCart(result.products);
+        localStorage.setItem("cartItems", JSON.stringify(result.products));
       } catch (error) {
         console.error("Error fetching shopping cart:", error);
       }
@@ -59,6 +61,8 @@ export default function StartOrder() {
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
       localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
+      localStorage.setItem("cartItems", "[]");
+
       //edits inventory qty by how much was ordered
     } catch (error) {
       console.error("Error completing shopping cart:", error);

@@ -11,6 +11,17 @@ const Nav = () => {
   const navigate = useNavigate();
   console.log("loggedIn", loggedIn);
 
+  const getCartItemCount = () => {
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      const parsedCartItems = JSON.parse(cartItems);
+      return parsedCartItems.length;
+    }
+    return 0;
+  };
+
+  const cartItemCount = getCartItemCount();
+
   async function handleLogout() {
     await logout();
     setLoggedIn(!loggedIn);
@@ -35,7 +46,7 @@ const Nav = () => {
             <Link to="/shoppingcart">Shopping Cart</Link>
             <div className="cart">
               <i className="bi bi-cart3"></i>
-              <div className="cartAmount">0</div>
+              <div className="cartAmount">{cartItemCount}</div>
             </div>
           </div>
         </>
