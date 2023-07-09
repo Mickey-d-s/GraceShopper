@@ -11,7 +11,7 @@ const {
   getUserByUserid,
   updateuser,
 } = require("../db/adapters/users");
-const { authRequired } = require("./utils");
+const { authRequired, checkForAdmin } = require("./utils");
 
 usersRouter.get("/", async (req, res, next) => {
   try {
@@ -119,14 +119,14 @@ usersRouter.get("/logout", async (req, res, next) => {
 });
 usersRouter.patch("/update/:id", async (req, res, next) => {
   try {
-    const { userid } = req.params.id;
-    const { adm } = req.body;
-    adm = updateObj;
-    const user = await getUserByUserid(+userid);
-    const updateduser = await updateuser(+userid, updateObj);
-    res.send({ success, updateduser });
+    console.log("req.body", req.body);
+    let userid = req.params.id;
+    const updateduser = await updateuser(+userid, req.body);
+    const { success, message, updatedUser } = updateduser;
+
+    res.send({ success, message, updatedUser });
   } catch (error) {
-    throw error;
+    next(error);
   }
 });
 
@@ -135,6 +135,6 @@ usersRouter.get("/me", authRequired, async (req, res, next) => {
   // query the db and get the cartid via userid (req.user.id)
   res.send({ success: true, message: "you are authorized", user: req.user });
 });
-// write a /me route! that sends the req.use....
+// // write a /me route! that sends the req.use....
 
 module.exports = usersRouter;

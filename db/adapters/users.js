@@ -106,12 +106,12 @@ async function updateuser(id, updateObj) {
       })
       .join(", ");
     const {
-      rows: [updatedRoutine],
+      rows: [updatedUser],
     } = await client.query(
       `
         update users
           set ${setString}
-          where id = ${id}
+          where user_id = ${id}
           returning *
       `,
       Object.values(updateObj)
@@ -119,7 +119,7 @@ async function updateuser(id, updateObj) {
     console.log("update keys", Object.keys(updateObj));
     console.log("obj values", Object.values(updateObj));
     console.log("set string", setString);
-    return updatedRoutine;
+    return { success: true, message: "user updated", updatedUser };
   } catch (error) {
     throw error;
   }

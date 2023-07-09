@@ -9,7 +9,6 @@ export function Dashboard() {
       <>
         <Dashboardnav></Dashboardnav>
         <Outlet />
-        <h1>test</h1>
       </>
     );
   } catch (error) {
