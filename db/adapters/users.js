@@ -30,6 +30,26 @@ async function getAllUsers() {
   `);
   return rows;
 }
+
+async function getUserByUserid(userid) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+        SELECT *
+        FROM users
+        WHERE user_id=$1;
+      `,
+      [userid]
+    );
+    console.log("user from getUserbyUserid:", user);
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function getUserByUsername(username) {
   try {
     const {
@@ -77,5 +97,39 @@ async function deleteUser(id) {
     console.log(error);
   }
 }
+async function updateuser(id, updateObj) {
+  try {
+    //works
+    const setString = Object.keys(updateObj)
+      .map((key, i) => {
+        return `${key}=$${i + 1}`;
+      })
+      .join(", ");
+    const {
+      rows: [updatedUser],
+    } = await client.query(
+      `
+        update users
+          set ${setString}
+          where user_id = ${id}
+          returning *
+      `,
+      Object.values(updateObj)
+    );
+    console.log("update keys", Object.keys(updateObj));
+    console.log("obj values", Object.values(updateObj));
+    console.log("set string", setString);
+    return { success: true, message: "user updated", updatedUser };
+  } catch (error) {
+    throw error;
+  }
+}
 
-module.exports = { createUser, getAllUsers, getUserByUsername, getUserbytoken };
+module.exports = {
+  createUser,
+  getAllUsers,
+  getUserByUsername,
+  getUserbytoken,
+  getUserByUserid,
+  updateuser,
+};
