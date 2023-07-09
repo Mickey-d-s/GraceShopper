@@ -46,12 +46,14 @@ nav {
 
 @keyframes neonGlow {
   0% {
-    text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00,
+    box-shadow: 0 0 5px #ffff00;
+    text-shadow: 0 0 0px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00,
       0 0 40px #ffff00, 0 0 70px #ffff00, 0 0 80px #ffff00, 0 0 100px #ffff00,
       0 0 150px #ffff00;
   }
   100% {
-    text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 20px #ffff00,
+    box-shadow: 0 0 20px 10px #ffff00;
+    text-shadow: 0 0 0px #ffff00, 0 0 10px #ffff00, 0 0 20px #ffff00,
       0 0 30px #ffff00, 0 0 40px #ffff00, 0 0 50px #ffff00, 0 0 60px #ffff00,
       0 0 70px #ffff00;
   }
