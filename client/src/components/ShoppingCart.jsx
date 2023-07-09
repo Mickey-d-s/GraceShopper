@@ -4,10 +4,16 @@ import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
+const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
+
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCartCreated, setShoppingCartCreated] = useState(
+    localStorage.getItem(SHOPPING_CART_CREATED_KEY) === "true"
+  );
+
   let navigate = useNavigate();
 
   async function startShopping() {
@@ -24,6 +30,8 @@ export default function StartOrder() {
       });
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
+      setShoppingCartCreated(true);
+      localStorage.setItem(SHOPPING_CART_CREATED_KEY, "true");
       navigate("/Menu");
     } catch (error) {
       console.log(error);
@@ -50,6 +58,7 @@ export default function StartOrder() {
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
+      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
       //edits inventory qty by how much was ordered
     } catch (error) {
       console.error("Error completing shopping cart:", error);
@@ -59,11 +68,17 @@ export default function StartOrder() {
   return (
     <div>
       <div id="orderButtons">
-        <button id="startShopping" onClick={() => startShopping()}>
-          Start Order
-        </button>
-        <button onClick={() => checkout()}>Checkout</button>
-        <button>Cancel Order</button>
+        {!shoppingCartCreated && (
+          <button id="startShopping" onClick={() => startShopping()}>
+            Start Order
+          </button>
+        )}
+        {shoppingCartCreated && (
+          <>
+            <button onClick={() => checkout()}>Checkout</button>
+            <button>Cancel Order</button>
+          </>
+        )}
       </div>
       {shoppingCart.length > 0 ? (
         <div>
@@ -80,7 +95,7 @@ export default function StartOrder() {
           ))}
         </div>
       ) : (
-        <p>Your shopping cart is empty.</p>
+        <p>Your shopping cart is empty 🤕</p>
       )}
     </div>
   );

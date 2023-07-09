@@ -16,6 +16,51 @@ nav {
   display: flex;
 }
 
+#startShopping {
+  background-color: #111111;
+  color: #ffff00;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#startShopping:hover {
+  background-color: #222222;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#startShopping:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+@keyframes neonGlow {
+  0% {
+    text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00, 0 0 30px #ffff00,
+      0 0 40px #ffff00, 0 0 70px #ffff00, 0 0 80px #ffff00, 0 0 100px #ffff00,
+      0 0 150px #ffff00;
+  }
+  100% {
+    text-shadow: 0 0 5px #ffff00, 0 0 10px #ffff00, 0 0 20px #ffff00,
+      0 0 30px #ffff00, 0 0 40px #ffff00, 0 0 50px #ffff00, 0 0 60px #ffff00,
+      0 0 70px #ffff00;
+  }
+}
+
+#startShopping {
+  animation: neonGlow 1s infinite alternate;
+}
+
 .count-button {
   background-color: darkgrey;
   border: none;
