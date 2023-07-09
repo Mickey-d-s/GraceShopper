@@ -26,7 +26,7 @@ export default function allUsers() {
   }
   return (
     <div>
-      <h2>Users</h2>
+      <h2>Users in database</h2>
       {users.map((user) => (
         <div key={user.user_id} className="users">
           <p>User Id: {user.user_id}</p>
