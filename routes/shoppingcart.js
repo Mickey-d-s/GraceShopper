@@ -78,18 +78,18 @@ shoppingCartsRouter.delete("/id", authRequired, async (req, res, next) => {
   }
 });
 
-shoppingCartsRouter.get("/user/order-history", async (req, res, next) => {
-  try {
-    const orders = await getAllOrdersByUserId(req.user.user_id);
-    res.send({
-      success: true,
-      message: "All My Orders ",
-      orders: orders,
-    });
-  } catch ({ error }) {
-    next({ error });
+shoppingCartsRouter.get(
+  "/user/order-history",
+  authRequired,
+  async (req, res, next) => {
+    try {
+      const orders = await getAllOrdersByUserId(req.user.user_id);
+      res.send(orders);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // call your get db adapter
 // if the user is logged in the user id is off the req.user

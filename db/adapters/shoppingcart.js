@@ -137,6 +137,7 @@ async function getAllOrdersByUserId(user_id) {
     throw error;
   }
 }
+
 async function updateShoppingStatus(user_id) {
   try {
     // Update the status from 'pending' to 'completed'

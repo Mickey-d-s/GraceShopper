@@ -1,20 +1,17 @@
-import useAuth from "../components/hooks/useAuth";
-import { useState, useEffect } from "react";
+import { AuthContext } from "./auth/AuthProvider";
+import { useState, useEffect, useContext } from "react";
 import { fetchAllOrdersForUser } from "../api/profile";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
   const [shoppingCarts, setShoppingCarts] = useState([]);
-  const [user] = useState(useAuth());
-  console.log("user", user);
+  const { user } = useContext(AuthContext);
   // NOT FINISHED
-  // get all shopping carts related to user_id
-  // AND list all of the cart items related to each specific shoppingcart_id
-  // in order of groups
+
   useEffect(() => {
     async function fetchShoppingCarts() {
       try {
-        const fetchedShoppingCarts = await fetchAllOrdersForUser(user.user_id);
+        const fetchedShoppingCarts = await fetchAllOrdersForUser();
         setShoppingCarts(fetchedShoppingCarts);
       } catch (error) {
         console.log(error);
@@ -26,26 +23,26 @@ export default function Profile() {
   return (
     <>
       <div className="profilePage">
-        <h1 className="userHeader">Welcome, {user.user.username}!</h1>
+        <h1 className="userHeader">Welcome, {user.username}!</h1>
         <div className="userInfo">
           <u>USER INFO</u>
-          <div>{user.user.username}</div>
+          <div>{user.username}</div>
           <hr></hr>
           <div className="orderhistory">
             <h2> Order History</h2>
             <h3 className="historyProducts">Your Recent Purchased Items</h3>
-            <ul className="history"></ul>
-            {/* {shoppingCarts.map((item) => (
-              <div key={item.item_id}>
-                <p>{item.name}</p>
-                <p>Qty: {item.qty}</p> */}
-            {/* add on click to edit qty that
-               deletes if qty is changed to 0*/}
-            {/* should update if qty is >1 */}
-            {/* <button>Edit Qty</button>
-                <p>Cost Per Item: {item.price}</p>
+            {shoppingCarts.map((shoppingCart) => (
+              <div key={shoppingCart.shoppingcart_id}>
+                <h2>Order No. {shoppingCart.shoppingcart_id}</h2>
+                {shoppingCart.products.map((item) => (
+                  <div key={item.item_id}>
+                    <h4>{item.name}</h4>
+                    <p>Qty: {item.qty}</p>
+                    <p>Cost Per Item: ${item.price}</p>
+                  </div>
+                ))}
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>

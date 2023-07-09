@@ -37,19 +37,6 @@ export default function StartOrder() {
       console.log(error);
     }
   }
-  async function orderHistory() {
-    try {
-      const userHistory = await getAllOrdersByUserId({
-        user_id: user.user_id,
-        status: "pending",
-      });
-      console.log("created order histroy", userHistory);
-      setHistory(userHistory);
-    } catch (error) {
-      console.log("Error fetching orders it NO WORK", error);
-    }
-  }
-  orderHistory();
 
   useEffect(() => {
     const fetchShoppingCart = async () => {

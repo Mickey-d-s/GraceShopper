@@ -97,7 +97,6 @@ export default function allProducts() {
                       +
                     </button>
                   </div>
-
                   <button
                     id="addToCartButton"
                     onClick={() =>
