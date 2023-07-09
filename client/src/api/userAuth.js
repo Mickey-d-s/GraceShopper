@@ -75,3 +75,34 @@ export async function fetchMe() {
   }
   return { success, message, user };
 }
+
+export async function fetchuserbyid(userid) {
+  const response = await fetch(`/api/users/test/${userid}`);
+  const { success, message, user } = await response.json();
+  console.log("inside getuserbyid-api", { success, message, user });
+  if (!success) {
+    throw { message };
+  }
+  return { success, message, user };
+}
+
+export async function updateuser(updateObj, userid) {
+  try {
+    console.log("both user and object in api", { updateObj, userid });
+    let adm = updateObj;
+    const response = await fetch(`/api/users/update/${userid}`, {
+      method: "PATCH",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        adm,
+      }),
+    });
+    const results = response.JSON;
+    console.log("results", results);
+    console.log("response", response);
+
+    return;
+  } catch (error) {
+    throw error;
+  }
+}

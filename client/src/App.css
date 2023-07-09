@@ -9,6 +9,11 @@ nav {
   padding-left: 2rem;
   padding-right: 1rem;
 }
+.users {
+  display: inline-table;
+  margin: 1%;
+  border: black solid 1px;
+}
 .Link {
   margin: auto;
 }
