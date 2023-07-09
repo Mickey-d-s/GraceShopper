@@ -3,7 +3,7 @@ import { createShoppingCart, completeOrder } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 // import { useNavigate } from "react-router-dom";
-// big word
+
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
@@ -16,7 +16,7 @@ export default function StartOrder() {
       // If the user does not have a cart:
       const createdOrder = await createShoppingCart({
         status: "pending",
-        user_id: user.user_id, // Access the user_id from the user object
+        user_id: user.user_id,
       });
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
@@ -38,14 +38,17 @@ export default function StartOrder() {
     fetchShoppingCart();
   }, []);
 
+  //Delete function item from cart_items inside of shopping cart
+  //Update function QTY of item inside of shopping cart
+
   const checkout = async () => {
     try {
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
+      //edits inventory qty by how much was ordered
     } catch (error) {
       console.error("Error completing shopping cart:", error);
-      // Handle the error
     }
   };
 
@@ -62,6 +65,10 @@ export default function StartOrder() {
             <div key={item.item_id}>
               <p>{item.name}</p>
               <p>Qty: {item.qty}</p>
+              {/* add on click to edit qty that
+               deletes if qty is changed to 0*/}
+              {/* should update if qty is >1 */}
+              <button>Edit Qty</button>
               <p>Cost Per Item: {item.price}</p>
             </div>
           ))}
