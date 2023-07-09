@@ -8,30 +8,21 @@ import {
 export default function allProducts() {
   const [products, setProducts] = useState([]);
   const [cart_id, setShoppingCartId] = useState(null);
+  const [counts, setCounts] = useState({});
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function fetchData() {
       try {
         const fetchedProducts = await fetchAllProducts();
         setProducts(fetchedProducts);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchProducts();
-  }, []);
 
-  useEffect(() => {
-    const fetchShoppingCartId = async () => {
-      try {
         const result = await getUserShoppingCart();
         setShoppingCartId(result.shoppingcart_id);
       } catch (error) {
         console.error(error);
       }
-    };
-
-    fetchShoppingCartId();
+    }
+    fetchData();
   }, []);
 
   const addToCart = async (shoppingcart_id, product_id, count) => {
@@ -41,7 +32,11 @@ export default function allProducts() {
         const cartItem = await addItemToCart({
           shoppingcart_id,
           product_id,
-          count,
+          count: count || 1,
+        });
+        setCounts({
+          ...counts,
+          [product_id]: 1, // Reset the count to 1 after adding to cart
         });
         return cartItem;
       } catch (error) {
@@ -67,12 +62,56 @@ export default function allProducts() {
           <h1>{category}</h1>
           {products.map((product) => (
             <div className="menu" key={product.product_id}>
-              <h3 className="dah2">{product.product_name}</h3>
-              <p>Price: ${product.price}</p>
-              <p>Description: {product.description}</p>
-              <button onClick={() => addToCart(cart_id, product.product_id, 1)}>
-                Add to Cart
-              </button>{" "}
+              <h3 className="productName">{product.product_name}</h3>
+              <div className="productCard">
+                <p>{product.description}</p>
+                <p>${product.price}</p>
+                <div>
+                  <div>
+                    <button
+                      className="count-button"
+                      onClick={() => {
+                        const currentCount = counts[product.product_id] || 1;
+                        setCounts({
+                          ...counts,
+                          [product.product_id]:
+                            currentCount > 1 ? currentCount - 1 : 1,
+                        });
+                      }}
+                    >
+                      -
+                    </button>
+                    <span className="count">
+                      {counts[product.product_id] || 1}
+                    </span>
+                    <button
+                      className="count-button"
+                      onClick={() => {
+                        const currentCount = counts[product.product_id] || 1;
+                        setCounts({
+                          ...counts,
+                          [product.product_id]: currentCount + 1,
+                        });
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    id="addToCartButton"
+                    onClick={() =>
+                      addToCart(
+                        cart_id,
+                        product.product_id,
+                        counts[product.product_id] || 1
+                      )
+                    }
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>

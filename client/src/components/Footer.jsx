@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import gucci from "../assets/gucci.jpg";
 
 function Footer() {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
     <footer>
       <h1
@@ -22,9 +32,18 @@ function Footer() {
             Franchise info
           </li>
           <li>
-            <a href="#" />
-            Radric Delantic Davis aka Gucci Mane
+            <a href="#" onClick={openPopup}>
+              Radric Delantic Davis aka Gucci Mane
+            </a>
           </li>
+          {showPopup && (
+            <div className="popup-overlay">
+              <div className="popup-content">
+                <img src={gucci} alt="Gucci Mane" />
+                <button onClick={closePopup}>Close</button>
+              </div>
+            </div>
+          )}
         </div>
         <div className="flexfooter">
           <h1>Services</h1>

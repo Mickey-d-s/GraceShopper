@@ -2,25 +2,37 @@ import { useContext, useState, useEffect } from "react";
 import { createShoppingCart, completeOrder } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
 
 export default function StartOrder() {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
-  // let navigate = useNavigate();
+  const [shoppingCartCreated, setShoppingCartCreated] = useState(
+    localStorage.getItem(SHOPPING_CART_CREATED_KEY) === "true"
+  );
+
+  let navigate = useNavigate();
 
   async function startShopping() {
     try {
-      // Does the user have a cart already??????
-      // If the user does not have a cart:
+      // Check if the user already has a shopping cart
+      if (shoppingCart.length > 0) {
+        console.log("User already has a shopping cart.");
+        return;
+      }
+      // Create a new shopping cart
       const createdOrder = await createShoppingCart({
         status: "pending",
-        user_id: user.user_id, // Access the user_id from the user object
+        user_id: user.user_id,
       });
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
-      // navigate("/Menu");
+      setShoppingCartCreated(true);
+      localStorage.setItem(SHOPPING_CART_CREATED_KEY, "true");
+      navigate("/Menu");
     } catch (error) {
       console.log(error);
     }
@@ -38,23 +50,35 @@ export default function StartOrder() {
     fetchShoppingCart();
   }, []);
 
+  //Delete function item from cart_items inside of shopping cart
+  //Update function QTY of item inside of shopping cart
+
   const checkout = async () => {
     try {
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
+      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
+      //edits inventory qty by how much was ordered
     } catch (error) {
       console.error("Error completing shopping cart:", error);
-      // Handle the error
     }
   };
 
   return (
     <div>
       <div id="orderButtons">
-        <button onClick={() => startShopping()}>Start Order</button>
-        <button onClick={() => checkout()}>Checkout</button>
-        <button>Cancel Order</button>
+        {!shoppingCartCreated && (
+          <button id="startShopping" onClick={() => startShopping()}>
+            Start Order
+          </button>
+        )}
+        {shoppingCartCreated && (
+          <>
+            <button onClick={() => checkout()}>Checkout</button>
+            <button>Cancel Order</button>
+          </>
+        )}
       </div>
       {shoppingCart.length > 0 ? (
         <div>
@@ -62,12 +86,16 @@ export default function StartOrder() {
             <div key={item.item_id}>
               <p>{item.name}</p>
               <p>Qty: {item.qty}</p>
+              {/* add on click to edit qty that
+               deletes if qty is changed to 0*/}
+              {/* should update if qty is >1 */}
+              <button>Edit Qty</button>
               <p>Cost Per Item: {item.price}</p>
             </div>
           ))}
         </div>
       ) : (
-        <p>Your shopping cart is empty.</p>
+        <p>Your shopping cart is empty 🤕</p>
       )}
     </div>
   );
