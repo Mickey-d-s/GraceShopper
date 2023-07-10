@@ -13,22 +13,21 @@ import { Dashboard } from "./Dashboard/dashboard";
 import Inventory from "./Inventory";
 import Users from "./Users";
 
+const getCartItemCount = () => {
+  const cartItems = localStorage.getItem("cartItems");
+  if (cartItems) {
+    const parsedCartItems = JSON.parse(cartItems);
+    return parsedCartItems.length;
+  }
+  return 0;
+};
+
 function App() {
-  const [cartItemCount, setCartItemCount] = useState(
-    localStorage.getItem("cartItems")
-  );
-  const getCartItemCount = () => {
-    const cartItems = localStorage.getItem("cartItems");
-    if (cartItems) {
-      const parsedCartItems = JSON.parse(cartItems);
-      return parsedCartItems.length;
-    }
-    return 0;
-  };
-  const parsedItemCount = getCartItemCount();
+  const [cartItemCount, setCartItemCount] = useState(getCartItemCount());
+
   return (
     <div>
-      <Nav cartItemCount={parsedItemCount} />
+      <Nav cartItemCount={cartItemCount} />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/health" element={<HealthPage />} />
