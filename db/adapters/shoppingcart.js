@@ -38,10 +38,11 @@ async function deleteShoppingCartByUserId({ user_id }) {
   }
 }
 
-async function updateShoppingCart({ user_id, updateObj }) {
+async function updateShoppingCart({ userid, updateObj }) {
   try {
     //untested
-    console.log(user_id);
+    console.log(userid);
+    console.log(updateObj);
     const setString = Object.keys(updateObj)
 
       .map((key, i) => {
@@ -54,7 +55,7 @@ async function updateShoppingCart({ user_id, updateObj }) {
       `
       UPDATE shoppingcarts
       SET ${setString}
-      WHERE id = ${user_id}
+      WHERE user_id = ${userid}
       returning *
     `,
       Object.values(updateObj)
