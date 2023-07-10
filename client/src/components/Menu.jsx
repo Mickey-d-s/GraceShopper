@@ -5,7 +5,7 @@ import {
   getUserShoppingCart,
 } from "../api/menu";
 
-export default function allProducts() {
+export default function allProducts({ setCartItemCount }) {
   const [products, setProducts] = useState([]);
   const [cart_id, setShoppingCartId] = useState(null);
   const [counts, setCounts] = useState({});
@@ -38,6 +38,7 @@ export default function allProducts() {
           ...counts,
           [product_id]: 1, // Reset the count to 1 after adding to cart
         });
+        setCartItemCount((state) => state + 1);
         return cartItem;
       } catch (error) {
         console.log("Failed to add item to cart:", error);

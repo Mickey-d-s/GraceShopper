@@ -6,21 +6,10 @@ import "../index.css";
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 
-const Nav = () => {
+const Nav = ({ cartItemCount }) => {
   const { setLoggedIn, loggedIn, user, setUser } = useAuth();
   const navigate = useNavigate();
   console.log("loggedIn", loggedIn);
-
-  const getCartItemCount = () => {
-    const cartItems = localStorage.getItem("cartItems");
-    if (cartItems) {
-      const parsedCartItems = JSON.parse(cartItems);
-      return parsedCartItems.length;
-    }
-    return 0;
-  };
-
-  const cartItemCount = getCartItemCount();
 
   async function handleLogout() {
     await logout();
