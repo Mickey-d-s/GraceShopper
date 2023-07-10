@@ -19,7 +19,7 @@ const getCartItemCount = () => {
     const parsedCartItems = JSON.parse(cartItems);
     return parsedCartItems.length;
   }
-  return 0;
+  return 1;
 };
 
 function App() {

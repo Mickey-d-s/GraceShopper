@@ -80,7 +80,7 @@ export default function allProducts({ setCartItemCount }) {
                 <div>
                   {isInCart(product.product_id) ? (
                     // Display stuff if product is in cart
-                    <h1>fire</h1>
+                    <h4>ADDED TO CART</h4>
                   ) : (
                     // Don't display stuff if product is not in cart
                     <div>
