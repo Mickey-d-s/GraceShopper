@@ -101,7 +101,19 @@ export async function updateuser(updateObj, userid) {
     console.log("results", results);
     console.log("response", response);
 
-    return;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteuser(userid) {
+  try {
+    const response = await fetch(`/api/users/delete/${userid}`, {
+      method: "DELETE",
+    });
+    const results = response.JSON;
+    return results;
   } catch (error) {
     throw error;
   }

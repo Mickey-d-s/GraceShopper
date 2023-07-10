@@ -93,8 +93,9 @@ async function deleteUser(id) {
     `,
       [id]
     );
+    return { success: true, message: "user deleted" };
   } catch (error) {
-    console.log(error);
+    return { success: false, message: error };
   }
 }
 async function updateuser(id, updateObj) {
@@ -132,4 +133,5 @@ module.exports = {
   getUserbytoken,
   getUserByUserid,
   updateuser,
+  deleteUser,
 };

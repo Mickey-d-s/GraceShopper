@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // // import { useNavigate } from "react-router-dom";
 import { getAllUsers, updateuser } from "../api/userAuth";
-
+import { deleteuser } from "../api/userAuth";
 export default function allUsers() {
   const [users, setUsers] = useState([]);
   const [admin, setadmin] = useState(false);
@@ -24,6 +24,11 @@ export default function allUsers() {
     let updateObj = admin;
     await updateuser(updateObj, userid);
   }
+  async function handledelete(e, userid) {
+    e.preventDefault();
+    confirm("confirm deletion");
+    await deleteuser(userid);
+  }
   return (
     <div>
       <h2>Users</h2>
@@ -44,6 +49,10 @@ export default function allUsers() {
             onClick={(e) => handlesubmit(e, user.user_id)}
           >
             confirm update
+          </button>
+          <br />
+          <button onClick={(e) => handledelete(e, user.user_id)}>
+            delete user
           </button>
         </div>
       ))}

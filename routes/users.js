@@ -10,8 +10,10 @@ const {
   getUserByUsername,
   getUserByUserid,
   updateuser,
+  deleteUser,
 } = require("../db/adapters/users");
 const { authRequired, checkForAdmin } = require("./utils");
+const { updateShoppingCart } = require("../db/adapters/shoppingcart");
 
 usersRouter.get("/", async (req, res, next) => {
   try {
@@ -136,5 +138,15 @@ usersRouter.get("/me", authRequired, async (req, res, next) => {
   res.send({ success: true, message: "you are authorized", user: req.user });
 });
 // // write a /me route! that sends the req.use....
+
+usersRouter.delete("/delete/:id", authRequired, async (req, res, next) => {
+  let userid = +req.params.id;
+  console.log("userid", userid);
+  updateObj = { user_id: null };
+  const nullshopper = await updateShoppingCart({ userid, updateObj });
+  const deleteuser = await deleteUser(+userid);
+  const { success, message } = deleteuser;
+  res.send({ success, message });
+});
 
 module.exports = usersRouter;
