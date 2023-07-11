@@ -63,9 +63,17 @@ inventoriesRouter.delete(
   //  authRequired,
   async (req, res, next) => {
     try {
+      console.log(req.params);
       const { id } = req.params;
-      const deletedInventory = await deleteInventory(id);
-      res.send({ message: "Deleted order!" });
+      console.log(id);
+      const deletedInventory = await deleteInventory(+id);
+      const { success, message } = deletedInventory;
+      if (success) {
+        res.send({ success, message });
+      }
+      if (!success) {
+        res.send({ success, message });
+      }
     } catch (error) {
       next(error);
     }
