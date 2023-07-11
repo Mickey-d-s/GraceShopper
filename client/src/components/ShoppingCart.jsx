@@ -66,19 +66,6 @@ export default function StartOrder() {
       console.error("Error completing shopping cart:", error);
     }
   };
-  const totalPrice = shoppingCart.reduce(
-    (total, item) => total + item.qty * item.price,
-    0
-  );
-  const handleEditQty = (itemId, newQty) => {
-    const updatedCart = shoppingCart.map((item) => {
-      if (item.item_id === itemId) {
-        return { ...item, qty: newQty };
-      }
-      return item;
-    });
-    setShoppingCart(updatedCart);
-  };
 
   return (
     <div>
@@ -95,46 +82,20 @@ export default function StartOrder() {
           </>
         )}
       </div>
-      <div className="cart">
-        <h1> My Shopping Cart</h1>
-        <h2>Total Price: $ {totalPrice}</h2>
-        <br></br>
-        {shoppingCart.length > 0 ? (
-          <div>
-            {shoppingCart.map((item) => (
-              <div key={item.item_id}>
-                <p>{item.name}</p>
-                <p>Qty: {item.qty}</p>
-                {/* add on click to edit qty that
-               deletes if qty is changed to 0*/}
-                {/* should update if qty is >1 */}
-                <button
-                  onClick={() => handleEditQty(item.item_id, item.qty - 1)}
-                >
-                  {" "}
-                  -
-                </button>
-                <button onClick={() => handleEditQty(item.item_id, 0)}>
-                  Delete
-                </button>
-                <button
-                  onClick={() => handleEditQty(item.item_id, item.qty + 1)}
-                >
-                  {" "}
-                  +
-                </button>
-                <p>Cost Per Item: ${item.price}</p>
-                <p>Subtotal: ${item.price * item.qty}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>Your shopping cart is empty 🤕</p>
-        )}
-      </div>
+      {shoppingCart.length > 0 ? (
+        <div>
+          {shoppingCart.map((item) => (
+            <div key={item.item_id}>
+              <p>{item.name}</p>
+              <p>Qty: {item.qty}</p>
+              <button>Edit Qty</button>
+              <p>Cost Per Item: {item.price}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Your shopping cart is empty 🤕</p>
+      )}
     </div>
   );
-};
-
-
-
+}
