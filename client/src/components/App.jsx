@@ -17,9 +17,13 @@ const getCartItemCount = () => {
   const cartItems = localStorage.getItem("cartItems");
   if (cartItems) {
     const parsedCartItems = JSON.parse(cartItems);
-    return parsedCartItems.length;
+    console.log("parsedCartitems:", parsedCartItems);
+    return parsedCartItems.reduce((acc, curr) => {
+      acc += curr.qty;
+      return acc;
+    }, 0);
   }
-  return 1;
+  return 0;
 };
 
 function App() {
