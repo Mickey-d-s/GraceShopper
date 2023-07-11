@@ -20,3 +20,14 @@ export async function fetchAllInventories() {
     console.error(error);
   }
 }
+
+export async function deleteinventory(id) {
+  try {
+    const response = await fetch(`/api/products/${id}`, { method: "delete" });
+    console.log(response);
+    const results = response.json;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+}

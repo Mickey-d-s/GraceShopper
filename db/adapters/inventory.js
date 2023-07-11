@@ -63,11 +63,11 @@ async function deleteInventory(id) {
   const {
     rows: [inventory],
   } = await client.query(
-    `DELETE from inventories WHERE inventory_id=$1
+    `DELETE from inventories WHERE inventory_id = $1
   `,
     [id]
   );
-  return inventory;
+  return { success: true, message: "iventory deleted" };
 }
 module.exports = {
   createInventories,

@@ -76,23 +76,28 @@ async function updateProduct(
 }
 
 async function deleteProduct(product_id) {
-  await client.query(
-    `DELETE FROM inventories
-     WHERE product_id = $1`,
-    [product_id]
-  );
-  await client.query(
-    `DELETE FROM cart_items
-     WHERE product_id = $1`,
-    [product_id]
-  );
-  await client.query(
-    `DELETE FROM products
-     WHERE product_id = $1`,
-    [product_id]
-  );
+  console.log("ping");
+  try {
+    await client.query(
+      `DELETE FROM inventories 
+      WHERE product_id = $1`,
+      [product_id]
+    );
+    await client.query(
+      `DELETE FROM cart_items 
+    WHERE product_id = $1`,
+      [product_id]
+    );
+    await client.query(
+      `DELETE FROM products
+      WHERE product_id = $1`,
+      [product_id]
+    );
 
-  return;
+    return { sucess: true, message: "inventory item deleted" };
+  } catch (error) {
+    return { sucess: false, message: error };
+  }
 }
 
 module.exports = {
