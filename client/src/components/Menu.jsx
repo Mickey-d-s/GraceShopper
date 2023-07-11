@@ -19,7 +19,6 @@ export default function allProducts({ setCartItemCount }) {
   const [counts, setCounts] = useState({});
   const [insideCart, setInsideCart] = useState(false);
 
-  console.log("counts:", counts);
   useEffect(() => {
     async function fetchData() {
       try {
