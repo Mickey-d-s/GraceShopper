@@ -20,6 +20,30 @@ nav {
 .flex {
   display: flex;
 }
+.cart {
+  position: relative;
+  background-color: black;
+  color: yellow;
+  padding: 5px;
+  border-radius: 4px;
+}
+.cartAmount {
+  position: absolute;
+  top: -2px;
+  right: 30px;
+  font-size: 15px;
+  background-color: red;
+  padding: 1px;
+  border-radius: 1px;
+  color: white;
+  border-radius: 50%;
+  height: 1rem;
+  width: 1rem;
+}
+
+/* End Nav Bar */
+/* ---------------------------------------- */
+/* Shopping Cart Page */
 
 #startShopping {
   background-color: #111111;
@@ -38,17 +62,14 @@ nav {
   transition: background-color 0.3s ease;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 #startShopping:hover {
   background-color: #222222;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
 }
-
 #startShopping:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
-
 @keyframes neonGlow {
   0% {
     box-shadow: 0 0 5px #ffff00;
@@ -63,10 +84,13 @@ nav {
       0 0 70px #ffff00;
   }
 }
-
 #startShopping {
   animation: neonGlow 1s infinite alternate;
 }
+
+/* End Shopping Cart Page */
+/* ---------------------------------------- */
+/* Menu Page */
 
 .count-button {
   background-color: darkgrey;
@@ -82,14 +106,12 @@ nav {
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
-
 .count {
   display: inline-block;
   font-size: 16px;
   font-weight: bold;
   margin: 0 8px;
 }
-
 #addToCartButton {
   background-color: gold;
   border: none;
@@ -104,15 +126,12 @@ nav {
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
-
 .productName {
   color: white;
 }
-
 .productCard {
   color: white;
 }
-
 .menu {
   display: inline-table;
   grid-template-columns: repeat(4, 223px);
@@ -130,7 +149,6 @@ nav {
   background-size: 200% 100%;
   animation: gradientAnimation 10s ease infinite;
 }
-
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
@@ -143,23 +161,9 @@ nav {
   }
 }
 
-.cart {
-  position: relative;
-  background-color: black;
-  color: yellow;
-  padding: 5px;
-  border-radius: 4px;
-}
-.cartAmount {
-  position: absolute;
-  top: -2px;
-  right: 30px;
-  font-size: 15px;
-  background-color: red;
-  padding: 1px;
-  border-radius: 1px;
-  color: white;
-}
+/* End Menu Page */
+/* ---------------------------------------- */
+/* Home Page */
 
 .landertext {
   margin: 0;
@@ -175,7 +179,6 @@ a {
   display: inline-flex;
   flex-wrap: wrap;
 }
-
 .product {
   margin-bottom: 40%;
 }
@@ -194,7 +197,6 @@ a {
 #orderButtons {
   padding-top: 4rem;
 }
-
 #bigBurger2 {
   background-image: url(./assets/bigburger2.jpg);
   background-size: cover;
@@ -214,24 +216,27 @@ a {
   height: 200px;
   margin: 2%;
 }
-
 #bigBurger Img {
   width: 100%;
 }
-
 #textboxalign {
   margin-left: 12%;
 }
-
 body {
   margin: 0;
 }
-
 p {
   word-wrap: break-word;
 
   gap: 10px;
 }
+#dah2 {
+  margin: auto;
+}
+
+/* End Home Page */
+/* ---------------------------------------- */
+/* Footer */
 
 footer {
   display: flex;
@@ -247,15 +252,12 @@ footer {
   justify-content: center;
   list-style-type: none;
 }
-
 #listitems {
   display: flex;
 }
-
 .flexfooter {
   padding: 1rem;
 }
-
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -268,13 +270,11 @@ footer {
   justify-content: center;
   z-index: 9999;
 }
-
 .popup-content {
   position: relative;
   max-width: 90%;
   max-height: 90%;
 }
-
 .popup-image {
   position: absolute;
   top: 0;
@@ -284,7 +284,6 @@ footer {
   object-fit: contain;
   z-index: 99999;
 }
-
 .popup-content button {
   position: absolute;
   top: 10px;
@@ -292,12 +291,6 @@ footer {
   z-index: 999999;
   /* Add additional styling for the close button */
 }
-#dah2 {
-  margin: auto;
-}
 
-.cartAmount {
-  border-radius: 50%;
-  height: 1rem;
-  width: 1rem;
-}
+/* End Footer */
+/* ---------------------------------------- */
