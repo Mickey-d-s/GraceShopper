@@ -46,7 +46,10 @@ function App() {
           <Route path="inventory" element={<Inventory />}></Route>
           <Route path="users" element={<Users />}></Route>
         </Route>
-        <Route path="/shoppingcart" element={<ShoppingCart />} />
+        <Route
+          path="/shoppingcart"
+          element={<ShoppingCart setCartItemCount={setCartItemCount} />}
+        />
       </Routes>
       <Footer />
     </div>

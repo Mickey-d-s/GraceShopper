@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
 
-export default function StartOrder() {
+export default function StartOrder({ setCartItemCount }) {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -65,7 +65,9 @@ export default function StartOrder() {
       setShoppingCart([]);
       localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
       localStorage.setItem("cartItems", "[]");
+      localStorage.clear();
       //edits inventory qty by how much was ordered
+      setCartItemCount(0);
     } catch (error) {
       console.error("Error completing shopping cart:", error);
     }
@@ -88,6 +90,10 @@ export default function StartOrder() {
       const canceledShoppingCart = await cancelOrder();
       console.log("Canceled shopping cart:", canceledShoppingCart);
       setShoppingCart([]);
+      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
+      localStorage.setItem("cartItems", "[]");
+      localStorage.clear();
+      setCartItemCount(0);
     } catch (error) {
       console.error("Error canceling shopping cart:", error);
     }
