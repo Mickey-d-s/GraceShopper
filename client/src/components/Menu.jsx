@@ -24,7 +24,6 @@ export default function allProducts({ setCartItemCount }) {
       try {
         const fetchedProducts = await fetchAllProducts();
         setProducts(fetchedProducts);
-
         const result = await getUserShoppingCart();
         setShoppingCartId(result.shoppingcart_id);
       } catch (error) {
@@ -49,7 +48,10 @@ export default function allProducts({ setCartItemCount }) {
           [product_id]: 1, // Reset the count to 1 after adding to cart
         });
         setCartItemCount((state) => state + 1);
-        set;
+        setInsideCart((prevState) => ({
+          ...prevState,
+          [product_id]: true,
+        }));
         return cartItem;
       } catch (error) {
         console.log("Failed to add item to cart:", error);
@@ -78,8 +80,10 @@ export default function allProducts({ setCartItemCount }) {
               <div className="productCard">
                 <p>{product.description}</p>
                 <p>${product.price}</p>
+
                 <div>
-                  {isInCart(product.product_id) ? (
+                  {insideCart[product.product_id] ||
+                  isInCart(product.product_id) ? (
                     // Display stuff if product is in cart
                     <h4>ADDED TO CART</h4>
                   ) : (
