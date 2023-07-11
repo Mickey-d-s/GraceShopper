@@ -1,12 +1,16 @@
 import { useContext, useState, useEffect } from "react";
-import { createShoppingCart, completeOrder } from "../api/shoppingcart";
+import {
+  createShoppingCart,
+  completeOrder,
+  cancelOrder,
+} from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
 
-export default function StartOrder() {
+export default function StartOrder({ setCartItemCount }) {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -28,6 +32,7 @@ export default function StartOrder() {
         status: "pending",
         user_id: user.user_id,
       });
+      //if statement for guest user
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
       setShoppingCartCreated(true);
@@ -61,7 +66,9 @@ export default function StartOrder() {
       setShoppingCart([]);
       localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
       localStorage.setItem("cartItems", "[]");
+      localStorage.clear();
       //edits inventory qty by how much was ordered
+      setCartItemCount(0);
     } catch (error) {
       console.error("Error completing shopping cart:", error);
     }
@@ -79,6 +86,19 @@ export default function StartOrder() {
     });
     setShoppingCart(updatedCart);
   };
+  const cancelOrder = async () => {
+    try {
+      const canceledShoppingCart = await cancelOrder();
+      console.log("Canceled shopping cart:", canceledShoppingCart);
+      setShoppingCart([]);
+      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
+      localStorage.setItem("cartItems", "[]");
+      localStorage.clear();
+      setCartItemCount(0);
+    } catch (error) {
+      console.error("Error canceling shopping cart:", error);
+    }
+  };
 
   return (
     <div>
@@ -91,7 +111,7 @@ export default function StartOrder() {
         {shoppingCartCreated && (
           <>
             <button onClick={() => checkout()}>Checkout</button>
-            <button>Cancel Order</button>
+            <button onClick={() => cancelOrder()}>Cancel Order</button>
           </>
         )}
       </div>
@@ -132,7 +152,4 @@ export default function StartOrder() {
       </div>
     </div>
   );
-};
-
-
-
+}
