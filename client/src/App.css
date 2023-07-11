@@ -295,3 +295,9 @@ footer {
 #dah2 {
   margin: auto;
 }
+
+.cartAmount {
+  border-radius: 50%;
+  height: 1rem;
+  width: 1rem;
+}

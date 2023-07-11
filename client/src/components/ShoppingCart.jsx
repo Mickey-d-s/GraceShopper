@@ -23,7 +23,7 @@ export default function StartOrder() {
         console.log("User already has a shopping cart.");
         return;
       }
-      // Create a new shopping cart
+      // Create a new shopping cart if no cart exists
       const createdOrder = await createShoppingCart({
         status: "pending",
         user_id: user.user_id,
@@ -43,6 +43,7 @@ export default function StartOrder() {
       try {
         const result = await getUserShoppingCart();
         setShoppingCart(result.products);
+        localStorage.setItem("cartItems", JSON.stringify(result.products));
       } catch (error) {
         console.error("Error fetching shopping cart:", error);
       }
@@ -59,6 +60,7 @@ export default function StartOrder() {
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
       localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
+      localStorage.setItem("cartItems", "[]");
       //edits inventory qty by how much was ordered
     } catch (error) {
       console.error("Error completing shopping cart:", error);
@@ -86,9 +88,6 @@ export default function StartOrder() {
             <div key={item.item_id}>
               <p>{item.name}</p>
               <p>Qty: {item.qty}</p>
-              {/* add on click to edit qty that
-               deletes if qty is changed to 0*/}
-              {/* should update if qty is >1 */}
               <button>Edit Qty</button>
               <p>Cost Per Item: {item.price}</p>
             </div>

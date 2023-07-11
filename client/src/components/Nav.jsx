@@ -6,7 +6,7 @@ import "../index.css";
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 
-const Nav = () => {
+const Nav = ({ cartItemCount }) => {
   const { setLoggedIn, loggedIn, user, setUser } = useAuth();
   const navigate = useNavigate();
   console.log("loggedIn", loggedIn);
@@ -35,7 +35,7 @@ const Nav = () => {
             <Link to="/shoppingcart">Shopping Cart</Link>
             <div className="cart">
               <i className="bi bi-cart3"></i>
-              <div className="cartAmount">0</div>
+              <div className="cartAmount">{cartItemCount}</div>
             </div>
           </div>
         </>
