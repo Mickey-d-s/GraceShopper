@@ -46,9 +46,10 @@ export default function allProducts({ setCartItemCount }) {
         });
         setCounts({
           ...counts,
-          [product_id]: 0, // Reset the count to 1 after adding to cart
+          [product_id]: 1, // Reset the count to 1 after adding to cart
         });
         setCartItemCount((state) => state + 1);
+        set;
         return cartItem;
       } catch (error) {
         console.log("Failed to add item to cart:", error);
