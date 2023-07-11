@@ -38,6 +38,7 @@ productsRouter.get("/", async (req, res, next) => {
 
 productsRouter.get("/:id", async (req, res, next) => {
   try {
+    console.log("ping");
     const SingleProduct = await getProductById(req.params.id);
     console.log("Get product by id", SingleProduct);
     res.send(SingleProduct);
@@ -66,18 +67,17 @@ productsRouter.patch(
   }
 );
 
-productsRouter.delete(
-  "/:product_id",
-  authRequired && checkForAdmin,
-  async (req, res, next) => {
-    try {
-      const product_id = req.params.product_id;
-      const deletedProduct = await deleteProduct(product_id);
-      res.send(deletedProduct);
-    } catch (error) {
-      next(error);
-    }
+productsRouter.delete("/:product_id", authRequired, async (req, res, next) => {
+  try {
+    console.log("ping");
+    const product_id = req.params.product_id;
+    const deletedProduct = await deleteProduct(product_id);
+    const { sucess, message } = deletedProduct;
+    console.log(sucess, message);
+    res.send({ sucess, message });
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 module.exports = productsRouter;
