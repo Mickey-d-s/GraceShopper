@@ -50,7 +50,6 @@ export default function allProducts({ setCartItemCount }) {
         });
         setCartItemCount((state) => state + 1);
         setInsideCart(isInCart(product_id), true);
-        setInsideCart(true);
         return cartItem;
       } catch (error) {
         console.log("Failed to add item to cart:", error);
