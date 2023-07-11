@@ -32,6 +32,7 @@ export default function StartOrder({ setCartItemCount }) {
         status: "pending",
         user_id: user.user_id,
       });
+      //if statement for guest user
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
       setShoppingCartCreated(true);

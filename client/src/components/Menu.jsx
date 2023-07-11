@@ -24,6 +24,7 @@ export default function allProducts({ setCartItemCount }) {
       try {
         const fetchedProducts = await fetchAllProducts();
         setProducts(fetchedProducts);
+        //needs to be different function for guest user functionality
         const result = await getUserShoppingCart();
         console.log("User shopping cart::::??", result);
         setShoppingCartId(result.shoppingcart_id);
