@@ -1,5 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { createShoppingCart, completeOrder } from "../api/shoppingcart";
+import {
+  createShoppingCart,
+  completeOrder,
+  cancelOrder,
+} from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
@@ -79,6 +83,15 @@ export default function StartOrder() {
     });
     setShoppingCart(updatedCart);
   };
+  const cancelOrder = async () => {
+    try {
+      const canceledShoppingCart = await cancelOrder();
+      console.log("Canceled shopping cart:", canceledShoppingCart);
+      setShoppingCart([]);
+    } catch (error) {
+      console.error("Error canceling shopping cart:", error);
+    }
+  };
 
   return (
     <div>
@@ -91,7 +104,7 @@ export default function StartOrder() {
         {shoppingCartCreated && (
           <>
             <button onClick={() => checkout()}>Checkout</button>
-            <button>Cancel Order</button>
+            <button onClick={() => cancelOrder()}>Cancel Order</button>
           </>
         )}
       </div>
@@ -132,7 +145,4 @@ export default function StartOrder() {
       </div>
     </div>
   );
-};
-
-
-
+}
