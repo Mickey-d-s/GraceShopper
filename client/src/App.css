@@ -165,6 +165,19 @@ nav {
 /* ---------------------------------------- */
 /* Home Page */
 
+#burger2Parent {
+  padding: 3rem;
+}
+#bigBurger2 {
+  background-image: url(./assets/bigburger2.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .landertext {
   position: absolute;
   text-align: center;
@@ -214,17 +227,6 @@ a {
 #orderButtons {
   padding-top: 4rem;
 }
-#bigBurger2 {
-  background-image: url(./assets/bigburger2.jpg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 8rem;
-  height: 30rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 #fries {
   background-image: url(./assets/fries.jpg);
   background-size: cover;
@@ -242,7 +244,7 @@ a {
   border-radius: 10px;
 }
 #bigBurger img {
-  width: 100%;
+  width: 70%;
   border-radius: 10px;
 }
 #textboxalign {
@@ -280,9 +282,27 @@ footer {
 }
 #listitems {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .flexfooter {
   padding: 1rem;
+  flex-basis: 33.33%;
+}
+.flexfooter h1 {
+  color: goldenrod;
+  margin-bottom: 1rem;
+}
+.flexfooter li {
+  margin-bottom: 0.5rem;
+}
+.flexfooter a {
+  color: yellow;
+  text-decoration: none;
+}
+.flexfooter a:hover {
+  text-decoration: underline;
 }
 .popup-overlay {
   position: fixed;
@@ -315,7 +335,6 @@ footer {
   top: 10px;
   right: 10px;
   z-index: 999999;
-  /* Add additional styling for the close button */
 }
 
 /* End Footer */

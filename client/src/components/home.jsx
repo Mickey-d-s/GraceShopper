@@ -7,18 +7,20 @@ export function Homepage() {
     const { loggedIn } = useContext(AuthContext);
     return (
       <>
-        <div id="bigBurger2">
-          <h1 className="landertext">
-            THE ORIGINAL BURGER JOINT BEFORE MC**ALD'S
-          </h1>
+        <div id="burger2Parent">
+          <div id="bigBurger2">
+            <h1 className="landertext">
+              THE ORIGINAL BURGER JOINT<br></br> BEFORE MC**ALD'S
+            </h1>
+          </div>
         </div>
         <div className="flexImage">
           <div>
             <h2 id="dah2">The Burger Above Their Burger</h2>
             <p>
               Have a taste of our world-renowned* Burger & Fries! We have a
-              variety of foods sure to satisfy your appetite, whether it's a
-              juicy burger, our specially seasoned fries, or one of our
+              variety of foods sure to satisfy your appetite<br></br> whether
+              it's a juicy burger, our specially seasoned fries, or one of our
               refreshing beverages!
             </p>
             <button>ABOUT US</button>
