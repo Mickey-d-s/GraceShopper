@@ -180,6 +180,18 @@ a {
   text-decoration: none;
   color: yellow;
 }
+.getStarted {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.getStarted:hover {
+  background-color: #e2e2e2;
+}
 .flexImage {
   display: flex;
   justify-content: center;

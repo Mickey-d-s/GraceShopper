@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "./auth/AuthProvider";
 import bigburger from "../assets/bigburger.jpg";
 
 export function Homepage() {
   try {
-    // const {user} = require("../") missing use context + use auth
+    const { loggedIn } = useContext(AuthContext);
     return (
       <>
         <div id="bigBurger2">
@@ -54,7 +55,15 @@ export function Homepage() {
         </div>
         <div>
           <h1>Order Online or Come Visit Us Today</h1>
-          <button>Get Started</button>
+          {loggedIn ? (
+            <a className="getStarted" href="/shoppingcart">
+              Get Started
+            </a>
+          ) : (
+            <a className="getStarted" href="/login">
+              Log In
+            </a>
+          )}
         </div>
       </>
     );
