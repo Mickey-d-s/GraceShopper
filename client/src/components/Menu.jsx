@@ -15,7 +15,7 @@ const isInCart = (product_id) => {
 
 export default function allProducts({ setCartItemCount }) {
   const [products, setProducts] = useState([]);
-  const [cart_id, setShoppingCartId] = useState(null);
+  const [shoppingCartId, setShoppingCartId] = useState(null);
   const [counts, setCounts] = useState({});
   const [insideCart, setInsideCart] = useState(false);
 
@@ -26,6 +26,7 @@ export default function allProducts({ setCartItemCount }) {
         const fetchedProducts = await fetchAllProducts();
         setProducts(fetchedProducts);
         const result = await getUserShoppingCart();
+        console.log("User shopping cart::::??", result);
         setShoppingCartId(result.shoppingcart_id);
       } catch (error) {
         console.error(error);
@@ -48,7 +49,7 @@ export default function allProducts({ setCartItemCount }) {
           ...counts,
           [product_id]: 1, // Reset the count to 1 after adding to cart
         });
-        setCartItemCount((state) => state + 1);
+        setCartItemCount((state) => state + counts[product_id]);
         setInsideCart((prevState) => ({
           ...prevState,
           [product_id]: true,
@@ -126,7 +127,7 @@ export default function allProducts({ setCartItemCount }) {
                         id="addToCartButton"
                         onClick={() =>
                           addToCart(
-                            cart_id,
+                            shoppingCartId,
                             product.product_id,
                             counts[product.product_id] || 1
                           )
