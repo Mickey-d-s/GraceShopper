@@ -28,9 +28,10 @@ async function deleteShoppingCartByUserId({ user_id }) {
       rows: [shoppingCart],
     } = await client.query(
       `
-        Delete FROM shoppingcarts
-        where id = $1 
-        `,
+        DELETE FROM shoppingcarts
+        WHERE user_id = $1
+        AND status = 'pending'
+         `,
       [user_id]
     );
   } catch (error) {

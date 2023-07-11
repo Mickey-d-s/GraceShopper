@@ -17,9 +17,13 @@ const getCartItemCount = () => {
   const cartItems = localStorage.getItem("cartItems");
   if (cartItems) {
     const parsedCartItems = JSON.parse(cartItems);
-    return parsedCartItems.length;
+    console.log("parsedCartitems:", parsedCartItems);
+    return parsedCartItems.reduce((acc, curr) => {
+      acc += curr.qty;
+      return acc;
+    }, 0);
   }
-  return 1;
+  return 0;
 };
 
 function App() {
@@ -42,7 +46,10 @@ function App() {
           <Route path="inventory" element={<Inventory />}></Route>
           <Route path="users" element={<Users />}></Route>
         </Route>
-        <Route path="/shoppingcart" element={<ShoppingCart />} />
+        <Route
+          path="/shoppingcart"
+          element={<ShoppingCart setCartItemCount={setCartItemCount} />}
+        />
       </Routes>
       <Footer />
     </div>
