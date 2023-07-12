@@ -28,7 +28,7 @@ export default function allInventories() {
     <div>
       <h2>Inventory</h2>
       {inventories.map((inventory) => (
-        <div key={inventory.inventory_id}>
+        <div key={inventory.inventory_id} className="inventories">
           <p>Product: {inventory.product.product_name}</p>
           <p>Quantiy: {inventory.quantity}</p>
           <button
