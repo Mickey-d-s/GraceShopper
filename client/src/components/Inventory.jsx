@@ -100,14 +100,14 @@ export default function allInventories() {
               <p>Quantity: {inventory.quantity}</p>
             </div>
           ))}
-          <button
+          {/* <button
             value={inventory.inventory_id}
             onClick={(e) => {
               handledelete(e, inventory.inventory_id);
             }}
           >
             delete {inventory.product.product_name}?
-          </button>
+          </button> */}
         </div>
       ))}
       <Outlet />
