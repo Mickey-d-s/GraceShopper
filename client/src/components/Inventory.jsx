@@ -91,25 +91,30 @@ export default function allInventories() {
         />
         <button type="submit">Submit</button>
       </form>
-      {products.map((product) => (
-        <div key={product.product_id} className="inventories">
-          <p>Product: {product.product_name}</p>
-          <p>Price: ${product.price}</p>
-          {inventories.map((inventory) => (
-            <div key={inventory.inventory_id}>
-              <p>Quantity: {inventory.quantity}</p>
-            </div>
-          ))}
-          {/* <button
-            value={inventory.inventory_id}
-            onClick={(e) => {
-              handledelete(e, inventory.inventory_id);
-            }}
-          >
-            delete {inventory.product.product_name}?
-          </button> */}
-        </div>
-      ))}
+      {products.map((product) => {
+        const productInventories = inventories.filter(
+          (inventory) => inventory.product_id === product.product_id
+        );
+        const totalQuantity = productInventories.reduce(
+          (sum, inventory) => sum + inventory.quantity,
+          0
+        );
+        return (
+          <div key={product.product_id} className="inventories">
+            <p>Product: {product.product_name}</p>
+            <p>Price: ${product.price}</p>
+            <p>Quantity: {totalQuantity}</p>
+            {/* <button
+              value={inventory.inventory_id}
+              onClick={(e) => {
+                handledelete(e, inventory.inventory_id);
+              }}
+            >
+              delete {inventory.product.product_name}?
+            </button> */}
+          </div>
+        );
+      })}
       <Outlet />
     </div>
   );
