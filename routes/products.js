@@ -12,7 +12,6 @@ productsRouter.post(
   "/",
   authRequired && checkForAdmin,
   async (req, res, next) => {
-    console.log("USER INSIDE OF DB-------", req.user);
     console.log("REQ BODY", req.body);
     try {
       const { product_name, price, description, inventory_id, category } =

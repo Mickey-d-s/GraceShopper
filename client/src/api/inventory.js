@@ -40,6 +40,7 @@ export async function createProduct(
   category
 ) {
   try {
+    console.log(product_name, price, description, inventory_id, category);
     const response = await fetch(`/api/products`, {
       method: "POST",
       headers: {

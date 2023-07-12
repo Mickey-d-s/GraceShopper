@@ -49,13 +49,13 @@ export default function allInventories() {
       category
     );
     try {
-      const addedinventoryfromDB = await createProduct(
+      const addedinventoryfromDB = await createProduct({
         product_name,
         price,
         description,
         inventoryID,
-        category
-      );
+        category,
+      });
       console.log("AddedinventoryfromDB:", addedinventoryfromDB);
       return addedinventoryfromDB;
     } catch (error) {
@@ -119,7 +119,7 @@ export default function allInventories() {
         );
         return (
           <div key={product.product_id} className="inventories">
-            <p>Inventory ID: {product.inventory_id}</p>
+            <p>Inventory ID: {product.product_id}</p>
             <p>Product: {product.product_name}</p>
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
