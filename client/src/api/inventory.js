@@ -36,6 +36,7 @@ export async function createProduct(
   product_name,
   price,
   description,
+  inventory_id,
   category
 ) {
   try {

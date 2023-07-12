@@ -11,8 +11,9 @@ import { Outlet } from "react-router-dom";
 export default function allInventories() {
   const [inventories, setInventories] = useState([]);
   const [product_name, setProductName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [inventoryID, setInventoryID] = useState("");
   const [category, setCategory] = useState("");
   const [products, setProducts] = useState([]);
 
@@ -56,7 +57,7 @@ export default function allInventories() {
       <h2>Inventory</h2>
       <form
         onSubmit={(e) =>
-          handleAdd(e, product_name, price, description, inventory_id, category)
+          handleAdd(e, product_name, price, description, inventoryID, category)
         }
         className="addProduct"
       >
@@ -67,6 +68,13 @@ export default function allInventories() {
           placeholder="product name"
           value={product_name}
           onChange={(e) => setProductName(e.target.value)}
+        />
+        <input
+          type="number"
+          id="inventoryID"
+          placeholder="inventoryID"
+          value={inventoryID}
+          onChange={(e) => setInventoryID(e.target.value)}
         />
         <input
           type="number"
@@ -101,7 +109,9 @@ export default function allInventories() {
         );
         return (
           <div key={product.product_id} className="inventories">
+            <p>Inventory ID: {product.inventory_id}</p>
             <p>Product: {product.product_name}</p>
+            <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
             {/* <button

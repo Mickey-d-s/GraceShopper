@@ -13,11 +13,13 @@ productsRouter.post(
   authRequired && checkForAdmin,
   async (req, res, next) => {
     try {
-      const { product_name, price, description, category } = req.body;
+      const { product_name, price, description, inventory_id, category } =
+        req.body;
       const newProduct = await createProduct(
         product_name,
         price,
         description,
+        inventory_id,
         category
       );
       res.send(newProduct);
