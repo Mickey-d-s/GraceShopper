@@ -57,3 +57,21 @@ export async function createInventory(
     throw error;
   }
 }
+export async function createCategories(product_id, quantity) {
+  try {
+    const response = await fetch(`/api/inventories`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        product_id,
+        quantity,
+      }),
+    });
+    const results = response.json;
+    return resuls;
+  } catch (error) {
+    throw error;
+  }
+}

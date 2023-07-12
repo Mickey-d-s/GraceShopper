@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import {
   deleteinventory,
   fetchAllInventories,
-  createInventory,
+  createProducts,
 } from "../api/inventory";
 import { Outlet } from "react-router-dom";
 
@@ -34,12 +34,13 @@ export default function allInventories() {
   }
   async function handleAdd(e) {
     try {
-      const addedinventoryfromDB = await createInventory(
+      const addedinventoryfromDB = await createProducts(
         product_name,
         price,
         description,
         category
       );
+      console.log("AddedinventoryfromDB:", addedinventoryfromDB);
       return addedinventoryfromDB;
     } catch (error) {
       throw error;
@@ -48,7 +49,12 @@ export default function allInventories() {
   return (
     <div>
       <h2>Inventory</h2>
-      <form onSubmit={handleAdd} className="addProduct">
+      <form
+        onSubmit={(e) =>
+          handleAdd(e, product_name, price, description, category)
+        }
+        className="addProduct"
+      >
         <label> creating new product</label>
         <input
           type="text"
