@@ -8,10 +8,7 @@ import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-export default function StartOrder({
-  setCartItemCount,
-  setShoppingCartCreated,
-}) {
+export default function StartOrder({ setCartItemCount }) {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -32,8 +29,6 @@ export default function StartOrder({
       //if statement for guest user
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
-      setShoppingCartCreated();
-      localStorage.getItem("cartItems", "[]");
       navigate("/Menu");
     } catch (error) {
       console.log(error);
@@ -86,8 +81,6 @@ export default function StartOrder({
       const canceledShoppingCart = await cancelOrder();
       console.log("Canceled shopping cart:", canceledShoppingCart);
       setShoppingCart([]);
-      // localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
-      // localStorage.setItem("cartItems", "[]");
       localStorage.clear();
       setCartItemCount(0);
     } catch (error) {
@@ -98,12 +91,12 @@ export default function StartOrder({
   return (
     <div>
       <div id="orderButtons">
-        {setShoppingCartCreated && (
+        {shoppingCart.length === 0 && (
           <button id="startShopping" onClick={() => startShopping()}>
             Start Order
           </button>
         )}
-        {!setShoppingCartCreated && (
+        {shoppingCart.length > 0 && (
           <>
             <button onClick={() => checkout()}>Checkout</button>
             <button onClick={() => deleteOrder()}>Cancel Order</button>
