@@ -40,6 +40,7 @@ export default function allInventories() {
         description,
         category
       );
+      return addedinventoryfromDB;
     } catch (error) {
       throw error;
     }
