@@ -20,6 +20,11 @@ nav {
   margin: 1%;
   border: black solid 1px;
 }
+.ShoppingCart {
+  display: inline-table;
+  margin: 1%;
+  border: black solid 1px;
+}
 .Link {
   margin: auto;
 }
