@@ -40,8 +40,8 @@ export async function createProduct(
   category
 ) {
   try {
-    const response = await fetch(`/api/products/`, {
-      method: "post",
+    const response = await fetch(`/api/products`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -53,7 +53,7 @@ export async function createProduct(
         category,
       }),
     });
-    const results = response.json;
+    const results = await response.json();
     return results;
   } catch (error) {
     throw error;

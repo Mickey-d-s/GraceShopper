@@ -10,12 +10,12 @@ import { Outlet } from "react-router-dom";
 
 export default function allInventories() {
   const [inventories, setInventories] = useState([]);
+  const [products, setProducts] = useState([]);
   const [product_name, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [inventoryID, setInventoryID] = useState("");
   const [category, setCategory] = useState("");
-  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchInventories() {
@@ -31,6 +31,7 @@ export default function allInventories() {
     fetchInventories();
   }, []);
   async function handledelete(e, inventory_id) {
+    e.preventDefault();
     try {
       const deleteproductsfromDB = await deleteProducts(inventory_id);
     } catch (error) {
@@ -38,12 +39,21 @@ export default function allInventories() {
     }
   }
   async function handleAdd(e) {
+    e.preventDefault();
+    console.log(
+      "LIST OF STUFF",
+      product_name,
+      price,
+      description,
+      inventoryID,
+      category
+    );
     try {
       const addedinventoryfromDB = await createProduct(
         product_name,
         price,
         description,
-        inventory_id,
+        inventoryID,
         category
       );
       console.log("AddedinventoryfromDB:", addedinventoryfromDB);
@@ -61,7 +71,7 @@ export default function allInventories() {
         }
         className="addProduct"
       >
-        <label> creating new product</label>
+        <label>Create New Product</label>
         <input
           type="text"
           id="product_name"
