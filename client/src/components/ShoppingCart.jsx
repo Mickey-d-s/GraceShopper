@@ -103,7 +103,7 @@ export default function StartOrder({ setCartItemCount }) {
           </>
         )}
       </div>
-      <div className="cart">
+      <div className="myShoppingCart">
         <h1> My Shopping Cart</h1>
         <br></br>
         {shoppingCart.length > 0 ? (
