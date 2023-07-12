@@ -34,6 +34,9 @@ const getCartItemCount = () => {
 
 function App() {
   const [cartItemCount, setCartItemCount] = useState(getCartItemCount());
+  const [shoppingCartCreated, setShoppingCartCreated] = useState(
+    localStorage.getItem("cartItems") === null
+  );
 
   return (
     <div>
@@ -54,7 +57,12 @@ function App() {
         </Route>
         <Route
           path="/shoppingcart"
-          element={<ShoppingCart setCartItemCount={setCartItemCount} />}
+          element={
+            <ShoppingCart
+              setCartItemCount={setCartItemCount}
+              setShoppingCartCreated={setShoppingCartCreated}
+            />
+          }
         />
       </Routes>
       <Footer />

@@ -8,16 +8,13 @@ import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
-
-export default function StartOrder({ setCartItemCount }) {
+export default function StartOrder({
+  setCartItemCount,
+  setShoppingCartCreated,
+}) {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
-  const [shoppingCartCreated, setShoppingCartCreated] = useState(
-    localStorage.getItem(SHOPPING_CART_CREATED_KEY) === "true"
-  );
-
   let navigate = useNavigate();
 
   async function startShopping() {
@@ -35,8 +32,8 @@ export default function StartOrder({ setCartItemCount }) {
       //if statement for guest user
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
-      setShoppingCartCreated(true);
-      localStorage.setItem(SHOPPING_CART_CREATED_KEY, "true");
+      setShoppingCartCreated();
+      localStorage.getItem("cartItems", "[]");
       navigate("/Menu");
     } catch (error) {
       console.log(error);
@@ -64,8 +61,6 @@ export default function StartOrder({ setCartItemCount }) {
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
-      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
-      localStorage.setItem("cartItems", "[]");
       localStorage.clear();
       //edits inventory qty by how much was ordered
       setCartItemCount(0);
@@ -91,8 +86,8 @@ export default function StartOrder({ setCartItemCount }) {
       const canceledShoppingCart = await cancelOrder();
       console.log("Canceled shopping cart:", canceledShoppingCart);
       setShoppingCart([]);
-      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
-      localStorage.setItem("cartItems", "[]");
+      // localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
+      // localStorage.setItem("cartItems", "[]");
       localStorage.clear();
       setCartItemCount(0);
     } catch (error) {
@@ -103,12 +98,12 @@ export default function StartOrder({ setCartItemCount }) {
   return (
     <div>
       <div id="orderButtons">
-        {!shoppingCartCreated && (
+        {setShoppingCartCreated && (
           <button id="startShopping" onClick={() => startShopping()}>
             Start Order
           </button>
         )}
-        {shoppingCartCreated && (
+        {!setShoppingCartCreated && (
           <>
             <button onClick={() => checkout()}>Checkout</button>
             <button onClick={() => deleteOrder()}>Cancel Order</button>
