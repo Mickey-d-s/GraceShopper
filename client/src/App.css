@@ -103,6 +103,17 @@ nav {
 #startShopping {
   animation: neonGlow 1s infinite alternate;
 }
+.myShoppingCart {
+  background-color: black;
+  padding: 0.5rem;
+  color: yellow;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border-radius: 1rem;
+}
+#orderButtons {
+  padding-bottom: 3rem;
+}
 
 /* End Shopping Cart Page */
 /* ---------------------------------------- */
@@ -148,6 +159,7 @@ nav {
 .productCard {
   color: white;
 }
+/* Couldnt find a sizing and spacing i liked for the product card */
 .menu {
   display: inline-table;
   grid-template-columns: repeat(4, 223px);
