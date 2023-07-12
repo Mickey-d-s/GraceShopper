@@ -105,15 +105,14 @@ export default function StartOrder({ setCartItemCount }) {
       </div>
       <div className="cart">
         <h1> My Shopping Cart</h1>
-        <h2>Total Price: $ {totalPrice}</h2>
         <br></br>
         {shoppingCart.length > 0 ? (
           <div>
+            <h2>Total: ${totalPrice}</h2>
             {shoppingCart.map((item) => (
               <div key={item.item_id}>
                 <p>{item.name}</p>
                 <p>Qty: {item.qty}</p>
-
                 <button
                   onClick={() => handleEditQty(item.item_id, item.qty - 1)}
                 >
