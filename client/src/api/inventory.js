@@ -31,3 +31,29 @@ export async function deleteinventory(id) {
     throw error;
   }
 }
+
+export async function createInventory(
+  product_name,
+  price,
+  description,
+  category
+) {
+  try {
+    const response = await fetch(`/api/products/`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        product_name,
+        price,
+        description,
+        category,
+      }),
+    });
+    const results = response.json;
+    return results;
+  } catch (error) {
+    throw error;
+  }
+}
