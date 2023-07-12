@@ -21,7 +21,7 @@ export async function fetchAllInventories() {
   }
 }
 
-export async function deleteinventory(id) {
+export async function deleteProducts(id) {
   try {
     const response = await fetch(`/api/products/${id}`, { method: "delete" });
     console.log(response);
@@ -32,7 +32,7 @@ export async function deleteinventory(id) {
   }
 }
 
-export async function createInventory(
+export async function createProduct(
   product_name,
   price,
   description,
@@ -48,6 +48,7 @@ export async function createInventory(
         product_name,
         price,
         description,
+        inventory_id,
         category,
       }),
     });
@@ -57,21 +58,20 @@ export async function createInventory(
     throw error;
   }
 }
-export async function createCategories(product_id, quantity) {
-  try {
-    const response = await fetch(`/api/inventories`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        product_id,
-        quantity,
-      }),
-    });
-    const results = response.json;
-    return resuls;
-  } catch (error) {
-    throw error;
-  }
-}
+// export async function createInventories(quantity) {
+//   try {
+//     const response = await fetch(`/api/inventories`, {
+//       method: "post",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         quantity,
+//       }),
+//     });
+//     const results = response.json;
+//     return resuls;
+//   } catch (error) {
+//     throw error;
+//   }
+// }

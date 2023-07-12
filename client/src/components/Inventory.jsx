@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 // // import { useNavigate } from "react-router-dom";
 import {
-  deleteinventory,
+  deleteProducts,
   fetchAllInventories,
-  createProducts,
+  createProduct,
 } from "../api/inventory";
+import { fetchAllProducts } from "../api/menu";
 import { Outlet } from "react-router-dom";
 
 export default function allInventories() {
@@ -13,12 +14,15 @@ export default function allInventories() {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchInventories() {
       try {
         const fetchedInventories = await fetchAllInventories();
         setInventories(fetchedInventories);
+        const fetchedProducts = await fetchAllProducts();
+        setProducts(fetchedProducts);
       } catch (error) {
         console.log(error);
       }
@@ -27,17 +31,18 @@ export default function allInventories() {
   }, []);
   async function handledelete(e, inventory_id) {
     try {
-      const deleteinventoryfromDB = await deleteinventory(inventory_id);
+      const deleteproductsfromDB = await deleteProducts(inventory_id);
     } catch (error) {
       throw error;
     }
   }
   async function handleAdd(e) {
     try {
-      const addedinventoryfromDB = await createProducts(
+      const addedinventoryfromDB = await createProduct(
         product_name,
         price,
         description,
+        inventory_id,
         category
       );
       console.log("AddedinventoryfromDB:", addedinventoryfromDB);
@@ -51,7 +56,7 @@ export default function allInventories() {
       <h2>Inventory</h2>
       <form
         onSubmit={(e) =>
-          handleAdd(e, product_name, price, description, category)
+          handleAdd(e, product_name, price, description, inventory_id, category)
         }
         className="addProduct"
       >
@@ -86,10 +91,15 @@ export default function allInventories() {
         />
         <button type="submit">Submit</button>
       </form>
-      {inventories.map((inventory) => (
-        <div key={inventory.inventory_id} className="inventories">
-          <p>Product: {inventory.product.product_name}</p>
-          <p>Quantiy: {inventory.quantity}</p>
+      {products.map((product) => (
+        <div key={product.product_id} className="inventories">
+          <p>Product: {product.product_name}</p>
+          <p>Price: ${product.price}</p>
+          {inventories.map((inventory) => (
+            <div key={inventory.inventory_id}>
+              <p>Quantity: {inventory.quantity}</p>
+            </div>
+          ))}
           <button
             value={inventory.inventory_id}
             onClick={(e) => {
