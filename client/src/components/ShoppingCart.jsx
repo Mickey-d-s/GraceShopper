@@ -86,7 +86,7 @@ export default function StartOrder({ setCartItemCount }) {
     });
     setShoppingCart(updatedCart);
   };
-  const cancelOrder = async () => {
+  const deleteOrder = async () => {
     try {
       const canceledShoppingCart = await cancelOrder();
       console.log("Canceled shopping cart:", canceledShoppingCart);
@@ -111,7 +111,7 @@ export default function StartOrder({ setCartItemCount }) {
         {shoppingCartCreated && (
           <>
             <button onClick={() => checkout()}>Checkout</button>
-            <button onClick={() => cancelOrder()}>Cancel Order</button>
+            <button onClick={() => deleteOrder()}>Cancel Order</button>
           </>
         )}
       </div>
