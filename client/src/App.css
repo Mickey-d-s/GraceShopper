@@ -14,6 +14,11 @@ nav {
   margin: 1%;
   border: black solid 1px;
 }
+.addProduct {
+  margin: 1%;
+  border: black solid 1px;
+  padding:1rem
+}
 
 .inventories {
   display: inline-table;

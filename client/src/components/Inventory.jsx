@@ -47,7 +47,7 @@ export default function allInventories() {
   return (
     <div>
       <h2>Inventory</h2>
-      <form onSubmit={handleAdd}>
+      <form onSubmit={handleAdd} className="addProduct">
         <label> creating new product</label>
         <input
           type="text"
