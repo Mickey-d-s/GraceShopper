@@ -111,8 +111,9 @@ export default function allInventories() {
       </form>
       {products.map((product) => {
         const productInventories = inventories.filter(
-          (inventory) => inventory.product_id === product.product_id
+          (inventory) => inventory.inventory_id === product.inventory_id
         );
+        console.log("productInventories:", productInventories);
         const totalQuantity = productInventories.reduce(
           (sum, inventory) => sum + inventory.quantity,
           0
