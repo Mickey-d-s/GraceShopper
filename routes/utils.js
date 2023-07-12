@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 const authRequired = (req, res, next) => {
   try {
     const token = req.signedCookies.token;
-    console.log("token in authRequired:", token);
+    // console.log("token in authRequired:", token);
     req.user = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Req.user: ", req.user);
+    // console.log("Req.user: ", req.user);
   } catch (error) {
     res.status(401).send({
       success: false,
@@ -18,8 +18,8 @@ const authRequired = (req, res, next) => {
 
 const checkForAdmin = (req, res, next) => {
   try {
-    console.log(req.user);
-    console.log(req.user.adm);
+    // console.log(req.user);
+    // console.log(req.user.adm);
     if (req.user.adm) {
       next();
     }

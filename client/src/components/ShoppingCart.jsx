@@ -8,16 +8,10 @@ import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-const SHOPPING_CART_CREATED_KEY = "shoppingCartCreated";
-
 export default function StartOrder({ setCartItemCount }) {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
-  const [shoppingCartCreated, setShoppingCartCreated] = useState(
-    localStorage.getItem(SHOPPING_CART_CREATED_KEY) === "true"
-  );
-
   let navigate = useNavigate();
 
   async function startShopping() {
@@ -35,8 +29,6 @@ export default function StartOrder({ setCartItemCount }) {
       //if statement for guest user
       console.log("Created Cart in FE: ", createdOrder);
       setOrder(createdOrder);
-      setShoppingCartCreated(true);
-      localStorage.setItem(SHOPPING_CART_CREATED_KEY, "true");
       navigate("/Menu");
     } catch (error) {
       console.log(error);
@@ -64,8 +56,6 @@ export default function StartOrder({ setCartItemCount }) {
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
-      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
-      localStorage.setItem("cartItems", "[]");
       localStorage.clear();
       //edits inventory qty by how much was ordered
       setCartItemCount(0);
@@ -86,13 +76,11 @@ export default function StartOrder({ setCartItemCount }) {
     });
     setShoppingCart(updatedCart);
   };
-  const cancelOrder = async () => {
+  const deleteOrder = async () => {
     try {
       const canceledShoppingCart = await cancelOrder();
       console.log("Canceled shopping cart:", canceledShoppingCart);
       setShoppingCart([]);
-      localStorage.removeItem(SHOPPING_CART_CREATED_KEY);
-      localStorage.setItem("cartItems", "[]");
       localStorage.clear();
       setCartItemCount(0);
     } catch (error) {
@@ -103,29 +91,28 @@ export default function StartOrder({ setCartItemCount }) {
   return (
     <div>
       <div id="orderButtons">
-        {!shoppingCartCreated && (
+        {shoppingCart.length === 0 && (
           <button id="startShopping" onClick={() => startShopping()}>
             Start Order
           </button>
         )}
-        {shoppingCartCreated && (
+        {shoppingCart.length > 0 && (
           <>
             <button onClick={() => checkout()}>Checkout</button>
-            <button onClick={() => cancelOrder()}>Cancel Order</button>
+            <button onClick={() => deleteOrder()}>Cancel Order</button>
           </>
         )}
       </div>
-      <div className="cart">
+      <div className="myShoppingCart">
         <h1> My Shopping Cart</h1>
-        <h2>Total Price: $ {totalPrice}</h2>
         <br></br>
         {shoppingCart.length > 0 ? (
           <div>
+            <h2>Total: ${totalPrice}</h2>
             {shoppingCart.map((item) => (
               <div key={item.item_id}>
                 <p>{item.name}</p>
                 <p>Qty: {item.qty}</p>
-
                 <button
                   onClick={() => handleEditQty(item.item_id, item.qty - 1)}
                 >

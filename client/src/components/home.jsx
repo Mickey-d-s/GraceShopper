@@ -1,66 +1,71 @@
-import React from "react";
-// import bigburger2 from "../assets/bigburger2.jpg";
+import React, { useContext } from "react";
+import { AuthContext } from "./auth/AuthProvider";
 import bigburger from "../assets/bigburger.jpg";
-import fries from "../assets/fries.jpg";
 
 export function Homepage() {
   try {
-    // const {user} = require("../") missing use context + use auth
+    const { loggedIn } = useContext(AuthContext);
     return (
       <>
-        <div id="bigBurger2">
-          <h1 className="landertext">
-            THE ORIGINAL BURGER JOINT BEFORE MC**ALD'S
-          </h1>
+        <div id="burger2Parent">
+          <div id="bigBurger2">
+            <h1 className="landertext">
+              THE ORIGINAL BURGER JOINT<br></br> BEFORE MC**ALD'S
+            </h1>
+          </div>
         </div>
         <div className="flexImage">
-          <h2 id="dah2">the burger above their burger</h2>
-          <div id="textboxalign">
+          <div>
+            <h2 id="dah2">The Burger Above Their Burger</h2>
             <p>
-              Have a taste of our world renowned* Burger & Fries!<br></br> We
-              have a variety of foods sure to sate the appetite, whether its a
-              juicy burgers, our specially seasoned fries, or one of our
-              refershing beverages!
+              Have a taste of our world-renowned* Burger & Fries! We have a
+              variety of foods sure to satisfy your appetite<br></br> whether
+              it's a juicy burger, our specially seasoned fries, or one of our
+              refreshing beverages!
             </p>
-            <button>about us</button>
+            <button>ABOUT US</button>
           </div>
         </div>
-        <div>
-          <div className="flexImage">
-            <div className="flex">
-              <div id="fries">
-                <h4 className="product">Seasoned Crisp Fries</h4>
-                <p>
-                  <a className="productbtn" href="/menu">
-                    order online
-                  </a>
-                </p>
-              </div>
+        <div className="flexImage">
+          <div>
+            <div id="fries">
+              <h4 className="product">Seasoned Crispy Fries</h4>
+              <p>
+                <a className="productbtn" href="/menu">
+                  Order Online
+                </a>
+              </p>
             </div>
-            <div className="flex">
-              <div id="chickenburger">
-                <h4 className="product">Chicken Burger</h4>
-                <p>
-                  <a className="productbtn" href="/menu">
-                    order online
-                  </a>
-                </p>
-              </div>
+          </div>
+          <div>
+            <div id="chickenburger">
+              <h4 className="product">Chicken Burger</h4>
+              <p>
+                <a className="productbtn" href="/menu">
+                  Order Online
+                </a>
+              </p>
             </div>
           </div>
         </div>
         <div>
-          <h1>
-            "The best burger I ever had"
-            <br /> - satisfied customer
-          </h1>
+          <h1>"The Best Burger I Ever Had"</h1>
+          <p>- Satisfied Customer</p>
         </div>
         <div id="bigBurger">
-          <img src={bigburger} alt="Big Burger IMG" />
+          <img src={bigburger} alt="Big Burger" />
         </div>
         <div>
-          <h1>order online or come visit us today</h1>
-          <button>get started</button>
+          <h1>Order Online or Come Visit Us Today</h1>
+          {loggedIn ? (
+            <a className="getStarted" href="/shoppingcart">
+              Get Started
+            </a>
+          ) : (
+            <a className="getStarted" href="/login">
+              Log In
+            </a>
+          )}
         </div>
       </>
     );

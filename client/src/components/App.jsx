@@ -18,10 +18,16 @@ const getCartItemCount = () => {
   if (cartItems) {
     const parsedCartItems = JSON.parse(cartItems);
     console.log("parsedCartitems:", parsedCartItems);
-    return parsedCartItems.reduce((acc, curr) => {
-      acc += curr.qty;
+    //returns array of objects. trying to do length but did reduce having a hard time understanding where the problem is coming from.
+    const cartItemCount = parsedCartItems.reduce((acc, curr) => {
+      if (curr.qty === 1) {
+        acc += 1;
+      } else {
+        acc += curr.qty;
+      }
       return acc;
     }, 0);
+    return cartItemCount;
   }
   return 0;
 };

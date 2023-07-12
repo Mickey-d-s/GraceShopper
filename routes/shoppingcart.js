@@ -25,6 +25,7 @@ shoppingCartsRouter.get("/user/cart", authRequired, async (req, res, next) => {
   try {
     const shoppingCart = await getShoppingCartByUserId(req.user.user_id);
     res.send(shoppingCart);
+    console.log("shoppingCart:", shoppingCart);
   } catch (error) {
     next(error);
   }

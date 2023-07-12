@@ -49,7 +49,7 @@ export default function allProducts({ setCartItemCount }) {
           ...counts,
           [product_id]: 1, // Reset the count to 1 after adding to cart
         });
-        setCartItemCount((state) => state + counts[product_id]);
+        setCartItemCount((state) => state + counts[product_id] || 1);
         setInsideCart((prevState) => ({
           ...prevState,
           [product_id]: true,

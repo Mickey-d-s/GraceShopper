@@ -87,6 +87,17 @@ nav {
 #startShopping {
   animation: neonGlow 1s infinite alternate;
 }
+.myShoppingCart {
+  background-color: black;
+  padding: 0.5rem;
+  color: yellow;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border-radius: 1rem;
+}
+#orderButtons {
+  padding-bottom: 3rem;
+}
 
 /* End Shopping Cart Page */
 /* ---------------------------------------- */
@@ -132,6 +143,7 @@ nav {
 .productCard {
   color: white;
 }
+/* Couldnt find a sizing and spacing i liked for the product card */
 .menu {
   display: inline-table;
   grid-template-columns: repeat(4, 223px);
@@ -165,28 +177,58 @@ nav {
 /* ---------------------------------------- */
 /* Home Page */
 
+#burger2Parent {
+  padding: 3rem;
+}
+#bigBurger2 {
+  background-image: url(./assets/bigburger2.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .landertext {
-  margin: 0;
-  color: white;
-  padding-top: 10%;
-  padding-bottom: 20%;
+  position: absolute;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffd700;
+  -webkit-text-stroke: 2px black;
+  -webkit-text-fill-color: #ffd700;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700,
+    0 0 40px #ffd700;
 }
 a {
   text-decoration: none;
   color: yellow;
 }
-.flexImage {
-  display: inline-flex;
-  flex-wrap: wrap;
+.getStarted {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
-.product {
-  margin-bottom: 40%;
+.getStarted:hover {
+  background-color: #e2e2e2;
+}
+.flexImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .productbtn {
   background-color: white;
   color: black;
-  border-radius: 20%;
-  opacity: 80%;
+  border-radius: 20px;
+  opacity: 0.8;
+  padding: 10px 20px;
 }
 .input {
   margin-bottom: 2%;
@@ -197,17 +239,13 @@ a {
 #orderButtons {
   padding-top: 4rem;
 }
-#bigBurger2 {
-  background-image: url(./assets/bigburger2.jpg);
-  background-size: cover;
-  border-radius: 30%;
-}
 #fries {
   background-image: url(./assets/fries.jpg);
   background-size: cover;
   width: 300px;
   height: 200px;
   margin: 2%;
+  border-radius: 10px;
 }
 #chickenburger {
   background-image: url(./assets/Chicken-Burgers.jpg);
@@ -215,9 +253,11 @@ a {
   width: 300px;
   height: 200px;
   margin: 2%;
+  border-radius: 10px;
 }
-#bigBurger Img {
-  width: 100%;
+#bigBurger img {
+  width: 70%;
+  border-radius: 10px;
 }
 #textboxalign {
   margin-left: 12%;
@@ -227,11 +267,11 @@ body {
 }
 p {
   word-wrap: break-word;
-
   gap: 10px;
 }
 #dah2 {
   margin: auto;
+  text-align: center;
 }
 
 /* End Home Page */
@@ -254,9 +294,27 @@ footer {
 }
 #listitems {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .flexfooter {
   padding: 1rem;
+  flex-basis: 33.33%;
+}
+.flexfooter h1 {
+  color: goldenrod;
+  margin-bottom: 1rem;
+}
+.flexfooter li {
+  margin-bottom: 0.5rem;
+}
+.flexfooter a {
+  color: yellow;
+  text-decoration: none;
+}
+.flexfooter a:hover {
+  text-decoration: underline;
 }
 .popup-overlay {
   position: fixed;
@@ -289,7 +347,6 @@ footer {
   top: 10px;
   right: 10px;
   z-index: 999999;
-  /* Add additional styling for the close button */
 }
 
 /* End Footer */
