@@ -34,6 +34,7 @@ export default function allInventories() {
     e.preventDefault();
     try {
       const deleteproductsfromDB = await deleteProducts(inventory_id);
+      return deleteproductsfromDB;
     } catch (error) {
       throw error;
     }
@@ -124,14 +125,14 @@ export default function allInventories() {
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
-            {/* <button
-              value={inventory.inventory_id}
+            <button
+              value={product.inventory_id}
               onClick={(e) => {
-                handledelete(e, inventory.inventory_id);
+                handledelete(e, product.inventory_id);
               }}
             >
-              delete {inventory.product.product_name}?
-            </button> */}
+              delete {product.product_name}?
+            </button>
           </div>
         );
       })}

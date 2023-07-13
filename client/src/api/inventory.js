@@ -21,9 +21,15 @@ export async function fetchAllInventories() {
   }
 }
 
-export async function deleteProducts(id) {
+export async function deleteProducts(inventory_id) {
   try {
-    const response = await fetch(`/api/products/${id}`, { method: "delete" });
+    const response = await fetch(`/api/products/${inventory_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ inventory_id }),
+    });
     console.log(response);
     const results = response.json;
     return results;
