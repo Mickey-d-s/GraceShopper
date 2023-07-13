@@ -39,6 +39,16 @@ export async function createProduct(
   inventory_id,
   category
 ) {
+  // Create inventory row
+  await fetch(`/api/inventories`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      inventory_id,
+    }),
+  });
   try {
     console.log(product_name, price, description, inventory_id, category);
     const response = await fetch(`/api/products`, {
@@ -55,6 +65,7 @@ export async function createProduct(
       }),
     });
     const results = await response.json();
+
     return results;
   } catch (error) {
     throw error;

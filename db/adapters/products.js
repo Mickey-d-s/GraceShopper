@@ -7,18 +7,28 @@ async function createProduct({
   inventory_id,
   category,
 }) {
+  await client.query(
+    `
+    INSERT INTO inventories (inventory_id, quantity)
+    VALUES ($1, 100)
+    ON CONFLICT (inventory_id) DO NOTHING;
+    `,
+    [inventory_id]
+  );
+
   try {
     const {
       rows: [product],
     } = await client.query(
       `
-            INSERT INTO products(product_name, price, description, inventory_id, category)
-            VALUES($1,$2,$3,$4, $5)
-            ON CONFLICT (product_name) DO NOTHING
-            RETURNING *;
-            `,
+      INSERT INTO products (product_name, price, description, inventory_id, category)
+      VALUES ($1, $2, $3, $4, $5)
+      ON CONFLICT (product_name) DO NOTHING
+      RETURNING *;
+      `,
       [product_name, price, description, inventory_id, category]
     );
+
     return product;
   } catch (error) {
     throw error;

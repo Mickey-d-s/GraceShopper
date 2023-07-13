@@ -53,7 +53,7 @@ export default function allInventories() {
         product_name,
         price,
         description,
-        inventoryID,
+        inventory_id: inventoryID,
         category,
       });
       console.log("AddedinventoryfromDB:", addedinventoryfromDB);
@@ -113,14 +113,13 @@ export default function allInventories() {
         const productInventories = inventories.filter(
           (inventory) => inventory.inventory_id === product.inventory_id
         );
-        console.log("productInventories:", productInventories);
         const totalQuantity = productInventories.reduce(
           (sum, inventory) => sum + inventory.quantity,
           0
         );
         return (
           <div key={product.product_id} className="inventories">
-            <p>Inventory ID: {product.product_id}</p>
+            <p>Inventory ID: {product.inventory_id}</p>
             <p>Product: {product.product_name}</p>
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
