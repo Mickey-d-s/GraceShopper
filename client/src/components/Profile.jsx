@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export default function Profile() {
   const [shoppingCarts, setShoppingCarts] = useState([]);
   const { user } = useContext(AuthContext);
+  const [shoppingCart, setShoppingCart] = useState([]);
   // NOT FINISHED
 
   useEffect(() => {
@@ -19,6 +20,13 @@ export default function Profile() {
     }
     fetchShoppingCarts();
   }, []);
+
+  const calculateTotalPrice = (shoppingCart) => {
+    const total = shoppingCart.products.reduce((total, item) => {
+      return total + item.qty * item.price;
+    }, 0);
+    return total;
+  };
 
   return (
     <>
@@ -34,6 +42,7 @@ export default function Profile() {
             {shoppingCarts.map((shoppingCart) => (
               <div key={shoppingCart.shoppingcart_id} className="ShoppingCart">
                 <h2>Order No. {shoppingCart.shoppingcart_id}</h2>
+                <h3>Total: ${calculateTotalPrice(shoppingCart)}</h3>
                 {shoppingCart.products.map((item) => (
                   <div key={item.item_id}>
                     <h4>{item.name}</h4>
