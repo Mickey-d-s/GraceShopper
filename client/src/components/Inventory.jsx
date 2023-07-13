@@ -4,6 +4,7 @@ import {
   deleteProducts,
   fetchAllInventories,
   createProduct,
+  updateInventoryQty,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
 import { Outlet } from "react-router-dom";
@@ -16,6 +17,7 @@ export default function allInventories() {
   const [description, setDescription] = useState("");
   const [inventoryID, setInventoryID] = useState("");
   const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     async function fetchInventories() {
@@ -64,6 +66,18 @@ export default function allInventories() {
       throw error;
     }
   }
+  // async function handleUpdate(e) {
+  //   e.preventDefault();
+  //   try {
+  //     const updatedInventoryfromDB = await updateInventoryQty({
+  //       inventory_id,
+  //       quantity,
+  //     });
+  //     return updatedInventoryfromDB;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
   return (
     <div>
       <h2>Inventory</h2>
@@ -111,6 +125,26 @@ export default function allInventories() {
         />
         <button type="submit">Submit</button>
       </form>
+      {/* <form
+        onSubmit={(e) => handleUpdate(e, InventoryID, quantity)}
+        className="updateProduct"
+      >
+        <label>Update Product</label>
+        <input
+          type="number"
+          id="inventoryID"
+          placeholder="inventoryID"
+          value={inventoryId}
+          onChange={(e) => setInventoryID(e.target.value)}
+        />
+        <input
+          type="number"
+          id="quantity"
+          placeholder="quantity"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+        />
+      </form> */}
       {products.map((product) => {
         const productInventories = inventories.filter(
           (inventory) => inventory.inventory_id === product.inventory_id

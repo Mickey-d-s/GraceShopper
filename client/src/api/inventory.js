@@ -20,6 +20,23 @@ export async function fetchAllInventories() {
     console.error(error);
   }
 }
+//updates product by PUT request
+export async function updateInventoryQty(inventory_id, quantity) {
+  try {
+    const response = await fetch(`/api/inventories/${inventory_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ quantity }),
+    });
+    const updatedTotalInvQty = await response.json();
+    console.log("updated inventory:", updatedTotalInvQty);
+    return updatedTotalInvQty;
+  } catch (error) {
+    console.error("Error updating Inventory Quantity:", error);
+  }
+}
 
 export async function deleteProducts(inventory_id) {
   try {
