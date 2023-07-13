@@ -39,6 +39,15 @@ async function createTables() {
       )`);
     console.log("after creating user");
 
+    // // -- Create the "inventory" table
+
+    await client.query(`
+      CREATE TABLE inventories (
+        inventory_id SERIAL PRIMARY KEY,
+        quantity INT
+      )`);
+    console.log("Created inventory table...");
+
     // // -- Create the "products" table
     //there is more work in products its all 2 dollars
     await client.query(`
@@ -48,16 +57,8 @@ async function createTables() {
         price DECIMAL(10,2) NOT NULL,
         description TEXT,
         inventory_id INT,
-        category TEXT NOT NULL
-      )`);
-
-    // // -- Create the "inventory" table
-    await client.query(`
-      CREATE TABLE inventories (
-        inventory_id SERIAL PRIMARY KEY,
-        product_id INT,
-        quantity INT,
-        FOREIGN KEY (product_id) REFERENCES products(product_id)
+        category TEXT NOT NULL,
+        FOREIGN KEY(inventory_id) REFERENCES inventories(inventory_id)
       )`);
 
     // // // -- Create the "shoppingcart" table
@@ -90,14 +91,15 @@ async function populateTables() {
       await createUser(user);
       console.log("users table populated");
     }
-    for (const product of products) {
-      await createProduct(product);
-      console.log("products table populated");
-    }
     for (const inventory of inventories) {
       await createInventories(inventory);
       console.log("Inventory table populated");
     }
+    for (const product of products) {
+      await createProduct(product);
+      console.log("products table populated");
+    }
+
     for (const shoppingCart of shopping_carts) {
       console.log("shopping cart item:", shoppingCart);
       await createShoppingCarts(shoppingCart);

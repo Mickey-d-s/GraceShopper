@@ -16,7 +16,11 @@ const authRequired = (req, res, next) => {
   next();
 };
 
-const checkForAdmin = (req, res, next) => {
+const checkForAdmin = async (req, res, next) => {
+  const token = req.signedCookies.token;
+  // console.log("token in authRequired:", token);
+  req.user = jwt.verify(token, process.env.JWT_SECRET);
+  console.log("USER INSIDE OF DB-------", req.user);
   try {
     // console.log(req.user);
     // console.log(req.user.adm);

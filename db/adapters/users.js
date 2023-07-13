@@ -1,28 +1,19 @@
 const client = require("../client");
 
 async function createUser({ username, email, password, adm }) {
-  try {
-    console.log("in the adapter");
-    console.log({ username, email, password, adm });
-
-    const {
-      rows: [user],
-    } = await client.query(
-      `
+  const {
+    rows: [user],
+  } = await client.query(
+    `
     INSERT INTO users(username, email, password, adm)
             VALUES($1,$2, $3, $4)
             ON CONFLICT (username) DO NOTHING
             returning *
             `,
-      [username, email, password, adm]
-    );
+    [username, email, password, adm]
+  );
 
-    return user;
-  } catch (error) {
-    console.log(error);
-    const success = false;
-    const message = "failed to create user";
-  }
+  return user;
 }
 async function getAllUsers() {
   const { rows } = await client.query(`

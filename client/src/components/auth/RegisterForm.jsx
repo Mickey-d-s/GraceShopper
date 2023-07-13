@@ -16,8 +16,8 @@ export default function RegisterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (username.length < 4) {
-      setError("username must be longer than 4 characters");
+    if (username.length < 5) {
+      setError("username must be longer than 5 characters");
       return;
     }
     if (password !== passwordConfirmation) {

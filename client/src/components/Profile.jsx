@@ -32,7 +32,7 @@ export default function Profile() {
             <h2> Order History</h2>
             <h3 className="historyProducts">Your Recent Purchased Items</h3>
             {shoppingCarts.map((shoppingCart) => (
-              <div key={shoppingCart.shoppingcart_id}>
+              <div key={shoppingCart.shoppingcart_id} className="ShoppingCart">
                 <h2>Order No. {shoppingCart.shoppingcart_id}</h2>
                 {shoppingCart.products.map((item) => (
                   <div key={item.item_id}>
