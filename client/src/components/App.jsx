@@ -13,11 +13,6 @@ import { Dashboard } from "./Dashboard/dashboard";
 import Inventory from "./Inventory";
 import Users from "./Users";
 
-const menuGallery = "menuGallery.html";
-const Gallery = document.querySelector(menuGallery);
-const element = document.createElement("menuGallery");
-document.body.appendChild(menuGallery);
-
 const getCartItemCount = () => {
   const cartItems = localStorage.getItem("cartItems");
   if (cartItems) {
