@@ -34,7 +34,8 @@ export default function Profile() {
         <h1 className="userHeader">Welcome, {user.username}!</h1>
         <div className="userInfo">
           <u>USER INFO</u>
-          <div>{user.username}</div>
+          <div>{("username:", user.username)}</div>
+          <div>{("email:", user.email)}</div>
           <hr></hr>
           <div className="orderhistory">
             <h2> Order History</h2>
