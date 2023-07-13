@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Profile() {
   const [shoppingCarts, setShoppingCarts] = useState([]);
   const { user } = useContext(AuthContext);
-  const [shoppingCart, setShoppingCart] = useState([]);
+
   // NOT FINISHED
 
   useEffect(() => {
