@@ -87,7 +87,7 @@ export default function allInventories() {
         }
         className="addProduct"
       >
-        <label>Create New Product</label>
+        <label>Create New Product: </label>
         <input
           type="text"
           id="product_name"
