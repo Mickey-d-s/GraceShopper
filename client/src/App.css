@@ -25,11 +25,28 @@ nav {
   margin: 1%;
   border: black solid 1px;
 }
+
 .ShoppingCart {
   display: inline-table;
   margin: 1%;
-  border: black solid 1px;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  animation: border-color 2s linear infinite;
 }
+
+@keyframes border-color {
+  0% {
+    border-color: yellow;
+  }
+  50% {
+    border-color: black;
+  }
+  100% {
+    border-color: yellow;
+  }
+}
+
 .Link {
   margin: auto;
 }

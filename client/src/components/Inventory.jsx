@@ -58,6 +58,7 @@ export default function allInventories() {
         category,
       });
       console.log("AddedinventoryfromDB:", addedinventoryfromDB);
+      alert("Product added to Inventory!");
       return addedinventoryfromDB;
     } catch (error) {
       throw error;
