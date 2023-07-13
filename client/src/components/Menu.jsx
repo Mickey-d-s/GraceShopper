@@ -36,8 +36,6 @@ export default function allProducts({ setCartItemCount }) {
   }, []);
 
   const addToCart = async (shoppingcart_id, product_id, count) => {
-    // Ensure shoppingcart_id is defined before adding to cart
-    //if product_id is already in cart disable button unless quantity is changed
     if (shoppingcart_id) {
       try {
         const cartItem = await addItemToCart({
@@ -47,13 +45,16 @@ export default function allProducts({ setCartItemCount }) {
         });
         setCounts({
           ...counts,
-          [product_id]: 1, // Reset the count to 1 after adding to cart
+          [product_id]: 1,
         });
-        setCartItemCount((state) => state + counts[product_id] || 1);
+
+        // Update the cart item count state
+        setCartItemCount((prevCount) => prevCount + (counts[product_id] || 1));
         setInsideCart((prevState) => ({
           ...prevState,
           [product_id]: true,
         }));
+
         return cartItem;
       } catch (error) {
         console.log("Failed to add item to cart:", error);
