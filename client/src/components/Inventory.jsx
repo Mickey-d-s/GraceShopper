@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 // // import { useNavigate } from "react-router-dom";
 import {
-  deleteProducts,
   fetchAllInventories,
   createProduct,
   updateInventoryQty,
+  deleteProducts,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
 import { Outlet } from "react-router-dom";

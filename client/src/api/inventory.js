@@ -39,6 +39,7 @@ export async function updateInventoryQty(inventory_id, quantity) {
 }
 
 export async function deleteProducts(inventory_id) {
+  console.log("inventory_id:", inventory_id);
   try {
     const response = await fetch(`/api/products/${inventory_id}`, {
       method: "DELETE",
