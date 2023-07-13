@@ -65,5 +65,7 @@ caption {
     flex-wrap: wrap;
     color:black;
     font-size: 16px;
-    padding:1rem
+    padding:1rem;
+    font-family: "Lobster", sans-serif;
+    font-weight: bold;
 }
