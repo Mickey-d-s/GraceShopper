@@ -5,7 +5,7 @@ import "../App.css";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
-import MenuGallery from "./menuGallery";
+import MenuGallery from "./MenuGallery";
 
 const Nav = ({ cartItemCount }) => {
   const { setLoggedIn, loggedIn, user, setUser } = useAuth();

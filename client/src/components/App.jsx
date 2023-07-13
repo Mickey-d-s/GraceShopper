@@ -12,7 +12,7 @@ import ShoppingCart from "../components/ShoppingCart";
 import { Dashboard } from "./Dashboard/dashboard";
 import Inventory from "./Inventory";
 import Users from "./Users";
-import MenuGallery from "./menuGallery";
+import MenuGallery from "./MenuGallery";
 
 const getCartItemCount = () => {
   const cartItems = localStorage.getItem("cartItems");
@@ -49,7 +49,7 @@ function App() {
           path="/Menu"
           element={<Menu setCartItemCount={setCartItemCount} />}
         />
-        <Route path="/menuGallery" element={<menuGallery />} />
+        <Route path="/MenuGallery" element={<MenuGallery />} />
         <Route path="Dashboard" element={<Dashboard />}>
           <Route path="inventory" element={<Inventory />}></Route>
           <Route path="users" element={<Users />}></Route>
