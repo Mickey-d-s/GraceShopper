@@ -95,18 +95,19 @@ async function deleteProduct(product_id) {
   console.log("ping");
   try {
     await client.query(
-      `DELETE FROM inventories 
+      `DELETE FROM products
       WHERE product_id = $1`,
+      [product_id]
+    );
+
+    await client.query(
+      `DELETE FROM inventories 
+      WHERE inventory_id = $1`,
       [product_id]
     );
     await client.query(
       `DELETE FROM cart_items 
     WHERE product_id = $1`,
-      [product_id]
-    );
-    await client.query(
-      `DELETE FROM products
-      WHERE product_id = $1`,
       [product_id]
     );
 
