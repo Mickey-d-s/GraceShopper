@@ -202,7 +202,7 @@ export default function allInventories() {
                 onChange={(e) => setCategory(e.target.value)}
               />
 
-              <button>Update Product</button>
+              <button type="submit">Update Product</button>
             </form>
             <form
               onSubmit={(e) => {
@@ -216,7 +216,7 @@ export default function allInventories() {
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
-              <button>Update Quantity</button>
+              <button type="submit">Update Quantity</button>
             </form>
             <button
               className="shoppingButtons"
