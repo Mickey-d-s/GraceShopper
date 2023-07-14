@@ -35,19 +35,18 @@ async function getCartById(item_id) {
   }
 }
 
-async function updateCartItem({ item_id, shoppingcart_id, product_id, count }) {
+async function updateCartItem({ item_id, count }) {
   try {
     const {
       rows: [cart_item],
     } = await client.query(
       `
-    UPDATE cart_items
-    SET shoppingcart_id = $2, product_id =  $3, count= $4
-    WHERE item_id = $1
-    RETURNING *;
-    
+      UPDATE cart_items
+      SET count = $2
+      WHERE item_id = $1
+      RETURNING *;
     `,
-      [item_id, shoppingcart_id, product_id, count]
+      [item_id, count]
     );
     return cart_item;
   } catch (error) {

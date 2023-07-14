@@ -23,7 +23,7 @@ export function Homepage() {
               it's a juicy burger, our specially seasoned fries, or one of our
               refreshing beverages!
             </p>
-            <button>ABOUT US</button>
+            <button className="shoppingButtons">ABOUT US</button>
           </div>
         </div>
         <div className="flexImage">

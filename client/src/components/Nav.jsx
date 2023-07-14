@@ -84,7 +84,7 @@ const Nav = ({ cartItemCount }) => {
         </>
       )} */}
       <h3 className="Username">Hi, {user.username}</h3>
-      <button className="navbar__logout" onClick={handleLogout}>
+      <button className="shoppingButtons" onClick={handleLogout}>
         Logout
       </button>
     </nav>
