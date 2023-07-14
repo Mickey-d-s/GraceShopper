@@ -67,13 +67,7 @@ export default function allInventories() {
       throw error;
     }
   }
-  async function handleUpdateProduct(
-    product_id,
-    product_name,
-    price,
-    description,
-    category
-  ) {
+  async function handleUpdateProduct(e) {
     e.preventDefault();
     try {
       const updatedProductfromDB = await updateProducts({
@@ -91,6 +85,7 @@ export default function allInventories() {
     }
   }
   async function handleUpdateInventories(e, product_id, quantity) {
+    e.preventDefault();
     try {
       const updatedInventoryfromDB = await updateInventories({
         product_id,
@@ -170,6 +165,7 @@ export default function allInventories() {
               onSubmit={(e) => {
                 handleUpdateProduct(
                   e,
+                  product_id,
                   product_name,
                   price,
                   description,
