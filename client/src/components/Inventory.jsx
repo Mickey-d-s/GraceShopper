@@ -123,7 +123,9 @@ export default function allInventories() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button className="shoppingButtons" type="submit">
+          Submit
+        </button>
       </form>
       {/* <form
         onSubmit={(e) => handleUpdate(e, InventoryID, quantity)}
@@ -161,6 +163,7 @@ export default function allInventories() {
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
             <button
+              className="shoppingButtons"
               value={product.inventory_id}
               onClick={(e) => {
                 handledelete(e, product.inventory_id);

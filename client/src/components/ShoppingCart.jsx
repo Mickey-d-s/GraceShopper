@@ -108,8 +108,12 @@ export default function StartOrder({ setCartItemCount }) {
         )}
         {shoppingCart.length > 0 && (
           <>
-            <button onClick={() => checkout()}>Checkout</button>
-            <button onClick={() => deleteOrder()}>Cancel Order</button>
+            <button className="shoppingButtons" onClick={() => checkout()}>
+              Checkout
+            </button>
+            <button className="shoppingButtons" onClick={() => deleteOrder()}>
+              Cancel Order
+            </button>
           </>
         )}
       </div>
@@ -124,15 +128,20 @@ export default function StartOrder({ setCartItemCount }) {
                 <p>{item.name}</p>
                 <p>Qty: {item.qty}</p>
                 <button
+                  className="shoppingButtons"
                   onClick={() => handleEditQty(item.item_id, item.qty - 1)}
                 >
                   {" "}
                   -
                 </button>
-                <button onClick={() => handleEditQty(item.item_id, 0)}>
+                <button
+                  className="shoppingButtons"
+                  onClick={() => handleEditQty(item.item_id, 0)}
+                >
                   Delete
                 </button>
                 <button
+                  className="shoppingButtons"
                   onClick={() => handleEditQty(item.item_id, item.qty + 1)}
                 >
                   {" "}
