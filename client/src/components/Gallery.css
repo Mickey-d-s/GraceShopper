@@ -36,17 +36,15 @@ main {
     display: flex;
     flex-direction: row;
 }
-
 .gallerydivs {
     padding: 1rem;
     display: flex;
-    flex-direction: wrap;
+    flex-wrap: wrap;
     margin: 1%;
     border: yellow solid 2px;
     border-radius: 5px;
     animation: border-color 2s linear infinite;
 }
-
 
 @keyframes border-color {
 0% {
