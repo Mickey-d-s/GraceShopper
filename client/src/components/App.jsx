@@ -20,7 +20,6 @@ const getCartItemCount = () => {
     try {
       const parsedCartItems = JSON.parse(cartItems);
       console.log("parsedCartItems:", parsedCartItems);
-
       const cartItemCount = parsedCartItems.reduce((acc, curr) => {
         if (curr.qty === 1) {
           acc += 1;
@@ -34,7 +33,6 @@ const getCartItemCount = () => {
       console.error("Error parsing cartItems JSON:", error);
     }
   }
-
   return 0;
 };
 
