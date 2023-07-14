@@ -5,7 +5,7 @@ import "../App.css";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
-import MenuGallery from "./MenuGallery";
+import MenuGallery from "./menuGallery";
 
 const Nav = ({ cartItemCount }) => {
   const { setLoggedIn, loggedIn, user, setUser } = useAuth();
@@ -84,7 +84,7 @@ const Nav = ({ cartItemCount }) => {
         </>
       )} */}
       <h3 className="Username">Hi, {user.username}</h3>
-      <button className="shoppingButtons" onClick={handleLogout}>
+      <button className="navbar__logout" onClick={handleLogout}>
         Logout
       </button>
     </nav>

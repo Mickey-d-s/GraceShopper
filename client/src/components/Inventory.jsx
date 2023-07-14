@@ -183,24 +183,28 @@ export default function allInventories() {
                 id={`product_name`}
                 placeholder={"product name"}
                 value={product_name}
+                onChange={(e) => setProductName(e.target.value)}
               />
               <input
                 type="number"
                 id={`price`}
                 placeholder={"price"}
                 value={price}
+                onChange={(e) => setPriceName(e.target.value)}
               />
               <input
                 type="text"
                 id={`description`}
                 placeholder={"description"}
                 value={description}
+                onChange={(e) => setDescriptionName(e.target.value)}
               />
               <input
                 type="text"
                 id={`category`}
                 placeholder={"category"}
                 value={category}
+                onChange={(e) => setCategoryName(e.target.value)}
               />
 
               <button>Update Product</button>
@@ -215,6 +219,7 @@ export default function allInventories() {
                 id="quantity"
                 placeholder="quantity"
                 value={quantity}
+                onChange={(e) => setQuantityName(e.target.value)}
               />
               <button>Update Quantity</button>
             </form>
