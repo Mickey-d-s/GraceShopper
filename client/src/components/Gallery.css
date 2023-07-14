@@ -15,7 +15,7 @@ main {
 #header {
     display:flex;
     align-items:center;
-    background: orange;
+    background: #000;
     border-bottom: 1px solid black;
     height:70px;
     font-family:cursive;
@@ -24,11 +24,48 @@ main {
 }
 .gallery {
     text-align:center;
-    background-color:grey;
-    max-width:1500%
+    background-color:#FFD700;
 }
 
-img{
-    width:250px;
-    margin:10px;
+.menuGallery {
+    width: 150px;
+    height: 150px;
+
+}
+.gallerydiv {
+    display: flex;
+    flex-direction: row;
+}
+.gallerydivs {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1%;
+    border: yellow solid 2px;
+    border-radius: 5px;
+    animation: border-color 2s linear infinite;
+}
+
+@keyframes border-color {
+0% {
+    border-color: yellow;
+        }
+50% {
+    border-color: black;
+        }
+100% {
+    border-color: yellow;
+        }
+    } 
+
+    
+
+caption {
+    display:flex;
+    flex-wrap: wrap;
+    color:black;
+    font-size: 16px;
+    padding:1rem;
+    font-family: "Lobster", sans-serif;
+    font-weight: bold;
 }
