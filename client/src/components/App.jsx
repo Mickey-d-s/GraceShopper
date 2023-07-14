@@ -17,19 +17,24 @@ import MenuGallery from "./MenuGallery";
 const getCartItemCount = () => {
   const cartItems = localStorage.getItem("cartItems");
   if (cartItems) {
-    const parsedCartItems = JSON.parse(cartItems);
-    console.log("parsedCartitems:", parsedCartItems);
-    //returns array of objects. trying to do length but did reduce having a hard time understanding where the problem is coming from.
-    const cartItemCount = parsedCartItems.reduce((acc, curr) => {
-      if (curr.qty === 1) {
-        acc += 1;
-      } else {
-        acc += curr.qty;
-      }
-      return acc;
-    }, 0);
-    return cartItemCount;
+    try {
+      const parsedCartItems = JSON.parse(cartItems);
+      console.log("parsedCartItems:", parsedCartItems);
+
+      const cartItemCount = parsedCartItems.reduce((acc, curr) => {
+        if (curr.qty === 1) {
+          acc += 1;
+        } else {
+          acc += curr.qty;
+        }
+        return acc;
+      }, 0);
+      return cartItemCount;
+    } catch (error) {
+      console.error("Error parsing cartItems JSON:", error);
+    }
   }
+
   return 0;
 };
 
