@@ -75,6 +75,7 @@ productsRouter.delete("/:product_id", authRequired, async (req, res, next) => {
   try {
     console.log("ping");
     const product_id = req.params.product_id;
+    console.log("product_id:", product_id);
     const deletedProduct = await deleteProduct(product_id);
     const { sucess, message } = deletedProduct;
     console.log(sucess, message);

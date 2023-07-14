@@ -55,3 +55,20 @@ export async function cancelOrder(user_id) {
     console.error(error);
   }
 }
+
+export async function updateItemQty(item_id, count) {
+  try {
+    const response = await fetch(`/api/cart_items/${item_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ count: count }),
+    });
+    const updatedCartQty = await response.json();
+    console.log("updated cart item:", updatedCartQty);
+    return updatedCartQty;
+  } catch (error) {
+    console.error("Error updating Cart Quantity:", error);
+  }
+}

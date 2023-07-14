@@ -17,6 +17,20 @@ async function createInventories({ quantity }) {
     throw error;
   }
 }
+async function updateInventoryTotal(quantity, product_id) {
+  try {
+    await client.query(
+      `
+      UPDATE inventories 
+      SET quantitiy = quantity - $1
+      WHERE product_id = $2;
+      `,
+      [quantity, product_id]
+    );
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function getInventoryById(id) {
   const {

@@ -5,6 +5,7 @@ const {
   getAllInventory,
   updateInventory,
 
+  updateInventoryTotal,
   deleteInventory,
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
@@ -27,19 +28,19 @@ inventoriesRouter.post("/", authRequired, async (req, res, next) => {
     next(error);
   }
 });
-// inventoriesRouter.put(
-//   "/:product_id/quantity/:quantity",
-//   authRequired,
-//   async (req, res, next) => {
-//     try {
-//       const { product_id, quantity } = req.params;
-//       await updateInventoryTotal(product_id, quantity);
-//       res.send("Inventory total quantity updated successfully.");
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
-// );
+inventoriesRouter.patch(
+  "/:product_id/quantity/:quantity",
+  authRequired,
+  async (req, res, next) => {
+    try {
+      const { product_id, quantity } = req.params;
+      await updateInventoryTotal(product_id, quantity);
+      res.send("Inventory total quantity updated successfully.");
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 //not sure if working either get's syntax error of select
 inventoriesRouter.get("/:id", async (req, res, next) => {
   try {

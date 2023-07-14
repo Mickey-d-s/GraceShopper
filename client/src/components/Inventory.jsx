@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 // // import { useNavigate } from "react-router-dom";
 import {
-  deleteProducts,
   fetchAllInventories,
   createProduct,
   updateInventories,
@@ -18,6 +17,7 @@ export default function allInventories() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     async function fetchInventories() {
@@ -36,6 +36,7 @@ export default function allInventories() {
     e.preventDefault();
     try {
       const deleteproductsfromDB = await deleteProducts(inventory_id);
+      return deleteproductsfromDB;
     } catch (error) {
       throw error;
     }
@@ -59,6 +60,7 @@ export default function allInventories() {
         category,
       });
       console.log("AddedinventoryfromDB:", addedinventoryfromDB);
+      alert("Product added to Inventory!");
       return addedinventoryfromDB;
     } catch (error) {
       throw error;
@@ -76,7 +78,7 @@ export default function allInventories() {
         }
         className="addProduct"
       >
-        <label>Create New Product</label>
+        <label>Create New Product: </label>
         <input
           type="text"
           id="product_name"
@@ -112,8 +114,30 @@ export default function allInventories() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button className="shoppingButtons" type="submit">
+          Submit
+        </button>
       </form>
+      {/* <form
+        onSubmit={(e) => handleUpdate(e, InventoryID, quantity)}
+        className="updateProduct"
+      >
+        <label>Update Product</label>
+        <input
+          type="number"
+          id="inventoryID"
+          placeholder="inventoryID"
+          value={inventoryId}
+          onChange={(e) => setInventoryID(e.target.value)}
+        />
+        <input
+          type="number"
+          id="quantity"
+          placeholder="quantity"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+        />
+      </form> */}
       {products.map((product) => {
         const productInventories = inventories.filter(
           (inventory) => inventory.inventory_id === product.inventory_id
@@ -131,26 +155,14 @@ export default function allInventories() {
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
-            <input
-              type="number"
-              id={`quantity_${product.product_id}`}
-              placeholder={"quantity"}
-              value={updatedQuantity[product.product_id] || ""}
-              onChange={(e) =>
-                handleQuantityChange(product.product_id, e.target.value)
-              }
-            />
-            <button onClick={() => handleUpdateQuantity(product.product_id)}>
-              Update Quantity
-            </button>
             {/* <button
               value={inventory.inventory_id}
               onClick={(e) => {
-                handledelete(e, inventory.inventory_id);
+                handledelete(e, product.inventory_id);
               }}
             >
-              delete {inventory.product.product_name}?
-            </button> */}
+              delete {product.product_name}?
+            </button>
           </div>
         );
       })}

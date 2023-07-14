@@ -17,19 +17,37 @@ nav {
 .addProduct {
   margin: 1%;
   border: black solid 1px;
-  padding:1rem
+  padding: 1rem;
 }
 
 .inventories {
   display: inline-table;
   margin: 1%;
   border: black solid 1px;
+  padding: 1rem;
 }
+
 .ShoppingCart {
   display: inline-table;
   margin: 1%;
-  border: black solid 1px;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  animation: border-color 2s linear infinite;
 }
+
+@keyframes border-color {
+  0% {
+    border-color: yellow;
+  }
+  50% {
+    border-color: black;
+  }
+  100% {
+    border-color: yellow;
+  }
+}
+
 .Link {
   margin: auto;
 }
@@ -55,6 +73,11 @@ nav {
   border-radius: 50%;
   height: 1rem;
   width: 1rem;
+}
+
+html,
+body {
+  cursor: url("./assets/burgerCursor.png"), auto;
 }
 
 /* End Nav Bar */
@@ -113,6 +136,10 @@ nav {
 }
 #orderButtons {
   padding-bottom: 3rem;
+  padding-top: 4rem;
+}
+.shoppingButtons {
+  cursor: pointer;
 }
 
 /* End Shopping Cart Page */
@@ -252,9 +279,7 @@ a {
 .righty {
   margin-right: 2%;
 }
-#orderButtons {
-  padding-top: 4rem;
-}
+
 #fries {
   background-image: url(./assets/fries.jpg);
   background-size: cover;
@@ -359,6 +384,7 @@ footer {
   z-index: 99999;
 }
 .popup-content button {
+  cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;

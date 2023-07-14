@@ -12,22 +12,26 @@ import ShoppingCart from "../components/ShoppingCart";
 import { Dashboard } from "./Dashboard/dashboard";
 import Inventory from "./Inventory";
 import Users from "./Users";
+import MenuGallery from "./MenuGallery";
 
 const getCartItemCount = () => {
   const cartItems = localStorage.getItem("cartItems");
   if (cartItems) {
-    const parsedCartItems = JSON.parse(cartItems);
-    console.log("parsedCartitems:", parsedCartItems);
-    //returns array of objects. trying to do length but did reduce having a hard time understanding where the problem is coming from.
-    const cartItemCount = parsedCartItems.reduce((acc, curr) => {
-      if (curr.qty === 1) {
-        acc += 1;
-      } else {
-        acc += curr.qty;
-      }
-      return acc;
-    }, 0);
-    return cartItemCount;
+    try {
+      const parsedCartItems = JSON.parse(cartItems);
+      console.log("parsedCartItems:", parsedCartItems);
+      const cartItemCount = parsedCartItems.reduce((acc, curr) => {
+        if (curr.qty === 1) {
+          acc += 1;
+        } else {
+          acc += curr.qty;
+        }
+        return acc;
+      }, 0);
+      return cartItemCount;
+    } catch (error) {
+      console.error("Error parsing cartItems JSON:", error);
+    }
   }
   return 0;
 };
@@ -48,6 +52,7 @@ function App() {
           path="/Menu"
           element={<Menu setCartItemCount={setCartItemCount} />}
         />
+        <Route path="/MenuGallery" element={<MenuGallery />} />
         <Route path="Dashboard" element={<Dashboard />}>
           <Route path="inventory" element={<Inventory />}></Route>
           <Route path="users" element={<Users />}></Route>

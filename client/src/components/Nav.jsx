@@ -5,6 +5,7 @@ import "../App.css";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
+import MenuGallery from "./MenuGallery";
 
 const Nav = ({ cartItemCount }) => {
   const { setLoggedIn, loggedIn, user, setUser } = useAuth();
@@ -30,6 +31,9 @@ const Nav = ({ cartItemCount }) => {
           </div>
           <div className="Link">
             <Link to="/Menu">Menu</Link>
+          </div>
+          <div className="Link">
+            <Link to="/MenuGallery">Menu Gallery</Link>
           </div>
           <div className="Link">
             <Link to="/shoppingcart">Shopping Cart</Link>
@@ -58,6 +62,9 @@ const Nav = ({ cartItemCount }) => {
           <div className="Link">
             <Link to="/Menu">Menu</Link>
           </div>
+          <div className="Link">
+            <Link to="/MenuGallery">Menu Gallery</Link>
+          </div>
         </>
       )}
       {/* {user?.username != "Stranger" && user?.isAdmin === true && (
@@ -77,7 +84,7 @@ const Nav = ({ cartItemCount }) => {
         </>
       )} */}
       <h3 className="Username">Hi, {user.username}</h3>
-      <button className="navbar__logout" onClick={handleLogout}>
+      <button className="shoppingButtons" onClick={handleLogout}>
         Logout
       </button>
     </nav>
