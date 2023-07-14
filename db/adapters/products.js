@@ -116,10 +116,31 @@ async function deleteProduct(product_id) {
   }
 }
 
+async function updateProductQuantity(productID, newQuantity) {
+  try {
+    const {
+      rows: [updatedInventory],
+    } = await client.query(
+      `
+    UPDATE inventories
+    SET quantity = $3
+    WHERE inventory_id = $1 AND
+    product_id = $2
+    RETURNING *;
+    `,
+      [inventory_id, productID, newQuantity]
+    );
+    return updatedInventory;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
   updateProduct,
   deleteProduct,
+  updateProductQuantity,
 };

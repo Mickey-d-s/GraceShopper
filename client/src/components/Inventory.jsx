@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+
 // // import { useNavigate } from "react-router-dom";
 import {
   deleteProducts,
   fetchAllInventories,
   createProduct,
+  updateProductQuantity,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
 import { Outlet } from "react-router-dom";
@@ -16,6 +18,7 @@ export default function allInventories() {
   const [description, setDescription] = useState("");
   const [inventoryID, setInventoryID] = useState("");
   const [category, setCategory] = useState("");
+  const [updatedQuantity, setUpdatedQuantity] = useState("");
 
   useEffect(() => {
     async function fetchInventories() {
@@ -62,6 +65,45 @@ export default function allInventories() {
       throw error;
     }
   }
+
+  async function handleUpdateQuantity(productID) {
+    const newQuantity = setUpdatedQuantity[productID];
+    try {
+      await updateProductQuantity(productID, newQuantity);
+      const updatedProducts = products.map((product) => {
+        if (product.product_id === productID) {
+          return { ...product, quantity: newQuantity };
+        }
+        return product;
+      });
+      setProducts(updatedProducts);
+      recalculateTotalQuantity(); // Recalculates total quantities
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleQuantityChange = (productID, newQuantity) => {
+    setUpdatedQuantity((prevState) => ({
+      ...prevState,
+      [productID]: newQuantity,
+    }));
+  };
+  const recalculateTotalQuantity = () => {
+    const updatedInventories = inventories.map((inventory) => {
+      const product = products.find(
+        (product) => product.inventory_id === inventory.inventory_id
+      );
+      if (product) {
+        const productQuantity =
+          updatedQuantity[product.product_id] || product.quantity;
+        return { ...inventory, quantity: productQuantity };
+      }
+      return inventory;
+    });
+    setInventories(updatedInventories);
+  };
+
   return (
     <div>
       <h2>Inventory</h2>
@@ -117,6 +159,8 @@ export default function allInventories() {
           (sum, inventory) => sum + inventory.quantity,
           0
         );
+        const updateProductQuantity =
+          updatedQuantity[product.product_id] || product.quantity;
         return (
           <div key={product.product_id} className="inventories">
             <p>Inventory ID: {product.inventory_id}</p>
@@ -124,6 +168,18 @@ export default function allInventories() {
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
+            <input
+              type="number"
+              id={`quantity_${product.product_id}`}
+              placeholder={"quantity"}
+              value={updatedQuantity[product.product_id] || ""}
+              onChange={(e) =>
+                handleQuantityChange(product.product_id, e.target.value)
+              }
+            />
+            <button onClick={() => handleUpdateQuantity(product.product_id)}>
+              Update Quantity
+            </button>
             {/* <button
               value={inventory.inventory_id}
               onClick={(e) => {
@@ -139,3 +195,15 @@ export default function allInventories() {
     </div>
   );
 }
+
+{
+  /* <button
+              value={inventory.inventory_id}
+              onClick={(e) => {
+                handledelete(e, inventory.inventory_id);
+              }}
+            >
+              delete {inventory.product.product_name}?
+            </button> */
+}
+     

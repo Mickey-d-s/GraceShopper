@@ -5,6 +5,7 @@ const {
   getProductById,
   updateProduct,
   deleteProduct,
+  updateProductQuantity,
 } = require("../db/adapters/products");
 const { authRequired, checkForAdmin } = require("./utils");
 
@@ -82,5 +83,23 @@ productsRouter.delete("/:product_id", authRequired, async (req, res, next) => {
     next(error);
   }
 });
+
+productsRouter.put(
+  "/:product_id/quantity",
+  authRequired && checkForAdmin,
+  async (req, res, next) => {
+    try {
+      const { product_id } = req.params;
+      const { quantity } = req.body;
+      const updatedInventory = await updateProductQuantity(
+        product_id,
+        quantity
+      );
+      res.send(updatedInventory);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = productsRouter;
