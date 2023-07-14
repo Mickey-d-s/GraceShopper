@@ -67,15 +67,22 @@ export default function StartOrder({ setCartItemCount }) {
     (total, item) => total + item.qty * item.price,
     0
   );
-  const handleEditQty = (itemId, newQty) => {
-    const updatedCart = shoppingCart.map((item) => {
-      if (item.item_id === itemId) {
-        return { ...item, qty: newQty };
-      }
-      return item;
-    });
-    setShoppingCart(updatedCart);
+  const handleEditQty = async (item_id, count) => {
+    try {
+      const updatedCartQty = await updateItemQty(item_id, count);
+      const updatedCart = shoppingCart.map((item) => {
+        if (item.item_id === item_id) {
+          return { ...item, count: updatedCartQty }; // Update the quantity
+        }
+        return item;
+      });
+      setShoppingCart(updatedCart);
+    } catch (error) {
+      console.error("Error handling Edit Quantity:", error);
+      // Handle the error, show an error message, or perform any other necessary actions
+    }
   };
+
   const deleteOrder = async () => {
     try {
       const canceledShoppingCart = await cancelOrder();

@@ -42,18 +42,14 @@ cart_itemsRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-cart_itemsRouter.patch("/:item_id", authRequired, async (req, res, next) => {
+cart_itemsRouter.patch("/:update", async (req, res, next) => {
   try {
-    const { item_id } = req.params;
-    const { shoppingcart_id, product_id, count } = req.body;
-    console.log(req.body);
-    const updatedCartItem = await updateCartItem({
+    const { item_id, count } = req.body;
+    const updatedCartItem = await updateCartItem(
+      req.params.update,
       item_id,
-      shoppingcart_id,
-      product_id,
-      count,
-    });
-    console.log("updatedCartItem:", updatedCartItem);
+      count
+    );
     res.send(updatedCartItem);
   } catch (error) {
     next(error);
