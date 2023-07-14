@@ -17,14 +17,14 @@ nav {
 .addProduct {
   margin: 1%;
   border: black solid 1px;
-  padding:1rem
+  padding: 1rem;
 }
 
 .inventories {
   display: inline-table;
   margin: 1%;
   border: black solid 1px;
-  padding:1rem;
+  padding: 1rem;
 }
 
 .ShoppingCart {
@@ -46,7 +46,7 @@ nav {
   100% {
     border-color: yellow;
   }
-} 
+}
 
 .Link {
   margin: auto;
@@ -75,6 +75,11 @@ nav {
   width: 1rem;
 }
 
+html,
+body {
+  cursor: url("./assets/burgerCursor.png"), auto;
+}
+
 /* End Nav Bar */
 /* ---------------------------------------- */
 /* Shopping Cart Page */
@@ -91,7 +96,7 @@ nav {
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
-  cursor: pointer;
+  cursor: crosshair;
   border-radius: 4px;
   transition: background-color 0.3s ease;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);

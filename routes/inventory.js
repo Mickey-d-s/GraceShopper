@@ -27,7 +27,7 @@ inventoriesRouter.post("/", authRequired, async (req, res, next) => {
     next(error);
   }
 });
-inventoriesRouter.put(
+inventoriesRouter.patch(
   "/:product_id/quantity/:quantity",
   authRequired,
   async (req, res, next) => {
