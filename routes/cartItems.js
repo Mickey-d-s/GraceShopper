@@ -46,8 +46,8 @@ cart_itemsRouter.patch("/:item_id", async (req, res, next) => {
   try {
     const { item_id } = req.params;
     const { count } = req.body;
-    const updatedCartItem = await updateCartItem(item_id, count);
-    res.json(updatedCartItem);
+    const updatedCartItem = await updateCartItem({ item_id, count });
+    res.send(updatedCartItem);
   } catch (error) {
     next(error);
   }

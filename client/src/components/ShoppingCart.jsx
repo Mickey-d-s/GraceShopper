@@ -3,6 +3,7 @@ import {
   createShoppingCart,
   completeOrder,
   cancelOrder,
+  updateItemQty,
 } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
@@ -51,28 +52,17 @@ export default function StartOrder({ setCartItemCount }) {
   //Delete function item from cart_items inside of shopping cart
   //Update function QTY of item inside of shopping cart
 
-  const checkout = async () => {
-    try {
-      const completedCart = await completeOrder();
-      console.log("Shopping cart completed:", completedCart);
-      setShoppingCart([]);
-      localStorage.clear();
-      //edits inventory qty by how much was ordered
-      setCartItemCount(0);
-    } catch (error) {
-      console.error("Error completing shopping cart:", error);
-    }
-  };
   const totalPrice = shoppingCart.reduce(
     (total, item) => total + item.qty * item.price,
     0
   );
+
   const handleEditQty = async (item_id, count) => {
     try {
       const updatedCartQty = await updateItemQty(item_id, count);
       const updatedCart = shoppingCart.map((item) => {
         if (item.item_id === item_id) {
-          return { ...item, count: updatedCartQty }; // Update the quantity
+          return { ...item, qty: updatedCartQty.count }; // Update the quantity
         }
         return item;
       });
@@ -92,6 +82,19 @@ export default function StartOrder({ setCartItemCount }) {
       setCartItemCount(0);
     } catch (error) {
       console.error("Error canceling shopping cart:", error);
+    }
+  };
+
+  const checkout = async () => {
+    try {
+      const completedCart = await completeOrder();
+      console.log("Shopping cart completed:", completedCart);
+      setShoppingCart([]);
+      localStorage.clear();
+      //edits inventory qty by how much was ordered
+      setCartItemCount(0);
+    } catch (error) {
+      console.error("Error completing shopping cart:", error);
     }
   };
 
