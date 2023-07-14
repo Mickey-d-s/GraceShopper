@@ -52,7 +52,7 @@ productsRouter.get("/:id", async (req, res, next) => {
 });
 
 productsRouter.patch(
-  "/:update",
+  "/:product_id",
   authRequired && checkForAdmin,
   async (req, res, next) => {
     try {

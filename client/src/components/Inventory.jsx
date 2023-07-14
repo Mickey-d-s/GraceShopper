@@ -5,7 +5,8 @@ import {
   deleteProducts,
   fetchAllInventories,
   createProduct,
-  updateProductQuantity,
+  updateInventories,
+  updateProducts,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
 import { Outlet } from "react-router-dom";
@@ -16,9 +17,7 @@ export default function allInventories() {
   const [product_name, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [inventoryID, setInventoryID] = useState("");
   const [category, setCategory] = useState("");
-  const [updatedQuantity, setUpdatedQuantity] = useState("");
 
   useEffect(() => {
     async function fetchInventories() {
@@ -66,43 +65,7 @@ export default function allInventories() {
     }
   }
 
-  async function handleUpdateQuantity(productID) {
-    const newQuantity = setUpdatedQuantity[productID];
-    try {
-      await updateProductQuantity(productID, newQuantity);
-      const updatedProducts = products.map((product) => {
-        if (product.product_id === productID) {
-          return { ...product, quantity: newQuantity };
-        }
-        return product;
-      });
-      setProducts(updatedProducts);
-      recalculateTotalQuantity(); // Recalculates total quantities
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const handleQuantityChange = (productID, newQuantity) => {
-    setUpdatedQuantity((prevState) => ({
-      ...prevState,
-      [productID]: newQuantity,
-    }));
-  };
-  const recalculateTotalQuantity = () => {
-    const updatedInventories = inventories.map((inventory) => {
-      const product = products.find(
-        (product) => product.inventory_id === inventory.inventory_id
-      );
-      if (product) {
-        const productQuantity =
-          updatedQuantity[product.product_id] || product.quantity;
-        return { ...inventory, quantity: productQuantity };
-      }
-      return inventory;
-    });
-    setInventories(updatedInventories);
-  };
+  async function handleUpdateQuantity(productID) {}
 
   return (
     <div>
@@ -206,4 +169,3 @@ export default function allInventories() {
               delete {inventory.product.product_name}?
             </button> */
 }
-     

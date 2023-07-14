@@ -43,21 +43,37 @@ async function getAllInventory() {
     throw error;
   }
 }
-
-async function updateInventory({ inventory_id, product_id, quantity }) {
-  const {
-    rows: [inventory],
-  } = await client.query(
-    `
-    UPDATE inventories
-    SET inventory_id = $1
-    WHERE product_id = $2 AND quantity = $3;
+async function updateInventories(product_id, quantity) {
+  try {
+    const {
+      rows: [updatedInventories],
+    } = await client.query(
+      `
+      UPDATE inventories
+      SET quantity = $2
+      WHERE inventory_id = (SELECT inventory_id FROM products WHERE product_id = $1);
     `,
-    [inventory_id, product_id, quantity]
-  );
-  console.log("updateInventory CHECK", inventory);
-  return inventory;
+      [product_id, quantity]
+    );
+    return updatedInventories;
+  } catch (error) {
+    throw error;
+  }
 }
+// async function updateInventory({ inventory_id, product_id, quantity }) {
+//   const {
+//     rows: [inventory],
+//   } = await client.query(
+//     `
+//     UPDATE inventories
+//     SET inventory_id = $1
+//     WHERE product_id = $2 AND quantity = $3;
+//     `,
+//     [inventory_id, product_id, quantity]
+//   );
+//   console.log("updateInventory CHECK", inventory);
+//   return inventory;
+// }
 
 async function deleteInventory(id) {
   const {
@@ -73,6 +89,6 @@ module.exports = {
   createInventories,
   getInventoryById,
   getAllInventory,
-  updateInventory,
+  updateInventories,
   deleteInventory,
 };

@@ -68,22 +68,22 @@ async function updateProduct(
   product_name,
   price,
   description,
-  category
+  category,
+  quantity
 ) {
   try {
     const {
       rows: [updatedProduct],
     } = await client.query(
       `
-    UPDATE products
-    SET product_name = $2,
-    price = $3,
-    description = $4
-    category = $5
-    WHERE product_id = $1
-    RETURNING *;
+      UPDATE products
+      SET product_name = $2,
+          price = $3,
+          description = $4,
+          category = $5
+      WHERE product_id = $1;
     `,
-      [product_id, product_name, price, description, category]
+      [product_id, product_name, price, description, category, quantity]
     );
     return updatedProduct;
   } catch (error) {
@@ -116,31 +116,10 @@ async function deleteProduct(product_id) {
   }
 }
 
-async function updateProductQuantity(productID, newQuantity) {
-  try {
-    const {
-      rows: [updatedInventory],
-    } = await client.query(
-      `
-    UPDATE inventories
-    SET quantity = $3
-    WHERE inventory_id = $1 AND
-    product_id = $2
-    RETURNING *;
-    `,
-      [inventory_id, productID, newQuantity]
-    );
-    return updatedInventory;
-  } catch (error) {
-    throw error;
-  }
-}
-
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
   updateProduct,
   deleteProduct,
-  updateProductQuantity,
 };

@@ -54,17 +54,13 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
 
 //getting you are not authorized for this one too
 inventoriesRouter.patch(
-  "/:inventory_id",
+  "/:product_id",
   authRequired,
   async (req, res, next) => {
     try {
-      const { inventory_id } = req.params;
-      const { product_id, quantity } = req.body;
-      const updatedInventory = await updateInventory(
-        inventory_id,
-        product_id,
-        quantity
-      );
+      const { product_id } = req.params;
+      const { quantity } = req.body;
+      const updatedInventory = await updateInventory(product_id, quantity);
       res.send(updatedInventory);
     } catch (error) {
       next(error);

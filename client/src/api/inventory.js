@@ -72,14 +72,38 @@ export async function createProduct(
   }
 }
 
-export async function updateProductQuantity(product_id, newQuantity) {
+export async function updateInventories(product_id, quantity) {
   try {
     const response = await fetch(`/api/inventory/${product_id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ quantity: newQuantity }),
+      body: JSON.stringify({ quantity }),
+    });
+    if (!response.ok) {
+      throw new Error("failed to update inventory quantity");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function updateProducts(
+  product_id,
+  product_name,
+  price,
+  description,
+  category
+) {
+  try {
+    const response = await fetch(`/api/products/:${product_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product_name, price, description, category }),
     });
     if (!response.ok) {
       throw new Error("failed to update product quantity");
