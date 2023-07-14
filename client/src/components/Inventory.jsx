@@ -68,7 +68,6 @@ export default function allInventories() {
     }
   }
   async function handleUpdateProduct(
-    e,
     product_id,
     product_name,
     price,
@@ -180,29 +179,29 @@ export default function allInventories() {
             >
               <input
                 type="text"
-                id={`product_name`}
-                placeholder={"product name"}
+                id="product_name"
+                placeholder="product name"
                 value={product_name}
                 onChange={(e) => setProductName(e.target.value)}
               />
               <input
                 type="number"
-                id={`price`}
-                placeholder={"price"}
+                id="price"
+                placeholder="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
               <input
                 type="text"
-                id={`description`}
-                placeholder={"description"}
+                id="description"
+                placeholder="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
               <input
                 type="text"
-                id={`category`}
-                placeholder={"category"}
+                id="category"
+                placeholder="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               />
