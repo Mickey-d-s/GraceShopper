@@ -62,6 +62,14 @@ export default function StartOrder({ setCartItemCount }) {
       const updatedCartQty = await updateItemQty(item_id, count);
       const updatedCart = shoppingCart.map((item) => {
         if (item.item_id === item_id) {
+          setCartItemCount((prevCount) => {
+            if (count === item.qty - 1) {
+              return prevCount - 1; // Decrease count by 1
+            } else if (count === item.qty + 1) {
+              return prevCount + 1; // Increase count by 1
+            }
+            return prevCount; // No change
+          });
           return { ...item, qty: updatedCartQty.count }; // Update the quantity
         }
         return item;
