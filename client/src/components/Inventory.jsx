@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-
 // // import { useNavigate } from "react-router-dom";
 import {
   fetchAllInventories,
   createProduct,
   updateInventories,
   updateProducts,
+  deleteProducts,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
 import { Outlet } from "react-router-dom";
@@ -16,8 +16,9 @@ export default function allInventories() {
   const [product_name, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [inventoryID, setInventoryID] = useState("");
   const [category, setCategory] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState("");
 
   useEffect(() => {
     async function fetchInventories() {
@@ -66,8 +67,42 @@ export default function allInventories() {
       throw error;
     }
   }
+  async function handleUpdateProduct(
+    e,
+    product_id,
+    product_name,
+    price,
+    description,
+    category
+  ) {
+    e.preventDefault();
+    try {
+      const updatedProductfromDB = await updateProducts({
+        product_id,
+        product_name,
+        price,
+        description,
+        category,
+      });
+      console.log("updatedproductfromdb:", updatedProductfromDB);
 
-  async function handleUpdateQuantity(productID) {}
+      return updatedProductfromDB;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async function handleUpdateInventories(e, product_id, quantity) {
+    try {
+      const updatedInventoryfromDB = await updateInventories({
+        product_id,
+        quantity,
+      });
+      console.log("updatedInventoryfromDB:", updatedInventoryfromDB);
+      return updatedInventoryfromDB;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   return (
     <div>
@@ -78,7 +113,7 @@ export default function allInventories() {
         }
         className="addProduct"
       >
-        <label>Create New Product: </label>
+        <label>Create New Product</label>
         <input
           type="text"
           id="product_name"
@@ -88,8 +123,8 @@ export default function allInventories() {
         />
         <input
           type="number"
-          id="inventoryID"
-          placeholder="inventoryID"
+          id="inventory_id"
+          placeholder="inventory_id"
           value={inventoryID}
           onChange={(e) => setInventoryID(e.target.value)}
         />
@@ -114,30 +149,9 @@ export default function allInventories() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         />
-        <button className="shoppingButtons" type="submit">
-          Submit
-        </button>
+
+        <button type="submit">Submit</button>
       </form>
-      {/* <form
-        onSubmit={(e) => handleUpdate(e, InventoryID, quantity)}
-        className="updateProduct"
-      >
-        <label>Update Product</label>
-        <input
-          type="number"
-          id="inventoryID"
-          placeholder="inventoryID"
-          value={inventoryId}
-          onChange={(e) => setInventoryID(e.target.value)}
-        />
-        <input
-          type="number"
-          id="quantity"
-          placeholder="quantity"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        />
-      </form> */}
       {products.map((product) => {
         const productInventories = inventories.filter(
           (inventory) => inventory.inventory_id === product.inventory_id
@@ -146,8 +160,6 @@ export default function allInventories() {
           (sum, inventory) => sum + inventory.quantity,
           0
         );
-        const updateProductQuantity =
-          updatedQuantity[product.product_id] || product.quantity;
         return (
           <div key={product.product_id} className="inventories">
             <p>Inventory ID: {product.inventory_id}</p>
@@ -155,8 +167,60 @@ export default function allInventories() {
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
-            {/* <button
-              value={inventory.inventory_id}
+            <form
+              onSubmit={(e) => {
+                handleUpdateProduct(
+                  e,
+                  product_name,
+                  price,
+                  description,
+                  category
+                );
+              }}
+            >
+              <input
+                type="text"
+                id={`product_name`}
+                placeholder={"product name"}
+                value={product_name}
+              />
+              <input
+                type="number"
+                id={`price`}
+                placeholder={"price"}
+                value={price}
+              />
+              <input
+                type="text"
+                id={`description`}
+                placeholder={"description"}
+                value={description}
+              />
+              <input
+                type="text"
+                id={`category`}
+                placeholder={"category"}
+                value={category}
+              />
+
+              <button>Update Product</button>
+            </form>
+            <form
+              onSubmit={(e) => {
+                handleUpdateInventories(e, quantity);
+              }}
+            >
+              <input
+                type="number"
+                id="quantity"
+                placeholder="quantity"
+                value={quantity}
+              />
+              <button>Update Quantity</button>
+            </form>
+            <button
+              className="shoppingButtons"
+              value={product.inventory_id}
               onClick={(e) => {
                 handledelete(e, product.inventory_id);
               }}
