@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import InventoryItem from "./InventoryItem";
+// import InventoryItem from "./InventoryItem";
 // // import { useNavigate } from "react-router-dom";
 import {
   fetchAllInventories,
   createProduct,
-  updateInventories,
+  updateInventoryQuantity,
   deleteProduct,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
@@ -59,36 +59,21 @@ export default function allInventories() {
       throw error;
     }
   }
-  async function handleUpdateProduct(e) {
-    e.preventDefault();
-    try {
-      const updatedProductfromDB = await updateProducts({
-        product_id,
-        product_name,
-        price,
-        description,
-        category,
-      });
-      console.log("updatedproductfromdb:", updatedProductfromDB);
 
-      return updatedProductfromDB;
-    } catch (error) {
-      throw error;
-    }
-  }
-  async function handleUpdateInventories(e, product_id, quantity) {
+  async function handleUpdateInventoryQuantity(e, inventory_id, quantity) {
     e.preventDefault();
     try {
-      const updatedInventoryfromDB = await updateInventories({
-        product_id,
-        quantity,
-      });
+      const updatedInventoryfromDB = await updateInventoryQuantity(
+        inventory_id,
+        quantity
+      );
       console.log("updatedInventoryfromDB:", updatedInventoryfromDB);
       return updatedInventoryfromDB;
     } catch (error) {
       throw error;
     }
   }
+
   async function handledelete(e, product_id, inventory_id) {
     e.preventDefault();
     try {
@@ -166,53 +151,13 @@ export default function allInventories() {
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
-            {/* <form
-              onSubmit={(e) => {
-                handleUpdateProduct(
-                  e,
-                  product_id,
-                  product_name,
-                  price,
-                  description,
-                  category
-                );
-              }}
-            >
-              <input
-                type="text"
-                id="product_name"
-                placeholder="product name"
-                value={product_name}
-                onChange={(e) => setProductName(e.target.value)}
-              />
-              <input
-                type="number"
-                id="price"
-                placeholder="price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
-              <input
-                type="text"
-                id="description"
-                placeholder="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-              <input
-                type="text"
-                id="category"
-                placeholder="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-
-              <button type="submit">Update Product</button>
-            </form>{" "}
-            */}{" "}
             <form
               onSubmit={(e) => {
-                handleUpdateInventories(e, product.product_id, quantity);
+                handleUpdateInventoryQuantity(
+                  e,
+                  product.inventory_id,
+                  quantity
+                );
               }}
             >
               <input
@@ -241,15 +186,4 @@ export default function allInventories() {
       <Outlet />
     </div>
   );
-}
-
-{
-  /* <button
-              value={inventory.inventory_id}
-              onClick={(e) => {
-                handledelete(e, inventory.inventory_id);
-              }}
-            >
-              delete {inventory.product.product_name}?
-            </button> */
 }

@@ -3,21 +3,11 @@ const {
   createInventories,
   getInventoryById,
   getAllInventory,
-  updateInventories,
-  updateInventoryTotal,
+  updateInventoryQuantity,
   deleteInventory,
   updateInventory,
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
-
-inventoriesRouter.get("/", async (req, res, next) => {
-  try {
-    const AllInventory = await getAllInventory();
-    res.send(AllInventory);
-  } catch (error) {
-    next(error);
-  }
-});
 
 inventoriesRouter.post("/", authRequired, async (req, res, next) => {
   try {
@@ -28,20 +18,16 @@ inventoriesRouter.post("/", authRequired, async (req, res, next) => {
     next(error);
   }
 });
-inventoriesRouter.patch(
-  "/:product_id/quantity/:quantity",
-  authRequired,
-  async (req, res, next) => {
-    try {
-      const { product_id, quantity } = req.params;
-      await updateInventoryTotal(product_id, quantity);
-      res.send("Inventory total quantity updated successfully.");
-    } catch (error) {
-      next(error);
-    }
+
+inventoriesRouter.get("/", async (req, res, next) => {
+  try {
+    const AllInventory = await getAllInventory();
+    res.send(AllInventory);
+  } catch (error) {
+    next(error);
   }
-);
-//not sure if working either get's syntax error of select
+});
+
 inventoriesRouter.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -53,7 +39,20 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-//getting you are not authorized for this one too
+inventoriesRouter.patch(
+  "/newupdate",
+  // authRequired,
+  async (req, res, next) => {
+    try {
+      const { inventory_id, quantity } = req.body; // Extract inventory_id and quantity from the request body
+      const updatedQty = await updateInventoryQuantity(inventory_id, quantity);
+      res.send(updatedQty);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 inventoriesRouter.patch("/update", authRequired, async (req, res, next) => {
   try {
     console.log("ping================================");
@@ -61,7 +60,7 @@ inventoriesRouter.patch("/update", authRequired, async (req, res, next) => {
     for (let i = 0; i < req.body.length; i++) {
       console.log(i, req.body[i]);
       let { product_id, quantity } = req.body[i];
-      console.log("within for lopp within routes", product_id, quantity);
+      console.log("within for loop within routes", product_id, quantity);
       const updatedInventory = await updateInventory(product_id, quantity);
       res.send(updatedInventory);
     }
@@ -69,6 +68,7 @@ inventoriesRouter.patch("/update", authRequired, async (req, res, next) => {
     next(error);
   }
 });
+
 inventoriesRouter.patch(
   "/:inventory_id",
   authRequired,

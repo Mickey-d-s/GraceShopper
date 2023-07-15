@@ -96,6 +96,26 @@ export async function createProduct(
   }
 }
 
+export async function updateInventoryQuantity(inventory_id, quantity) {
+  try {
+    const response = await fetch(`/api/inventories/newupdate`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inventory_id,
+        quantity,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function updateInventories(p_id) {
   console.log("product_id object:", p_id);
 
@@ -116,6 +136,7 @@ export async function updateInventories(p_id) {
     throw error;
   }
 }
+
 export async function updateInventory({ i_id }) {
   console.log("inventory_id object:", i_id);
   const { inventory_id, updatedObj } = i_id;
@@ -137,44 +158,3 @@ export async function updateInventory({ i_id }) {
     throw error;
   }
 }
-// export async function updateProducts(
-//   product_id,
-//   product_name,
-//   price,
-//   description,
-//   category
-// ) {
-//   try {
-//     const response = await fetch(`/api/products/:${product_id}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ product_name, price, description, category }),
-//     });
-//     if (!response.ok) {
-//       throw new Error("failed to update product quantity");
-//     }
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-// export async function createInventories(quantity) {
-//   try {
-//     const response = await fetch(`/api/inventories`, {
-//       method: "post",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         quantity,
-//       }),
-//     });
-//     const results = response.json;
-//     return resuls;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
