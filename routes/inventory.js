@@ -6,6 +6,7 @@ const {
   updateInventories,
   updateInventoryTotal,
   deleteInventory,
+  updateInventory,
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
 
@@ -64,6 +65,22 @@ inventoriesRouter.patch(
       console.log("quantity in routes", quantity);
       const updatedInventory = await updateInventories(product_id, quantity);
       res.send(updatedInventory);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+inventoriesRouter.patch(
+  "/:inventory_id",
+  authRequired,
+  async (req, res, next) => {
+    try {
+      const { inventory_id } = req.params;
+      console.log("inventory_id", inventory_id);
+      const { updatedObj } = req.body;
+      console.log("updatedObj", updatedObj);
+      const newInventories = await updateInventory(inventory_id, updatedObj);
+      res.send(newInventories);
     } catch (error) {
       next(error);
     }

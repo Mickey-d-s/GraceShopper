@@ -74,21 +74,26 @@ async function updateInventories(product_id, quantity) {
     throw error;
   }
 }
-// async function updateInventory({ inventory_id, product_id, quantity }) {
-//   const {
-//     rows: [inventory],
-//   } = await client.query(
-//     `
-//     UPDATE inventories
-//     SET inventory_id = $1
-//     WHERE product_id = $2 AND quantity = $3;
-//     `,
-//     [inventory_id, product_id, quantity]
-//   );
-//   console.log("updateInventory CHECK", inventory);
-//   return inventory;
-// }
-
+async function updateInventory({ inventory_id, updateObj }) {
+  console.log(inventory_id, updateObj);
+  const setString = Object.keys(updateObj)
+    .map((key, i) => {
+      return `${key}=$${i + 1}`;
+    })
+    .join(", ");
+  const {
+    rows: [inventory],
+  } = await client.query(
+    `
+    UPDATE inventories
+    SET ${setString}
+    WHERE product_id = ${inventory_id}
+    `,
+    Object.values(updateObj)
+  );
+  console.log("updateInventory CHECK", inventory);
+  return inventory;
+}
 async function deleteInventory(id) {
   const {
     rows: [inventory],
@@ -104,6 +109,7 @@ module.exports = {
   getInventoryById,
   getAllInventory,
   updateInventories,
+  updateInventory,
   deleteInventory,
   updateInventoryTotal,
 };

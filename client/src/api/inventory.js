@@ -118,6 +118,27 @@ export async function updateInventories(p_id) {
     throw error;
   }
 }
+export async function updateInventory({ i_id }) {
+  console.log("inventory_id object:", i_id);
+  const { inventory_id, updatedObj } = i_id;
+
+  try {
+    const response = await fetch(`/api/inventories/:${inventory_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ updatedObj }),
+    });
+    if (!response.ok) {
+      throw new Error("failed to update inventory quantity");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 // export async function updateProducts(
 //   product_id,
 //   product_name,
