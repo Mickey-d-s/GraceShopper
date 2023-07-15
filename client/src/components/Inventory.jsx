@@ -151,11 +151,6 @@ export default function allInventories() {
 
         <button type="submit">Submit</button>
       </form>
-<<<<<<< HEAD
-      {products.map((product) => (
-        <InventoryItem product={product} key={product.product_id} />
-      ))}
-=======
       {products.map((product) => {
         const productInventories = inventories.filter(
           (inventory) => inventory.inventory_id === product.inventory_id
@@ -214,7 +209,8 @@ export default function allInventories() {
               />
 
               <button type="submit">Update Product</button>
-            </form>
+            </form>{" "}
+            */}
             <form
               onSubmit={(e) => {
                 handleUpdateInventories(e, product.product_id, quantity);
@@ -243,7 +239,6 @@ export default function allInventories() {
           </div>
         );
       })}
->>>>>>> cc4815fa8586dfcfbf2537a78b2e15d3c85759a6
       <Outlet />
     </div>
   );
