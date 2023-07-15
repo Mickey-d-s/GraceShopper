@@ -93,30 +93,42 @@ export default function StartOrder({ setCartItemCount }) {
       console.error("Error canceling shopping cart:", error);
     }
   };
-
   const checkout = async () => {
     try {
-      console.log(shoppingCart);
-      let items = [];
-      for (let i = 0; i < shoppingCart.length; i++) {
-        items.push({
-          productid: shoppingCart[i].product_id,
-          itemqty: shoppingCart[i].qty,
-        });
-      }
-      console.log(items);
-      const updatedquantity = await updateInventories(items);
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
       localStorage.clear();
       //edits inventory qty by how much was ordered
       setCartItemCount(0);
-      return updatedquantity, completedCart;
     } catch (error) {
       console.error("Error completing shopping cart:", error);
     }
   };
+
+  // const checkout = async () => {
+  //   try {
+  //     console.log(shoppingCart);
+  //     let items = [];
+  //     for (let i = 0; i < shoppingCart.length; i++) {
+  //       items.push({
+  //         productid: shoppingCart[i].product_id,
+  //         itemqty: shoppingCart[i].qty,
+  //       });
+  //     }
+  //     console.log(items);
+  //     const updatedquantity = await updateInventories(items);
+  //     const completedCart = await completeOrder();
+  //     console.log("Shopping cart completed:", completedCart);
+  //     setShoppingCart([]);
+  //     localStorage.clear();
+  //     //edits inventory qty by how much was ordered
+  //     setCartItemCount(0);
+  //     return updatedquantity, completedCart;
+  //   } catch (error) {
+  //     console.error("Error completing shopping cart:", error);
+  //   }
+  // };
   return (
     <div>
       <div id="orderButtons">
