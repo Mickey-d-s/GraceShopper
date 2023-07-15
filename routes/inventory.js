@@ -3,8 +3,7 @@ const {
   createInventories,
   getInventoryById,
   getAllInventory,
-  updateInventory,
-
+  updateInventories,
   updateInventoryTotal,
   deleteInventory,
 } = require("../db/adapters/inventory");
@@ -60,8 +59,10 @@ inventoriesRouter.patch(
   async (req, res, next) => {
     try {
       const { product_id } = req.params;
+      console.log("product_id in routes:", product_id);
       const { quantity } = req.body;
-      const updatedInventory = await updateInventory(product_id, quantity);
+      console.log("quantity in routes", quantity);
+      const updatedInventory = await updateInventories(product_id, quantity);
       res.send(updatedInventory);
     } catch (error) {
       next(error);

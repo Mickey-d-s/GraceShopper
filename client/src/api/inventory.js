@@ -96,9 +96,13 @@ export async function createProduct(
   }
 }
 
-export async function updateInventories(product_id, quantity) {
+export async function updateInventories(p_id) {
+  const { product_id, quantity } = p_id;
+  console.log("product_id object:", p_id);
+  console.log("product_id:", product_id);
+  console.log("quantity:", quantity);
   try {
-    const response = await fetch(`/api/inventory/${product_id}`, {
+    const response = await fetch(`/api/inventories/${product_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

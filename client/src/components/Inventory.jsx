@@ -211,17 +211,19 @@ export default function allInventories() {
             </form>
             <form
               onSubmit={(e) => {
-                handleUpdateInventories(e, quantity);
+                handleUpdateInventories(e, product.product_id, quantity);
               }}
             >
               <input
                 type="number"
                 id="quantity"
                 placeholder="quantity"
-                value={quantity}
+                value={product.quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
-              <button type="submit">Update Quantity</button>
+              <button type="submit" value={product.product_id}>
+                Update Quantity
+              </button>
             </form>
             <button
               className="shoppingButtons"
