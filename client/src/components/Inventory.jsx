@@ -151,9 +151,99 @@ export default function allInventories() {
 
         <button type="submit">Submit</button>
       </form>
+<<<<<<< HEAD
       {products.map((product) => (
         <InventoryItem product={product} key={product.product_id} />
       ))}
+=======
+      {products.map((product) => {
+        const productInventories = inventories.filter(
+          (inventory) => inventory.inventory_id === product.inventory_id
+        );
+        const totalQuantity = productInventories.reduce(
+          (sum, inventory) => sum + inventory.quantity,
+          0
+        );
+        return (
+          <div key={product.product_id} className="inventories">
+            <p>Inventory ID: {product.inventory_id}</p>
+            <p>Product: {product.product_name}</p>
+            <p>Description: {product.description}</p>
+            <p>Category: {product.category}</p>
+            <p>Price: ${product.price}</p>
+            <p>Quantity: {totalQuantity}</p>
+            <form
+              onSubmit={(e) => {
+                handleUpdateProduct(
+                  e,
+                  product_id,
+                  product_name,
+                  price,
+                  description,
+                  category
+                );
+              }}
+            >
+              <input
+                type="text"
+                id="product_name"
+                placeholder="product name"
+                value={product_name}
+                onChange={(e) => setProductName(e.target.value)}
+              />
+              <input
+                type="number"
+                id="price"
+                placeholder="price"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              <input
+                type="text"
+                id="description"
+                placeholder="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <input
+                type="text"
+                id="category"
+                placeholder="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+
+              <button type="submit">Update Product</button>
+            </form>
+            <form
+              onSubmit={(e) => {
+                handleUpdateInventories(e, product.product_id, quantity);
+              }}
+            >
+              <input
+                type="number"
+                id="quantity"
+                placeholder="quantity"
+                value={product.quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+              <button type="submit" value={product.product_id}>
+                Update Quantity
+              </button>
+            </form>
+            <button
+              className="shoppingButtons"
+              value={product.product_id}
+              onClick={(e) => {
+                handledelete(e, product.product_id, product.inventory_id);
+              }}
+            >
+              delete {product.product_name}?
+            </button>
+          </div>
+        );
+      })}
+>>>>>>> cc4815fa8586dfcfbf2537a78b2e15d3c85759a6
       <Outlet />
     </div>
   );

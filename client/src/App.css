@@ -11,8 +11,21 @@ nav {
 }
 .users {
   display: inline-table;
-  margin: 1%;
-  border: black solid 1px;
+  margin: 1rem 0;
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+@media (min-width: 500px) {
+  .users {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .users {
+    width: 33.33%;
+  }
 }
 .addProduct {
   margin: 1%;
