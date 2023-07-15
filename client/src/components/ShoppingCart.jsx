@@ -5,7 +5,6 @@ import {
   cancelOrder,
   updateItemQty,
 } from "../api/shoppingcart";
-import { updateInventories } from "../api/inventory";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";

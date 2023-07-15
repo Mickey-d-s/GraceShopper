@@ -45,16 +45,16 @@ export default function allInventories() {
       category
     );
     try {
-      const addedinventoryfromDB = await createProduct({
+      const addedInventoryFromDB = await createProduct({
         product_name,
         price,
         description,
         inventory_id: inventoryID,
         category,
       });
-      console.log("AddedinventoryfromDB:", addedinventoryfromDB);
+      console.log("AddedInventoryFromDB:", addedInventoryFromDB);
       alert("Product added to Inventory!");
-      return addedinventoryfromDB;
+      return addedInventoryFromDB;
     } catch (error) {
       throw error;
     }
@@ -63,25 +63,22 @@ export default function allInventories() {
   async function handleUpdateInventoryQuantity(e, inventory_id, quantity) {
     e.preventDefault();
     try {
-      const updatedInventoryfromDB = await updateInventoryQuantity(
+      const updatedInventoryFromDB = await updateInventoryQuantity(
         inventory_id,
         quantity
       );
-      console.log("updatedInventoryfromDB:", updatedInventoryfromDB);
-      return updatedInventoryfromDB;
+      console.log("updatedInventoryFromDB:", updatedInventoryFromDB);
+      return updatedInventoryFromDB;
     } catch (error) {
       throw error;
     }
   }
 
-  async function handledelete(e, product_id, inventory_id) {
+  async function handleDeleteProduct(e, inventory_id) {
     e.preventDefault();
     try {
-      const deleteproductsfromDB = await deleteProduct(
-        product_id,
-        inventory_id
-      );
-      return deleteproductsfromDB;
+      const deleteProductsFromDB = await deleteProduct(inventory_id);
+      return deleteProductsFromDB;
     } catch (error) {
       throw error;
     }
@@ -100,35 +97,35 @@ export default function allInventories() {
         <input
           type="text"
           id="product_name"
-          placeholder="product name"
+          placeholder="Product Name"
           value={product_name}
           onChange={(e) => setProductName(e.target.value)}
         />
         <input
           type="number"
           id="inventory_id"
-          placeholder="inventory_id"
+          placeholder="Inventory ID"
           value={inventoryID}
           onChange={(e) => setInventoryID(e.target.value)}
         />
         <input
           type="number"
           id="price"
-          placeholder="price"
+          placeholder="Price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
         <input
           type="text"
           id="description"
-          placeholder="description"
+          placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <input
           type="text"
           id="category"
-          placeholder="category"
+          placeholder="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         />
@@ -163,7 +160,7 @@ export default function allInventories() {
               <input
                 type="number"
                 id="quantity"
-                placeholder="quantity"
+                placeholder="Quantity"
                 value={product.quantity}
                 onChange={(e) => setQuantity(e.target.value)}
               />
@@ -175,10 +172,10 @@ export default function allInventories() {
               className="shoppingButtons"
               value={product.product_id}
               onClick={(e) => {
-                handledelete(e, product.product_id, product.inventory_id);
+                handleDeleteProduct(e, product.inventory_id);
               }}
             >
-              delete {product.product_name}?
+              Delete {product.product_name}?
             </button>
           </div>
         );

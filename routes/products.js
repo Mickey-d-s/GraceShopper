@@ -70,18 +70,21 @@ productsRouter.patch(
   }
 );
 
-productsRouter.delete("/:product_id", authRequired, async (req, res, next) => {
-  try {
-    console.log("ping");
-    const product_id = req.params.product_id;
-    const inventory_id = req.params.inventory_id;
-    const deletedProduct = await deleteProduct(product_id, inventory_id);
-    const { success, message } = deletedProduct;
-    console.log(success, message);
-    res.send({ success, message });
-  } catch (error) {
-    next(error);
+productsRouter.delete(
+  "/:inventory_id",
+  authRequired,
+  async (req, res, next) => {
+    try {
+      console.log("ping");
+      const inventory_id = req.params.inventory_id;
+      const deletedProduct = await deleteProduct(inventory_id);
+      const { success, message } = deletedProduct;
+      console.log(success, message);
+      res.send({ success, message });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = productsRouter;

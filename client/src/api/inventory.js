@@ -38,10 +38,10 @@ export async function fetchAllInventories() {
 //   }
 // }
 
-export async function deleteProduct(product_id, inventory_id) {
-  console.log("product_id & inventory_id:", product_id, inventory_id);
+export async function deleteProduct(inventory_id) {
+  console.log("product_id & inventory_id:", inventory_id);
   try {
-    const response = await fetch(`/api/products/${product_id}`, {
+    const response = await fetch(`/api/products/${inventory_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -113,48 +113,5 @@ export async function updateInventoryQuantity(inventory_id, quantity) {
     return result;
   } catch (error) {
     console.error(error);
-  }
-}
-
-export async function updateInventories(p_id) {
-  console.log("product_id object:", p_id);
-
-  try {
-    const response = await fetch(`/api/inventories/update`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(p_id),
-    });
-    if (!response.ok) {
-      throw new Error("failed to update inventory quantity");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-export async function updateInventory({ i_id }) {
-  console.log("inventory_id object:", i_id);
-  const { inventory_id, updatedObj } = i_id;
-
-  try {
-    const response = await fetch(`/api/inventories/:${inventory_id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ updatedObj }),
-    });
-    if (!response.ok) {
-      throw new Error("failed to update inventory quantity");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
   }
 }
