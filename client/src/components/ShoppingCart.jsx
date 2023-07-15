@@ -95,6 +95,16 @@ export default function StartOrder({ setCartItemCount }) {
 
   const checkout = async () => {
     try {
+      console.log(shoppingCart);
+      let items = [];
+      for (let i = 0; i < shoppingCart.length; i++) {
+        items.push({
+          productid: shoppingCart[i].product_id,
+          itemqty: shoppingCart[i].qty,
+        });
+      }
+      console.log(items);
+      const updatequantity = await updateinventory(items);
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
@@ -105,7 +115,6 @@ export default function StartOrder({ setCartItemCount }) {
       console.error("Error completing shopping cart:", error);
     }
   };
-
   return (
     <div>
       <div id="orderButtons">
