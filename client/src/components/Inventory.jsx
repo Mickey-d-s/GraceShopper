@@ -5,7 +5,6 @@ import {
   fetchAllInventories,
   createProduct,
   updateInventories,
-  updateProducts,
   deleteProduct,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
@@ -167,7 +166,7 @@ export default function allInventories() {
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
-            <form
+            {/* <form
               onSubmit={(e) => {
                 handleUpdateProduct(
                   e,
@@ -210,7 +209,7 @@ export default function allInventories() {
 
               <button type="submit">Update Product</button>
             </form>{" "}
-            */}
+            */}{" "}
             <form
               onSubmit={(e) => {
                 handleUpdateInventories(e, product.product_id, quantity);
