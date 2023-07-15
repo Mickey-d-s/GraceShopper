@@ -98,7 +98,7 @@ export async function createProduct(
 
 export async function updateInventoryQuantity(inventory_id, quantity) {
   try {
-    const response = await fetch(`/api/inventories/newupdate`, {
+    const response = await fetch(`/api/inventories/update`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

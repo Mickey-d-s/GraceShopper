@@ -62,27 +62,6 @@ async function updateInventoryQuantity(inventory_id, quantity) {
   }
 }
 
-async function updateInventory(inventory_id, updateObj) {
-  console.log("whithin adapter", inventory_id, updateObj);
-  const setString = Object.keys(updateObj)
-    .map((key, i) => {
-      return `${key}=$${i + 1}`;
-    })
-    .join(", ");
-  const {
-    rows: [inventory],
-  } = await client.query(
-    `
-    UPDATE inventories
-    SET ${setString}
-    WHERE product_id = ${inventory_id}
-    `,
-    Object.values(updateObj)
-  );
-  console.log("updateInventory CHECK", inventory);
-  return inventory;
-}
-
 async function deleteInventory(id) {
   const {
     rows: [inventory],
@@ -99,6 +78,5 @@ module.exports = {
   getInventoryById,
   getAllInventory,
   updateInventoryQuantity,
-  updateInventory,
   deleteInventory,
 };
