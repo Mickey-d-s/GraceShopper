@@ -5,7 +5,7 @@ import {
   createProduct,
   updateInventories,
   updateProducts,
-  deleteProducts,
+  deleteProduct,
 } from "../api/inventory";
 import { fetchAllProducts } from "../api/menu";
 import { Outlet } from "react-router-dom";
@@ -33,15 +33,7 @@ export default function allInventories() {
     }
     fetchInventories();
   }, []);
-  async function handledelete(e, inventory_id) {
-    e.preventDefault();
-    try {
-      const deleteproductsfromDB = await deleteProducts(inventory_id);
-      return deleteproductsfromDB;
-    } catch (error) {
-      throw error;
-    }
-  }
+
   async function handleAdd(e) {
     e.preventDefault();
     console.log(
@@ -93,6 +85,18 @@ export default function allInventories() {
       });
       console.log("updatedInventoryfromDB:", updatedInventoryfromDB);
       return updatedInventoryfromDB;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async function handledelete(e, product_id, inventory_id) {
+    e.preventDefault();
+    try {
+      const deleteproductsfromDB = await deleteProduct(
+        product_id,
+        inventory_id
+      );
+      return deleteproductsfromDB;
     } catch (error) {
       throw error;
     }
@@ -158,6 +162,7 @@ export default function allInventories() {
           <div key={product.product_id} className="inventories">
             <p>Inventory ID: {product.inventory_id}</p>
             <p>Product: {product.product_name}</p>
+            <p>Description: {product.description}</p>
             <p>Category: {product.category}</p>
             <p>Price: ${product.price}</p>
             <p>Quantity: {totalQuantity}</p>
@@ -220,9 +225,9 @@ export default function allInventories() {
             </form>
             <button
               className="shoppingButtons"
-              value={product.inventory_id}
+              value={product.product_id}
               onClick={(e) => {
-                handledelete(e, product.inventory_id);
+                handledelete(e, product.product_id, product.inventory_id);
               }}
             >
               delete {product.product_name}?

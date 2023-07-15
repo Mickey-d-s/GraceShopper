@@ -91,7 +91,7 @@ async function updateProduct(
   }
 }
 
-async function deleteProduct(product_id) {
+async function deleteProduct(product_id, inventory_id) {
   console.log("ping");
   try {
     await client.query(
@@ -102,18 +102,13 @@ async function deleteProduct(product_id) {
 
     await client.query(
       `DELETE FROM inventories 
-      WHERE inventory_id = $1`,
-      [product_id]
-    );
-    await client.query(
-      `DELETE FROM cart_items 
-    WHERE product_id = $1`,
-      [product_id]
+      WHERE inventory_id = $2`,
+      [inventory_id]
     );
 
-    return { sucess: true, message: "inventory item deleted" };
+    return { success: true, message: "inventory item deleted" };
   } catch (error) {
-    return { sucess: false, message: error };
+    return { success: false, message: error };
   }
 }
 

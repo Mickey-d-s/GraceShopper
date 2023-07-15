@@ -38,10 +38,10 @@ export async function fetchAllInventories() {
 //   }
 // }
 
-export async function deleteProducts(inventory_id) {
-  console.log("inventory_id:", inventory_id);
+export async function deleteProduct(product_id, inventory_id) {
+  console.log("product_id & inventory_id:", product_id, inventory_id);
   try {
-    const response = await fetch(`/api/products/${inventory_id}`, {
+    const response = await fetch(`/api/products/${product_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
