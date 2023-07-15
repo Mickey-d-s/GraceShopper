@@ -5,7 +5,7 @@ import {
   cancelOrder,
   updateItemQty,
 } from "../api/shoppingcart";
-import { updateInventory } from "../api/inventory";
+import { updateInventories } from "../api/inventory";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
@@ -105,7 +105,7 @@ export default function StartOrder({ setCartItemCount }) {
         });
       }
       console.log(items);
-      const updatedquantity = await updateInventory(items);
+      const updatedquantity = await updateInventories(items);
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);

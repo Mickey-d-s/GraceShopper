@@ -74,8 +74,8 @@ async function updateInventories(product_id, quantity) {
     throw error;
   }
 }
-async function updateInventory({ inventory_id, updateObj }) {
-  console.log(inventory_id, updateObj);
+async function updateInventory(inventory_id, updateObj) {
+  console.log("whithin adapter", inventory_id, updateObj);
   const setString = Object.keys(updateObj)
     .map((key, i) => {
       return `${key}=$${i + 1}`;

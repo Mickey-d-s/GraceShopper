@@ -54,22 +54,21 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
 });
 
 //getting you are not authorized for this one too
-inventoriesRouter.patch(
-  "/:product_id",
-  authRequired,
-  async (req, res, next) => {
-    try {
-      const { product_id } = req.params;
-      console.log("product_id in routes:", product_id);
-      const { quantity } = req.body;
-      console.log("quantity in routes", quantity);
-      const updatedInventory = await updateInventories(product_id, quantity);
+inventoriesRouter.patch("/update", authRequired, async (req, res, next) => {
+  try {
+    console.log("ping================================");
+    console.log(req.body);
+    for (let i = 0; i < req.body.length; i++) {
+      console.log(i, req.body[i]);
+      let { product_id, quantity } = req.body[i];
+      console.log("within for lopp within routes", product_id, quantity);
+      const updatedInventory = await updateInventory(product_id, quantity);
       res.send(updatedInventory);
-    } catch (error) {
-      next(error);
     }
+  } catch (error) {
+    next(error);
   }
-);
+});
 inventoriesRouter.patch(
   "/:inventory_id",
   authRequired,

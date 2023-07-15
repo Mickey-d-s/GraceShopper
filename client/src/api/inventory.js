@@ -97,17 +97,15 @@ export async function createProduct(
 }
 
 export async function updateInventories(p_id) {
-  const { product_id, quantity } = p_id;
   console.log("product_id object:", p_id);
-  console.log("product_id:", product_id);
-  console.log("quantity:", quantity);
+
   try {
-    const response = await fetch(`/api/inventories/${product_id}`, {
+    const response = await fetch(`/api/inventories/update`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ quantity }),
+      body: JSON.stringify(p_id),
     });
     if (!response.ok) {
       throw new Error("failed to update inventory quantity");
