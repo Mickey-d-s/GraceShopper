@@ -92,6 +92,9 @@ html,
 body {
   cursor: url("./assets/milkshake.png"), auto;
 }
+button {
+  cursor: pointer;
+}
 
 /* End Nav Bar */
 /* ---------------------------------------- */
