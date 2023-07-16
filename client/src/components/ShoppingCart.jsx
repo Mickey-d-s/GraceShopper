@@ -5,6 +5,7 @@ import {
   cancelOrder,
   updateItemQty,
   checkoutInventoryQuantity,
+  deleteItemFromCart,
 } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
@@ -78,6 +79,25 @@ export default function StartOrder({ setCartItemCount }) {
     }
   };
 
+  const deleteItem = async (item_id) => {
+    try {
+      const deletedCartItem = await deleteItemFromCart(item_id);
+      // reset state of shopping cart
+      const result = await getUserShoppingCart();
+      setShoppingCart(result.products);
+      // set count
+      setCartItemCount((prevCount) => prevCount - 1);
+      // Remove the specific item from localStorage based on its ID
+      const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+      const updatedCartItems = cartItems.filter(
+        (item) => item.item_id !== item_id
+      );
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    } catch (error) {
+      console.error("Error handling Delete Item:", error);
+    }
+  };
+
   const deleteOrder = async () => {
     try {
       const canceledShoppingCart = await cancelOrder(user.user_id);
@@ -145,7 +165,7 @@ export default function StartOrder({ setCartItemCount }) {
                 </button>
                 <button
                   className="shoppingButtons"
-                  onClick={() => handleEditQty(item.item_id, 0)}
+                  onClick={() => deleteItem(item.item_id)}
                 >
                   Delete
                 </button>
