@@ -127,7 +127,7 @@ export default function StartOrder({ setCartItemCount }) {
   };
 
   return (
-    <div>
+    <div className="route_flex">
       <div id="orderButtons">
         {shoppingCart.length === 0 && (
           <button id="startShopping" onClick={() => startShopping()}>

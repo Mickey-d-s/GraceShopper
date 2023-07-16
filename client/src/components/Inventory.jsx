@@ -85,7 +85,7 @@ export default function allInventories() {
   }
 
   return (
-    <div>
+    <div className="route_flex">
       <h2>Inventory</h2>
       <form
         onSubmit={(e) =>

@@ -47,7 +47,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="register-container">
+    <div className="route_flex">
       <div className="register-form">
         <form onSubmit={(e) => handleSubmit(e)}>
           <h2>Register</h2>

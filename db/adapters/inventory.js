@@ -46,7 +46,7 @@ async function getAllInventory() {
 
 async function updateInventoryQuantity(inventory_id, quantity) {
   try {
-    await client.query(
+    const updated = await client.query(
       `
       UPDATE inventories
       SET quantity = $2
@@ -56,6 +56,8 @@ async function updateInventoryQuantity(inventory_id, quantity) {
       [inventory_id, quantity]
     );
     console.log("Inventory quantity updated successfully!");
+
+    return updated;
   } catch (error) {
     console.log("Error updating Inventory quantity:", error);
   }
@@ -78,22 +80,10 @@ async function checkoutInventoryQuantity(inventory_id, quantity) {
   }
 }
 
-async function deleteInventory(id) {
-  const {
-    rows: [inventory],
-  } = await client.query(
-    `DELETE from inventories WHERE inventory_id = $1
-  `,
-    [id]
-  );
-  return { success: true, message: "inventory deleted" };
-}
-
 module.exports = {
   createInventories,
   getInventoryById,
   getAllInventory,
   checkoutInventoryQuantity,
   updateInventoryQuantity,
-  deleteInventory,
 };

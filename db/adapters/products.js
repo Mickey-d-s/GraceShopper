@@ -94,12 +94,25 @@ async function updateProduct(
 async function deleteProduct(inventory_id) {
   console.log("ping");
   try {
+    // Check if the product_id exists in the cart_items table
+    const checkCartItems = await client.query(
+      `SELECT COUNT(*) FROM cart_items WHERE product_id = $1`,
+      [inventory_id]
+    );
+    // If the product_id exists in cart_items, set it to null
+    if (checkCartItems.rows[0].count > 0) {
+      await client.query(
+        `UPDATE cart_items SET product_id = NULL WHERE product_id = $1`,
+        [inventory_id]
+      );
+    }
+    // Perform the deletion from the products table
     await client.query(
       `DELETE FROM products
       WHERE inventory_id = $1`,
       [inventory_id]
     );
-
+    // Perform the deletion from the inventories table
     await client.query(
       `DELETE FROM inventories 
       WHERE inventory_id = $1`,

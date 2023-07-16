@@ -78,15 +78,6 @@ button {
 /* ---------------------------------------- */
 /* Profile Page */
 
-.ShoppingCart {
-  padding: 0.5rem;
-  display: inline-table;
-  margin: 1%;
-  border: yellow solid 2px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #000;
-  animation: border-color 2s linear infinite;
-}
 @keyframes border-color {
   0% {
     border-color: yellow;
@@ -97,6 +88,19 @@ button {
   100% {
     border-color: yellow;
   }
+}
+#scroll {
+  padding: 0.5rem;
+  display: inline-block;
+  margin: 1%;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  animation: border-color 2s linear infinite;
+  max-height: 15rem;
+  overflow-y: scroll;
+  table-layout: fixed;
+  width: 25%;
 }
 
 /* End Profile Page */
@@ -211,16 +215,21 @@ button {
 .productCard {
   color: white;
 }
-/* Couldnt find a sizing and spacing i liked for the product card */
-.menu {
+.menuItem {
+  min-width: 18rem;
+  margin: 1rem;
   display: inline-table;
   grid-template-columns: repeat(4, 223px);
   border-radius: 1rem;
   justify-content: center;
   margin-right: 1%;
-  padding: 0.5rem;
+  padding-bottom: 1rem;
+  margin: 1%;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
 }
-.menu {
+.menuItem {
   background: linear-gradient(
     to right,
     #3e3c3c,
@@ -358,6 +367,14 @@ p {
 /* ---------------------------------------- */
 /* Footer */
 
+.app_flex {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+.route_flex {
+  flex: 1;
+}
 footer {
   display: flex;
   flex-direction: row;
