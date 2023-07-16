@@ -40,27 +40,6 @@ nav {
   padding: 1rem;
 }
 
-.ShoppingCart {
-  display: inline-table;
-  margin: 1%;
-  border: yellow solid 2px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #000;
-  animation: border-color 2s linear infinite;
-}
-
-@keyframes border-color {
-  0% {
-    border-color: yellow;
-  }
-  50% {
-    border-color: black;
-  }
-  100% {
-    border-color: yellow;
-  }
-}
-
 .Link {
   margin: auto;
 }
@@ -93,6 +72,31 @@ button {
 }
 
 /* End Nav Bar */
+/* ---------------------------------------- */
+/* Profile Page */
+
+.ShoppingCart {
+  padding: 0.5rem;
+  display: inline-table;
+  margin: 1%;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  animation: border-color 2s linear infinite;
+}
+@keyframes border-color {
+  0% {
+    border-color: yellow;
+  }
+  50% {
+    border-color: black;
+  }
+  100% {
+    border-color: yellow;
+  }
+}
+
+/* End Profile Page */
 /* ---------------------------------------- */
 /* Shopping Cart Page */
 
@@ -134,25 +138,14 @@ button {
 #startShopping {
   animation: neonGlow 1s infinite alternate;
 }
-@keyframes border-color {
-  0% {
-    border-color: yellow;
-  }
-  50% {
-    border-color: black;
-  }
-  100% {
-    border-color: yellow;
-  }
-}
 #myCart {
-  /* padding: 0.5rem; */
+  padding: 0.5rem;
   margin-left: 5%;
   margin-right: 5%;
   border: yellow solid 2px;
   border-radius: 5px;
+  box-shadow: 0 0 5px #000;
   animation: border-color 2s linear infinite;
-  font-style: bold;
 }
 #myShoppingCart {
   padding: 1rem;
@@ -160,11 +153,11 @@ button {
   margin-right: 20%;
   border: yellow solid 2px;
   border-radius: 5px;
+  box-shadow: 0 0 5px #000;
   animation: border-color 2s linear infinite;
-  font-style: bold;
 }
 #orderButtons {
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
   padding-top: 4rem;
 }
 .shoppingButtons {
