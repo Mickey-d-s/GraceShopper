@@ -117,10 +117,6 @@ button {
   background-color: #222222;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
 }
-#startShopping:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
 @keyframes neonGlow {
   0% {
     box-shadow: 0 0 5px #ffff00;
@@ -138,13 +134,33 @@ button {
 #startShopping {
   animation: neonGlow 1s infinite alternate;
 }
-.myShoppingCart {
-  background-color: black;
-  padding: 0.5rem;
-  color: yellow;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  border-radius: 1rem;
+@keyframes border-color {
+  0% {
+    border-color: yellow;
+  }
+  50% {
+    border-color: black;
+  }
+  100% {
+    border-color: yellow;
+  }
+}
+#myCart {
+  /* padding: 0.5rem; */
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 5px;
+  animation: border-color 2s linear infinite;
+  font-style: bold;
+}
+#myShoppingCart {
+  padding: 1rem;
+  margin-left: 20%;
+  margin-right: 20%;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  animation: border-color 2s linear infinite;
+  font-style: bold;
 }
 #orderButtons {
   padding-bottom: 3rem;

@@ -104,30 +104,6 @@ export default function StartOrder({ setCartItemCount }) {
       console.error("Error completing shopping cart:", error);
     }
   };
-
-  // const checkout = async () => {
-  //   try {
-  //     console.log(shoppingCart);
-  //     let items = [];
-  //     for (let i = 0; i < shoppingCart.length; i++) {
-  //       items.push({
-  //         productid: shoppingCart[i].product_id,
-  //         itemqty: shoppingCart[i].qty,
-  //       });
-  //     }
-  //     console.log(items);
-  //     const updatedquantity = await updateInventories(items);
-  //     const completedCart = await completeOrder();
-  //     console.log("Shopping cart completed:", completedCart);
-  //     setShoppingCart([]);
-  //     localStorage.clear();
-  //     //edits inventory qty by how much was ordered
-  //     setCartItemCount(0);
-  //     return updatedquantity, completedCart;
-  //   } catch (error) {
-  //     console.error("Error completing shopping cart:", error);
-  //   }
-  // };
   return (
     <div>
       <div id="orderButtons">
@@ -147,11 +123,11 @@ export default function StartOrder({ setCartItemCount }) {
           </>
         )}
       </div>
-      <div className="myShoppingCart">
-        <h1> My Shopping Cart</h1>
+      <div>
+        <h1 id="myShoppingCart"> My Shopping Cart</h1>
         <br></br>
         {shoppingCart.length > 0 ? (
-          <div>
+          <div id="myCart">
             <h2>Total: ${totalPrice}</h2>
             {shoppingCart.map((item) => (
               <div key={item.item_id}>

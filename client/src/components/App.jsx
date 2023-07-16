@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Nav from "../components/Nav";
 import Menu from "./Menu";
-import Registerform from "../components/auth/RegisterForm";
+import RegisterForm from "../components/auth/RegisterForm";
 import LoginForm from "../components/auth/LoginForm";
 import HealthPage from "../components/HealthPage";
 import Profile from "../components/Profile";
@@ -46,7 +46,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/health" element={<HealthPage />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<Registerform />} />
+        <Route path="/register" element={<RegisterForm />} />
         <Route path="/Profile" element={<Profile />} />
         <Route
           path="/Menu"
