@@ -86,7 +86,7 @@ async function deleteInventory(id) {
   `,
     [id]
   );
-  return { success: true, message: "iventory deleted" };
+  return { success: true, message: "inventory deleted" };
 }
 
 module.exports = {
