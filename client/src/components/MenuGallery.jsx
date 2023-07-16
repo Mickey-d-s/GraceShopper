@@ -12,31 +12,31 @@ export default function MenuGallery() {
   return (
     <div>
       <div id="header">Made Fresh Everyday!</div>
-      <h1 class="gallery">Photo Gallery of Menu Items</h1>
-      <div class="gallerydiv">
-        <div class="gallerydivs">
+      <h1 className="gallery">Photo Gallery of Menu Items</h1>
+      <div className="gallerydiv">
+        <div className="gallerydivs">
           <img className="menuGallery" src={AngusBurger} alt="nature1" />
-          <caption> Angus Burger $2</caption>
+          <div> Angus Burger $2</div>
         </div>
-        <div class="gallerydivs">
+        <div className="gallerydivs">
           <img className="menuGallery" src={ChickenBurger} alt="nature1" />
-          <caption> Chicken Burger $2</caption>
+          <div> Chicken Burger $2</div>
         </div>
-        <div class="gallerydivs">
+        <div className="gallerydivs">
           <img className="menuGallery" src={PorkBurger} alt="nature1" />
-          <caption> Pork Burger $2</caption>
+          <div> Pork Burger $2</div>
         </div>
-        <div class="gallerydivs">
+        <div className="gallerydivs">
           <img className="menuGallery" src={FishBurger} alt="nature1" />
-          <caption> Fish Burger $2</caption>
+          <div> Fish Burger $2</div>
         </div>
-        <div class="gallerydivs">
+        <div className="gallerydivs">
           <img className="menuGallery" src={Fries} alt="nature1" />
-          <caption> Fries $2</caption>
+          <div> Fries $2</div>
         </div>
-        <div class="gallerydivs">
+        <div className="gallerydivs">
           <img className="menuGallery" src={IceCreamCone} alt="nature1" />
-          <caption> Ice Cream Cone $2</caption>
+          <div> Ice Cream Cone $2</div>
         </div>
       </div>
     </div>

@@ -68,22 +68,22 @@ async function updateProduct(
   product_name,
   price,
   description,
-  category
+  category,
+  quantity
 ) {
   try {
     const {
       rows: [updatedProduct],
     } = await client.query(
       `
-    UPDATE products
-    SET product_name = $2,
-    price = $3,
-    description = $4
-    category = $5
-    WHERE product_id = $1
-    RETURNING *;
+      UPDATE products
+      SET product_name = $2,
+          price = $3,
+          description = $4,
+          category = $5
+      WHERE product_id = $1;
     `,
-      [product_id, product_name, price, description, category]
+      [product_id, product_name, price, description, category, quantity]
     );
     return updatedProduct;
   } catch (error) {
@@ -91,29 +91,24 @@ async function updateProduct(
   }
 }
 
-async function deleteProduct(product_id) {
+async function deleteProduct(inventory_id) {
   console.log("ping");
   try {
     await client.query(
       `DELETE FROM products
-      WHERE product_id = $1`,
-      [product_id]
+      WHERE inventory_id = $1`,
+      [inventory_id]
     );
 
     await client.query(
       `DELETE FROM inventories 
       WHERE inventory_id = $1`,
-      [product_id]
-    );
-    await client.query(
-      `DELETE FROM cart_items 
-    WHERE product_id = $1`,
-      [product_id]
+      [inventory_id]
     );
 
-    return { sucess: true, message: "inventory item deleted" };
+    return { success: true, message: "inventory item deleted" };
   } catch (error) {
-    return { sucess: false, message: error };
+    return { success: false, message: error };
   }
 }
 

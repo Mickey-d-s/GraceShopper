@@ -13,7 +13,6 @@ import { Dashboard } from "./Dashboard/dashboard";
 import Inventory from "./Inventory";
 import Users from "./Users";
 import MenuGallery from "./MenuGallery";
-
 const getCartItemCount = () => {
   const cartItems = localStorage.getItem("cartItems");
   if (cartItems) {

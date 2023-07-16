@@ -20,26 +20,26 @@ export async function fetchAllInventories() {
     console.error(error);
   }
 }
-//updates product by PUT request
-export async function updateInventoryQty(inventory_id, quantity) {
-  try {
-    const response = await fetch(`/api/inventories/${inventory_id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ quantity }),
-    });
-    const updatedTotalInvQty = await response.json();
-    console.log("updated inventory:", updatedTotalInvQty);
-    return updatedTotalInvQty;
-  } catch (error) {
-    console.error("Error updating Inventory Quantity:", error);
-  }
-}
+// //updates product by PUT request
+// export async function updateInventoryQty(inventory_id, quantity) {
+//   try {
+//     const response = await fetch(`/api/inventories/${inventory_id}`, {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ quantity }),
+//     });
+//     const updatedTotalInvQty = await response.json();
+//     console.log("updated inventory:", updatedTotalInvQty);
+//     return updatedTotalInvQty;
+//   } catch (error) {
+//     console.error("Error updating Inventory Quantity:", error);
+//   }
+// }
 
-export async function deleteProducts(inventory_id) {
-  console.log("inventory_id:", inventory_id);
+export async function deleteProduct(inventory_id) {
+  console.log("product_id & inventory_id:", inventory_id);
   try {
     const response = await fetch(`/api/products/${inventory_id}`, {
       method: "DELETE",
@@ -95,20 +95,23 @@ export async function createProduct(
     throw error;
   }
 }
-// export async function createInventories(quantity) {
-//   try {
-//     const response = await fetch(`/api/inventories`, {
-//       method: "post",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         quantity,
-//       }),
-//     });
-//     const results = response.json;
-//     return resuls;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+
+export async function updateInventoryQuantity(inventory_id, quantity) {
+  try {
+    const response = await fetch(`/api/inventories/update`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inventory_id,
+        quantity,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}

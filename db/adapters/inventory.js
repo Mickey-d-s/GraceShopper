@@ -17,20 +17,6 @@ async function createInventories({ quantity }) {
     throw error;
   }
 }
-async function updateInventoryTotal(quantity, product_id) {
-  try {
-    await client.query(
-      `
-      UPDATE inventories 
-      SET quantitiy = quantity - $1
-      WHERE product_id = $2;
-      `,
-      [quantity, product_id]
-    );
-  } catch (error) {
-    throw error;
-  }
-}
 
 async function getInventoryById(id) {
   const {
@@ -58,19 +44,22 @@ async function getAllInventory() {
   }
 }
 
-async function updateInventory({ inventory_id, product_id, quantity }) {
-  const {
-    rows: [inventory],
-  } = await client.query(
-    `
-    UPDATE inventories
-    SET inventory_id = $1
-    WHERE product_id = $2 AND quantity = $3;
+async function updateInventoryQuantity(inventory_id, quantity) {
+  try {
+    await client.query(
+      `
+      UPDATE inventories
+      SET quantity = $2
+      WHERE inventory_id = $1
+      RETURNING *
     `,
-    [inventory_id, product_id, quantity]
-  );
-  console.log("updateInventory CHECK", inventory);
-  return inventory;
+      [inventory_id, quantity]
+    );
+
+    console.log("Inventory quantity updated successfully!");
+  } catch (error) {
+    console.log("Error updating Inventory quantity:", error);
+  }
 }
 
 async function deleteInventory(id) {
@@ -83,11 +72,11 @@ async function deleteInventory(id) {
   );
   return { success: true, message: "iventory deleted" };
 }
+
 module.exports = {
   createInventories,
   getInventoryById,
   getAllInventory,
-  updateInventory,
-  updateInventoryTotal,
+  updateInventoryQuantity,
   deleteInventory,
 };
