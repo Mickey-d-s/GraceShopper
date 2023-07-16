@@ -85,8 +85,9 @@ export default function StartOrder({ setCartItemCount }) {
       // reset state of shopping cart
       const result = await getUserShoppingCart();
       setShoppingCart(result.products);
-      // set count
+      // NEED TO FIX SET CART ITEM COUNT --------------------------------
       setCartItemCount((prevCount) => prevCount - 1);
+      //-----------------------------------------------------------------
       // Remove the specific item from localStorage based on its ID
       const cartItems = JSON.parse(localStorage.getItem("cartItems"));
       const updatedCartItems = cartItems.filter(

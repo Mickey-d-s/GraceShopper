@@ -20,7 +20,7 @@ export function Homepage() {
           <div className="popup-overlay">
             <div className="popup-content">
               <div className="popup">
-                <h1>Brandon</h1>
+                <h1>Brandon Brungardt</h1>
                 <a
                   className="nameLinks"
                   href="http://www.linkedin.com/in/brandonbrungardt"
@@ -29,7 +29,7 @@ export function Homepage() {
                 >
                   Brandon's LinkedIn
                 </a>
-                <h1>Brian</h1>
+                <h1>Brian Kim</h1>
                 <a
                   className="nameLinks"
                   href="https://www.linkedin.com/in/bibimbop/"
@@ -38,7 +38,7 @@ export function Homepage() {
                 >
                   Brian's LinkedIn
                 </a>
-                <h1>Elliot</h1>
+                <h1>Elliot Carmona</h1>
                 <a
                   className="nameLinks"
                   href="http://linkedin.com/in/elliotcarmona016"
@@ -47,7 +47,7 @@ export function Homepage() {
                 >
                   Elliot's LinkedIn
                 </a>
-                <h1>Jeffery</h1>
+                <h1>Jeffery Sass</h1>
                 <a
                   className="nameLinks"
                   href="https://www.linkedin.com/in/charlotte-sass/"
