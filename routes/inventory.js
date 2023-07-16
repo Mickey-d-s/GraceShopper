@@ -3,20 +3,10 @@ const {
   createInventories,
   getInventoryById,
   getAllInventory,
-  updateInventory,
-  updateInventoryTotal,
+  updateInventoryQuantity,
   deleteInventory,
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
-
-inventoriesRouter.get("/", async (req, res, next) => {
-  try {
-    const AllInventory = await getAllInventory();
-    res.send(AllInventory);
-  } catch (error) {
-    next(error);
-  }
-});
 
 inventoriesRouter.post("/", authRequired, async (req, res, next) => {
   try {
@@ -27,20 +17,16 @@ inventoriesRouter.post("/", authRequired, async (req, res, next) => {
     next(error);
   }
 });
-inventoriesRouter.patch(
-  "/:product_id/quantity/:quantity",
-  authRequired,
-  async (req, res, next) => {
-    try {
-      const { product_id, quantity } = req.params;
-      await updateInventoryTotal(product_id, quantity);
-      res.send("Inventory total quantity updated successfully.");
-    } catch (error) {
-      next(error);
-    }
+
+inventoriesRouter.get("/", async (req, res, next) => {
+  try {
+    const AllInventory = await getAllInventory();
+    res.send(AllInventory);
+  } catch (error) {
+    next(error);
   }
-);
-//not sure if working either get's syntax error of select
+});
+
 inventoriesRouter.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -52,20 +38,14 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-//getting you are not authorized for this one too
 inventoriesRouter.patch(
-  "/:inventory_id",
-  authRequired,
+  "/update",
+  // authRequired,
   async (req, res, next) => {
     try {
-      const { inventory_id } = req.params;
-      const { product_id, quantity } = req.body;
-      const updatedInventory = await updateInventory(
-        inventory_id,
-        product_id,
-        quantity
-      );
-      res.send(updatedInventory);
+      const { inventory_id, quantity } = req.body;
+      const updatedQty = await updateInventoryQuantity(inventory_id, quantity);
+      res.send(updatedQty);
     } catch (error) {
       next(error);
     }
