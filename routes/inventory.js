@@ -5,7 +5,6 @@ const {
   getAllInventory,
   updateInventoryQuantity,
   checkoutInventoryQuantity,
-  deleteInventory,
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
 
@@ -64,28 +63,6 @@ inventoriesRouter.patch(
         quantity
       );
       res.send(updatedQty);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-inventoriesRouter.delete(
-  "/:id",
-  //  authRequired,
-  async (req, res, next) => {
-    try {
-      console.log(req.params);
-      const { id } = req.params;
-      console.log(id);
-      const deletedInventory = await deleteInventory(+id);
-      const { success, message } = deletedInventory;
-      if (success) {
-        res.send({ success, message });
-      }
-      if (!success) {
-        res.send({ success, message });
-      }
     } catch (error) {
       next(error);
     }

@@ -78,22 +78,10 @@ async function checkoutInventoryQuantity(inventory_id, quantity) {
   }
 }
 
-async function deleteInventory(id) {
-  const {
-    rows: [inventory],
-  } = await client.query(
-    `DELETE from inventories WHERE inventory_id = $1
-  `,
-    [id]
-  );
-  return { success: true, message: "inventory deleted" };
-}
-
 module.exports = {
   createInventories,
   getInventoryById,
   getAllInventory,
   checkoutInventoryQuantity,
   updateInventoryQuantity,
-  deleteInventory,
 };
