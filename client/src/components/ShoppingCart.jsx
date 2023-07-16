@@ -80,7 +80,7 @@ export default function StartOrder({ setCartItemCount }) {
 
   const deleteOrder = async () => {
     try {
-      const canceledShoppingCart = await cancelOrder();
+      const canceledShoppingCart = await cancelOrder(user.user_id);
       console.log("Canceled shopping cart:", canceledShoppingCart);
       setShoppingCart([]);
       localStorage.clear();

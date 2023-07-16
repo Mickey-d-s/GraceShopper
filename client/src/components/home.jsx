@@ -41,7 +41,7 @@ export function Homepage() {
                 <h1>Elliot</h1>
                 <a
                   className="nameLinks"
-                  href="ELLIOT LINKEDIN LINK"
+                  href="http://linkedin.com/in/elliotcarmona016"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -50,7 +50,7 @@ export function Homepage() {
                 <h1>Jeffery</h1>
                 <a
                   className="nameLinks"
-                  href="JEFFERY LINKEDIN LINK"
+                  href="https://www.linkedin.com/in/charlotte-sass/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

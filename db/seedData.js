@@ -144,17 +144,18 @@ const inventories = [
 ];
 const cart_items = [
   { shoppingcart_id: 1, product_id: 1, count: 10 },
-  { shoppingcart_id: 3, product_id: 2, count: 9 },
-  { shoppingcart_id: null, product_id: 3, count: null },
-  { shoppingcart_id: null, product_id: 4, count: null },
-  { shoppingcart_id: null, product_id: 5, count: null },
+  { shoppingcart_id: 2, product_id: 2, count: 10 },
+  { shoppingcart_id: 3, product_id: 3, count: 10 },
+  { shoppingcart_id: 4, product_id: 4, count: 10 },
+  { shoppingcart_id: 5, product_id: 5, count: 10 },
 ];
 
 const shopping_carts = [
-  { status: null, user_id: 1 },
-  { status: null, user_id: 2 },
-  { status: null, user_id: 3 },
-  { status: null, user_id: 4 },
+  { status: "completed", user_id: 1 },
+  { status: "completed", user_id: 2 },
+  { status: "completed", user_id: 3 },
+  { status: "completed", user_id: 4 },
+  { status: "completed", user_id: 5 },
 ];
 
 // ]

@@ -179,6 +179,32 @@ async function updateShoppingStatus(user_id) {
 //   }
 // }
 
+async function deleteShoppingCart(user_id) {
+  try {
+    console.log(user_id);
+    await client.query(
+      `DELETE FROM cart_items
+       WHERE shoppingcart_id IN (
+       SELECT shoppingcart_id
+       FROM shoppingcarts
+       WHERE user_id = $1
+       AND status = 'pending'
+);`,
+      [user_id]
+    );
+    await client.query(
+      `DELETE FROM shoppingcarts
+       WHERE user_id = $1
+       AND status = 'pending';
+         `,
+      [user_id]
+    );
+    return { success: true, message: "Shopping Cart Deleted" };
+  } catch (error) {
+    return { success: false, message: error };
+  }
+}
+
 module.exports = {
   createShoppingCarts,
   deleteShoppingCartByUserId,
@@ -187,4 +213,5 @@ module.exports = {
   //getShoppingCartById,
   getAllOrdersByUserId,
   updateShoppingStatus,
+  deleteShoppingCart,
 };

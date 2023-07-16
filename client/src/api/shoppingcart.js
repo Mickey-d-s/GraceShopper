@@ -39,7 +39,7 @@ export async function completeOrder(user_id) {
 
 export async function cancelOrder(user_id) {
   try {
-    const response = await fetch(`api/shoppingcart/:${user_id}`, {
+    const response = await fetch(`api/shoppingcart/cancel`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
