@@ -31,7 +31,7 @@ const Nav = ({ cartItemCount }) => {
             <Link to="/Menu">Menu</Link>
           </div>
           <div className="Link">
-            <Link to="/MenuGallery">Menu Gallery</Link>
+            <Link to="/MenuGallery">Gallery</Link>
           </div>
           <div className="Link">
             <Link to="/shoppingcart">Shopping Cart</Link>
@@ -61,26 +61,10 @@ const Nav = ({ cartItemCount }) => {
             <Link to="/Menu">Menu</Link>
           </div>
           <div className="Link">
-            <Link to="/MenuGallery">Menu Gallery</Link>
+            <Link to="/MenuGallery">Gallery</Link>
           </div>
         </>
       )}
-      {/* {user?.username != "Stranger" && user?.isAdmin === true && (
-        <>
-          <div className="Link">
-            <Link to="/register">Register</Link>
-          </div>
-          <div className="Link">
-            <Link to="/login">Login</Link>
-          </div>
-          <div className="Link">
-            <Link to="/Profile">Profile</Link>
-          </div>
-          <div className="Link">
-            <Link to="/Menu">Menu</Link>
-          </div>
-        </>
-      )} */}
       <h3 className="Username">Hi, {user.username}</h3>
       <button className="navbar__logout" onClick={handleLogout}>
         Logout

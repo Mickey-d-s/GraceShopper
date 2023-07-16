@@ -38,7 +38,7 @@ export default function LoginForm() {
     <div className="auth-form-container">
       <div className="auth-form">
         <form onSubmit={(e) => handleSubmit(e)}>
-          <h2>{location.pathname.substring(1)}</h2>
+          <h2>Login</h2>
           {error && <p className="error-message">{error}</p>}
           <input
             required
@@ -65,10 +65,10 @@ export default function LoginForm() {
           </button>
         </form>
         <p>
-          {pathname === "/login"
-            ? "Already have an account? "
-            : "Don't have an account? "}
-          <Link to={pathname === "/register"}>{"Sign Up"}</Link>
+          Is This Your First Visit?&nbsp;&nbsp;
+          <a className="loginTag" href="/register">
+            Register Here
+          </a>
         </p>
       </div>
     </div>

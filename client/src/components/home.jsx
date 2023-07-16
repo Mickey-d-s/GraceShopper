@@ -1,12 +1,66 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "./auth/AuthProvider";
 import bigburger from "../assets/bigburger.jpg";
 
 export function Homepage() {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   try {
     const { loggedIn } = useContext(AuthContext);
     return (
       <>
+        {showPopup && (
+          <div className="popup-overlay">
+            <div className="popup-content">
+              <div className="popup">
+                <h1>Brandon</h1>
+                <a
+                  className="nameLinks"
+                  href="http://www.linkedin.com/in/brandonbrungardt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Brandon's LinkedIn
+                </a>
+                <h1>Brian</h1>
+                <a
+                  className="nameLinks"
+                  href="https://www.linkedin.com/in/bibimbop/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Brian's LinkedIn
+                </a>
+                <h1>Elliot</h1>
+                <a
+                  className="nameLinks"
+                  href="ELLIOT LINKEDIN LINK"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Elliot's LinkedIn
+                </a>
+                <h1>Jeffery</h1>
+                <a
+                  className="nameLinks"
+                  href="JEFFERY LINKEDIN LINK"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Jeffery's LinkedIn
+                </a>
+                <button onClick={closePopup}>Close</button>
+              </div>
+            </div>
+          </div>
+        )}
         <div id="burger2Parent">
           <div id="bigBurger2">
             <h1 className="landertext">
@@ -23,7 +77,9 @@ export function Homepage() {
               it's a juicy burger, our specially seasoned fries, or one of our
               refreshing beverages!
             </p>
-            <button className="shoppingButtons">ABOUT US</button>
+            <button className="shoppingButtons" onClick={openPopup}>
+              ABOUT US
+            </button>
           </div>
         </div>
         <div className="flexImage">
