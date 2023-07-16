@@ -54,16 +54,17 @@ async function updateCartItem({ item_id, count }) {
   }
 }
 
-async function deleteCartItem(shoppingcart_id) {
+async function deleteCartItem(item_id) {
   try {
     const {
       rows: [cart_item],
     } = await client.query(
       `
-  DELETE from cart_items WHERE item_id =$1
+  DELETE from cart_items 
+  WHERE item_id = $1
   RETURNING *;
   `,
-      [shoppingcart_id]
+      [item_id]
     );
     return cart_item;
   } catch (error) {

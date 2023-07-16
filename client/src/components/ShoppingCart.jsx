@@ -4,6 +4,8 @@ import {
   completeOrder,
   cancelOrder,
   updateItemQty,
+  checkoutInventoryQuantity,
+  deleteItemFromCart,
 } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
@@ -49,9 +51,6 @@ export default function StartOrder({ setCartItemCount }) {
     fetchShoppingCart();
   }, []);
 
-  //Delete function item from cart_items inside of shopping cart
-  //Update function QTY of item inside of shopping cart
-
   const totalPrice = shoppingCart.reduce(
     (total, item) => total + item.qty * item.price,
     0
@@ -77,13 +76,30 @@ export default function StartOrder({ setCartItemCount }) {
       setShoppingCart(updatedCart);
     } catch (error) {
       console.error("Error handling Edit Quantity:", error);
-      // Handle the error, show an error message, or perform any other necessary actions
+    }
+  };
+
+  const deleteItem = async (item_id, qty) => {
+    try {
+      const deletedCartItem = await deleteItemFromCart(item_id);
+      // reset state of shopping cart
+      const result = await getUserShoppingCart();
+      setShoppingCart(result.products);
+      setCartItemCount((prevCount) => prevCount - qty);
+      // Remove the specific item from localStorage based on its ID
+      const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+      const updatedCartItems = cartItems.filter(
+        (item) => item.item_id !== item_id
+      );
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    } catch (error) {
+      console.error("Error handling Delete Item:", error);
     }
   };
 
   const deleteOrder = async () => {
     try {
-      const canceledShoppingCart = await cancelOrder();
+      const canceledShoppingCart = await cancelOrder(user.user_id);
       console.log("Canceled shopping cart:", canceledShoppingCart);
       setShoppingCart([]);
       localStorage.clear();
@@ -92,42 +108,24 @@ export default function StartOrder({ setCartItemCount }) {
       console.error("Error canceling shopping cart:", error);
     }
   };
+
   const checkout = async () => {
     try {
+      // Update inventory quantities for each item in the shopping cart
+      for (const item of shoppingCart) {
+        await checkoutInventoryQuantity(item.inventory_id, item.qty);
+      }
+      // Complete the order
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
       localStorage.clear();
-      //edits inventory qty by how much was ordered
       setCartItemCount(0);
     } catch (error) {
       console.error("Error completing shopping cart:", error);
     }
   };
 
-  // const checkout = async () => {
-  //   try {
-  //     console.log(shoppingCart);
-  //     let items = [];
-  //     for (let i = 0; i < shoppingCart.length; i++) {
-  //       items.push({
-  //         productid: shoppingCart[i].product_id,
-  //         itemqty: shoppingCart[i].qty,
-  //       });
-  //     }
-  //     console.log(items);
-  //     const updatedquantity = await updateInventories(items);
-  //     const completedCart = await completeOrder();
-  //     console.log("Shopping cart completed:", completedCart);
-  //     setShoppingCart([]);
-  //     localStorage.clear();
-  //     //edits inventory qty by how much was ordered
-  //     setCartItemCount(0);
-  //     return updatedquantity, completedCart;
-  //   } catch (error) {
-  //     console.error("Error completing shopping cart:", error);
-  //   }
-  // };
   return (
     <div>
       <div id="orderButtons">
@@ -147,11 +145,11 @@ export default function StartOrder({ setCartItemCount }) {
           </>
         )}
       </div>
-      <div className="myShoppingCart">
-        <h1> My Shopping Cart</h1>
+      <div>
+        <h1 id="myShoppingCart"> My Shopping Cart</h1>
         <br></br>
         {shoppingCart.length > 0 ? (
-          <div>
+          <div id="myCart">
             <h2>Total: ${totalPrice}</h2>
             {shoppingCart.map((item) => (
               <div key={item.item_id}>
@@ -166,7 +164,7 @@ export default function StartOrder({ setCartItemCount }) {
                 </button>
                 <button
                   className="shoppingButtons"
-                  onClick={() => handleEditQty(item.item_id, 0)}
+                  onClick={() => deleteItem(item.item_id, item.qty)}
                 >
                   Delete
                 </button>

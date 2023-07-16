@@ -50,7 +50,7 @@ export default function RegisterForm() {
     <div className="register-container">
       <div className="register-form">
         <form onSubmit={(e) => handleSubmit(e)}>
-          <h2>{location.pathname.substring(1)}</h2>
+          <h2>Register</h2>
           {error && <p className="error-message">{error}</p>}
           <input
             className="input"
@@ -91,12 +91,10 @@ export default function RegisterForm() {
           <button type="submit">Submit</button>
         </form>
         <p>
-          {pathname === "/register"
-            ? "Already have an account? "
-            : "Don't have an account? "}
-          <Link to={pathname === "/register" ? "/register" : "/login"}>
-            {pathname === "/login" ? "Sign Up" : "Login Here"}
-          </Link>
+          Already have an account?&nbsp;&nbsp;
+          <a className="loginTag" href="/login">
+            Log In
+          </a>
         </p>
       </div>
     </div>
