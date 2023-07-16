@@ -6,10 +6,10 @@ import { Outlet } from "react-router-dom";
 export function Dashboard() {
   try {
     return (
-      <>
+      <div className="route_flex">
         <Dashboardnav></Dashboardnav>
         <Outlet />
-      </>
+      </div>
     );
   } catch (error) {
     throw error;

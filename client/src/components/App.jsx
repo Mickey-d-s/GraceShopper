@@ -40,9 +40,9 @@ function App() {
   const [cartItemCount, setCartItemCount] = useState(getCartItemCount());
 
   return (
-    <div>
+    <div className="app_flex">
       <Nav cartItemCount={cartItemCount} />
-      <Routes>
+      <Routes className="route_flex">
         <Route path="/" element={<Homepage />} />
         <Route path="/health" element={<HealthPage />} />
         <Route path="/login" element={<LoginForm />} />
