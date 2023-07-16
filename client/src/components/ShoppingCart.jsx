@@ -79,15 +79,13 @@ export default function StartOrder({ setCartItemCount }) {
     }
   };
 
-  const deleteItem = async (item_id) => {
+  const deleteItem = async (item_id, qty) => {
     try {
       const deletedCartItem = await deleteItemFromCart(item_id);
       // reset state of shopping cart
       const result = await getUserShoppingCart();
       setShoppingCart(result.products);
-      // NEED TO FIX SET CART ITEM COUNT --------------------------------
-      setCartItemCount((prevCount) => prevCount - 1);
-      //-----------------------------------------------------------------
+      setCartItemCount((prevCount) => prevCount - qty);
       // Remove the specific item from localStorage based on its ID
       const cartItems = JSON.parse(localStorage.getItem("cartItems"));
       const updatedCartItems = cartItems.filter(
@@ -166,7 +164,7 @@ export default function StartOrder({ setCartItemCount }) {
                 </button>
                 <button
                   className="shoppingButtons"
-                  onClick={() => deleteItem(item.item_id)}
+                  onClick={() => deleteItem(item.item_id, item.qty)}
                 >
                   Delete
                 </button>

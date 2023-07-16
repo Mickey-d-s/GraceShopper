@@ -47,14 +47,14 @@ export function Homepage() {
                 >
                   Elliot's LinkedIn
                 </a>
-                <h1>Jeffery Sass</h1>
+                <h1>Charlotte Sass</h1>
                 <a
                   className="nameLinks"
                   href="https://www.linkedin.com/in/charlotte-sass/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Jeffery's LinkedIn
+                  Charlotte's LinkedIn
                 </a>
                 <button onClick={closePopup}>Close</button>
               </div>
