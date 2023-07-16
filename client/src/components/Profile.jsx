@@ -37,8 +37,8 @@ export default function Profile() {
           <div>{("username:", user.username)}</div>
           <div>{("email:", user.email)}</div>
           <hr></hr>
-          <div>
-            <h2 id="orderhistory"> Order History</h2>
+          <div className="orderhistory">
+            <h2> Order History</h2>
             <h3 className="historyProducts">Your Recent Purchased Items</h3>
             {shoppingCarts.map((shoppingCart) => (
               <div key={shoppingCart.shoppingcart_id} className="ShoppingCart">
