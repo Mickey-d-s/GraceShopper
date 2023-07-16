@@ -88,10 +88,6 @@ nav {
   width: 1rem;
 }
 
-html,
-body {
-  cursor: url("./assets/milkshake.png"), auto;
-}
 button {
   cursor: pointer;
 }
