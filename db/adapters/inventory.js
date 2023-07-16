@@ -46,7 +46,7 @@ async function getAllInventory() {
 
 async function updateInventoryQuantity(inventory_id, quantity) {
   try {
-    await client.query(
+    const updated = await client.query(
       `
       UPDATE inventories
       SET quantity = $2
@@ -56,6 +56,8 @@ async function updateInventoryQuantity(inventory_id, quantity) {
       [inventory_id, quantity]
     );
     console.log("Inventory quantity updated successfully!");
+
+    return updated;
   } catch (error) {
     console.log("Error updating Inventory quantity:", error);
   }

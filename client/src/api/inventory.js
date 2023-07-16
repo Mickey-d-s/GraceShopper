@@ -92,7 +92,7 @@ export async function updateInventoryQuantity(inventory_id, quantity) {
       }),
     });
     const result = await response.json();
-    console.log(result);
+    console.log("Result inside of update Inventory QTY:", result);
     return result;
   } catch (error) {
     console.error(error);

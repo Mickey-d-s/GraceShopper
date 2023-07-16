@@ -38,35 +38,26 @@ inventoriesRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-inventoriesRouter.patch(
-  "/update",
-  // authRequired,
-  async (req, res, next) => {
-    try {
-      const { inventory_id, quantity } = req.body;
-      const updatedQty = await updateInventoryQuantity(inventory_id, quantity);
-      res.send(updatedQty);
-    } catch (error) {
-      next(error);
-    }
+inventoriesRouter.patch("/update", authRequired, async (req, res, next) => {
+  try {
+    const { inventory_id, quantity } = req.body;
+    console.log("INVENTORY ID AND QUANTITY:", inventory_id, quantity);
+    const updatedQty = await updateInventoryQuantity(inventory_id, quantity);
+    console.log("UPDATED QUANTITY:", updatedQty);
+    res.send(updatedQty);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
-inventoriesRouter.patch(
-  "/checkout",
-  // authRequired,
-  async (req, res, next) => {
-    try {
-      const { inventory_id, quantity } = req.body;
-      const updatedQty = await checkoutInventoryQuantity(
-        inventory_id,
-        quantity
-      );
-      res.send(updatedQty);
-    } catch (error) {
-      next(error);
-    }
+inventoriesRouter.patch("/checkout", authRequired, async (req, res, next) => {
+  try {
+    const { inventory_id, quantity } = req.body;
+    const updatedQty = await checkoutInventoryQuantity(inventory_id, quantity);
+    res.send(updatedQty);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 module.exports = inventoriesRouter;
