@@ -30,7 +30,7 @@ export default function allUsers() {
     await deleteuser(userid);
   }
   return (
-    <div>
+    <div className="route_flex">
       <h2>Users in database</h2>
       {users.map((user) => (
         <div key={user.user_id} className="users">

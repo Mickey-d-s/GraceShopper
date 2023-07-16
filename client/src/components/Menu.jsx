@@ -72,7 +72,7 @@ export default function allProducts({ setCartItemCount }) {
   }, {});
 
   return (
-    <div>
+    <div className="route_flex">
       <h2>Menu</h2>
       {Object.entries(groupedProducts).map(([category, products]) => (
         <div key={category}>

@@ -23,7 +23,7 @@ function Health() {
   }, []);
 
   return (
-    <div>
+    <div className="route_flex">
       <h1>Welcome to Grace Shopper</h1>
       {healthMsg && <p>{healthMsg}</p>}
       {err && <p>{err}</p>}

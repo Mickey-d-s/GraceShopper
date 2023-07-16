@@ -30,7 +30,7 @@ export default function Profile() {
 
   return (
     <>
-      <div className="profilePage">
+      <div className="route_flex">
         <h1 className="userHeader">Welcome, {user.username}!</h1>
         <div className="userInfo">
           <u>USER INFO</u>
@@ -40,17 +40,23 @@ export default function Profile() {
           <div className="orderhistory">
             <h2> Order History</h2>
             <h3 className="historyProducts">Your Recent Purchased Items</h3>
+
             {shoppingCarts.map((shoppingCart) => (
-              <div key={shoppingCart.shoppingcart_id} className="ShoppingCart">
-                <h2>Order No. {shoppingCart.shoppingcart_id}</h2>
-                <h3>Total: ${calculateTotalPrice(shoppingCart)}</h3>
-                {shoppingCart.products.map((item) => (
-                  <div key={item.item_id}>
-                    <h4>{item.name}</h4>
-                    <p>Qty: {item.qty}</p>
-                    <p>Cost Per Item: ${item.price}</p>
-                  </div>
-                ))}
+              <div id="scroll">
+                <div
+                  key={shoppingCart.shoppingcart_id}
+                  className="ShoppingCart"
+                >
+                  <h2>Order No. {shoppingCart.shoppingcart_id}</h2>
+                  <h3>Total: ${calculateTotalPrice(shoppingCart)}</h3>
+                  {shoppingCart.products.map((item) => (
+                    <div key={item.item_id}>
+                      <h4>{item.name}</h4>
+                      <p>Qty: {item.qty}</p>
+                      <p>Cost Per Item: ${item.price}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

@@ -35,7 +35,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="auth-form-container">
+    <div className="route_flex">
       <div className="auth-form">
         <form onSubmit={(e) => handleSubmit(e)}>
           <h2>Login</h2>

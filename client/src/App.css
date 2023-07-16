@@ -78,15 +78,6 @@ button {
 /* ---------------------------------------- */
 /* Profile Page */
 
-.ShoppingCart {
-  padding: 0.5rem;
-  display: inline-table;
-  margin: 1%;
-  border: yellow solid 2px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #000;
-  animation: border-color 2s linear infinite;
-}
 @keyframes border-color {
   0% {
     border-color: yellow;
@@ -97,6 +88,19 @@ button {
   100% {
     border-color: yellow;
   }
+}
+#scroll {
+  padding: 0.5rem;
+  display: inline-block;
+  margin: 1%;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  animation: border-color 2s linear infinite;
+  max-height: 15rem;
+  overflow-y: scroll;
+  table-layout: fixed;
+  width: 25%;
 }
 
 /* End Profile Page */
@@ -220,6 +224,10 @@ button {
   justify-content: center;
   margin-right: 1%;
   padding-bottom: 1rem;
+  margin: 1%;
+  border: yellow solid 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
 }
 .menuItem {
   background: linear-gradient(
