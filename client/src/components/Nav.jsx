@@ -13,7 +13,7 @@ const Nav = ({ cartItemCount }) => {
   async function handleLogout() {
     await logout();
     setLoggedIn(!loggedIn);
-    navigate("/users/login");
+    navigate("/login");
   }
 
   return (
