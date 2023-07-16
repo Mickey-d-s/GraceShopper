@@ -4,6 +4,7 @@ import {
   completeOrder,
   cancelOrder,
   updateItemQty,
+  checkoutInventoryQuantity,
 } from "../api/shoppingcart";
 import { getUserShoppingCart } from "../api/menu";
 import { AuthContext } from "./auth/AuthProvider";
@@ -49,9 +50,6 @@ export default function StartOrder({ setCartItemCount }) {
     fetchShoppingCart();
   }, []);
 
-  //Delete function item from cart_items inside of shopping cart
-  //Update function QTY of item inside of shopping cart
-
   const totalPrice = shoppingCart.reduce(
     (total, item) => total + item.qty * item.price,
     0
@@ -77,7 +75,6 @@ export default function StartOrder({ setCartItemCount }) {
       setShoppingCart(updatedCart);
     } catch (error) {
       console.error("Error handling Edit Quantity:", error);
-      // Handle the error, show an error message, or perform any other necessary actions
     }
   };
 
@@ -92,18 +89,24 @@ export default function StartOrder({ setCartItemCount }) {
       console.error("Error canceling shopping cart:", error);
     }
   };
+
   const checkout = async () => {
     try {
+      // Update inventory quantities for each item in the shopping cart
+      for (const item of shoppingCart) {
+        await checkoutInventoryQuantity(item.inventory_id, item.qty);
+      }
+      // Complete the order
       const completedCart = await completeOrder();
       console.log("Shopping cart completed:", completedCart);
       setShoppingCart([]);
       localStorage.clear();
-      //edits inventory qty by how much was ordered
       setCartItemCount(0);
     } catch (error) {
       console.error("Error completing shopping cart:", error);
     }
   };
+
   return (
     <div>
       <div id="orderButtons">

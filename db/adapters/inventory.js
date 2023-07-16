@@ -55,7 +55,23 @@ async function updateInventoryQuantity(inventory_id, quantity) {
     `,
       [inventory_id, quantity]
     );
+    console.log("Inventory quantity updated successfully!");
+  } catch (error) {
+    console.log("Error updating Inventory quantity:", error);
+  }
+}
 
+async function checkoutInventoryQuantity(inventory_id, quantity) {
+  try {
+    await client.query(
+      `
+      UPDATE inventories
+      SET quantity = quantity - $2
+      WHERE inventory_id = $1
+      RETURNING *
+    `,
+      [inventory_id, quantity]
+    );
     console.log("Inventory quantity updated successfully!");
   } catch (error) {
     console.log("Error updating Inventory quantity:", error);
@@ -77,6 +93,7 @@ module.exports = {
   createInventories,
   getInventoryById,
   getAllInventory,
+  checkoutInventoryQuantity,
   updateInventoryQuantity,
   deleteInventory,
 };

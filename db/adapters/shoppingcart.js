@@ -81,6 +81,7 @@ async function getShoppingCartByUserId(user_id) {
         JSON_BUILD_OBJECT(
           'item_id', cart_items.item_id,
           'product_id', products.product_id,
+          'inventory_id', products.inventory_id,
           'name', products.product_name,
           'qty', cart_items.count,
           'price', products.price

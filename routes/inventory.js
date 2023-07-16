@@ -4,6 +4,7 @@ const {
   getInventoryById,
   getAllInventory,
   updateInventoryQuantity,
+  checkoutInventoryQuantity,
   deleteInventory,
 } = require("../db/adapters/inventory");
 const { authRequired } = require("./utils");
@@ -45,6 +46,23 @@ inventoriesRouter.patch(
     try {
       const { inventory_id, quantity } = req.body;
       const updatedQty = await updateInventoryQuantity(inventory_id, quantity);
+      res.send(updatedQty);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+inventoriesRouter.patch(
+  "/checkout",
+  // authRequired,
+  async (req, res, next) => {
+    try {
+      const { inventory_id, quantity } = req.body;
+      const updatedQty = await checkoutInventoryQuantity(
+        inventory_id,
+        quantity
+      );
       res.send(updatedQty);
     } catch (error) {
       next(error);

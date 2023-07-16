@@ -72,3 +72,23 @@ export async function updateItemQty(item_id, count) {
     console.error("Error updating Cart Quantity:", error);
   }
 }
+
+export async function checkoutInventoryQuantity(inventory_id, quantity) {
+  try {
+    const response = await fetch(`/api/inventories/checkout`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        inventory_id,
+        quantity,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
