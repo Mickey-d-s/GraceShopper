@@ -149,6 +149,7 @@ button {
   /* padding: 0.5rem; */
   margin-left: 5%;
   margin-right: 5%;
+  border: yellow solid 2px;
   border-radius: 5px;
   animation: border-color 2s linear infinite;
   font-style: bold;
